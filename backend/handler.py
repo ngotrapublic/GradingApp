@@ -31,11 +31,32 @@ class H(http.server.SimpleHTTPRequestHandler):
         pass
 
     def end_headers(self):
-        if not self.path.startswith('/api/'):              # web pages: always check for a newer version (after an update)
+        if not self.route_path().startswith('/api/'):              # web pages: always check for a newer version (after an update)
             self.send_header('Cache-Control', 'no-cache')
         super().end_headers()
 
     # ---------------- helpers ----------------
+    def route_path(self):
+        """Path used for API routing. Vercel rewrites /api/* → /api/index and may replace self.path;
+        the original suffix is passed as ?__path= (see vercel.json)."""
+        url = urllib.parse.urlparse(self.path)
+        qs = urllib.parse.parse_qs(url.query)
+        if qs.get('__path'):
+            return '/api/' + qs['__path'][0].lstrip('/')
+        for h in ('x-forwarded-uri', 'x-invoke-path'):
+            raw = self.headers.get(h) or ''
+            p = urllib.parse.urlparse(raw).path if raw else ''
+            if not p and raw.startswith('/'):
+                p = raw.split('?', 1)[0]
+            if p.startswith('/api/') and p not in ('/api', '/api/', '/api/index', '/api/index.py'):
+                return p
+        return url.path
+
+    def route_query(self):
+        qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        qs.pop('__path', None)
+        return qs
+
     def ip(self):
         fwd = self.headers.get('X-Forwarded-For') if ON_VERCEL else None   # only trust the header behind Vercel's proxy
         return (fwd.split(',')[0].strip() if fwd else self.client_address[0]) or '?'
@@ -83,12 +104,12 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     # ---------------- GET ----------------
     def do_GET(self):
-        url = urllib.parse.urlparse(self.path); path = url.path
-        query = urllib.parse.parse_qs(url.query)
+        path = self.route_path()
+        query = self.route_query()
         if path.startswith('/api/public/'):     # student page – the student's own information only
             return self.public_get(path)
         if path == '/api/qr.svg':               # QR code of the page address (no secret inside)
-            target = '/student/' if 'student' in url.query else ''
+            target = '/student/' if 'student' in query else ''
             base = self.base_url()
             if not base:
                 return self.send_json(err('No Wi-Fi address found on this computer', 'Không tìm thấy địa chỉ wifi của máy'), 404)
@@ -149,7 +170,7 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     # ---------------- POST ----------------
     def do_POST(self):
-        path = urllib.parse.urlparse(self.path).path
+        path = self.route_path()
         n = int(self.headers.get('Content-Length', '0') or 0)
         if n > 6_000_000:
             return self.send_json({'error': 'too large'}, 413)
