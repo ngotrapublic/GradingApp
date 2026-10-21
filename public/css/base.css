@@ -50,3 +50,11 @@ h2{font-size:17px;margin:14px 0 8px}
 .big{width:100%;padding:14px;border-radius:12px;border:2px solid var(--g);background:#fff;color:var(--g2);font-weight:700;font-size:18px;margin:10px 0 6px}
 .big.on{background:var(--g);color:#fff}
 .login input{width:100%}
+/* labelled fields (sign-in, accounts, classes) */
+.fl{display:block;font-size:13px;color:var(--mut);margin:8px 0 0}
+.fl input,.fl select{display:block;width:100%;margin:4px 0 0;padding:9px;border:1px solid var(--line);border-radius:8px;font-size:16px;color:var(--txt);background:#fff;letter-spacing:0;text-align:left}
+.login .fl input{font-size:17px;letter-spacing:0;text-align:left;padding:10px;margin:4px 0 0}
+.pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;background:var(--sel);color:var(--g2);margin-left:4px}
+.pad{padding:10px 12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+details summary{cursor:pointer;margin-top:6px}

@@ -26,3 +26,6 @@
 .thumbs .th img{width:96px;height:96px;object-fit:cover;border-radius:8px;border:1px solid var(--line);margin:0}
 .thumbs .th button{position:absolute;top:-6px;right:-6px;width:26px;height:26px;border-radius:50%;border:0;background:var(--bad);color:#fff;font-weight:700}
 .photo-btn{display:inline-block;margin:4px 0 8px;cursor:pointer}
+.confirm{font-size:20px;text-align:center;margin:18px 0}
+.big small{font-weight:400;color:var(--mut)}
+.big.on small{color:#e8f3e1}

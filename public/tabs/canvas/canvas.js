@@ -1,6 +1,6 @@
 // Tab "Canvas": checks before sending, gradebook import file, marks table.
 function labChecks(lab){
-  const Lb=S.keys.labs[lab], out=[];
+  const Lb=K().labs[lab], out=[];
   const st=sorted(), hasVals=s=>(rec(s.sid,lab).values||[]).some(v=>v!==null&&v!==''&&v!==undefined);
   const add=(t,arr)=>{ if(arr.length) out.push(`<li><b>${t}</b>: ${arr.map(s=>esc(s.name)).join(', ')}</li>`); };
   add(T('No team / member (no variant)','Chưa có nhóm / thành viên (không có mã đề)'), st.filter(s=>!variant(s)));
@@ -19,7 +19,7 @@ function buildImport(rows, labs){
   const hd=rows[0], H=hd.map(x=>x.trim().toLowerCase());
   const iName=H.indexOf('student'), iSis=H.indexOf('sis user id'), iSec=H.indexOf('section');
   if(iName<0||iSec<0) return {error:T('Not a Canvas Gradebook export (columns Student / Section are missing).','Không phải file Export của Canvas Gradebook (thiếu cột Student / Section).')};
-  const labCol={}; hd.forEach((h,i)=>{ const mm=h.trim().match(/^lab\s*([1-4])\b/i); if(mm && !(mm[1] in labCol) && !/data/i.test(h) && !/(current|final|unposted)\s+(score|grade|points)/i.test(h)) labCol[mm[1]]=i; });
+  const labCol={}; hd.forEach((h,i)=>{ const mm=h.trim().match(/^lab\s*(\d+)\b/i); if(mm && labs().includes(mm[1]) && !(mm[1] in labCol) && !/data/i.test(h) && !/(current|final|unposted)\s+(score|grade|points)/i.test(h)) labCol[mm[1]]=i; });
   const studs=C().students, match=r=>{ const sis=(iSis>=0?r[iSis]:'').trim(); return studs.find(s=>sis&&s.sid.toLowerCase()===sis.toLowerCase()) || studs.find(s=>norm(s.name)===norm(r[iName])); };
   const data=rows.slice(1).filter(r=>(r[iName]||'').trim() && !/points possible/i.test(r[iName]) && !/^test student$/i.test(r[iName].trim()));
   const res={labCol, total:data.length, matched:data.filter(match).length, unmatched:data.filter(r=>!match(r)).map(r=>r[iName]),
@@ -45,16 +45,16 @@ function renderSum(m){
   let info=null;
   if(gb){ info=buildImport(gb.rows,[]);
     if(info.error) h+=`<p class="zero">${esc(info.error)}</p>`;
-    else if(!Object.keys(info.labCol).length) h+=`<p class="zero">${T('The file has no assignment columns named "Lab 1" … "Lab 4". Create these assignments on Canvas and export again.','File không có cột assignment tên "Lab 1" … "Lab 4". Tạo các assignment này trên Canvas rồi Export lại.')}</p>`;
-    else { const def=new Set([lab, ...['1','2','3','4'].filter(l=>changedSince(l).length)]);
+    else if(!Object.keys(info.labCol).length) h+=`<p class="zero">${T('The file has no assignment columns named "Lab 1", "Lab 2"…. Create these assignments on Canvas and export again.','File không có cột assignment tên "Lab 1", "Lab 2"…. Tạo các assignment này trên Canvas rồi Export lại.')}</p>`;
+    else { const def=new Set([lab, ...labs().filter(l=>changedSince(l).length)]);
       h+=`<p class="muted">${T(`Matched ${info.matched}/${info.total} students.`,`Khớp ${info.matched}/${info.total} SV.`)}${info.unmatched.length?T(` Not matched (left blank): ${info.unmatched.map(esc).join(', ')}.`,` Không khớp (để trống): ${info.unmatched.map(esc).join(', ')}.`):''}${info.notInFile.length?T(` On this page but not in the file: ${info.notInFile.map(esc).join(', ')}.`,` Có trên web nhưng không có trong file: ${info.notInFile.map(esc).join(', ')}.`):''}</p>
       <div class="btns"><span class="lbl">${T('Send labs:','Gửi các lab:')}</span>${Object.keys(info.labCol).sort().map(l=>`<label class="btn" style="padding:6px 10px"><input type="checkbox" data-gl="${l}" ${def.has(l)?'checked':''}> Lab ${l}</label>`).join('')}</div>
       <div class="btns"><button class="on" id="gbdl">${T('Download the Canvas import file','Tải file import Canvas')}</button></div>`; } }
   h += `<h2>${T('Step 3 – On Canvas','Bước 3 – Trên Canvas')}</h2><p class="muted">${T('Canvas → <b>Grades</b> → <b>Import</b> → choose the downloaded file → check the changes → <b>Save</b>. Then post grades / announcements on Canvas as usual.','Canvas → <b>Grades</b> → <b>Import</b> → chọn file vừa tải → kiểm tra các thay đổi → <b>Save</b>. Sau đó công bố điểm / thông báo cho SV trên Canvas như bình thường.')}</p>`;
-  h += `<h2>${T('Marks','Bảng điểm')} ${esc(C().name)}</h2><div class="card scroll"><table><tr><th>${T('Name','Họ tên')}</th><th>${T('Team','Nhóm')}</th>${['1','2','3','4'].map(l=>`<th>Lab ${l}<br><small>/${S.keys.labs[l].total}</small></th>`).join('')}<th>${T('Total','Tổng')}<br><small>/50</small></th></tr>
-   ${st.map(s=>{ const sc=['1','2','3','4'].map(l=>score(s,l)); return `<tr><td>${esc(s.name)}<br><small class="muted">${esc(s.sid)}</small></td><td>${s.team||'–'}</td>${sc.map((x,i)=>{ const c=changedSince(String(i+1)).includes(s); return `<td class="num" ${c?'style="background:#fff7e0"':''}>${x}</td>`; }).join('')}<td class="num"><b>${sc.reduce((a,b)=>a+b,0)}</b></td></tr>`; }).join('')}
+  h += `<h2>${T('Marks','Bảng điểm')} ${esc(C().name)}</h2><div class="card scroll"><table><tr><th>${T('Name','Họ tên')}</th><th>${T('Team','Nhóm')}</th>${labs().map(l=>`<th>Lab ${l}<br><small>/${K().labs[l].total}</small></th>`).join('')}<th>${T('Total','Tổng')}<br><small>/${labs().reduce((a,l)=>a+K().labs[l].total,0)}</small></th></tr>
+   ${st.map(s=>{ const sc=labs().map(l=>score(s,l)); return `<tr><td>${esc(s.name)}<br><small class="muted">${esc(s.sid)}</small></td><td>${s.team||'–'}</td>${sc.map((x,i)=>{ const c=changedSince(labs()[i]).includes(s); return `<td class="num" ${c?'style="background:#fff7e0"':''}>${x}</td>`; }).join('')}<td class="num"><b>${sc.reduce((a,b)=>a+b,0)}</b></td></tr>`; }).join('')}
    </table></div><p class="muted">${T('Yellow cells: marks changed but not sent to Canvas yet.','Ô vàng: điểm đã đổi, chưa đưa lên Canvas.')}</p>
-   <div class="btns"><a class="btn" href="/api/export.xlsx" style="text-decoration:none">${T('Download Excel archive (all 3 classes)','Tải Excel lưu trữ (cả 3 lớp)')}</a></div>`;
+   <div class="btns"><a class="btn" href="/api/export.xlsx?cls=${S.cls}" style="text-decoration:none">${T('Download Excel (this class)','Tải Excel (lớp này)')}</a><a class="btn" href="/api/export.xlsx" style="text-decoration:none">${T('Excel: all my classes','Excel: tất cả lớp của tôi')}</a></div>`;
   m.innerHTML=h; bindSeg(m);
   $('#gb').onchange=async e=>{ const f=e.target.files[0]; if(!f) return; const rows=parseCSV((await f.text()).replace(/^﻿/,''));
     if(rows.length<2){ toast(T('Empty file','File trống')); return; } S.gbNew={rows, name:f.name, time:T('not saved yet','chưa lưu')}; renderSum(m); };

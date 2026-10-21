@@ -38,16 +38,16 @@ function pubBox(){
   const p=((C().publish||{})[S.lab])||{};
   const sw=(k,label)=>`<label class="switch"><input type="checkbox" data-pub="${k}" ${p[k]?'checked':''}><span class="knob"></span>${label}</label>`;
   return `<div class="card pubbox"><div class="pubtitle">${T(`Student page – Lab ${S.lab}, ${esc(C().name)}`,`Trang SV – Lab ${S.lab}, ${esc(C().name)}`)}</div>
-    <div class="btns">${sw('card',T('Show card','Cho SV xem đề'))}${sw('submit',T('Accept submissions','Nhận bài'))}${sw('marks',T('Show marks','Cho SV xem điểm'))}
+    <div class="btns">${sw('card',T('Show card','Cho SV xem đề'))}${sw('submit',T('Accept submissions','Nhận bài'))}${canManage()?sw('marks',T('Show marks','Cho SV xem điểm')):''}
     <button class="btn" id="qrs">${T('QR for students','QR cho SV')}</button></div></div>`;
 }
 function panel(s){
-  const Lb=L(), v=variant(s), K=v&&Lb.variants[v], r=rec(s.sid);
-  if(!K) return `<div class="panel"><p class="muted">${T('This student has no team / member yet, so no variant. Go to the <b>Class</b> tab.','SV chưa có nhóm / thành viên nên chưa có mã đề. Vào tab <b>Lớp &amp; nhóm</b>.')}</p></div>`;
-  const figs=[...(K.figs||[]), ...(S.lab==='3'?[`/api/lab3/${v}.png`]:[])];
-  let h = `<div class="panel"><p class="info">${K.info.map(sub).join('<br>')}</p>` +
+  const Lb=L(), v=variant(s), V=v&&Lb.variants[v], r=rec(s.sid);
+  if(!V) return `<div class="panel"><p class="muted">${T('This student has no team / member yet, so no variant. Go to the <b>Students</b> tab.','SV chưa có nhóm / thành viên nên chưa có mã đề. Vào tab <b>SV &amp; nhóm</b>.')}</p></div>`;
+  const figs=[...(V.figs||[]), ...(V.image?[`/api/asset/${C().course}/${V.image}`]:[])];
+  let h = `<div class="panel"><p class="info">${V.info.map(sub).join('<br>')}</p>` +
     (figs.length?`<details class="figs"><summary class="muted">${T('Circuit / task figure','Hình đề bài')}</summary>${figs.map(f=>`<a href="${f}" target="_blank"><img src="${f}" alt=""></a>`).join('')}</details>`:'') + `<div class="scroll"><table><tr><th>${T('Quantity','Đại lượng')}</th><th>${T('Key','Đáp án')}</th><th>±10%</th><th>${T('Submitted','SV nộp')}</th><th>${T('Marks','Điểm')}</th></tr>`;
-  Lb.questions.forEach((q,i)=>{ const k=K.keys[i], x=(r.values||[])[i], mk=mark(x,k,q[3]);
+  Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(r.values||[])[i], mk=mark(x,k,q[3]);
     const cl = mk===null?'':(mk===q[3]?'full':(mk>0?'half':'zero'));
     h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num"><b>${fmt(k)}</b></td><td class="num">${fmt(k*0.9)} – ${fmt(k*1.1)}</td>
       <td class="num">${fmt(x)}</td><td class="${cl}">${mk===null?'–':(r.tick?mk:'('+mk+')')}/${q[3]}</td></tr>`; });
@@ -60,7 +60,7 @@ function panel(s){
     Lb.questions.map((q,i)=>`<div><label>${sub(q[1])} (${esc(q[2])})</label><input inputmode="decimal" data-i="${i}" value="${(r.values||[])[i]??''}"></div>`).join('') +
     `</div><div class="btns"><button class="on" data-savevals="${esc(s.sid)}">${T('Save values','Lưu số')}</button></div></details>`;
   const ov=r.override!=null;
-  h += `<details ${ov?'open':''}><summary class="muted">${T('Set the score by hand (special cases)','Sửa điểm tay (trường hợp đặc biệt)')}</summary>
+  if(canManage()) h += `<details ${ov?'open':''}><summary class="muted">${T('Set the score by hand (special cases)','Sửa điểm tay (trường hợp đặc biệt)')}</summary>
     <p class="muted">${T('This score replaces the automatic score everywhere (list, Canvas file, Excel, student page).','Điểm này thay cho điểm tự tính ở mọi nơi (danh sách, file Canvas, Excel, trang SV).')}</p>
     <div class="edit"><div><label>${T('Score','Điểm')} (0–${Lb.total})</label><input inputmode="decimal" data-ov value="${ov?r.override:''}"></div>
     <div><label>${T('Reason','Lý do')}</label><input data-reason value="${esc(r.reason||'')}" placeholder="${T('e.g. make-up session','vd: làm bù')}"></div></div>

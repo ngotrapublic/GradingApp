@@ -1,74 +1,104 @@
-// Student page: student ID + 4-digit PIN -> your team, your card for the open labs, your marks (when released).
-// The PIN is chosen by the student at the first sign-in; the lecturer can reset it (tab Class).
-const ST = { info: null, sid: '', step: 'sid', need: null, name: '' };
-try { ST.sid = localStorage.getItem('student_sid') || ''; } catch (e) {}
+// Student page: student ID -> confirm your name -> password (created at the first sign-in, one password for all lab courses)
+// -> choose the class (when you take several lab courses) -> your team, your card for the open labs, your marks (when released).
+const ST = { me: null, info: null, step: 'sid', check: null, cls: '' };
+try { ST.cls = localStorage.getItem('student_cls') || ''; } catch (e) {}
 
 async function post(path, body) {
   const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   const j = await r.json().catch(() => ({}));
-  if (!r.ok) { toast((LANG === 'vi' && j.error_vi) || j.error || T('Error', 'Lỗi')); if (r.status === 401) { ST.info = null; render(); } return null; }
+  if (!r.ok) { toast((LANG === 'vi' && j.error_vi) || j.error || T('Error', 'Lỗi')); if (r.status === 401) { ST.me = null; ST.info = null; render(); } return null; }
   return j;
 }
-
-async function me() {   // the signed-in student's information (session cookie), or null
-  const r = await fetch('/api/public/me');
+async function get(path) {
+  const r = await fetch(path);
   if (r.status === 401) return null;
   const j = await r.json().catch(() => ({}));
   if (!r.ok) { toast((LANG === 'vi' && j.error_vi) || j.error || T('Error', 'Lỗi')); return null; }
   return j;
 }
 
-async function reload() { const info = await me(); ST.info = info; render(); return info; }
+// who am I + the open class (the one chosen before, or the only one)
+async function reload() {
+  ST.me = await get('/api/public/me'); ST.info = null;
+  if (ST.me) {
+    const ids = ST.me.classes.map(c => String(c.id));
+    if (!ids.includes(ST.cls)) ST.cls = ids.length === 1 ? ids[0] : '';
+    if (ST.cls) ST.info = await get('/api/public/class/' + ST.cls);
+  }
+  render(); return ST.me;
+}
+function pick(id) { ST.cls = String(id); try { localStorage.setItem('student_cls', ST.cls); } catch (e) {} return reload(); }
 
 function renderSignIn(app, head) {
   let body;
+  const c = ST.check;
   if (ST.step === 'sid') {
-    body = `<h2>${T('Your student ID', 'MSSV của bạn')}</h2>
+    body = `<div class="sidform"><h2>${T('Your student ID', 'MSSV của bạn')}</h2>
       <p class="muted">${T('Type your student ID (SIS ID on Canvas), for example AUS15128.', 'Nhập MSSV (SIS ID trên Canvas), ví dụ AUS15128.')}</p>
-      <input id="sid" autocomplete="username" autocapitalize="characters" value="${esc(ST.sid)}">
+      <input id="sid" autocomplete="username" autocapitalize="characters" value="${esc((c && c.sid) || '')}"></div>
       <button class="big on" id="go">${T('Next', 'Tiếp')}</button>`;
+  } else if (ST.step === 'confirm') {
+    body = `<h2>${T('Is this you?', 'Đây có phải bạn không?')}</h2>
+      <p class="confirm"><b>${esc(c.name)}</b><br><span class="muted">${esc(c.sid)}</span></p>
+      <button class="big on" id="go">${T('Yes, this is me', 'Đúng, là tôi')}</button>
+      <button class="big" id="back">${T('No – change the student ID', 'Không – nhập lại MSSV')}</button>`;
   } else {
-    const isNew = ST.need === 'new';
-    body = `<h2>${isNew ? T('Choose your PIN', 'Đặt PIN của bạn') : T('Your PIN', 'PIN của bạn')}</h2>
-      <p class="muted">${esc(ST.name || ST.sid)}</p>
-      <p class="muted">${isNew ? T('First time: choose 4 digits and remember them. You need this PIN every time you sign in on a new phone.', 'Lần đầu: chọn 4 chữ số và nhớ kỹ. Đăng nhập trên điện thoại khác sẽ cần PIN này.')
-                               : T('Forgot your PIN? Ask the lecturer to reset it.', 'Quên PIN? Nhờ giảng viên đặt lại.')}</p>
-      <input id="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="${isNew ? 'new-password' : 'current-password'}" placeholder="••••">
-      ${isNew ? `<input id="pin2" type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="${T('Type it again', 'Nhập lại')}">` : ''}
-      <button class="big on" id="go">${T('Sign in', 'Đăng nhập')}</button>
+    const isNew = !c.hasPassword;
+    body = `<h2>${isNew ? T('Create your password', 'Tạo mật khẩu') : T('Your password', 'Mật khẩu của bạn')}</h2>
+      <p class="muted">${esc(c.name)} · ${esc(c.sid)}</p>
+      <p class="muted">${isNew ? T('First sign-in: create a password (at least 6 characters). Next time you sign in with your student ID and this password – for all your lab courses.', 'Lần đầu: tạo mật khẩu (ít nhất 6 ký tự). Lần sau đăng nhập bằng MSSV và mật khẩu này – dùng cho mọi môn lab.')
+                               : T('Forgot your password? Ask your lecturer to reset it.', 'Quên mật khẩu? Nhờ giảng viên đặt lại.')}</p>
+      <label class="fl">${T('Password', 'Mật khẩu')}<input id="pw" type="password" autocomplete="${isNew ? 'new-password' : 'current-password'}"></label>
+      ${isNew ? `<label class="fl">${T('Password again', 'Nhập lại mật khẩu')}<input id="pw2" type="password" autocomplete="new-password"></label>` : ''}
+      <button class="big on" id="go">${isNew ? T('Create and sign in', 'Tạo và đăng nhập') : T('Sign in', 'Đăng nhập')}</button>
       <p style="text-align:center"><a href="#" id="back">${T('Not me / change ID', 'Không phải tôi / đổi MSSV')}</a></p>`;
   }
-  app.innerHTML = head + `<main><div class="login card sidform">${body}</div></main>`;
+  app.innerHTML = head + `<main><div class="login card">${body}</div></main>`;
   bindLangToggle(app);
   const go = async () => {
     if (ST.step === 'sid') {
       const sid = $('#sid').value.trim(); if (!sid) return;
-      const j = await post('/api/public/login', { sid }); if (!j) return;
-      ST.sid = sid; try { localStorage.setItem('student_sid', sid); } catch (e) {}
-      if (j.ok) return reload();
-      ST.need = j.need; ST.name = j.name || ''; ST.step = 'pin'; return render();
+      const j = await post('/api/public/check', { sid }); if (!j) return;
+      ST.check = j; ST.step = 'confirm'; return render();
     }
-    const pin = $('#pin').value.trim();
-    if (!/^\d{4}$/.test(pin)) return toast(T('The PIN must be 4 digits.', 'PIN phải gồm 4 chữ số.'));
-    if (ST.need === 'new' && pin !== $('#pin2').value.trim()) return toast(T('The two PINs are different.', 'Hai lần nhập PIN không giống nhau.'));
-    const j = await post('/api/public/login', { sid: ST.sid, pin }); if (!j) return;
-    ST.step = 'sid'; ST.need = null; reload();
+    if (ST.step === 'confirm') { ST.step = 'pw'; return render(); }
+    const password = $('#pw').value;
+    if (!c.hasPassword) {
+      if (password.length < 6) return toast(T('The password needs at least 6 characters.', 'Mật khẩu cần ít nhất 6 ký tự.'));
+      if (password !== $('#pw2').value) return toast(T('The two passwords are different.', 'Hai lần nhập mật khẩu không giống nhau.'));
+    }
+    if (!await post('/api/public/login', { sid: c.sid, password })) return;
+    ST.step = 'sid'; ST.check = null; reload();
   };
   $('#go').onclick = go;
   app.querySelectorAll('input').forEach(i => i.onkeydown = e => { if (e.key === 'Enter') go(); });
-  const back = $('#back'); if (back) back.onclick = e => { e.preventDefault(); ST.step = 'sid'; ST.need = null; render(); };
-  (app.querySelector('#pin') || app.querySelector('#sid')).focus();
+  const back = $('#back'); if (back) back.onclick = e => { e.preventDefault(); ST.step = 'sid'; render(); };
+  const f = app.querySelector('#pw') || app.querySelector('#sid'); if (f) f.focus();
 }
+
+function renderPick(app, head) {
+  const M = ST.me;
+  app.innerHTML = head + `<main><div class="card who"><div class="nm">${esc(M.name)}</div><div class="sub">${esc(M.sid)}</div></div>
+    <h2>${T('Choose your class', 'Chọn lớp')}</h2>
+    ${M.classes.map(c => `<button class="big" data-pick="${c.id}"><b>${esc(c.name)}</b> · ${esc(c.courseName)}<br><small>${esc(c.term)}</small></button>`).join('')}
+    ${M.classes.length ? '' : `<p class="muted">${T('You are not in any class at the moment.', 'Hiện bạn chưa có trong lớp nào.')}</p>`}
+    <div class="btns"><button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
+  bindLangToggle(app);
+  app.querySelectorAll('[data-pick]').forEach(b => b.onclick = () => pick(b.dataset.pick));
+  $('#out').onclick = signOut;
+}
+async function signOut() { await post('/api/public/logout', {}); ST.me = null; ST.info = null; ST.step = 'sid'; render(); }
 
 function render() {
   document.documentElement.lang = LANG;
-  document.title = T('Electric Circuit Lab – Student', 'Electric Circuit Lab – Sinh viên');
+  document.title = T('Lab – Student', 'Lab – Sinh viên');
   const app = $('#app');
-  const head = `<header><div class="row"><h1>Electric Circuit Lab</h1>${langToggle()}</div></header>`;
-  if (!ST.info) return renderSignIn(app, head);
+  const head = `<header><div class="row"><h1>${ST.info ? esc(ST.info.courseName) : 'Lab'}</h1>${langToggle()}</div></header>`;
+  if (!ST.me) return renderSignIn(app, head);
+  if (!ST.info) return renderPick(app, head);
   const I = ST.info;
   let h = head + `<main><div class="card who"><div class="nm">${esc(I.name)}</div>
-    <div class="sub">${esc(I.sid)} | ${esc(I.className)}</div>`;
+    <div class="sub">${esc(I.sid)} | ${esc(I.className)} | ${esc(I.term)}</div>`;
   if (I.team) {
     h += `<div class="teambig"><div><b>${I.team}</b>${T('Team / bench', 'Nhóm / cụm máy')}</div><div><b>${I.member}</b>${T('Member', 'Thành viên')}</div><div><b>${I.variant}</b>${T('Variant', 'Mã đề')}</div></div>
       <div class="sub">${T('Your team', 'Cùng nhóm')}: ${I.teammates.length ? I.teammates.map(esc).join(', ') : '–'}</div>`;
@@ -84,7 +114,7 @@ function render() {
     if (L.card) h += `<div class="lines">${L.card.map(l => `<div>${sub(l)}</div>`).join('')}</div>`;
     (L.figs || []).forEach(f => { h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
     if (L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
-    if (L.card && L.lab === '2') h += `<p><a class="dl" href="/student/files/Lab2_RLC_data_template.xlsx" download>⬇ ${T('Excel template for your RLC data', 'File Excel mẫu để ghi số liệu RLC')}</a></p>`;
+    (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
     if (L.submit) h += submitForm(L);
     if (L.marks !== null) { sum += L.marks; total += L.total;
       h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
@@ -92,7 +122,7 @@ function render() {
   });
   if (!shown) h += `<p class="muted">${T('Nothing to show yet. Your card appears when the lab starts.', 'Chưa có gì để hiện. Đề sẽ hiện khi bắt đầu buổi lab.')}</p>`;
   if (total) h += `<p class="muted">${T(`Released labs: <b>${sum}</b> / ${total}. These marks are provisional – the official marks are on Canvas.`, `Các lab đã công bố: <b>${sum}</b> / ${total}. Điểm này để tham khảo – điểm chính thức trên Canvas.`)}</p>`;
-  h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button><button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
+  h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button>${ST.me.classes.length > 1 ? `<button id="other">${T('Other class', 'Lớp khác')}</button>` : ''}<button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
   app.innerHTML = h;
   bindLangToggle(app);
   app.querySelectorAll('[data-send]').forEach(b => b.onclick = async () => {
@@ -100,7 +130,7 @@ function render() {
     const values = [...box.querySelectorAll('input')].map(i => i.value.trim());
     if (values.some(v => v !== '' && isNaN(+v.replace(',', '.')))) { toast(T('Numbers only, please.', 'Chỉ nhập số.')); return; }
     b.disabled = true;
-    const j = await post('/api/public/submit', { lab, values });
+    const j = await post('/api/public/submit', { cls: I.id, lab, values });
     b.disabled = false;
     if (!j) return;
     toast(T('Submitted', 'Đã nộp')); reload();
@@ -109,16 +139,17 @@ function render() {
     const f = inp.files[0]; if (!f) return;
     toast(T('Uploading…', 'Đang gửi ảnh…'));
     let data; try { data = await shrink(f); } catch (e) { toast(T('Could not read the photo', 'Không đọc được ảnh')); return; }
-    const j = await post('/api/public/photo', { lab: inp.dataset.photo, data });
+    const j = await post('/api/public/photo', { cls: I.id, lab: inp.dataset.photo, data });
     if (!j) return;
     toast(T('Photo saved', 'Đã lưu ảnh')); reload();
   });
   app.querySelectorAll('[data-delph]').forEach(b => b.onclick = async () => {
     if (!confirm(T('Delete this photo?', 'Xóa ảnh này?'))) return;
-    if (await post('/api/public/photo_delete', { lab: b.dataset.lab, id: +b.dataset.delph })) reload();
+    if (await post('/api/public/photo_delete', { cls: I.id, lab: b.dataset.lab, id: +b.dataset.delph })) reload();
   });
   $('#ref').onclick = async () => { if (await reload()) toast(T('Updated', 'Đã cập nhật')); };
-  $('#out').onclick = async () => { await post('/api/public/logout', {}); ST.info = null; ST.step = 'sid'; render(); };
+  $('#out').onclick = signOut;
+  const other = $('#other'); if (other) other.onclick = () => { ST.info = null; ST.cls = ''; try { localStorage.removeItem('student_cls'); } catch (e) {} render(); };
 }
 
 reload();
