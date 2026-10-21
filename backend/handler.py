@@ -109,7 +109,7 @@ class H(http.server.SimpleHTTPRequestHandler):
         if path.startswith('/api/public/'):     # student page – the student's own information only
             return self.public_get(path)
         if path == '/api/qr.svg':               # QR code of the page address (no secret inside)
-            target = '/student/' if 'student' in query else ''
+            target = '/student/' if 'student' in query or (query.get('target') or [''])[0] == 'student' else ''
             base = self.base_url()
             if not base:
                 return self.send_json(err('No Wi-Fi address found on this computer', 'Không tìm thấy địa chỉ wifi của máy'), 404)
