@@ -1,0 +1,11 @@
+# student data – never in git
+data/
+*.db
+*.db-wal
+*.db-shm
+# local tools
+.venv/
+__pycache__/
+.vercel/
+.env*
+.DS_Store

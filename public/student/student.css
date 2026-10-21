@@ -1,0 +1,28 @@
+/* Student page */
+.who{padding:12px 14px}
+.who .nm{font-size:19px;font-weight:700}
+.who .sub{color:var(--mut);font-size:14px}
+.teambig{display:flex;gap:10px;margin:10px 0 4px}
+.teambig div{flex:1;background:#eef6e8;border-radius:10px;padding:8px;text-align:center}
+.teambig b{display:block;font-size:22px;color:var(--g2)}
+.lab{padding:12px 14px}
+.lab h3{margin:0 0 6px;font-size:16px}
+.lab .lines{font-size:15px;line-height:1.5}
+.lab .lines div:first-child{font-weight:700}
+.lab img{width:100%;border-radius:8px;margin-top:8px;border:1px solid var(--line)}
+.lab .closed{color:var(--mut);font-size:14px}
+.marks{margin-top:8px;font-size:15px}
+.marks b{font-size:18px;color:var(--g2)}
+.sidform input{font-size:22px;text-align:center;letter-spacing:2px;padding:12px;margin:12px 0;text-transform:uppercase}
+.submit{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.submit .subhead{font-weight:700;margin-bottom:6px}
+.submit label{display:block;margin:6px 0;font-size:15px}
+.submit input{width:100%;padding:10px;font-size:18px;border:1px solid var(--line);border-radius:8px;margin-top:3px}
+.submit input:disabled{background:#f1f3ef;color:var(--mut)}
+.submit .ok{color:var(--ok);font-weight:700}
+.lab img.fig{background:#fff;padding:6px}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.thumbs .th{position:relative;width:96px;height:96px}
+.thumbs .th img{width:96px;height:96px;object-fit:cover;border-radius:8px;border:1px solid var(--line);margin:0}
+.thumbs .th button{position:absolute;top:-6px;right:-6px;width:26px;height:26px;border-radius:50%;border:0;background:var(--bad);color:#fff;font-weight:700}
+.photo-btn{display:inline-block;margin:4px 0 8px;cursor:pointer}
