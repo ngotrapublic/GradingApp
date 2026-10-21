@@ -1,7 +1,19 @@
 // Student page: student ID -> confirm your name -> password (created at the first sign-in, one password for all lab courses)
 // -> choose the class (when you take several lab courses) -> your team, your card for the open labs, your marks (when released).
-const ST = { me: null, info: null, step: 'sid', check: null, cls: '' };
+const ST = { me: null, info: null, step: 'sid', check: null, cls: '', draft: {} };
 try { ST.cls = localStorage.getItem('student_cls') || ''; } catch (e) {}
+
+function cacheDrafts() {
+  document.querySelectorAll('.submit [data-send]').forEach(b => {
+    const box = b.closest('.submit');
+    ST.draft[b.dataset.send] = [...box.querySelectorAll('input[inputmode="decimal"]')].map(i => i.value);
+  });
+}
+function formValues(lab, saved) {
+  const d = ST.draft[lab];
+  return (d && d.length ? d : (saved || [])).map(v => v ?? '');
+}
+function clearDraft(lab) { delete ST.draft[lab]; }
 
 async function post(path, body) {
   const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
@@ -125,18 +137,20 @@ function render() {
   h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button>${ST.me.classes.length > 1 ? `<button id="other">${T('Other class', 'Lớp khác')}</button>` : ''}<button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
   app.innerHTML = h;
   bindLangToggle(app);
+  app.querySelectorAll('.submit input[inputmode="decimal"]').forEach(i => i.oninput = () => cacheDrafts());
   app.querySelectorAll('[data-send]').forEach(b => b.onclick = async () => {
     const lab = b.dataset.send, box = b.closest('.submit');
-    const values = [...box.querySelectorAll('input')].map(i => i.value.trim());
+    const values = [...box.querySelectorAll('input[inputmode="decimal"]')].map(i => i.value.trim());
     if (values.some(v => v !== '' && isNaN(+v.replace(',', '.')))) { toast(T('Numbers only, please.', 'Chỉ nhập số.')); return; }
     b.disabled = true;
     const j = await post('/api/public/submit', { cls: I.id, lab, values });
     b.disabled = false;
     if (!j) return;
-    toast(T('Submitted', 'Đã nộp')); reload();
+    clearDraft(lab); toast(T('Submitted', 'Đã nộp')); reload();
   });
   app.querySelectorAll('[data-photo]').forEach(inp => inp.onchange = async () => {
     const f = inp.files[0]; if (!f) return;
+    cacheDrafts();
     toast(T('Uploading…', 'Đang gửi ảnh…'));
     let data; try { data = await shrink(f); } catch (e) { toast(T('Could not read the photo', 'Không đọc được ảnh')); return; }
     const j = await post('/api/public/photo', { cls: I.id, lab: inp.dataset.photo, data });
@@ -145,9 +159,10 @@ function render() {
   });
   app.querySelectorAll('[data-delph]').forEach(b => b.onclick = async () => {
     if (!confirm(T('Delete this photo?', 'Xóa ảnh này?'))) return;
+    cacheDrafts();
     if (await post('/api/public/photo_delete', { cls: I.id, lab: b.dataset.lab, id: +b.dataset.delph })) reload();
   });
-  $('#ref').onclick = async () => { if (await reload()) toast(T('Updated', 'Đã cập nhật')); };
+  $('#ref').onclick = async () => { cacheDrafts(); if (await reload()) toast(T('Updated', 'Đã cập nhật')); };
   $('#out').onclick = signOut;
   const other = $('#other'); if (other) other.onclick = () => { ST.info = null; ST.cls = ''; try { localStorage.removeItem('student_cls'); } catch (e) {} render(); };
 }
@@ -156,11 +171,11 @@ reload();
 
 // values form under the card: editable until the lecturer ticks
 function submitForm(L) {
-  const S_ = L.submit, vals = S_.values || [];
+  const S_ = L.submit, vals = formValues(L.lab, S_.values);
   let h = `<div class="submit"><div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked.', 'Giảng viên đã xác nhận – đã khóa.')}</p>`;
   h += S_.questions.map((q, i) => `<label>${sub(q[0])} <small>(${esc(q[1])})</small>
-      <input inputmode="decimal" ${S_.locked ? 'disabled' : ''} value="${vals[i] ?? ''}" placeholder="${T('number', 'số')}"></label>`).join('');
+      <input inputmode="decimal" ${S_.locked ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}"></label>`).join('');
   // photos of the real circuit (evidence), 1–3 per lab
   const P = S_.photos || [];
   h += `<div class="subhead">${T('Photos of your circuit (1–3)', 'Ảnh mạch thật (1–3 ảnh)')}</div>`;
