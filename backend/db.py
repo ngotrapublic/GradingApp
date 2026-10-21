@@ -11,7 +11,8 @@ from .store import PG, connect as _connect
 
 TABLES = """
 CREATE TABLE IF NOT EXISTS config   (key TEXT PRIMARY KEY, value TEXT);
-CREATE TABLE IF NOT EXISTS users    (id {ID}, username TEXT UNIQUE, name TEXT, role TEXT, pw TEXT, active INTEGER DEFAULT 1, created TEXT);
+CREATE TABLE IF NOT EXISTS users    (id {ID}, username TEXT UNIQUE, name TEXT, role TEXT, pw TEXT, active INTEGER DEFAULT 1, created TEXT,
+                                     must_change INTEGER DEFAULT 0);
 CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, user_id INTEGER, created TEXT);
 CREATE TABLE IF NOT EXISTS classes  (id {ID}, course TEXT, term TEXT, name TEXT, vset INTEGER, owner INTEGER, created TEXT);
 CREATE TABLE IF NOT EXISTS class_staff (class_id INTEGER, user_id INTEGER, PRIMARY KEY (class_id, user_id));
@@ -32,6 +33,8 @@ CREATE INDEX IF NOT EXISTS hits_k ON hits (k, t);
 SCHEMA = TABLES.format(ID='SERIAL PRIMARY KEY', BLOB='BYTEA') if PG else TABLES.format(ID='INTEGER PRIMARY KEY AUTOINCREMENT', BLOB='BLOB')
 ROLES = ('admin', 'lecturer', 'ta')
 LEGACY_TERM = 'Fall 2026'           # term given to the classes of the first version (one course, 3 fixed classes)
+# default account 'admin' (only the hash is stored here); its password must be changed at the first sign-in
+DEFAULT_ADMIN_PW = 'pbkdf2$12201068aebc99efad0b66bd6220755f$50960dacc7a5954bacd07373fc739fd94c84c8da94500f2e23e77cb7a0224bb1'
 
 _ready = False
 
@@ -68,13 +71,20 @@ def init_db():
         if not PG and is_legacy(con):
             upgrade_legacy(con)
         con.executescript(SCHEMA)
-        if os.environ.get('ADMIN_PASSWORD'):           # Vercel: the admin password is a server setting
+        if PG:
+            con.execute('ALTER TABLE users ADD COLUMN IF NOT EXISTS must_change INTEGER DEFAULT 0')
+        elif 'must_change' not in [r[1] for r in con.execute('PRAGMA table_info(users)').fetchall()]:
+            con.execute('ALTER TABLE users ADD COLUMN must_change INTEGER DEFAULT 0')
+        if os.environ.get('ADMIN_PASSWORD'):           # optional: the admin password as a server setting (Vercel)
             u = con.execute("SELECT id FROM users WHERE username='admin'").fetchone()
             if u:
                 con.execute("UPDATE users SET pw=?, role='admin', active=1 WHERE id=?", (hash_pw(os.environ['ADMIN_PASSWORD']), u['id']))
             else:
                 con.execute("INSERT INTO users (username, name, role, pw, created) VALUES ('admin', 'Admin', 'admin', ?, ?)",
                             (hash_pw(os.environ['ADMIN_PASSWORD']), now()))
+        elif not con.execute('SELECT 1 FROM users').fetchone():   # first start: default admin account
+            con.execute("INSERT INTO users (username, name, role, pw, created, must_change) VALUES ('admin', 'Admin', 'admin', ?, ?, 1)",
+                        (DEFAULT_ADMIN_PW, now()))
     _ready = True
 
 
@@ -163,9 +173,9 @@ def delete_class(con, class_id):
 def user_from_token(con, tok):
     if not tok:
         return None
-    r = con.execute('SELECT u.id, u.username, u.name, u.role FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token=? AND u.active=1',
+    r = con.execute('SELECT u.id, u.username, u.name, u.role, u.must_change FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token=? AND u.active=1',
                     (tok,)).fetchone()
-    return dict(r) if r else None
+    return {**dict(r), 'must_change': bool(r['must_change'])} if r else None
 
 
 def class_role(con, user, class_id):

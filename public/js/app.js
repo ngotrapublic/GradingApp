@@ -3,6 +3,7 @@ function render(){
   const app=$('#app');
   document.documentElement.lang=LANG;
   if(!S.data){ return renderLogin(app); }
+  if(ME().must_change){ return renderChangePw(app); }
   const ids=Object.keys(S.data.classes);
   if(!S.data.classes[S.cls]) S.cls=ids[0]||'';
   const hasCls=!!S.cls, me=ME(), staffOnly=me.role==='ta';

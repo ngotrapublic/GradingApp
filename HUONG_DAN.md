@@ -9,19 +9,20 @@ Có 2 cách chạy, **cùng một bộ code**:
 ## Tài khoản
 | Vai trò | Ai tạo | Làm được gì |
 |---|---|---|
-| **Admin** | tạo lúc cài đặt | tạo / khóa tài khoản, đặt lại mật khẩu; thấy mọi lớp, giao lớp cho giảng viên |
+| **Admin** | có sẵn: username `admin` (mật khẩu mặc định do thầy/cô đặt) | tạo / khóa tài khoản, đặt lại mật khẩu; thấy mọi lớp, giao lớp cho giảng viên |
 | **Giảng viên** | admin | tạo lớp của mình (chọn môn + học kỳ), nhập danh sách SV, chấm, gửi Canvas, thêm TA vào lớp. **Chỉ thấy lớp của mình.** |
 | **TA** | admin | chỉ thấy lớp được giảng viên thêm vào; được **tick, chấm đồ thị / demo, nhập số tay, bật-tắt Cho SV xem đề / Nhận bài**. Không được: sửa danh sách, chia lại nhóm, sửa điểm tay, công bố điểm, gửi Canvas, đặt lại mật khẩu SV |
 | **Sinh viên** | tự tạo | đăng nhập bằng **MSSV + mật khẩu** (một mật khẩu cho mọi môn lab) |
 
 - Mọi người đăng nhập bằng **username + mật khẩu** (ít nhất 8 ký tự). Nút **👤** góc trên: đổi mật khẩu, đăng xuất.
+- **Đăng nhập lần đầu bằng mật khẩu được cấp** (admin mặc định, tài khoản mới, mật khẩu vừa được đặt lại) thì web **bắt đổi mật khẩu** trước khi làm việc khác.
 - Sai mật khẩu nhiều lần thì bị khóa 15 phút.
 - TA muốn vào lớp: báo admin tạo tài khoản TA → giảng viên vào tab **Lớp** → **Sửa lớp này** → **Thêm TA**.
 
 ## Chạy trên laptop
 1. Nhấp đúp **start.command** (lần đầu macOS có thể hỏi: chuột phải → Open).
 2. Cửa sổ Terminal hiện địa chỉ `http://localhost:8000` (laptop) và `http://192.168.x.x:8000` + **mã QR** (điện thoại **cùng wifi**).
-3. **Lần đầu**: web yêu cầu tạo tài khoản **admin**. Sau đó vào tab **Tài khoản** tạo tài khoản giảng viên cho chính mình (và TA nếu có), rồi đăng xuất, đăng nhập lại bằng tài khoản giảng viên.
+3. **Lần đầu**: đăng nhập `admin` + mật khẩu mặc định → đổi mật khẩu admin → tab **Tài khoản** tạo tài khoản giảng viên cho chính mình (và TA nếu có) → đăng xuất, đăng nhập lại bằng tài khoản giảng viên.
 4. **Ngôn ngữ**: mặc định tiếng Anh; bấm **EN | VI** để đổi.
 5. Tắt: đóng cửa sổ Terminal hoặc nhấn Ctrl+C.
 
@@ -84,15 +85,16 @@ Cần: tài khoản Vercel (đăng nhập bằng GitHub/Google), Node.js trên l
 
 1. Mở Terminal tại thư mục `GradingApp`, chạy `npx vercel` → đăng nhập → trả lời các câu hỏi (tạo project mới, giữ thư mục hiện tại).
 2. Trang Vercel → project → **Storage** → **Create Database** → **Neon (Postgres)** → gói Free → **Connect** vào project. Vercel tự thêm biến `DATABASE_URL`.
-3. **Settings → Environment Variables** → thêm `ADMIN_PASSWORD` = mật khẩu tài khoản **admin** (dài, khó đoán). Mật khẩu admin chỉ đổi ở đây.
-4. Chạy `npx vercel --prod`. Địa chỉ dạng `https://<tên-project>.vercel.app`. Đăng nhập `admin` + `ADMIN_PASSWORD` → tab **Tài khoản** tạo tài khoản giảng viên / TA. Nút **QR** tự dùng địa chỉ này.
+3. Chạy `npx vercel --prod`. Địa chỉ dạng `https://<tên-project>.vercel.app`. Nút **QR** tự dùng địa chỉ này.
+4. **Ngay sau đó**: đăng nhập `admin` + mật khẩu mặc định → **đổi mật khẩu admin** (web bắt đổi) → tab **Tài khoản** tạo tài khoản giảng viên / TA.
+   (Tùy chọn: đặt biến `ADMIN_PASSWORD` trong Settings → Environment Variables thì mật khẩu admin luôn lấy theo biến này.)
 5. (Nếu đã có dữ liệu trên laptop) chép lên **một lần**, khi database online còn trống:
    - Bật `start.command` một lần rồi tắt (để nâng cấp file dữ liệu cũ).
    - Vercel → Storage → database → **.env.local** → copy giá trị `DATABASE_URL`.
    - Terminal ở thư mục `GradingApp`:
      `.venv/bin/pip install "psycopg[binary]"` rồi
      `DATABASE_URL='<dán vào đây>' .venv/bin/python tools/upload_to_cloud.py`
-   - Tài khoản, lớp, SV (cả mật khẩu SV), điểm, ảnh được chép nguyên. Tài khoản `admin` online giữ mật khẩu `ADMIN_PASSWORD`.
+   - Tài khoản, lớp, SV (cả mật khẩu SV), điểm, ảnh được chép nguyên. Tài khoản `admin` online giữ mật khẩu đang dùng online.
 6. Sửa code sau này: chạy lại `npx vercel --prod`.
 
 Lưu ý:

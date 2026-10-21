@@ -32,8 +32,8 @@ with db.connect() as dst:
     for r in src.execute('SELECT * FROM users').fetchall():
         old = dst.execute('SELECT id FROM users WHERE username=?', (r['username'],)).fetchone()
         uid[r['id']] = old[0] if old else dst.execute(      # 'admin' made from ADMIN_PASSWORD on the server stays as it is
-            'INSERT INTO users (username, name, role, pw, active, created) VALUES (?,?,?,?,?,?) RETURNING id',
-            (r['username'], r['name'], r['role'], r['pw'], r['active'], r['created'])).fetchone()[0]
+            'INSERT INTO users (username, name, role, pw, active, created, must_change) VALUES (?,?,?,?,?,?,?) RETURNING id',
+            (r['username'], r['name'], r['role'], r['pw'], r['active'], r['created'], r['must_change'] if 'must_change' in r.keys() else 0)).fetchone()[0]
     print(f'  users: {len(uid)}')
     for table in TABLES[1:]:
         cols = [r[1] for r in src.execute(f'PRAGMA table_info({table})')]

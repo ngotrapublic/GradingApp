@@ -107,8 +107,7 @@ class H(http.server.SimpleHTTPRequestHandler):
         with connect() as con:
             me = self.user(con)
             if path == '/api/status':
-                setup = not os.environ.get('ADMIN_PASSWORD') and not con.execute('SELECT 1 FROM users').fetchone()
-                return self.send_json({'me': me, 'needSetup': setup})
+                return self.send_json({'me': me})
             if not me:
                 return self.send_json({'error': 'auth'}, 401)
             if path == '/api/keys':
@@ -161,10 +160,6 @@ class H(http.server.SimpleHTTPRequestHandler):
         with LOCK, connect() as con:
             if path.startswith('/api/public/'):
                 return self.public_post(con, path, body)
-            if path == '/api/setup':            # laptop, first start: create the admin account
-                if os.environ.get('ADMIN_PASSWORD') or con.execute('SELECT 1 FROM users').fetchone():
-                    return self.send_json(err('Already set up.', 'Đã cài đặt rồi.'), 403)
-                return self.create_user(con, {**body, 'role': 'admin'}, login=True)
             if path == '/api/login':
                 return self.staff_login(con, body)
             me = self.user(con)
@@ -173,6 +168,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             if path == '/api/logout':
                 con.execute('DELETE FROM sessions WHERE token=?', (self.cookie('tok'),))
                 return self.send_json({'ok': True}, cookie=self.set_cookie('tok', '', 0))
+            if me['must_change'] and path != '/api/password':      # first sign-in with a given password: change it first
+                return self.send_json(err('Change your password first.', 'Đổi mật khẩu trước đã.'), 403)
             if path == '/api/password':         # change my own password
                 row = con.execute('SELECT pw FROM users WHERE id=?', (me['id'],)).fetchone()
                 if me['username'] == 'admin' and os.environ.get('ADMIN_PASSWORD'):
@@ -181,7 +178,9 @@ class H(http.server.SimpleHTTPRequestHandler):
                     return self.send_json(err('The current password is wrong.', 'Mật khẩu hiện tại sai.'), 403)
                 if len(str(body.get('new', ''))) < 8:
                     return self.send_json(err('The new password needs at least 8 characters.', 'Mật khẩu mới cần ít nhất 8 ký tự.'), 400)
-                con.execute('UPDATE users SET pw=? WHERE id=?', (hash_pw(str(body['new'])), me['id']))
+                if str(body['new']) == str(body.get('old', '')):
+                    return self.send_json(err('Choose a new password, different from the current one.', 'Chọn mật khẩu mới, khác mật khẩu hiện tại.'), 400)
+                con.execute('UPDATE users SET pw=?, must_change=0 WHERE id=?', (hash_pw(str(body['new'])), me['id']))
                 con.execute('DELETE FROM sessions WHERE user_id=? AND token<>?', (me['id'], self.cookie('tok')))   # sign out other devices
                 return self.send_json({'ok': True})
             if path in ('/api/user_create', '/api/user_update'):
@@ -313,7 +312,7 @@ class H(http.server.SimpleHTTPRequestHandler):
         add_hit(con, ip_key); add_hit(con, user_key)
         return self.send_json(err('Wrong username or password.', 'Sai username hoặc mật khẩu.'), 403)
 
-    def create_user(self, con, body, login=False):
+    def create_user(self, con, body):
         username = str(body.get('username', '')).strip().lower()
         role, pw = str(body.get('role', '')), str(body.get('password', ''))
         if not USERNAME.fullmatch(username):
@@ -324,10 +323,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             return self.send_json(err('The password needs at least 8 characters.', 'Mật khẩu cần ít nhất 8 ký tự.'), 400)
         if con.execute('SELECT 1 FROM users WHERE username=?', (username,)).fetchone():
             return self.send_json(err('This username already exists.', 'Username này đã có.'), 400)
-        uid = con.execute('INSERT INTO users (username, name, role, pw, created) VALUES (?,?,?,?,?) RETURNING id',
+        uid = con.execute('INSERT INTO users (username, name, role, pw, created, must_change) VALUES (?,?,?,?,?,1) RETURNING id',
                           (username, str(body.get('name', '')).strip()[:60] or username, role, hash_pw(pw), now())).fetchone()[0]
-        if login:
-            return self.send_json({'ok': True}, cookie=self.set_cookie('tok', new_session(con, 'sessions', uid), 15552000))
         return self.send_json({'ok': True, 'id': uid})
 
     def update_user(self, con, me, body):
@@ -348,7 +345,7 @@ class H(http.server.SimpleHTTPRequestHandler):
         if body.get('password'):
             if len(str(body['password'])) < 8:
                 return self.send_json(err('The password needs at least 8 characters.', 'Mật khẩu cần ít nhất 8 ký tự.'), 400)
-            con.execute('UPDATE users SET pw=? WHERE id=?', (hash_pw(str(body['password'])), uid))
+            con.execute('UPDATE users SET pw=?, must_change=1 WHERE id=?', (hash_pw(str(body['password'])), uid))   # they choose their own at the next sign-in
             con.execute('DELETE FROM sessions WHERE user_id=?', (uid,))
         return self.send_json({'ok': True})
 
