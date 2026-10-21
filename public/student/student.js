@@ -121,17 +121,17 @@ function render() {
   h += `</div>`;
   let shown = 0, sum = 0, total = 0;
   I.labs.forEach(L => {
-    if (!L.card && L.marks === null && !L.submit) return;
+    if (!L.card && L.marks === null && !L.submit && !(L.review && L.review.length)) return;
     shown++;
     h += `<div class="card lab"><h3>Lab ${L.lab}</h3>`;
     if (L.card) h += `<div class="lines">${L.card.map(l => `<div>${sub(l)}</div>`).join('')}</div>`;
     (L.figs || []).forEach(f => { h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
     if (L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
     (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
-    if (L.submit) h += submitForm(L);
     if (L.marks !== null) { sum += L.marks; total += L.total;
-      h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`;
-      if (L.review && L.review.length) h += reviewTable(L.review); }
+      h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
+    if (L.submit) h += submitForm(L);
+    else if (L.review && L.review.length) h += `<div class="submit">${valueFields(L, true)}</div>`;
     h += `</div>`;
   });
   if (!shown) h += `<p class="muted">${T('Nothing to show yet. Your card appears when the lab starts.', 'Chưa có gì để hiện. Đề sẽ hiện khi bắt đầu buổi lab.')}</p>`;
@@ -179,24 +179,26 @@ function render() {
 
 reload();
 
-// after marks are released: your value vs key (green = within ±10%, red = wrong or near)
-function reviewTable(rows) {
-  let h = `<div class="review"><div class="subhead">${T('Your answers vs the key', 'Số bạn nộp và đáp án')}</div>
-    <table><tr><th>${T('Quantity', 'Đại lượng')}</th><th>${T('Yours', 'Bạn nộp')}</th><th>${T('Key', 'Đáp án')}</th></tr>`;
-  rows.forEach(r => {
-    const cls = r.ok ? 'ok' : 'bad';
-    h += `<tr class="${cls}"><td>${sub(r.label)} <small>(${esc(r.unit)})</small></td>
-      <td class="num">${fmt(r.yours)}</td><td class="num"><b>${fmt(r.key)}</b></td></tr>`;
-  });
-  return h + `</table><p class="muted">${T('Green = within ±10% of the key. Red = outside that (including near-miss).', 'Xanh = trong khoảng ±10% đáp án. Đỏ = ngoài khoảng đó (kể cả gần đúng).')}</p></div>`;
+// measured-value fields; when marks are released, color the field and show the key under it
+function valueFields(L, frozen) {
+  const S_ = L.submit, rev = L.review || [];
+  const vals = S_ ? formValues(L.lab, S_.values, frozen) : rev.map(r => r.yours == null ? '' : String(r.yours));
+  const qs = S_ ? S_.questions : rev.map(r => [r.label, r.unit]);
+  let h = qs.map((q, i) => {
+    const r = rev[i], cls = r ? (r.ok ? 'ok' : 'bad') : '';
+    return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
+      <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
+      ${r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b></span>` : ''}</label>`;
+  }).join('');
+  if (rev.length) h += `<p class="muted">${T('Green = within ±10% of the key. Red = outside that (including near-miss).', 'Xanh = trong khoảng ±10% đáp án. Đỏ = ngoài khoảng đó (kể cả gần đúng).')}</p>`;
+  return h;
 }
 
 // values form: edit while drafting; after submit view-only until Unsubmit; after lecturer tick view-only forever
 function submitForm(L) {
-  const S_ = L.submit, frozen = !!(S_.locked || S_.submitted);
-  const vals = formValues(L.lab, S_.values, frozen);
+  const S_ = L.submit, frozen = !!(S_.locked || S_.submitted || L.review);
   let h = `<div class="submit">`;
-  if (!S_.locked) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
+  if (!S_.locked && !L.review) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
     <ol>
       <li>${T('Measure on your bench, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>')}</li>
       <li>${T('To change after submitting: tap <b>Unsubmit</b>, edit, then submit again.', 'Muốn sửa sau khi đã nộp: bấm <b>Hủy nộp</b>, sửa, rồi nộp lại.')}</li>
@@ -206,14 +208,13 @@ function submitForm(L) {
   h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
   else if (S_.submitted) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
-  h += S_.questions.map((q, i) => `<label>${sub(q[0])} <small>(${esc(q[1])})</small>
-      <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}"></label>`).join('');
+  h += valueFields(L, frozen);
   const P = S_.photos || [];
   h += `<div class="subhead">${T('Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)')}</div>`;
   if (!P.length) h += `<p class="zero">${T('No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.')}</p>`;
   h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${frozen ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
   if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T('Take / choose a photo', 'Chụp / chọn ảnh')}<input type="file" accept="image/*" capture="environment" data-photo="${L.lab}" hidden></label>`;
-  if (S_.locked) { /* view only */ }
+  if (S_.locked || L.review) { /* view only */ }
   else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
   else h += `<button class="big on" data-send="${L.lab}">${T('Submit', 'Nộp')}</button>`;
   if (S_.time) h += `<p class="muted">${T('Last submitted', 'Nộp lần cuối')}: ${esc(S_.time)}</p>`;

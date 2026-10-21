@@ -13,15 +13,11 @@
 .lab .closed{color:var(--mut);font-size:14px}
 .marks{margin-top:8px;font-size:15px}
 .marks b{font-size:18px;color:var(--g2)}
-.review{margin-top:10px}
-.review table{width:100%;border-collapse:collapse;font-size:14px}
-.review th,.review td{padding:6px 5px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-.review th{color:var(--mut);font-weight:600;font-size:12px}
-.review td.num{font-variant-numeric:tabular-nums;text-align:right}
-.review tr.ok td{background:#e8f5e9;color:#1b5e20}
-.review tr.ok td b{color:#1b5e20}
-.review tr.bad td{background:#fdecea;color:#b71c1c}
-.review tr.bad td b{color:#b71c1c}
+.submit label.val.ok input{background:#e8f5e9;border-color:#81c784;color:#1b5e20;font-weight:600}
+.submit label.val.bad input{background:#fdecea;border-color:#e57373;color:#b71c1c;font-weight:600}
+.submit .keyline{display:block;margin-top:4px;font-size:13px}
+.submit label.val.ok .keyline{color:#2e7d32}
+.submit label.val.bad .keyline{color:#c62828}
 .sidform input{font-size:22px;text-align:center;letter-spacing:2px;padding:12px;margin:12px 0;text-transform:uppercase}
 .submit{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .submit .subhead{font-weight:700;margin-bottom:6px}
