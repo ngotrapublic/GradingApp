@@ -9,9 +9,10 @@ function cacheDrafts() {
     ST.draft[b.dataset.send] = [...box.querySelectorAll('input[inputmode="decimal"]')].map(i => i.value);
   });
 }
-function formValues(lab, saved) {
+function formValues(lab, saved, frozen) {
+  if (frozen) return (saved || []).map(v => v == null ? '' : String(v));
   const d = ST.draft[lab];
-  return (d && d.length ? d : (saved || [])).map(v => v ?? '');
+  return (d && d.length ? d : (saved || [])).map(v => v == null ? '' : String(v));
 }
 function clearDraft(lab) { delete ST.draft[lab]; }
 
@@ -148,6 +149,14 @@ function render() {
     if (!j) return;
     clearDraft(lab); toast(T('Submitted', 'Đã nộp')); reload();
   });
+  app.querySelectorAll('[data-unsubmit]').forEach(b => b.onclick = async () => {
+    if (!confirm(T('Unsubmit so you can edit? Call the lecturer again after you resubmit.', 'Hủy nộp để sửa? Sau khi nộp lại phải gọi giảng viên xác nhận lại.'))) return;
+    b.disabled = true;
+    const j = await post('/api/public/unsubmit', { cls: I.id, lab: b.dataset.unsubmit });
+    b.disabled = false;
+    if (!j) return;
+    toast(T('Unsubmitted – you can edit now', 'Đã hủy nộp – có thể sửa')); reload();
+  });
   app.querySelectorAll('[data-photo]').forEach(inp => inp.onchange = async () => {
     const f = inp.files[0]; if (!f) return;
     cacheDrafts();
@@ -169,29 +178,33 @@ function render() {
 
 reload();
 
-// values form under the card: editable until the lecturer ticks
+// values form: edit while drafting; after submit view-only until Unsubmit; after lecturer tick view-only forever
 function submitForm(L) {
-  const S_ = L.submit, vals = formValues(L.lab, S_.values);
+  const S_ = L.submit, frozen = !!(S_.locked || S_.submitted);
+  const vals = formValues(L.lab, S_.values, frozen);
   let h = `<div class="submit">`;
   if (!S_.locked) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
     <ol>
       <li>${T('Measure on your bench, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>')}</li>
+      <li>${T('To change after submitting: tap <b>Unsubmit</b>, edit, then submit again.', 'Muốn sửa sau khi đã nộp: bấm <b>Hủy nộp</b>, sửa, rồi nộp lại.')}</li>
       <li>${T('<b>Call the lecturer or TA to your bench.</b> Do not pack up or leave until they have ticked you. Submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống cụm máy của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick. Chỉ nộp trên điện thoại là chưa đủ.')}</li>
       <li>${T('They will check the number <span class="nowrap">on the <b>instrument</b></span> (must match what you submitted), your circuit and photo, then confirm at your bench. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số <span class="nowrap">trên <b>máy đo</b></span> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại cụm máy. Chỉ sau khi được xác nhận thì số đo mới tính điểm.')}</li>
     </ol></div>`;
   h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
+  else if (S_.submitted) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
   h += S_.questions.map((q, i) => `<label>${sub(q[0])} <small>(${esc(q[1])})</small>
-      <input inputmode="decimal" ${S_.locked ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}"></label>`).join('');
-  // one photo of the real circuit (evidence) per lab
+      <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}"></label>`).join('');
   const P = S_.photos || [];
   h += `<div class="subhead">${T('Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)')}</div>`;
   if (!P.length) h += `<p class="zero">${T('No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.')}</p>`;
-  h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${S_.locked ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
-  if (!S_.locked && P.length < 1) h += `<label class="btn pri photo-btn">${T('Take / choose a photo', 'Chụp / chọn ảnh')}<input type="file" accept="image/*" capture="environment" data-photo="${L.lab}" hidden></label>`;
-  if (!S_.locked) h += `<button class="big on" data-send="${L.lab}">${S_.time ? T('Update', 'Nộp lại') : T('Submit', 'Nộp')}</button>`;
+  h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${frozen ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
+  if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T('Take / choose a photo', 'Chụp / chọn ảnh')}<input type="file" accept="image/*" capture="environment" data-photo="${L.lab}" hidden></label>`;
+  if (S_.locked) { /* view only */ }
+  else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
+  else h += `<button class="big on" data-send="${L.lab}">${T('Submit', 'Nộp')}</button>`;
   if (S_.time) h += `<p class="muted">${T('Last submitted', 'Nộp lần cuối')}: ${esc(S_.time)}</p>`;
-  if (!S_.locked) h += `<p class="muted">${T('Use real measured values, in the unit shown. You can edit until the lecturer ticks you at the bench.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh. Sửa được cho đến khi giảng viên tick tại cụm máy.')}</p>`;
+  if (!frozen) h += `<p class="muted">${T('Use real measured values, in the unit shown.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh.')}</p>`;
   h += `</div>`;
   return h;
 }

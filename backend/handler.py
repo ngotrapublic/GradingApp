@@ -463,6 +463,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             return self.send_json(NO_RIGHT, 403)
         if path == '/api/public/submit':
             return self.public_submit(con, st, c, body)
+        if path == '/api/public/unsubmit':
+            return self.public_unsubmit(con, st, c, body)
         if path in ('/api/public/photo', '/api/public/photo_delete'):
             return self.public_photo(con, st, c, body, delete=path.endswith('delete'))
         return self.send_json({'error': 'not found'}, 404)
@@ -494,16 +496,18 @@ class H(http.server.SimpleHTTPRequestHandler):
         tok = new_session(con, 'stu_sessions', row['sid'])
         return self.send_json({'ok': True}, cookie=self.set_cookie('stu', tok, 15552000, 'Lax'))
 
-    def _open_lab(self, con, st, c, lab):
+    def _open_lab(self, con, st, c, lab, *, for_unsubmit=False):
         """Checks before a student changes one lab. Returns True or sends the error."""
         if lab not in keys(c['course'])['labs']:
             self.send_json({'error': 'bad lab'}, 400); return False
         pub = con.execute('SELECT submit FROM publish WHERE class_id=? AND lab=?', (c['id'], lab)).fetchone()
         if not pub or not pub['submit']:
             self.send_json(err('Submissions for this lab are closed.', 'Lab này đang không nhận bài.'), 403); return False
-        rec = con.execute('SELECT tick FROM records WHERE class_id=? AND lab=? AND sid=?', (c['id'], lab, st['sid'])).fetchone()
+        rec = con.execute('SELECT tick, src FROM records WHERE class_id=? AND lab=? AND sid=?', (c['id'], lab, st['sid'])).fetchone()
         if rec and rec['tick']:
             self.send_json(err('Already checked by the lecturer – locked.', 'Giảng viên đã xác nhận – đã khóa.'), 409); return False
+        if not for_unsubmit and rec and rec['src'] == 'web':
+            self.send_json(err('Already submitted. Unsubmit first to edit.', 'Đã nộp. Bấm Hủy nộp trước rồi mới sửa.'), 409); return False
         return True
 
     def public_submit(self, con, st, c, body):
@@ -520,12 +524,25 @@ class H(http.server.SimpleHTTPRequestHandler):
         vals += [None] * (n - len(vals))
         if all(v is None for v in vals):
             return self.send_json(err('Type at least one value.', 'Nhập ít nhất một số.'), 400)
+        if not con.execute('SELECT 1 FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone():
+            return self.send_json(err('Take one photo of your circuit first.', 'Chụp một ảnh mạch trước đã.'), 400)
         t = now()
         con.execute('INSERT INTO records (class_id, lab, sid, tick, manual) VALUES (?,?,?,0,?) ON CONFLICT DO NOTHING', (cid, lab, sid, '{}'))
         con.execute("UPDATE records SET vals=?, src='web', updated=? WHERE class_id=? AND lab=? AND sid=?", (json.dumps(vals), t, cid, lab, sid))
         con.execute('INSERT INTO submissions (class_id, lab, sid, vals, time, ip, agent) VALUES (?,?,?,?,?,?,?)',
                     (cid, lab, sid, json.dumps(vals), t, self.ip(), (self.headers.get('User-Agent') or '')[:200]))
         return self.send_json({'ok': True, 'time': t})
+
+    def public_unsubmit(self, con, st, c, body):
+        lab = str(body.get('lab', ''))
+        if not self._open_lab(con, st, c, lab, for_unsubmit=True):
+            return
+        cid, sid = c['id'], st['sid']
+        rec = con.execute('SELECT src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
+        if not rec or rec['src'] != 'web':
+            return self.send_json(err('Nothing to unsubmit.', 'Chưa có bài để hủy nộp.'), 400)
+        con.execute('UPDATE records SET src=NULL WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid))
+        return self.send_json({'ok': True})
 
     def public_photo(self, con, st, c, body, delete=False):
         lab = str(body.get('lab', ''))
@@ -571,9 +588,11 @@ def student_view(C, sid):
         if pub.get('marks') or rec.get('show_marks'):
             item['marks'] = score(C, lab, st)
         if pub.get('submit') and v:
+            submitted = rec.get('src') == 'web'
             item['submit'] = {'questions': [[q[1], q[2]] for q in L['questions']],   # label + unit only
-                              'values': rec.get('values') if rec.get('src') == 'web' else None,
-                              'time': rec.get('updated') if rec.get('src') == 'web' else None,
+                              'values': rec.get('values'),
+                              'time': rec.get('updated') if submitted else None,
+                              'submitted': submitted,
                               'locked': bool(rec.get('tick')),
                               'photos': [{'id': p['id'], 'url': f"/api/public/photo/{p['id']}.jpg", 'time': p['time']}
                                          for p in C.get('photos', {}).get(lab, {}).get(sid, [])]}

@@ -55,7 +55,7 @@ Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thô
 
 **Trong buổi lab:**
 1. Tab **Chấm** → hộp **Trang SV**: bật **Cho SV xem đề** và **Nhận bài**, bấm **QR cho SV** và chiếu lên màn hình.
-2. SV quét QR, đăng nhập, xem đề (kèm sơ đồ mạch), đo, điền số ngay dưới đề, **chụp đúng 1 ảnh mạch thật** (breadboard, bắt buộc) và bấm **Nộp**. Sửa số / xóa rồi chụp lại ảnh được cho đến khi được tick.
+2. SV quét QR, đăng nhập, xem đề (kèm sơ đồ mạch), đo, điền số ngay dưới đề, **chụp đúng 1 ảnh mạch thật** (breadboard, bắt buộc) và bấm **Nộp**. Muốn sửa: bấm **Hủy nộp**, sửa, rồi nộp lại. Đã được tick thì chỉ xem, không sửa.
 3. Giảng viên / TA đi tick trên điện thoại – số SV nộp và ảnh mạch hiện ngay trong khung chấm. Đã tick thì số và ảnh của SV bị khóa.
 4. Hết giờ: tắt **Nhận bài**.
    SV nào không nộp được trên điện thoại: xem số trên máy đo của SV rồi nhập ở mục **Nhập / sửa số tay** trong khung chấm.

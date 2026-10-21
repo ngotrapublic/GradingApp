@@ -1,17 +1,18 @@
 // Tab "Grade": students by team, answer key, tick, manual marks.
 function hasData(sid, lab=S.lab){ const r=rec(sid,lab); return (r.values||[]).some(v=>v!==null&&v!==''&&v!==undefined); }
+function isSubmitted(sid, lab=S.lab){ return rec(sid,lab).src === 'web'; }
 function statusChip(s){
   const r=rec(s.sid);
   if(r.tick) return `<span class="chip tick">${T('Ticked','Đã tick')}</span>`;
-  if(hasData(s.sid)) return `<span class="chip sub">${T('Submitted','Đã nộp')}</span>`;
+  if(isSubmitted(s.sid)) return `<span class="chip sub">${T('Submitted','Đã nộp')}</span>`;
   return `<span class="chip open">${T('Not submitted','Chưa nộp')}</span>`;
 }
 function marksReleased(s){ return !!(((C().publish||{})[S.lab]||{}).marks || rec(s.sid).show_marks); }
 function renderGrade(m){
   const Lb=L(), st=sorted(), q=S.q.toLowerCase();
   const done=st.filter(s=>rec(s.sid).tick).length;
-  const waiting=st.filter(s=>hasData(s.sid)&&!rec(s.sid).tick).length;
-  const open=st.filter(s=>!hasData(s.sid)&&!rec(s.sid).tick).length;
+  const waiting=st.filter(s=>isSubmitted(s.sid)&&!rec(s.sid).tick).length;
+  const open=st.filter(s=>!isSubmitted(s.sid)&&!rec(s.sid).tick).length;
   let html = labSeg() + `<div class="stats"><div><b>${st.length}</b>${T('students','SV')}</div><div><b>${done}</b>${T('ticked','đã tick')}</div><div><b>${waiting}</b>${T('submitted','đã nộp')}</div><div><b>${open}</b>${T('not submitted','chưa nộp')}</div></div>
     ${(()=>{ const ch=changedSince(S.lab); return ch.length? `<div class="card" style="padding:10px 12px;background:#fff7e0;border-color:#e0a800">${T(`Lab ${S.lab}: <b>${ch.length} student(s)</b> with marks not yet sent to Canvas.`,`Lab ${S.lab}: <b>${ch.length} SV</b> có điểm chưa đưa lên Canvas.`)} <a href="#" id="gosend">${T('Go to Canvas tab →','Gửi Canvas →')}</a></div>`:''; })()}
     ${pubBox()}
