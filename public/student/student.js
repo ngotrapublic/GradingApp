@@ -95,10 +95,10 @@ function renderPick(app, head) {
     <h2>${T('Choose your class', 'Chọn lớp')}</h2>
     ${M.classes.map(c => `<button class="big" data-pick="${c.id}"><b>${esc(c.name)}</b> · ${esc(c.courseName)}<br><small>${esc(c.term)}</small></button>`).join('')}
     ${M.classes.length ? '' : `<p class="muted">${T('You are not in any class at the moment.', 'Hiện bạn chưa có trong lớp nào.')}</p>`}
-    <div class="btns"><button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
+    </main>`;
   bindLangToggle(app);
   app.querySelectorAll('[data-pick]').forEach(b => b.onclick = () => pick(b.dataset.pick));
-  $('#out').onclick = signOut;
+  const out = $('#out'); if (out) out.onclick = signOut;
 }
 async function signOut() { await post('/api/public/logout', {}); ST.me = null; ST.info = null; ST.step = 'sid'; render(); }
 
@@ -106,7 +106,8 @@ function render() {
   document.documentElement.lang = LANG;
   document.title = T('Lab – Student', 'Lab – Sinh viên');
   const app = $('#app');
-  const head = `<header><div class="row"><h1>${ST.info ? esc(ST.info.courseName) : 'Lab'}</h1>${langToggle()}</div></header>`;
+  const outBtn = ST.me ? `<button class="qrbtn" id="out">${T('Sign out', 'Đăng xuất')}</button>` : '';
+  const head = `<header><div class="row"><h1>${ST.info ? esc(ST.info.courseName) : 'Lab'}</h1>${langToggle()}${outBtn}</div></header>`;
   if (!ST.me) return renderSignIn(app, head);
   if (!ST.info) return renderPick(app, head);
   const I = ST.info;
@@ -149,9 +150,10 @@ function render() {
   });
   if (!labs.length) h += `<p class="muted">${T('Nothing to show yet. Your card appears when the lab starts.', 'Chưa có gì để hiện. Đề sẽ hiện khi bắt đầu buổi lab.')}</p>`;
   if (total) h += `<p class="muted">${T(`Released labs: <b>${sum}</b> / ${total}. These marks are provisional – the official marks are on Canvas.`, `Các lab đã công bố: <b>${sum}</b> / ${total}. Điểm này để tham khảo – điểm chính thức trên Canvas.`)}</p>`;
-  h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button>${ST.me.classes.length > 1 ? `<button id="other">${T('Other class', 'Lớp khác')}</button>` : ''}<button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
+  h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button>${ST.me.classes.length > 1 ? `<button id="other">${T('Other class', 'Lớp khác')}</button>` : ''}</div></main>`;
   app.innerHTML = h;
   bindLangToggle(app);
+  const out = $('#out'); if (out) out.onclick = signOut;
   app.querySelectorAll('.submit input[inputmode="decimal"]').forEach(i => i.oninput = () => cacheDrafts());
   app.querySelectorAll('[data-send]').forEach(b => b.onclick = async () => {
     const lab = b.dataset.send, box = b.closest('.submit');
@@ -186,7 +188,6 @@ function render() {
     if (await post('/api/public/photo_delete', { cls: I.id, lab: b.dataset.lab, id: +b.dataset.delph })) reload();
   });
   $('#ref').onclick = async () => { cacheDrafts(); if (await reload()) toast(T('Updated', 'Đã cập nhật')); };
-  $('#out').onclick = signOut;
   const other = $('#other'); if (other) other.onclick = () => { ST.info = null; ST.cls = ''; try { localStorage.removeItem('student_cls'); } catch (e) {} render(); };
 }
 
