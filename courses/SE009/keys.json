@@ -3904,8 +3904,8 @@
    "parts": [
     {
      "title": [
-      "Task 1 – RC warm-up",
-      "Bài 1 – Warm-up RC"
+      "Task 1 – RC warm-up (individual)",
+      "Bài 1 – Warm-up RC (làm cá nhân)"
      ],
      "cardSlice": [
       1,
@@ -3916,12 +3916,16 @@
      ],
      "questions": [
       0
+     ],
+     "note": [
+      "Each member builds and measures their own RC circuit (your own values on the card).",
+      "Mỗi thành viên tự dựng và đo mạch RC của mình (theo số trên đề của bạn)."
      ]
     },
     {
      "title": [
-      "Task 2 – RLC filter",
-      "Bài 2 – Bộ lọc RLC"
+      "Task 2 – RLC filter (team – one circuit for the whole team)",
+      "Bài 2 – Bộ lọc RLC (làm nhóm – cả nhóm chung một mạch)"
      ],
      "cardSlice": [
       2,
@@ -3937,8 +3941,8 @@
      ],
      "files": true,
      "note": [
-      "At the end of this lab, upload a screenshot of the RLC graph from this Excel file (not a photo of the circuit).",
-      "Cuối lab này, tải ảnh chụp đồ thị RLC từ file Excel này (không phải ảnh mạch)."
+      "The whole team uses the same RLC circuit (same type, Q, frequencies). Measure together, but each student still types their own numbers and uploads the graph screenshot.",
+      "Cả nhóm dùng chung một mạch RLC (cùng loại lọc, Q, tần số). Đo cùng nhau, nhưng mỗi SV vẫn tự nhập số và tải ảnh đồ thị của mình."
      ]
     }
    ],
@@ -3956,8 +3960,8 @@
      "Tải ảnh chụp đồ thị"
     ],
     "howto": [
-     "Do <b>Task 1</b> and <b>Task 2</b>, type the values, then upload <b>one screenshot of your Task 2 RLC graph</b> from Excel (not a breadboard photo). Then <span class=\"nowrap\">tap <b>Submit.</b></span>",
-     "Làm <b>Bài 1</b> và <b>Bài 2</b>, nhập số, rồi tải <b>đúng một ảnh chụp đồ thị RLC của Bài 2</b> từ Excel (không phải ảnh breadboard). Sau đó <span class=\"nowrap\">bấm <b>Nộp.</b></span>"
+     "<b>Task 1</b> = individual RC. <b>Task 2</b> = team RLC (one shared circuit). Type your values, upload <b>one screenshot of the Task 2 RLC graph</b> (not a breadboard photo), then <span class=\"nowrap\">tap <b>Submit.</b></span>",
+     "<b>Bài 1</b> = RC cá nhân. <b>Bài 2</b> = RLC nhóm (chung một mạch). Nhập số, tải <b>đúng một ảnh đồ thị RLC Bài 2</b> (không phải ảnh breadboard), rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span>"
     ],
     "check": [
      "They will check the numbers <span class=\"nowrap\">on the <b>instrument</b></span> against what you submitted, and your <b>RLC graph photo</b>, then confirm at your bench.",
