@@ -20,6 +20,8 @@
 .howto b{display:block;margin-bottom:4px;color:var(--txt)}
 .howto ol{margin:6px 0 0;padding-left:18px}
 .howto li{margin:4px 0}
+.howto li b{display:inline;margin:0}
+.howto .nowrap{white-space:nowrap}
 .submit label{display:block;margin:6px 0;font-size:15px}
 .submit input{width:100%;padding:10px;font-size:18px;border:1px solid var(--line);border-radius:8px;margin-top:3px}
 .submit input:disabled{background:#f1f3ef;color:var(--mut)}
