@@ -356,7 +356,7 @@ class H(http.server.SimpleHTTPRequestHandler):
     def staff_login(self, con, body):
         username = str(body.get('username', '')).strip().lower()
         ip_key, user_key = 'login-fail:' + self.ip(), 'login-fail-user:' + username
-        if count_hits(con, ip_key, 900) >= 10 or count_hits(con, user_key, 900) >= 8:      # wait 15 minutes
+        if count_hits(con, ip_key, 900) >= 30 or count_hits(con, user_key, 900) >= 8:      # wait 15 minutes (a whole campus may share one IP)
             return self.send_json(TOO_MANY, 429)
         u = con.execute('SELECT id, pw, active FROM users WHERE username=?', (username,)).fetchone()
         if u and u['active'] and check_pw(str(body.get('password', '')), u['pw']):
@@ -444,7 +444,7 @@ class H(http.server.SimpleHTTPRequestHandler):
     def public_get(self, path):
         with connect() as con:
             st = self.student(con)
-            if not allow(con, 'get:' + self.ip(), 240):
+            if not allow(con, 'get:' + self.ip(), 3000):     # generous: every phone on the school Wi-Fi has the same public IP
                 return self.send_json(TOO_MANY, 429)
             if not st:
                 return self.send_json({'error': 'signin'}, 401)
@@ -501,12 +501,15 @@ class H(http.server.SimpleHTTPRequestHandler):
     def student_login(self, con, body, check_only):
         """Step 1 (check): student ID -> name to confirm + whether a password exists.
         Step 2 (login): first time the student creates the password; later student ID + password."""
-        if not allow(con, 'stu-login:' + self.ip(), 40, 600):
+        # per IP only a loose limit (a class shares one public IP); student IDs that do not exist are limited harder,
+        # wrong passwords are limited per student (below)
+        if not allow(con, 'stu-login:' + self.ip(), 1500, 600) or count_hits(con, 'stu-miss:' + self.ip(), 600) >= 60:
             return self.send_json(TOO_MANY, 429)
         sid = str(body.get('sid', '')).strip().upper()
         row = con.execute('SELECT s.sid, s.name, s.pw FROM students s WHERE s.sid=? AND EXISTS (SELECT 1 FROM enrollments e WHERE e.sid=s.sid)',
                           (sid,)).fetchone()
         if not row:
+            add_hit(con, 'stu-miss:' + self.ip())
             return self.send_json(err('Student ID not found. Check it (e.g. AUS15128).', 'Không tìm thấy MSSV. Kiểm tra lại (vd AUS15128).'), 404)
         if check_only:
             return self.send_json({'sid': row['sid'], 'name': row['name'], 'hasPassword': bool(row['pw'])})
