@@ -1,8 +1,18 @@
 // Tab "Grade": students by team, answer key, tick, manual marks.
+function hasData(sid, lab=S.lab){ const r=rec(sid,lab); return (r.values||[]).some(v=>v!==null&&v!==''&&v!==undefined); }
+function statusChip(s){
+  const r=rec(s.sid);
+  if(r.tick) return `<span class="chip tick">${T('Ticked','Đã tick')}</span>`;
+  if(hasData(s.sid)) return `<span class="chip sub">${T('Submitted','Đã nộp')}</span>`;
+  return `<span class="chip open">${T('Not submitted','Chưa nộp')}</span>`;
+}
+function marksReleased(s){ return !!(((C().publish||{})[S.lab]||{}).marks || rec(s.sid).show_marks); }
 function renderGrade(m){
   const Lb=L(), st=sorted(), q=S.q.toLowerCase();
-  const done=st.filter(s=>rec(s.sid).tick).length, sub_=st.filter(s=>(rec(s.sid).values||[]).some(v=>v!==null&&v!=='')).length;
-  let html = labSeg() + `<div class="stats"><div><b>${st.length}</b>${T('students','SV')}</div><div><b>${done}</b>${T('ticked','đã tick')}</div><div><b>${sub_}</b>${T('with data','có số liệu')}</div></div>
+  const done=st.filter(s=>rec(s.sid).tick).length;
+  const waiting=st.filter(s=>hasData(s.sid)&&!rec(s.sid).tick).length;
+  const open=st.filter(s=>!hasData(s.sid)&&!rec(s.sid).tick).length;
+  let html = labSeg() + `<div class="stats"><div><b>${st.length}</b>${T('students','SV')}</div><div><b>${done}</b>${T('ticked','đã tick')}</div><div><b>${waiting}</b>${T('submitted','đã nộp')}</div><div><b>${open}</b>${T('not submitted','chưa nộp')}</div></div>
     ${(()=>{ const ch=changedSince(S.lab); return ch.length? `<div class="card" style="padding:10px 12px;background:#fff7e0;border-color:#e0a800">${T(`Lab ${S.lab}: <b>${ch.length} student(s)</b> with marks not yet sent to Canvas.`,`Lab ${S.lab}: <b>${ch.length} SV</b> có điểm chưa đưa lên Canvas.`)} <a href="#" id="gosend">${T('Go to Canvas tab →','Gửi Canvas →')}</a></div>`:''; })()}
     ${pubBox()}
     <input type="search" id="q" placeholder="${T('Search name / student ID / variant','Tìm tên / MSSV / mã đề')}" value="${esc(S.q)}" style="margin-bottom:10px">`;
@@ -18,7 +28,7 @@ function renderGrade(m){
     html += `<div class="card">${head}` + vis.map(s=>{
       const v=variant(s), r=rec(s.sid), sc=score(s);
       let row = `<div class="st" data-sid="${esc(s.sid)}"><div class="nm"><b>${esc(s.name)}</b><small>${esc(s.sid)} | ${T('M','TV')} ${s.member||'–'} | ${T('var.','mã')} ${v||'–'}</small></div>
-        <span class="chip ${r.tick?'tick':''}">${r.tick?'✓ tick':T('not ticked','chưa tick')}</span><span class="sc">${r.override!=null?'✎ ':''}${sc}</span></div>`;
+        ${statusChip(s)}${marksReleased(s)?`<span class="chip marks">${T('marks on','điểm hiện')}</span>`:''}<span class="sc">${r.override!=null?'✎ ':''}${sc}</span></div>`;
       if(S.open===s.sid) row += panel(s);
       return row; }).join('') + `</div>`;
   }
@@ -38,8 +48,9 @@ function pubBox(){
   const p=((C().publish||{})[S.lab])||{};
   const sw=(k,label)=>`<label class="switch"><input type="checkbox" data-pub="${k}" ${p[k]?'checked':''}><span class="knob"></span>${label}</label>`;
   return `<div class="card pubbox"><div class="pubtitle">${T(`Student page – Lab ${S.lab}, ${esc(C().name)}`,`Trang SV – Lab ${S.lab}, ${esc(C().name)}`)}</div>
-    <div class="btns">${sw('card',T('Show card','Cho SV xem đề'))}${sw('submit',T('Accept submissions','Nhận bài'))}${canManage()?sw('marks',T('Show marks','Cho SV xem điểm')):''}
-    <button class="btn" id="qrs">${T('QR for students','QR cho SV')}</button></div></div>`;
+    <div class="btns">${sw('card',T('Show card','Cho SV xem đề'))}${sw('submit',T('Accept submissions','Nhận bài'))}${canManage()?sw('marks',T('Release marks (all)','Công bố điểm (cả lớp)')):''}
+    <button class="btn" id="qrs">${T('QR for students','QR cho SV')}</button></div>
+    ${canManage()?`<p class="muted" style="margin:6px 0 0">${T('Or open a student and release marks for that student only.','Hoặc mở từng SV để công bố điểm riêng.')}</p>`:''}</div>`;
 }
 function panel(s){
   const Lb=L(), v=variant(s), V=v&&Lb.variants[v], r=rec(s.sid);
@@ -52,6 +63,11 @@ function panel(s){
     h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num"><b>${fmt(k)}</b></td><td class="num">${fmt(k*0.9)} – ${fmt(k*1.1)}</td>
       <td class="num">${fmt(x)}</td><td class="${cl}">${mk===null?'–':(r.tick?mk:'('+mk+')')}/${q[3]}</td></tr>`; });
   h += `</table></div><button class="big ${r.tick?'on':''}" data-tick="${esc(s.sid)}">${r.tick?T('✓ Ticked – tap to undo','✓ Đã tick – bấm để bỏ'):T('Tick: I saw the reading on the instrument','Tick: đã xem số đo trên máy')}</button>`;
+  if(canManage()){
+    const allOn=!!(((C().publish||{})[S.lab]||{}).marks), on=allOn||!!r.show_marks;
+    h += `<div class="btns" style="margin-top:8px"><button class="btn ${on?'pri':''}" data-showmarks="${esc(s.sid)}" ${allOn?'disabled':''}>${on?T('Marks released to this student','Đã công bố điểm cho SV này'):T('Release marks to this student','Công bố điểm cho SV này')}</button></div>`;
+    if(allOn) h += `<p class="muted">${T('Class-wide release is on. Turn it off above to release per student.', 'Đang công bố cả lớp. Tắt công tắc ở trên nếu muốn công bố từng SV.')}</p>`;
+  }
   Lb.manual.filter(x=>x[3]==='student').forEach(mn=>{ const cur=(r.manual||{})[mn[0]];
     h += `<div class="btns"><span class="lbl">${esc(manLabel(mn))}:</span>` + mn[2].map(val=>`<button data-man="${mn[0]}" data-val="${val}" class="${cur!==undefined&&+cur===val?'on':''}">${val}</button>`).join('') + `</div>`; });
   const ph=((C().photos||{})[S.lab]||{})[s.sid]||[];
@@ -71,6 +87,8 @@ function panel(s){
 function bindPanel(m){
   m.querySelectorAll('.panel').forEach(p=>p.onclick=e=>e.stopPropagation());
   m.querySelectorAll('[data-tick]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.tick; S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,tick:!rec(sid).tick}); toast(rec(sid).tick?T('Ticked','Đã tick'):T('Tick removed','Đã bỏ tick')); renderGrade($('#main')); });
+  m.querySelectorAll('[data-showmarks]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.showmarks; const on=!rec(sid).show_marks;
+    S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,show_marks:on}); toast(on?T('Marks released to this student','Đã công bố điểm cho SV này'):T('Marks hidden for this student','Đã ẩn điểm với SV này')); renderGrade($('#main')); });
   m.querySelectorAll('[data-man]').forEach(b=>b.onclick=async()=>{ const sid=S.open, man={...(rec(sid).manual||{})}, k=b.dataset.man, off=man[k]!==undefined&&+man[k]===+b.dataset.val;   // tap the selected mark again = clear it
     if(off) delete man[k]; else man[k]=+b.dataset.val;
     S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,manual:man}); toast(off?T('Mark cleared','Đã bỏ chọn'):T('Saved','Đã lưu')); renderGrade($('#main')); });

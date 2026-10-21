@@ -296,6 +296,9 @@ class H(http.server.SimpleHTTPRequestHandler):
                         if not 0 <= ov <= K['labs'][lab]['total']:
                             return self.send_json(err(f"Score must be 0–{K['labs'][lab]['total']}", f"Điểm phải từ 0 đến {K['labs'][lab]['total']}"), 400)
                     con.execute('UPDATE records SET override=?, reason=? WHERE class_id=? AND lab=? AND sid=?', (ov, str(body.get('reason', ''))[:200], cid, lab, sid))
+                if 'show_marks' in body:        # release this student's marks on the student page (lecturer only)
+                    if not manage: return self.send_json(NO_RIGHT, 403)
+                    con.execute('UPDATE records SET show_marks=? WHERE class_id=? AND lab=? AND sid=?', (1 if body['show_marks'] else 0, cid, lab, sid))
                 con.execute('UPDATE records SET updated=? WHERE class_id=? AND lab=? AND sid=?', (now(), cid, lab, sid))
             elif path == '/api/sync':           # remember what was sent to Canvas (+ the gradebook file)
                 if not manage: return self.send_json(NO_RIGHT, 403)
@@ -533,8 +536,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             con.execute('DELETE FROM photos WHERE id=? AND class_id=? AND lab=? AND sid=?', (as_int(body.get('id')) or 0, cid, lab, sid))
             return self.send_json({'ok': True})
         n = con.execute('SELECT COUNT(*) FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()[0]
-        if n >= 3:
-            return self.send_json(err('Maximum 3 photos. Delete one first.', 'Tối đa 3 ảnh. Xóa bớt một ảnh trước.'), 400)
+        if n >= 1:
+            return self.send_json(err('Only one photo is allowed. Delete it first to replace.', 'Chỉ được 1 ảnh. Xóa ảnh cũ trước nếu muốn chụp lại.'), 400)
         try:
             raw = base64.b64decode(str(body.get('data', '')).split(',')[-1], validate=True)
         except Exception:
@@ -564,10 +567,10 @@ def student_view(C, sid):
             item['files'] = L.get('files', [])
             if V.get('image'):
                 item['image'] = f"/api/public/image/{C['id']}/{lab}.png"
-        if pub.get('marks'):
+        rec = C['labs'].get(lab, {}).get(sid, {})
+        if pub.get('marks') or rec.get('show_marks'):
             item['marks'] = score(C, lab, st)
         if pub.get('submit') and v:
-            rec = C['labs'].get(lab, {}).get(sid, {})
             item['submit'] = {'questions': [[q[1], q[2]] for q in L['questions']],   # label + unit only
                               'values': rec.get('values') if rec.get('src') == 'web' else None,
                               'time': rec.get('updated') if rec.get('src') == 'web' else None,

@@ -55,7 +55,7 @@ Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thô
 
 **Trong buổi lab:**
 1. Tab **Chấm** → hộp **Trang SV**: bật **Cho SV xem đề** và **Nhận bài**, bấm **QR cho SV** và chiếu lên màn hình.
-2. SV quét QR, đăng nhập, xem đề (kèm sơ đồ mạch), đo, điền số ngay dưới đề, **chụp 1–3 ảnh mạch thật** (bắt buộc) và bấm **Nộp**. Sửa số / thêm, xóa ảnh được cho đến khi được tick.
+2. SV quét QR, đăng nhập, xem đề (kèm sơ đồ mạch), đo, điền số ngay dưới đề, **chụp đúng 1 ảnh mạch thật** (breadboard, bắt buộc) và bấm **Nộp**. Sửa số / xóa rồi chụp lại ảnh được cho đến khi được tick.
 3. Giảng viên / TA đi tick trên điện thoại – số SV nộp và ảnh mạch hiện ngay trong khung chấm. Đã tick thì số và ảnh của SV bị khóa.
 4. Hết giờ: tắt **Nhận bài**.
    SV nào không nộp được trên điện thoại: xem số trên máy đo của SV rồi nhập ở mục **Nhập / sửa số tay** trong khung chấm.
@@ -64,7 +64,7 @@ Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thô
 1. Tab **Gửi Canvas** → **Bước 1** xem danh sách cần xử lý (có số nhưng chưa tick, chưa chấm đồ thị / demo…) và sửa ở tab **Chấm**.
 2. **Bước 2**: lần đầu chọn file sổ điểm (Canvas → Grades → **Export**); các lần sau web dùng lại file đã lưu. Đánh dấu lab → **Tải file import Canvas**.
 3. Canvas → **Grades** → **Import** → chọn file vừa tải → kiểm tra → **Save**. Công bố điểm / thông báo cho SV trên Canvas như bình thường.
-4. (Tùy chọn) bật **Cho SV xem điểm** để SV xem trên trang SV.
+4. (Tùy chọn) công bố điểm cho SV: bật **Công bố điểm (cả lớp)**, hoặc mở từng SV → **Công bố điểm cho SV này**.
 
 Nếu sau đó sửa điểm (ví dụ tick bù), tab **Chấm** sẽ báo "x SV có điểm chưa đưa lên Canvas" – làm lại bước 2–3 cho lab đó. Ô vàng trong bảng điểm = điểm đã đổi nhưng chưa gửi.
 

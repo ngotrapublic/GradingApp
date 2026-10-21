@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS students (sid TEXT PRIMARY KEY, name TEXT, pw TEXT);
 CREATE TABLE IF NOT EXISTS enrollments (class_id INTEGER, sid TEXT, team INTEGER, member INTEGER, PRIMARY KEY (class_id, sid));
 CREATE TABLE IF NOT EXISTS stu_sessions (token TEXT PRIMARY KEY, sid TEXT, created TEXT);
 CREATE TABLE IF NOT EXISTS records  (class_id INTEGER, lab TEXT, sid TEXT, tick INTEGER DEFAULT 0, vals TEXT, manual TEXT, src TEXT,
-                                     updated TEXT, override REAL, reason TEXT, PRIMARY KEY (class_id, lab, sid));
+                                     updated TEXT, override REAL, reason TEXT, show_marks INTEGER DEFAULT 0, PRIMARY KEY (class_id, lab, sid));
 CREATE TABLE IF NOT EXISTS team_marks (class_id INTEGER, lab TEXT, team TEXT, field TEXT, value REAL, PRIMARY KEY (class_id, lab, team, field));
 CREATE TABLE IF NOT EXISTS sync     (class_id INTEGER, lab TEXT, time TEXT, scores TEXT, PRIMARY KEY (class_id, lab));
 CREATE TABLE IF NOT EXISTS gradebook (class_id INTEGER PRIMARY KEY, time TEXT, name TEXT, rows TEXT);
@@ -73,8 +73,14 @@ def init_db():
         con.executescript(SCHEMA)
         if PG:
             con.execute('ALTER TABLE users ADD COLUMN IF NOT EXISTS must_change INTEGER DEFAULT 0')
-        elif 'must_change' not in [r[1] for r in con.execute('PRAGMA table_info(users)').fetchall()]:
-            con.execute('ALTER TABLE users ADD COLUMN must_change INTEGER DEFAULT 0')
+            con.execute('ALTER TABLE records ADD COLUMN IF NOT EXISTS show_marks INTEGER DEFAULT 0')
+        else:
+            cols_u = [r[1] for r in con.execute('PRAGMA table_info(users)').fetchall()]
+            cols_r = [r[1] for r in con.execute('PRAGMA table_info(records)').fetchall()]
+            if 'must_change' not in cols_u:
+                con.execute('ALTER TABLE users ADD COLUMN must_change INTEGER DEFAULT 0')
+            if 'show_marks' not in cols_r:
+                con.execute('ALTER TABLE records ADD COLUMN show_marks INTEGER DEFAULT 0')
         if os.environ.get('ADMIN_PASSWORD'):           # optional: the admin password as a server setting (Vercel)
             u = con.execute("SELECT id FROM users WHERE username='admin'").fetchone()
             if u:
@@ -224,7 +230,7 @@ def load(con, user, ids=None):
                          f'WHERE e.class_id IN ({q}) ORDER BY s.name', ids).fetchall():
         C(r['class_id'])['students'].append({'sid': r['sid'], 'name': r['name'], 'team': r['team'], 'member': r['member'], 'hasPin': bool(r['pw'])})
     for r in con.execute(f'SELECT * FROM records WHERE class_id IN ({q})', ids).fetchall():
-        rec = {'tick': bool(r['tick'])}
+        rec = {'tick': bool(r['tick']), 'show_marks': bool(r['show_marks']) if 'show_marks' in r.keys() else False}
         if r['vals']: rec['values'] = json.loads(r['vals'])
         if r['manual']: rec['manual'] = json.loads(r['manual'])
         if r['src']: rec['src'] = r['src']

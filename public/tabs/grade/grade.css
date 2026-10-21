@@ -8,6 +8,9 @@
 .st .nm small{color:var(--mut)}
 .chip{font-size:13px;border-radius:999px;padding:3px 9px;border:1px solid var(--line);white-space:nowrap}
 .chip.tick{background:var(--ok);border-color:var(--ok);color:#fff}
+.chip.sub{background:#fff3cd;border-color:#e0a800;color:#7a5a00}
+.chip.open{background:#eef2ea;color:var(--mut)}
+.chip.marks{background:#e3f2fd;border-color:#64b5f6;color:#1565c0;margin-left:4px}
 .sc{font-weight:700;min-width:46px;text-align:right}
 .panel{padding:10px 12px 14px;border-top:1px dashed var(--line);background:#fbfcfa}
 .info{color:var(--mut);font-size:14px;margin:0 0 8px}
