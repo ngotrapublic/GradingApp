@@ -177,7 +177,7 @@ function submitForm(L) {
     <ol>
       <li>${T('Measure on your bench, type the values below, take 1–3 photos of your breadboard (and the instrument screen), then tap <b>Submit.</b>', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp 1–3 ảnh breadboard (và màn hình máy đo), rồi bấm <b>Nộp.</b>')}</li>
       <li>${T('<b>Call the lecturer or TA to your bench.</b> Do not pack up or leave until they have ticked you – submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống cụm máy của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick – chỉ nộp trên điện thoại là chưa đủ.')}</li>
-      <li>${T('They will check: the number on the <b>instrument</b> (must match what you submitted), your circuit and photos, then tick “I saw the reading on the instrument”. Only after that tick do your measured values count for marks.', 'Họ sẽ kiểm tra: số trên <b>máy đo</b> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi tick “đã xem số đo trên máy”. Chỉ sau khi được tick thì số đo mới tính điểm.')}</li>
+      <li>${T('They will check the number on the <b>instrument</b> (must match what you submitted), your circuit and photos, then confirm at your bench. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số trên <b>máy đo</b> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại cụm máy. Chỉ sau khi được xác nhận thì số đo mới tính điểm.')}</li>
     </ol></div>`;
   h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
