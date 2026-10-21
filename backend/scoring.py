@@ -12,9 +12,9 @@ def variant(vset, st):
     return int(vset) * 100 + (3 * (t - 1) + m if m <= 3 else 18 + t)
 
 
-def score(C, lab, st):
-    """Marks of one student for one lab. C = one class as returned by db.load()."""
-    K = keys(C['course']); lab = str(lab); L = K['labs'][lab]; v = variant(C['vset'], st)
+def score(C, lab, st, K=None):
+    """Marks of one student for one lab. C = one class as returned by db.load(). K = keys pack (with overrides)."""
+    K = K or keys(C['course']); lab = str(lab); L = K['labs'][lab]; v = variant(C['vset'], st)
     rec = C['labs'].get(lab, {}).get(st['sid'], {})
     if rec.get('override') is not None:          # lecturer's manual score wins
         return float(rec['override'])
@@ -36,19 +36,19 @@ def score(C, lab, st):
     return total
 
 
-def export_xlsx(classes):
-    """One sheet per class."""
+def export_xlsx(classes, keypacks=None):
+    """One sheet per class. keypacks = {course: keys_live(...)} when overrides exist."""
     from openpyxl import Workbook
     from openpyxl.styles import Font, PatternFill, Alignment
     wb = Workbook(); wb.remove(wb.active)
     for C in classes:
-        K = keys(C['course']); labs = list(K['labs']); full = sum(K['labs'][l]['total'] for l in labs)
+        K = (keypacks or {}).get(C['course']) or keys(C['course']); labs = list(K['labs']); full = sum(K['labs'][l]['total'] for l in labs)
         ws = wb.create_sheet(f"{C['name']} {C['term']}"[:30].replace('/', '-'))
         ws.append(['MSSV', 'Họ tên', 'Nhóm', 'TV', 'Mã đề'] + [f'Lab {l} (/{K["labs"][l]["total"]})' for l in labs] + [f'Tổng /{full:g}', 'Quy về /10'])
         for c in ws[1]:
             c.font = Font(bold=True, color='FFFFFF'); c.fill = PatternFill('solid', fgColor='549E39'); c.alignment = Alignment(horizontal='center', wrap_text=True)
         for st in sorted(C['students'], key=lambda s: (int(s.get('team') or 99), int(s.get('member') or 9), s['name'])):
-            sc = [score(C, l, st) for l in labs]
+            sc = [score(C, l, st, K) for l in labs]
             ws.append([st['sid'], st['name'], st.get('team'), st.get('member'), variant(C['vset'], st)] + sc + [sum(sc), round(sum(sc) / full * 10, 2)])
         for col, w in zip('ABCDEFGHIJK', [14, 28, 7, 5, 8, 11, 11, 11, 11, 10, 12]):
             ws.column_dimensions[col].width = w

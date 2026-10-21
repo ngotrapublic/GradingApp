@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS gradebook (class_id INTEGER PRIMARY KEY, time TEXT, n
 CREATE TABLE IF NOT EXISTS publish  (class_id INTEGER, lab TEXT, card INTEGER DEFAULT 0, marks INTEGER DEFAULT 0, submit INTEGER DEFAULT 0, PRIMARY KEY (class_id, lab));
 CREATE TABLE IF NOT EXISTS photos   (id {ID}, class_id INTEGER, lab TEXT, sid TEXT, file TEXT, time TEXT, ip TEXT, data {BLOB});
 CREATE TABLE IF NOT EXISTS submissions (id {ID}, class_id INTEGER, lab TEXT, sid TEXT, vals TEXT, time TEXT, ip TEXT, agent TEXT);
+CREATE TABLE IF NOT EXISTS key_overrides (course TEXT, lab TEXT, variant TEXT, keys TEXT, updated TEXT,
+                                          PRIMARY KEY (course, lab, variant));
 CREATE TABLE IF NOT EXISTS hits     (k TEXT, t REAL);
 CREATE INDEX IF NOT EXISTS hits_k ON hits (k, t);
 """

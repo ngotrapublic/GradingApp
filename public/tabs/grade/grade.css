@@ -18,6 +18,7 @@
 .edit{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 .edit label{font-size:12px;color:var(--mut)}
 .edit input{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px}
+.keyin{width:100%;max-width:110px;padding:6px 8px;border:1px solid var(--g);border-radius:8px;font-weight:700;font-variant-numeric:tabular-nums}
 .stats{display:flex;gap:8px;margin-bottom:10px}
 .stats div{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center}
 .stats b{display:block;font-size:20px}

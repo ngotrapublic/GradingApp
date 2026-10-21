@@ -59,11 +59,18 @@ function panel(s){
   const figs=[...(V.figs||[]), ...(V.image?[`/api/asset/${C().course}/${V.image}`]:[])];
   let h = `<div class="panel"><p class="info">${V.info.map(sub).join('<br>')}</p>` +
     (figs.length?`<details class="figs"><summary class="muted">${T('Circuit / task figure','Hình đề bài')}</summary>${figs.map(f=>`<a href="${f}" target="_blank"><img src="${f}" alt=""></a>`).join('')}</details>`:'') + `<div class="scroll"><table><tr><th>${T('Quantity','Đại lượng')}</th><th>${T('Key','Đáp án')}</th><th>±10%</th><th>${T('Submitted','SV nộp')}</th><th>${T('Marks','Điểm')}</th></tr>`;
+  const editKeys=canManage();
   Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(r.values||[])[i], mk=mark(x,k,q[3]);
     const cl = mk===null?'':(mk===q[3]?'full':(mk>0?'half':'zero'));
-    h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num"><b>${fmt(k)}</b></td><td class="num">${fmt(k*0.9)} – ${fmt(k*1.1)}</td>
+    const keyCell=editKeys
+      ? `<input class="keyin" inputmode="decimal" data-keyi="${i}" value="${k??''}">`
+      : `<b>${fmt(k)}</b>`;
+    h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num">${keyCell}</td><td class="num">${fmt(k*0.9)} – ${fmt(k*1.1)}</td>
       <td class="num">${fmt(x)}</td><td class="${cl}">${mk===null?'–':(r.tick?mk:'('+mk+')')}/${q[3]}</td></tr>`; });
-  h += `</table></div><button class="big ${r.tick?'on':''}" data-tick="${esc(s.sid)}">${r.tick?T('✓ Ticked – tap to undo','✓ Đã tick – bấm để bỏ'):T('Tick: I saw the reading on the instrument','Tick: đã xem số đo trên máy')}</button>`;
+  h += `</table></div>`;
+  if(editKeys) h += `<p class="muted">${T(`Edit the keys above if they are wrong. Saving applies to <b>every student with variant ${v}</b> and updates automatic marks.`, `Sửa đáp án ở trên nếu sai. Lưu sẽ áp dụng cho <b>mọi SV mã đề ${v}</b> và cập nhật điểm tự tính.`)}${V.keys_edited?` <b>${T('(already edited)','(đã sửa)')}</b>`:''}</p>
+    <div class="btns"><button class="on" data-savekeys="${v}">${T('Save answer keys','Lưu đáp án')}</button>${V.keys_edited?`<button data-resetkeys="${v}">${T('Back to original keys','Về đáp án gốc')}</button>`:''}</div>`;
+  h += `<button class="big ${r.tick?'on':''}" data-tick="${esc(s.sid)}">${r.tick?T('✓ Ticked – tap to undo','✓ Đã tick – bấm để bỏ'):T('Tick: I saw the reading on the instrument','Tick: đã xem số đo trên máy')}</button>`;
   if(canManage()){
     const allOn=!!(((C().publish||{})[S.lab]||{}).marks), on=allOn||!!r.show_marks;
     h += `<div class="btns" style="margin-top:8px"><button class="btn ${on?'pri':''}" data-showmarks="${esc(s.sid)}" ${allOn?'disabled':''}>${on?T('Marks released to this student','Đã công bố điểm cho SV này'):T('Release marks to this student','Công bố điểm cho SV này')}</button></div>`;
@@ -100,4 +107,15 @@ function bindPanel(m){
     S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,override:+raw,reason:d.querySelector('[data-reason]').value.trim()}); toast(T('Score saved','Đã lưu điểm')); renderGrade($('#main')); });
   m.querySelectorAll('[data-clearov]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.clearov;
     S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,override:null,reason:''}); toast(T('Automatic score restored','Đã về điểm tự tính')); renderGrade($('#main')); });
+  m.querySelectorAll('[data-savekeys]').forEach(b=>b.onclick=async()=>{
+    const panel=b.closest('.panel'), keys=[...panel.querySelectorAll('[data-keyi]')].sort((a,c)=>+a.dataset.keyi-+c.dataset.keyi).map(i=>i.value.trim());
+    if(keys.some(v=>v===''||isNaN(+v.replace(',','.')))) return toast(T('Every key must be a number.','Mọi đáp án phải là số.'));
+    const j=await api('/api/key_override',{cls:S.cls,lab:S.lab,variant:b.dataset.savekeys,keys:keys.map(v=>+v.replace(',','.'))});
+    S.data=j.data; S.keys=j.keys; toast(T('Answer keys saved','Đã lưu đáp án')); renderGrade($('#main'));
+  });
+  m.querySelectorAll('[data-resetkeys]').forEach(b=>b.onclick=async()=>{
+    if(!confirm(T('Restore the original keys for this variant?','Khôi phục đáp án gốc của mã đề này?'))) return;
+    const j=await api('/api/key_override',{cls:S.cls,lab:S.lab,variant:b.dataset.resetkeys,keys:null});
+    S.data=j.data; S.keys=j.keys; toast(T('Original keys restored','Đã về đáp án gốc')); renderGrade($('#main'));
+  });
 }

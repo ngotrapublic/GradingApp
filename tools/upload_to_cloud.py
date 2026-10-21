@@ -15,7 +15,7 @@ from backend.config import DB               # noqa: E402
 from backend import db                      # noqa: E402
 
 TABLES = ['users', 'classes', 'class_staff', 'students', 'enrollments', 'records', 'team_marks', 'sync', 'gradebook',
-          'publish', 'photos', 'submissions']
+          'publish', 'photos', 'submissions', 'key_overrides']
 SERIAL = ['users', 'classes', 'photos', 'submissions']      # tables with an id counter
 
 if not os.path.exists(DB):
@@ -37,6 +37,8 @@ with db.connect() as dst:
     print(f'  users: {len(uid)}')
     for table in TABLES[1:]:
         cols = [r[1] for r in src.execute(f'PRAGMA table_info({table})')]
+        if not cols:
+            print(f'  {table}: (skipped – not on laptop)'); continue
         rows = src.execute(f'SELECT {", ".join(cols)} FROM {table}').fetchall()
         for r in rows:
             vals = [uid.get(r[c]) if c in ('owner', 'user_id') else r[c] for c in cols]

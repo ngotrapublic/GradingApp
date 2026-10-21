@@ -5,7 +5,7 @@ Per class: the owner (lecturer) and the admin may do everything ('manage'); a TA
 import base64, http.server, io, json, os, re, socketserver, urllib.parse
 
 from .config import LOCK, PORT, STATIC
-from .courses import COURSES, asset, keys
+from .courses import COURSES, asset, keys, keys_live
 from .db import (ROLES, add_hit, allow, as_int, assign_random, check_pw, class_role, connect, count_hits, delete_class, hash_pw,
                  load, new_session, now, set_gradebook, set_sync, set_team_mark, upsert_student, user_from_token, visible_class_ids)
 from .network import lan_ips, qr_svg
@@ -132,7 +132,7 @@ class H(http.server.SimpleHTTPRequestHandler):
             if not me:
                 return self.send_json({'error': 'auth'}, 401)
             if path == '/api/keys':
-                return self.send_json({c: keys(c) for c in COURSES})
+                return self.send_json({c: keys_live(con, c) for c in COURSES})
             if path == '/api/data':
                 return self.send_json(load(con, me))
             if path == '/api/users':            # admin: every account; lecturer: the TA accounts (to add a TA to a class)
@@ -158,7 +158,9 @@ class H(http.server.SimpleHTTPRequestHandler):
                 if not ids:
                     return self.send_json(NO_RIGHT, 403)
                 try:
-                    b = export_xlsx(list(load(con, me, ids).get('classes', {}).values()))
+                    classes = list(load(con, me, ids).get('classes', {}).values())
+                    packs = {c['course']: keys_live(con, c['course']) for c in classes}
+                    b = export_xlsx(classes, packs)
                 except ImportError:
                     return self.send_json(err('The openpyxl library is missing. Start the app with start.command to install it.', 'Thiếu thư viện openpyxl. Chạy bằng start.command để tự cài.'), 500)
                 self.send_response(200)
@@ -319,9 +321,35 @@ class H(http.server.SimpleHTTPRequestHandler):
                     con.execute('DELETE FROM team_marks WHERE class_id=? AND lab=? AND team=? AND field=?', (cid, str(body['lab']), str(body['team']), body['field']))
                 else:
                     set_team_mark(con, cid, body['lab'], body['team'], body['field'], body['value'])
+            elif path == '/api/key_override':   # fix a wrong answer key for one variant (all students with that variant)
+                if not manage:
+                    return self.send_json(NO_RIGHT, 403)
+                lab, var = str(body.get('lab', '')), str(body.get('variant', ''))
+                L = K['labs'].get(lab)
+                if not L or var not in L.get('variants', {}):
+                    return self.send_json(err('No such lab / variant.', 'Không có lab / mã đề này.'), 400)
+                n = len(L['questions'])
+                if body.get('keys') is None:
+                    con.execute('DELETE FROM key_overrides WHERE course=? AND lab=? AND variant=?', (course, lab, var))
+                else:
+                    raw = body['keys']
+                    if not isinstance(raw, list) or len(raw) != n:
+                        return self.send_json(err(f'Need {n} key values.', f'Cần đúng {n} đáp án.'), 400)
+                    vals = []
+                    for x in raw:
+                        try:
+                            vals.append(float(str(x).replace(',', '.')))
+                        except (TypeError, ValueError):
+                            return self.send_json(err('Keys must be numbers.', 'Đáp án phải là số.'), 400)
+                    con.execute(
+                        'INSERT INTO key_overrides (course, lab, variant, keys, updated) VALUES (?,?,?,?,?) '
+                        'ON CONFLICT (course, lab, variant) DO UPDATE SET keys=excluded.keys, updated=excluded.updated',
+                        (course, lab, var, json.dumps(vals), now()))
             else:
                 return self.send_json({'error': 'not found'}, 404)
             con.commit()
+            if path == '/api/key_override':
+                return self.send_json({'data': load(con, me), 'keys': {code: keys_live(con, code) for code in COURSES}})
             return self.send_json(load(con, me))
 
     # ---------------- staff accounts ----------------
@@ -429,7 +457,8 @@ class H(http.server.SimpleHTTPRequestHandler):
                 c = self.enrolled(con, st, int(m.group(1)))
                 if not c:
                     return self.send_json({'error': 'not found'}, 404)
-                return self.send_json(student_view(load(con, None, [c['id']])['classes'][str(c['id'])], st['sid']))
+                C = load(con, None, [c['id']])['classes'][str(c['id'])]
+                return self.send_json(student_view(C, st['sid'], keys_live(con, C['course'])))
             m = re.fullmatch(r'/api/public/photo/(\d+)\.jpg', path)
             if m:                               # only the student's own photos
                 r = con.execute('SELECT sid, data FROM photos WHERE id=?', (int(m.group(1)),)).fetchone()
@@ -570,9 +599,9 @@ class H(http.server.SimpleHTTPRequestHandler):
         return self.send_json({'ok': True, 'id': pid, 'time': t})
 
 
-def student_view(C, sid):
+def student_view(C, sid, keypack=None):
     """Only this student's own information in one class. Answer keys only when marks are released."""
-    K = keys(C['course'])
+    K = keypack or keys(C['course'])
     st = next(s for s in C['students'] if s['sid'] == sid)
     v = variant(C['vset'], st)
     mates = [s['name'] for s in C['students'] if st.get('team') and s.get('team') == st['team'] and s['sid'] != st['sid']]
@@ -589,7 +618,7 @@ def student_view(C, sid):
                 item['image'] = f"/api/public/image/{C['id']}/{lab}.png"
         rec = C['labs'].get(lab, {}).get(sid, {})
         if pub.get('marks') or rec.get('show_marks'):
-            item['marks'] = score(C, lab, st)
+            item['marks'] = score(C, lab, st, K)
             if V:                               # their own variant keys + band (ok / half / bad = green / orange / red)
                 rule, ans, yours = K['rule'], V['keys'], rec.get('values') or []
                 rows = []

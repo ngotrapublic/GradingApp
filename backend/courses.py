@@ -1,7 +1,9 @@
 """Course packages: courses/<CODE>/course.json (name, number of variant sets) + keys.json (labs, variants, answer keys)
 + assets/ (private images, e.g. Lab 3 scope screens). Public images of a course live in public/courses/<CODE>/.
 A new lab course = a new folder here."""
-import json, os
+import copy
+import json
+import os
 
 from .config import COURSES_DIR
 
@@ -24,6 +26,23 @@ COURSES = _load()
 
 def keys(course):
     return COURSES[course]['keys']
+
+
+def keys_live(con, course):
+    """Answer keys with lecturer overrides from the database applied (deepcopy only when needed)."""
+    K = keys(course)
+    rows = con.execute('SELECT lab, variant, keys FROM key_overrides WHERE course=?', (course,)).fetchall()
+    if not rows:
+        return K
+    K = copy.deepcopy(K)
+    for r in rows:
+        lab, var = r['lab'], str(r['variant'])
+        V = K.get('labs', {}).get(lab, {}).get('variants', {}).get(var)
+        if not V:
+            continue
+        V['keys'] = json.loads(r['keys'])
+        V['keys_edited'] = True
+    return K
 
 
 def asset(course, rel):
