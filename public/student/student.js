@@ -172,8 +172,15 @@ reload();
 // values form under the card: editable until the lecturer ticks
 function submitForm(L) {
   const S_ = L.submit, vals = formValues(L.lab, S_.values);
-  let h = `<div class="submit"><div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
-  if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked.', 'Giảng viên đã xác nhận – đã khóa.')}</p>`;
+  let h = `<div class="submit">`;
+  if (!S_.locked) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
+    <ol>
+      <li>${T('Measure on your bench, type the values below, take 1–3 photos of your breadboard (and the instrument screen), then tap <b>Submit</b>.', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp 1–3 ảnh breadboard (và màn hình máy đo), rồi bấm <b>Nộp</b>.')}</li>
+      <li>${T('<b>Call the lecturer or TA to your bench.</b> Do not pack up or leave until they have ticked you – submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống cụm máy của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick – chỉ nộp trên điện thoại là chưa đủ.')}</li>
+      <li>${T('They will check: the number on the <b>instrument</b> (must match what you submitted), your circuit and photos, then tick “I saw the reading on the instrument”. Only after that tick do your measured values count for marks.', 'Họ sẽ kiểm tra: số trên <b>máy đo</b> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi tick “đã xem số đo trên máy”. Chỉ sau khi được tick thì số đo mới tính điểm.')}</li>
+    </ol></div>`;
+  h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
+  if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
   h += S_.questions.map((q, i) => `<label>${sub(q[0])} <small>(${esc(q[1])})</small>
       <input inputmode="decimal" ${S_.locked ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}"></label>`).join('');
   // photos of the real circuit (evidence), 1–3 per lab
@@ -184,7 +191,8 @@ function submitForm(L) {
   if (!S_.locked && P.length < 3) h += `<label class="btn pri photo-btn">${T('Take / choose a photo', 'Chụp / chọn ảnh')}<input type="file" accept="image/*" capture="environment" data-photo="${L.lab}" hidden></label>`;
   if (!S_.locked) h += `<button class="big on" data-send="${L.lab}">${S_.time ? T('Update', 'Nộp lại') : T('Submit', 'Nộp')}</button>`;
   if (S_.time) h += `<p class="muted">${T('Last submitted', 'Nộp lần cuối')}: ${esc(S_.time)}</p>`;
-  h += `<p class="muted">${T('Use measured values, in the unit shown. You can change them until the lecturer checks your reading.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh. Sửa được cho đến khi giảng viên xác nhận.')}</p></div>`;
+  if (!S_.locked) h += `<p class="muted">${T('Use real measured values, in the unit shown. You can edit until the lecturer ticks you at the bench.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh. Sửa được cho đến khi giảng viên tick tại cụm máy.')}</p>`;
+  h += `</div>`;
   return h;
 }
 
