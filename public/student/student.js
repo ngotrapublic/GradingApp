@@ -229,6 +229,7 @@ function partsBody(L, frozen) {
     h += partCardLines(L, p);
     (p.figs || []).forEach(fi => { const f = (L.figs || [])[fi]; if (f) h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
     if (p.files) (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
+    if (p.note) h += `<p class="muted">${T(p.note[0], p.note[1])}</p>`;
     h += valueFields(L, frozen, p.questions || []);
     h += `</div>`;
   });

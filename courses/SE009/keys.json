@@ -3913,16 +3913,17 @@
      "cardSlice": [2, null],
      "figs": [1],
      "questions": [1, 2, 3],
-     "files": true
+     "files": true,
+     "note": ["At the end of this lab, upload a screenshot of the RLC graph from this Excel file (not a photo of the circuit).", "Cuối lab này, tải ảnh chụp đồ thị RLC từ file Excel này (không phải ảnh mạch)."]
     }
    ],
    "photo": {
-    "head": ["Photo of your graph (required, one only)", "Ảnh đồ thị (bắt buộc, đúng 1 tấm)"],
-    "empty": ["No photo yet. Screenshot your Excel graph (or photograph the screen).", "Chưa có ảnh. Chụp màn hình đồ thị Excel (hoặc chụp màn hình máy)."],
-    "btn": ["Take / choose a graph photo", "Chụp / chọn ảnh đồ thị"],
-    "howto": ["Measure on your bench, type the values below, take <b>one photo of your graph</b> (Excel chart / screen), then <span class=\"nowrap\">tap <b>Submit.</b></span>", "Đo trên cụm máy, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh đồ thị</b> (biểu đồ Excel / màn hình), rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span>"],
-    "check": ["They will check the number <span class=\"nowrap\">on the <b>instrument</b></span> (must match what you submitted), your graph photo, then confirm at your bench. Only after that confirmation do your measured values count for marks.", "Họ sẽ kiểm tra số <span class=\"nowrap\">trên <b>máy đo</b></span> (khớp với số bạn nộp), ảnh đồ thị của bạn, rồi xác nhận tại cụm máy. Chỉ sau khi được xác nhận thì số đo mới tính điểm."],
-    "need": ["Take one photo of your graph first.", "Chụp một ảnh đồ thị trước đã."],
+    "head": ["Task 2 – photo of your RLC graph (required, one only). Not a photo of the circuit.", "Bài 2 – ảnh đồ thị RLC (bắt buộc, đúng 1 tấm). Không chụp ảnh mạch."],
+    "empty": ["No graph photo yet. Open the Excel template → make the RLC chart → screenshot it (or photograph the laptop screen).", "Chưa có ảnh đồ thị. Mở file Excel mẫu → vẽ đồ thị RLC → chụp màn hình (hoặc chụp màn hình laptop)."],
+    "btn": ["Upload graph screenshot", "Tải ảnh chụp đồ thị"],
+    "howto": ["Do <b>Task 1</b> and <b>Task 2</b>, type the values, then upload <b>one screenshot of your Task 2 RLC graph</b> from Excel (not a breadboard photo). Then <span class=\"nowrap\">tap <b>Submit.</b></span>", "Làm <b>Bài 1</b> và <b>Bài 2</b>, nhập số, rồi tải <b>đúng một ảnh chụp đồ thị RLC của Bài 2</b> từ Excel (không phải ảnh breadboard). Sau đó <span class=\"nowrap\">bấm <b>Nộp.</b></span>"],
+    "check": ["They will check the numbers <span class=\"nowrap\">on the <b>instrument</b></span> against what you submitted, and your <b>RLC graph photo</b>, then confirm at your bench.", "Họ sẽ đối chiếu số <span class=\"nowrap\">trên <b>máy đo</b></span> với số bạn nộp, và xem <b>ảnh đồ thị RLC</b>, rồi xác nhận tại cụm máy."],
+    "need": ["Upload one photo of your Task 2 RLC graph first (not the circuit).", "Hãy tải một ảnh đồ thị RLC Bài 2 trước (không phải ảnh mạch)."],
     "capture": false
    }
   },
