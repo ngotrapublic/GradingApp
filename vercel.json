@@ -2,7 +2,7 @@
   "outputDirectory": "public",
   "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index" }],
   "functions": {
-    "api/index.py": { "includeFiles": "{keys.json,assets/**,backend/**}", "maxDuration": 30 }
+    "api/index.py": { "includeFiles": "{courses/**,backend/**}", "maxDuration": 30 }
   },
   "headers": [
     { "source": "/(.*)", "headers": [
