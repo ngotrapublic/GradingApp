@@ -2101,18 +2101,18 @@
      "keys": [
       3.3862753849339438,
       116.15937545453453,
-      29.594181773060892,
+      35.36865626536545,
       1.826122181624828
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "High-pass (across L), Q = 1.75",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 10 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 104   |   Team 2 – Member 1",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2120,25 +2120,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "105": {
      "keys": [
       1.5392160840608835,
       116.15937545453453,
-      29.594181773060892,
+      35.36865626536545,
       1.826122181624828
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "High-pass (across L), Q = 1.75",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 22 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 105   |   Team 2 – Member 2",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2146,25 +2146,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "106": {
      "keys": [
       0.7204841244540306,
       116.15937545453453,
-      29.594181773060892,
+      35.36865626536545,
       1.826122181624828
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "High-pass (across L), Q = 1.75",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 106   |   Team 2 – Member 3",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2172,25 +2172,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "107": {
      "keys": [
       15.915494309189537,
       101.63945352271772,
-      30.263313388703285,
-      2.065591117977289
+      32.352842882598964,
+      16.176421441299482
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "Band-pass (across R), Q = 2",
       "RC warm-up: Low-pass, R = 1kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 107   |   Team 3 – Member 1",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2198,25 +2198,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "108": {
      "keys": [
       7.2343155950861515,
       101.63945352271772,
-      30.263313388703285,
-      2.065591117977289
+      32.352842882598964,
+      16.176421441299482
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "Band-pass (across R), Q = 2",
       "RC warm-up: High-pass, R = 1kΩ, C = 22 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 108   |   Team 3 – Member 2",
       "Warm-up: RC High-pass, R = 1kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2224,25 +2224,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "109": {
      "keys": [
       3.3862753849339438,
       101.63945352271772,
-      30.263313388703285,
-      2.065591117977289
+      32.352842882598964,
+      16.176421441299482
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "Band-pass (across R), Q = 2",
       "RC warm-up: Low-pass, R = 1kΩ, C = 47 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 109   |   Team 3 – Member 3",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2250,7 +2250,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "110": {
@@ -2335,18 +2335,18 @@
      "keys": [
       3.3862753849339438,
       81.31156281817417,
-      31.031756753030333,
+      33.73017038372862,
       2.551551815399144
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "High-pass (across L), Q = 2.5",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 10 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 113   |   Team 5 – Member 1",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2354,25 +2354,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "114": {
      "keys": [
       1.5392160840608835,
       81.31156281817417,
-      31.031756753030333,
+      33.73017038372862,
       2.551551815399144
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "High-pass (across L), Q = 2.5",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 22 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 114   |   Team 5 – Member 2",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2380,25 +2380,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "115": {
      "keys": [
       0.7204841244540306,
       81.31156281817417,
-      31.031756753030333,
+      33.73017038372862,
       2.551551815399144
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "High-pass (across L), Q = 2.5",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 115   |   Team 5 – Member 3",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2406,25 +2406,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "116": {
      "keys": [
       15.915494309189537,
       67.75963568181182,
-      31.44131175165378,
-      3.04255531702266
+      32.352842882598964,
+      10.78428096086632
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "Band-pass (across R), Q = 3",
       "RC warm-up: High-pass, R = 1kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 116   |   Team 6 – Member 1",
       "Warm-up: RC High-pass, R = 1kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2432,25 +2432,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "117": {
      "keys": [
       7.2343155950861515,
       67.75963568181182,
-      31.44131175165378,
-      3.04255531702266
+      32.352842882598964,
+      10.78428096086632
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "Band-pass (across R), Q = 3",
       "RC warm-up: Low-pass, R = 1kΩ, C = 22 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 117   |   Team 6 – Member 2",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2458,25 +2458,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "118": {
      "keys": [
       3.3862753849339438,
       67.75963568181182,
-      31.44131175165378,
-      3.04255531702266
+      32.352842882598964,
+      10.78428096086632
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "Band-pass (across R), Q = 3",
       "RC warm-up: High-pass, R = 1kΩ, C = 47 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 118   |   Team 6 – Member 3",
       "Warm-up: RC High-pass, R = 1kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2484,7 +2484,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "119": {
@@ -2517,18 +2517,18 @@
      "keys": [
       1.5392160840608833,
       116.15937545453453,
-      29.594181773060892,
+      35.36865626536545,
       1.826122181624828
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "High-pass (across L), Q = 1.75",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 120   |   Team 2 – Member 4",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2536,25 +2536,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "121": {
      "keys": [
       3.3862753849339438,
       101.63945352271772,
-      30.263313388703285,
-      2.065591117977289
+      32.352842882598964,
+      16.176421441299482
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "Band-pass (across R), Q = 2",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 121   |   Team 3 – Member 4",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2562,7 +2562,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "122": {
@@ -2595,18 +2595,18 @@
      "keys": [
       0.7204841244540306,
       81.31156281817417,
-      31.031756753030333,
+      33.73017038372862,
       2.551551815399144
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "High-pass (across L), Q = 2.5",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 123   |   Team 5 – Member 4",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2614,25 +2614,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "124": {
      "keys": [
       15.915494309189537,
       67.75963568181182,
-      31.44131175165378,
-      3.04255531702266
+      32.352842882598964,
+      10.78428096086632
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "Band-pass (across R), Q = 3",
       "RC warm-up: High-pass, R = 1kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 124   |   Team 6 – Member 4",
       "Warm-up: RC High-pass, R = 1kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2640,7 +2640,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "201": {
@@ -2725,18 +2725,18 @@
      "keys": [
       15.915494309189537,
       90.34618090908242,
-      30.71364564006613,
+      34.07952461431995,
       2.3077016733076685
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "High-pass (across L), Q = 2.25",
       "RC warm-up: High-pass, R = 1kΩ, C = 10 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 204   |   Team 2 – Member 1",
       "Warm-up: RC High-pass, R = 1kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2744,25 +2744,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "205": {
      "keys": [
       7.2343155950861515,
       90.34618090908242,
-      30.71364564006613,
+      34.07952461431995,
       2.3077016733076685
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "High-pass (across L), Q = 2.25",
       "RC warm-up: Low-pass, R = 1kΩ, C = 22 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 205   |   Team 2 – Member 2",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2770,25 +2770,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "206": {
      "keys": [
       3.3862753849339438,
       90.34618090908242,
-      30.71364564006613,
+      34.07952461431995,
       2.3077016733076685
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "High-pass (across L), Q = 2.25",
       "RC warm-up: High-pass, R = 1kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 206   |   Team 2 – Member 3",
       "Warm-up: RC High-pass, R = 1kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2796,25 +2796,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "207": {
      "keys": [
       7.234315595086151,
       81.31156281817417,
-      31.031756753030333,
-      2.551551815399144
+      32.352842882598964,
+      12.941137153039584
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "Band-pass (across R), Q = 2.5",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 207   |   Team 3 – Member 1",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2822,25 +2822,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "208": {
      "keys": [
       3.288325270493706,
       81.31156281817417,
-      31.031756753030333,
-      2.551551815399144
+      32.352842882598964,
+      12.941137153039584
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "Band-pass (across R), Q = 2.5",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 22 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 208   |   Team 3 – Member 2",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2848,25 +2848,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "209": {
      "keys": [
       1.5392160840608833,
       81.31156281817417,
-      31.031756753030333,
-      2.551551815399144
+      32.352842882598964,
+      12.941137153039584
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "Band-pass (across R), Q = 2.5",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 47 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 209   |   Team 3 – Member 3",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2874,7 +2874,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "210": {
@@ -2959,18 +2959,18 @@
      "keys": [
       15.915494309189537,
       135.51927136362363,
-      28.53252549110097,
+      36.68467563141554,
       1.590990257669732
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "High-pass (across L), Q = 1.5",
       "RC warm-up: Low-pass, R = 1kΩ, C = 10 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 213   |   Team 5 – Member 1",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -2978,25 +2978,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "214": {
      "keys": [
       7.2343155950861515,
       135.51927136362363,
-      28.53252549110097,
+      36.68467563141554,
       1.590990257669732
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "High-pass (across L), Q = 1.5",
       "RC warm-up: High-pass, R = 1kΩ, C = 22 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 214   |   Team 5 – Member 2",
       "Warm-up: RC High-pass, R = 1kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3004,25 +3004,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "215": {
      "keys": [
       3.3862753849339438,
       135.51927136362363,
-      28.53252549110097,
+      36.68467563141554,
       1.590990257669732
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "High-pass (across L), Q = 1.5",
       "RC warm-up: Low-pass, R = 1kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 215   |   Team 5 – Member 3",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3030,25 +3030,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "216": {
      "keys": [
       7.234315595086151,
       116.15937545453453,
-      29.594181773060892,
-      1.826122181624828
+      32.352842882598964,
+      18.48733879005655
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "Band-pass (across R), Q = 1.75",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 216   |   Team 6 – Member 1",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3056,25 +3056,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "217": {
      "keys": [
       3.288325270493706,
       116.15937545453453,
-      29.594181773060892,
-      1.826122181624828
+      32.352842882598964,
+      18.48733879005655
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "Band-pass (across R), Q = 1.75",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 22 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 217   |   Team 6 – Member 2",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3082,25 +3082,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "218": {
      "keys": [
       1.5392160840608833,
       116.15937545453453,
-      29.594181773060892,
-      1.826122181624828
+      32.352842882598964,
+      18.48733879005655
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "Band-pass (across R), Q = 1.75",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 47 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 218   |   Team 6 – Member 3",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3108,7 +3108,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "219": {
@@ -3141,18 +3141,18 @@
      "keys": [
       0.7204841244540306,
       90.34618090908242,
-      30.71364564006613,
+      34.07952461431995,
       2.3077016733076685
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "High-pass (across L), Q = 2.25",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 220   |   Team 2 – Member 4",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3160,25 +3160,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "221": {
      "keys": [
       15.915494309189537,
       81.31156281817417,
-      31.031756753030333,
-      2.551551815399144
+      32.352842882598964,
+      12.941137153039584
      ],
      "info": [
-      "Low-pass (across C), Q = 2.5",
+      "Band-pass (across R), Q = 2.5",
       "RC warm-up: Low-pass, R = 1kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 221   |   Team 3 – Member 4",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3186,7 +3186,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "222": {
@@ -3219,18 +3219,18 @@
      "keys": [
       3.3862753849339438,
       135.51927136362363,
-      28.53252549110097,
+      36.68467563141554,
       1.590990257669732
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "High-pass (across L), Q = 1.5",
       "RC warm-up: Low-pass, R = 1kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 223   |   Team 5 – Member 4",
       "Warm-up: RC Low-pass, R = 1kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3238,25 +3238,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "224": {
      "keys": [
       7.234315595086151,
       116.15937545453453,
-      29.594181773060892,
-      1.826122181624828
+      32.352842882598964,
+      18.48733879005655
      ],
      "info": [
-      "Low-pass (across C), Q = 1.75",
+      "Band-pass (across R), Q = 1.75",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 224   |   Team 6 – Member 4",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3264,7 +3264,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "301": {
@@ -3349,18 +3349,18 @@
      "keys": [
       7.234315595086151,
       67.75963568181182,
-      31.44131175165378,
+      33.29080067822166,
       3.04255531702266
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "High-pass (across L), Q = 3",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 10 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 304   |   Team 2 – Member 1",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3368,25 +3368,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "305": {
      "keys": [
       3.288325270493706,
       67.75963568181182,
-      31.44131175165378,
+      33.29080067822166,
       3.04255531702266
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "High-pass (across L), Q = 3",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 22 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 305   |   Team 2 – Member 2",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3394,25 +3394,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "306": {
      "keys": [
       1.5392160840608833,
       67.75963568181182,
-      31.44131175165378,
+      33.29080067822166,
       3.04255531702266
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "High-pass (across L), Q = 3",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 306   |   Team 2 – Member 3",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3420,25 +3420,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "307": {
      "keys": [
       3.3862753849339438,
       135.51927136362363,
-      28.53252549110097,
-      1.590990257669732
+      32.352842882598964,
+      21.56856192173264
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "Band-pass (across R), Q = 1.5",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 307   |   Team 3 – Member 1",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3446,25 +3446,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "308": {
      "keys": [
       1.5392160840608835,
       135.51927136362363,
-      28.53252549110097,
-      1.590990257669732
+      32.352842882598964,
+      21.56856192173264
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "Band-pass (across R), Q = 1.5",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 22 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 308   |   Team 3 – Member 2",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3472,25 +3472,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "309": {
      "keys": [
       0.7204841244540306,
       135.51927136362363,
-      28.53252549110097,
-      1.590990257669732
+      32.352842882598964,
+      21.56856192173264
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "Band-pass (across R), Q = 1.5",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 47 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 309   |   Team 3 – Member 3",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3498,7 +3498,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "310": {
@@ -3583,18 +3583,18 @@
      "keys": [
       7.234315595086151,
       101.63945352271772,
-      30.263313388703285,
+      34.586643872803755,
       2.065591117977289
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "High-pass (across L), Q = 2",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 10 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 313   |   Team 5 – Member 1",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3602,25 +3602,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "314": {
      "keys": [
       3.288325270493706,
       101.63945352271772,
-      30.263313388703285,
+      34.586643872803755,
       2.065591117977289
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "High-pass (across L), Q = 2",
       "RC warm-up: High-pass, R = 2.2kΩ, C = 22 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 314   |   Team 5 – Member 2",
       "Warm-up: RC High-pass, R = 2.2kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3628,25 +3628,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "315": {
      "keys": [
       1.5392160840608833,
       101.63945352271772,
-      30.263313388703285,
+      34.586643872803755,
       2.065591117977289
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "High-pass (across L), Q = 2",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 315   |   Team 5 – Member 3",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3654,25 +3654,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "316": {
      "keys": [
       3.3862753849339438,
       90.34618090908242,
-      30.71364564006613,
-      2.3077016733076685
+      32.352842882598964,
+      14.379041281155095
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "Band-pass (across R), Q = 2.25",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 316   |   Team 6 – Member 1",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3680,25 +3680,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "317": {
      "keys": [
       1.5392160840608835,
       90.34618090908242,
-      30.71364564006613,
-      2.3077016733076685
+      32.352842882598964,
+      14.379041281155095
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "Band-pass (across R), Q = 2.25",
       "RC warm-up: Low-pass, R = 4.7kΩ, C = 22 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 317   |   Team 6 – Member 2",
       "Warm-up: RC Low-pass, R = 4.7kΩ, C = 22 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3706,25 +3706,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "318": {
      "keys": [
       0.7204841244540306,
       90.34618090908242,
-      30.71364564006613,
-      2.3077016733076685
+      32.352842882598964,
+      14.379041281155095
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "Band-pass (across R), Q = 2.25",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 47 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 318   |   Team 6 – Member 3",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3732,7 +3732,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "319": {
@@ -3765,18 +3765,18 @@
      "keys": [
       3.3862753849339438,
       67.75963568181182,
-      31.44131175165378,
+      33.29080067822166,
       3.04255531702266
      ],
      "info": [
-      "Low-pass (across C), Q = 3",
+      "High-pass (across L), Q = 3",
       "RC warm-up: High-pass, R = 1kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 320   |   Team 2 – Member 4",
       "Warm-up: RC High-pass, R = 1kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3784,25 +3784,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "321": {
      "keys": [
       7.234315595086151,
       135.51927136362363,
-      28.53252549110097,
-      1.590990257669732
+      32.352842882598964,
+      21.56856192173264
      ],
      "info": [
-      "Low-pass (across C), Q = 1.5",
+      "Band-pass (across R), Q = 1.5",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 321   |   Team 3 – Member 4",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3810,7 +3810,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     },
     "322": {
@@ -3843,18 +3843,18 @@
      "keys": [
       1.5392160840608833,
       101.63945352271772,
-      30.263313388703285,
+      34.586643872803755,
       2.065591117977289
      ],
      "info": [
-      "Low-pass (across C), Q = 2",
+      "High-pass (across L), Q = 2",
       "RC warm-up: Low-pass, R = 2.2kΩ, C = 47 nF",
       "Last value: peak Vout/Vin"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 323   |   Team 5 – Member 4",
       "Warm-up: RC Low-pass, R = 2.2kΩ, C = 47 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): High-pass (output across L)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3862,25 +3862,25 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_hp.png"
      ]
     },
     "324": {
      "keys": [
       3.3862753849339438,
       90.34618090908242,
-      30.71364564006613,
-      2.3077016733076685
+      32.352842882598964,
+      14.379041281155095
      ],
      "info": [
-      "Low-pass (across C), Q = 2.25",
+      "Band-pass (across R), Q = 2.25",
       "RC warm-up: High-pass, R = 4.7kΩ, C = 10 nF",
-      "Last value: peak Vout/Vin"
+      "Last value: bandwidth BW (kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 324   |   Team 6 – Member 4",
       "Warm-up: RC High-pass, R = 4.7kΩ, C = 10 nF",
-      "RLC (team – the same circuit for all members): Low-pass (output across C)",
+      "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
       "+ at most 2 extra points near the peak.",
@@ -3888,7 +3888,7 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png",
-      "/courses/SE009/img/rlc_lp.png"
+      "/courses/SE009/img/rlc_bp.png"
      ]
     }
    },
