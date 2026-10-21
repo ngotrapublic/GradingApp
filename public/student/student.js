@@ -119,22 +119,35 @@ function render() {
     h += `<p class="muted">${T('You are not in a team yet. Ask the lecturer.', 'Bạn chưa có nhóm. Hỏi giảng viên.')}</p>`;
   }
   h += `</div>`;
-  let shown = 0, sum = 0, total = 0;
-  I.labs.forEach(L => {
-    if (!L.card && L.marks === null && !L.submit && !(L.review && L.review.length)) return;
-    shown++;
-    h += `<div class="card lab"><h3>Lab ${L.lab}</h3>`;
-    if (L.card) h += `<div class="lines">${L.card.map(l => `<div>${sub(l)}</div>`).join('')}</div>`;
-    (L.figs || []).forEach(f => { h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
-    if (L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
-    (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
-    if (L.marks !== null) { sum += L.marks; total += L.total;
-      h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
-    if (L.submit) h += submitForm(L);
-    else if (L.review && L.review.length) h += `<div class="submit">${valueFields(L, true)}</div>`;
-    h += `</div>`;
+  let sum = 0, total = 0;
+  const labs = I.labs
+    .filter(L => L.card || L.marks !== null || L.submit || (L.review && L.review.length))
+    .sort((a, b) => +b.lab - +a.lab);
+  labs.forEach((L, i) => {
+    const open = i === 0;
+    const markBit = L.marks !== null ? ` · ${L.marks}/${L.total}` : '';
+    h += `<details class="card lab"${open ? ' open' : ''}><summary>Lab ${esc(String(L.lab))}${markBit}</summary>`;
+    if (L.parts && L.parts.length) {
+      if (L.card && L.card[0]) h += `<div class="lines"><div>${sub(L.card[0])}</div></div>`;
+      if (L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
+      if (L.marks !== null) { sum += L.marks; total += L.total;
+        h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
+      if (L.submit) h += submitForm(L);
+      else if (L.review && L.review.length) h += `<div class="submit">${partsBody(L, true)}</div>`;
+      else h += partsBody(L, true);
+    } else {
+      if (L.card) h += `<div class="lines">${L.card.map(l => `<div>${sub(l)}</div>`).join('')}</div>`;
+      (L.figs || []).forEach(f => { h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
+      if (L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
+      (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
+      if (L.marks !== null) { sum += L.marks; total += L.total;
+        h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
+      if (L.submit) h += submitForm(L);
+      else if (L.review && L.review.length) h += `<div class="submit">${valueFields(L, true)}</div>`;
+    }
+    h += `</details>`;
   });
-  if (!shown) h += `<p class="muted">${T('Nothing to show yet. Your card appears when the lab starts.', 'Chưa có gì để hiện. Đề sẽ hiện khi bắt đầu buổi lab.')}</p>`;
+  if (!labs.length) h += `<p class="muted">${T('Nothing to show yet. Your card appears when the lab starts.', 'Chưa có gì để hiện. Đề sẽ hiện khi bắt đầu buổi lab.')}</p>`;
   if (total) h += `<p class="muted">${T(`Released labs: <b>${sum}</b> / ${total}. These marks are provisional – the official marks are on Canvas.`, `Các lab đã công bố: <b>${sum}</b> / ${total}. Điểm này để tham khảo – điểm chính thức trên Canvas.`)}</p>`;
   h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button>${ST.me.classes.length > 1 ? `<button id="other">${T('Other class', 'Lớp khác')}</button>` : ''}<button id="out">${T('Sign out', 'Đăng xuất')}</button></div></main>`;
   app.innerHTML = h;
@@ -179,41 +192,78 @@ function render() {
 
 reload();
 
-// measured-value fields; when marks are released, color the field and show the key under it
-function valueFields(L, frozen) {
+// one measured-value field (index i); when marks are released, color and show the key
+function valueField(L, i, frozen) {
   const S_ = L.submit, rev = L.review || [];
   const vals = S_ ? formValues(L.lab, S_.values, frozen) : rev.map(r => r.yours == null ? '' : String(r.yours));
   const qs = S_ ? S_.questions : rev.map(r => [r.label, r.unit]);
-  let h = qs.map((q, i) => {
-    const r = rev[i], cls = r ? (r.band || (r.ok ? 'ok' : 'bad')) : '';
-    return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
-      <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
-      ${r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b></span>` : ''}</label>`;
-  }).join('');
-  if (rev.length) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
+  const q = qs[i]; if (!q) return '';
+  const r = rev[i], cls = r ? (r.band || (r.ok ? 'ok' : 'bad')) : '';
+  return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
+    <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
+    ${r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b></span>` : ''}</label>`;
+}
+
+function valueFields(L, frozen, indices) {
+  const S_ = L.submit, rev = L.review || [];
+  const n = S_ ? S_.questions.length : rev.length;
+  const idxs = indices || [...Array(n).keys()];
+  let h = idxs.map(i => valueField(L, i, frozen)).join('');
+  if (rev.length && !indices) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
+  return h;
+}
+
+function partCardLines(L, part) {
+  const card = L.card || [], sl = part.cardSlice;
+  if (!sl) return '';
+  const a = sl[0] || 0, b = sl[1] == null ? card.length : sl[1];
+  const lines = card.slice(a, b);
+  return lines.length ? `<div class="lines">${lines.map(l => `<div>${sub(l)}</div>`).join('')}</div>` : '';
+}
+
+function partsBody(L, frozen) {
+  let h = '';
+  (L.parts || []).forEach(p => {
+    const title = p.title || ['', ''];
+    h += `<div class="part"><div class="subhead">${esc(T(title[0], title[1]))}</div>`;
+    h += partCardLines(L, p);
+    (p.figs || []).forEach(fi => { const f = (L.figs || [])[fi]; if (f) h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
+    if (p.files) (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
+    h += valueFields(L, frozen, p.questions || []);
+    h += `</div>`;
+  });
+  if (L.review && L.review.length) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
   return h;
 }
 
 // values form: edit while drafting; after submit view-only until Unsubmit; after lecturer tick view-only forever
 function submitForm(L) {
   const S_ = L.submit, frozen = !!(S_.locked || S_.submitted || L.review);
+  const split = !!(L.parts && L.parts.length);
+  const ph = L.photo || {};
+  const howto1 = ph.howto || ['Measure on your bench, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>'];
+  const howto4 = ph.check || ['They will check the number <span class="nowrap">on the <b>instrument</b></span> (must match what you submitted), your circuit and photo, then confirm at your bench. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số <span class="nowrap">trên <b>máy đo</b></span> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại cụm máy. Chỉ sau khi được xác nhận thì số đo mới tính điểm.'];
+  const head = ph.head || ['Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)'];
+  const empty = ph.empty || ['No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.'];
+  const btn = ph.btn || ['Take / choose a photo', 'Chụp / chọn ảnh'];
+  const cap = ph.capture === false ? '' : ' capture="environment"';
   let h = `<div class="submit">`;
   if (!S_.locked && !L.review) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
     <ol>
-      <li>${T('Measure on your bench, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>')}</li>
+      <li>${T(howto1[0], howto1[1])}</li>
       <li>${T('To change after submitting: tap <b>Unsubmit</b>, edit, then submit again.', 'Muốn sửa sau khi đã nộp: bấm <b>Hủy nộp</b>, sửa, rồi nộp lại.')}</li>
       <li>${T('<b>Call the lecturer or TA to your bench.</b> Do not pack up or leave until they have ticked you. Submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống cụm máy của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick. Chỉ nộp trên điện thoại là chưa đủ.')}</li>
-      <li>${T('They will check the number <span class="nowrap">on the <b>instrument</b></span> (must match what you submitted), your circuit and photo, then confirm at your bench. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số <span class="nowrap">trên <b>máy đo</b></span> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại cụm máy. Chỉ sau khi được xác nhận thì số đo mới tính điểm.')}</li>
+      <li>${T(howto4[0], howto4[1])}</li>
     </ol></div>`;
-  h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
+  if (!split) h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
   else if (S_.submitted) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
-  h += valueFields(L, frozen);
+  h += split ? partsBody(L, frozen) : valueFields(L, frozen);
   const P = S_.photos || [];
-  h += `<div class="subhead">${T('Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)')}</div>`;
-  if (!P.length) h += `<p class="zero">${T('No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.')}</p>`;
+  h += `<div class="subhead">${T(head[0], head[1])}</div>`;
+  if (!P.length) h += `<p class="zero">${T(empty[0], empty[1])}</p>`;
   h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${frozen ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
-  if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T('Take / choose a photo', 'Chụp / chọn ảnh')}<input type="file" accept="image/*" capture="environment" data-photo="${L.lab}" hidden></label>`;
+  if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T(btn[0], btn[1])}<input type="file" accept="image/*"${cap} data-photo="${L.lab}" hidden></label>`;
   if (S_.locked || L.review) { /* view only */ }
   else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
   else h += `<button class="big on" data-send="${L.lab}">${T('Submit', 'Nộp')}</button>`;

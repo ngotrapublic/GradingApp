@@ -525,6 +525,9 @@ class H(http.server.SimpleHTTPRequestHandler):
         if all(v is None for v in vals):
             return self.send_json(err('Type at least one value.', 'Nhập ít nhất một số.'), 400)
         if not con.execute('SELECT 1 FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone():
+            need = (keys(c['course'])['labs'][lab].get('photo') or {}).get('need')
+            if need:
+                return self.send_json(err(need[0], need[1]), 400)
             return self.send_json(err('Take one photo of your circuit first.', 'Chụp một ảnh mạch trước đã.'), 400)
         t = now()
         con.execute('INSERT INTO records (class_id, lab, sid, tick, manual) VALUES (?,?,?,0,?) ON CONFLICT DO NOTHING', (cid, lab, sid, '{}'))
@@ -576,7 +579,7 @@ def student_view(C, sid):
     labs = []
     for lab, L in K['labs'].items():
         pub = C.get('publish', {}).get(lab, {})
-        item = {'lab': lab, 'title': L['title'], 'total': L['total'], 'card': None, 'figs': [], 'image': None, 'files': [], 'marks': None, 'review': None, 'submit': None}
+        item = {'lab': lab, 'title': L['title'], 'total': L['total'], 'card': None, 'figs': [], 'image': None, 'files': [], 'parts': L.get('parts') or [], 'photo': L.get('photo') or None, 'marks': None, 'review': None, 'submit': None}
         V = L['variants'].get(str(v)) if v else None
         if pub.get('card') and V:
             item['card'] = V.get('card')

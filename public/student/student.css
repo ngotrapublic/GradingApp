@@ -6,7 +6,11 @@
 .teambig div{flex:1;background:#eef6e8;border-radius:10px;padding:8px;text-align:center}
 .teambig b{display:block;font-size:22px;color:var(--g2)}
 .lab{padding:12px 14px}
-.lab h3{margin:0 0 6px;font-size:16px}
+.lab summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;gap:6px;user-select:none;margin:0}
+.lab summary::-webkit-details-marker{display:none}
+.lab summary::before{content:'▸';color:var(--mut);font-size:12px;width:1em}
+.lab[open] summary{margin-bottom:6px}
+.lab[open] summary::before{content:'▾'}
 .lab .lines{font-size:15px;line-height:1.5}
 .lab .lines div:first-child{font-weight:700}
 .lab img{width:100%;border-radius:8px;margin-top:8px;border:1px solid var(--line)}
@@ -23,6 +27,9 @@
 .sidform input{font-size:22px;text-align:center;letter-spacing:2px;padding:12px;margin:12px 0;text-transform:uppercase}
 .submit{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
 .submit .subhead{font-weight:700;margin-bottom:6px}
+.lab .part{margin:12px 0;padding:10px 0 4px;border-top:1px dashed var(--line)}
+.lab .part:first-of-type{border-top:0;padding-top:0}
+.lab .part .subhead{color:var(--g2);font-size:15px}
 .howto{background:#fff8e6;border:1px solid #e0c36a;border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:14px;line-height:1.45}
 .howto b{display:block;margin-bottom:4px;color:var(--txt)}
 .howto ol{margin:6px 0 0;padding-left:18px}
