@@ -185,12 +185,12 @@ function valueFields(L, frozen) {
   const vals = S_ ? formValues(L.lab, S_.values, frozen) : rev.map(r => r.yours == null ? '' : String(r.yours));
   const qs = S_ ? S_.questions : rev.map(r => [r.label, r.unit]);
   let h = qs.map((q, i) => {
-    const r = rev[i], cls = r ? (r.ok ? 'ok' : 'bad') : '';
+    const r = rev[i], cls = r ? (r.band || (r.ok ? 'ok' : 'bad')) : '';
     return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
       <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
       ${r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b></span>` : ''}</label>`;
   }).join('');
-  if (rev.length) h += `<p class="muted">${T('Green = within ±10% of the key. Red = outside that (including near-miss).', 'Xanh = trong khoảng ±10% đáp án. Đỏ = ngoài khoảng đó (kể cả gần đúng).')}</p>`;
+  if (rev.length) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
   return h;
 }
 

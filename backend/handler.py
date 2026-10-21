@@ -587,7 +587,7 @@ def student_view(C, sid):
         rec = C['labs'].get(lab, {}).get(sid, {})
         if pub.get('marks') or rec.get('show_marks'):
             item['marks'] = score(C, lab, st)
-            if V:                               # their own variant keys + per-question result (ok = green, else red)
+            if V:                               # their own variant keys + band (ok / half / bad = green / orange / red)
                 rule, ans, yours = K['rule'], V['keys'], rec.get('values') or []
                 rows = []
                 for i, q in enumerate(L['questions']):
@@ -596,13 +596,17 @@ def student_view(C, sid):
                         x = float(yours[i]) if i < len(yours) and yours[i] not in (None, '') else None
                     except (TypeError, ValueError):
                         x = None
-                    ok = False
+                    band = 'bad'
                     if x is not None and key not in (None, 0):
                         err = abs(x / float(key) - 1)
-                        ok = err <= rule['full']
+                        if err <= rule['full']:
+                            band = 'ok'
+                        elif err <= rule['half']:
+                            band = 'half'
                     elif x is not None and key == 0:
-                        ok = abs(x) <= 1e-12
-                    rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': key, 'ok': ok, 'max': q[3]})
+                        if abs(x) <= 1e-12:
+                            band = 'ok'
+                    rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': key, 'band': band, 'ok': band == 'ok', 'max': q[3]})
                 item['review'] = rows
         if pub.get('submit') and v:
             submitted = rec.get('src') == 'web'

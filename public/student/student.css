@@ -14,9 +14,11 @@
 .marks{margin-top:8px;font-size:15px}
 .marks b{font-size:18px;color:var(--g2)}
 .submit label.val.ok input{background:#e8f5e9;border-color:#81c784;color:#1b5e20;font-weight:600}
+.submit label.val.half input{background:#fff3e0;border-color:#ffb74d;color:#e65100;font-weight:600}
 .submit label.val.bad input{background:#fdecea;border-color:#e57373;color:#b71c1c;font-weight:600}
 .submit .keyline{display:block;margin-top:4px;font-size:13px}
 .submit label.val.ok .keyline{color:#2e7d32}
+.submit label.val.half .keyline{color:#c77c00}
 .submit label.val.bad .keyline{color:#c62828}
 .sidform input{font-size:22px;text-align:center;letter-spacing:2px;padding:12px;margin:12px 0;text-transform:uppercase}
 .submit{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
