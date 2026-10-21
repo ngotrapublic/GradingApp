@@ -130,7 +130,8 @@ function render() {
     (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
     if (L.submit) h += submitForm(L);
     if (L.marks !== null) { sum += L.marks; total += L.total;
-      h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
+      h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`;
+      if (L.review && L.review.length) h += reviewTable(L.review); }
     h += `</div>`;
   });
   if (!shown) h += `<p class="muted">${T('Nothing to show yet. Your card appears when the lab starts.', 'Chưa có gì để hiện. Đề sẽ hiện khi bắt đầu buổi lab.')}</p>`;
@@ -177,6 +178,18 @@ function render() {
 }
 
 reload();
+
+// after marks are released: your value vs key (green = within ±10%, red = wrong or near)
+function reviewTable(rows) {
+  let h = `<div class="review"><div class="subhead">${T('Your answers vs the key', 'Số bạn nộp và đáp án')}</div>
+    <table><tr><th>${T('Quantity', 'Đại lượng')}</th><th>${T('Yours', 'Bạn nộp')}</th><th>${T('Key', 'Đáp án')}</th></tr>`;
+  rows.forEach(r => {
+    const cls = r.ok ? 'ok' : 'bad';
+    h += `<tr class="${cls}"><td>${sub(r.label)} <small>(${esc(r.unit)})</small></td>
+      <td class="num">${fmt(r.yours)}</td><td class="num"><b>${fmt(r.key)}</b></td></tr>`;
+  });
+  return h + `</table><p class="muted">${T('Green = within ±10% of the key. Red = outside that (including near-miss).', 'Xanh = trong khoảng ±10% đáp án. Đỏ = ngoài khoảng đó (kể cả gần đúng).')}</p></div>`;
+}
 
 // values form: edit while drafting; after submit view-only until Unsubmit; after lecturer tick view-only forever
 function submitForm(L) {
