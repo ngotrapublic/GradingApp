@@ -2015,7 +2015,11 @@
      "Peak or BW",
      "Peak Vout/Vin or BW",
      "–/kHz",
-     3
+     3,
+     {
+      "full": 0.2,
+      "half": 0.35
+     }
     ]
    ],
    "variants": {

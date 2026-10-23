@@ -10,12 +10,13 @@ const canManage = (cls=C()) => cls && ['admin','owner'].includes(cls.role);   //
 function variant(st, cls=C()){ if(!(st.team&&st.member&&cls.vset)) return null; const t=+st.team, m=+st.member; return cls.vset*100 + (m<=3? 3*(t-1)+m : 18+t); }
 function rec(sid, lab=S.lab){ return ((C().labs[lab]||{})[sid])||{}; }
 function teamRec(team, lab=S.lab){ return ((C().team||{})[lab]||{})[team]||{}; }
-function mark(x, key, m){ if(x===undefined||x===null||x===''||isNaN(+x)) return null; const e=Math.abs(+x/key-1);
-  return e<=K().rule.full? m : e<=K().rule.half? m/2 : 0; }
+const qrule = q => (q && q[4] && q[4].full)? q[4] : K().rule;      // a question may have its own tolerance (5th item)
+function mark(x, key, m, rule=K().rule){ if(x===undefined||x===null||x===''||isNaN(+x)) return null; const e=Math.abs(+x/key-1);
+  return e<=rule.full? m : e<=rule.half? m/2 : 0; }
 function score(st, lab=S.lab){
   const Lb=K().labs[lab], v=variant(st), r=rec(st.sid, lab); let t=0;
   if(r.override!==undefined && r.override!==null) return +r.override;   // lecturer's manual score wins
-  if(v && Lb.variants[v] && r.tick){ Lb.questions.forEach((q,i)=>{ const s=mark((r.values||[])[i], Lb.variants[v].keys[i], q[3]); if(s) t+=s; }); }
+  if(v && Lb.variants[v] && r.tick){ Lb.questions.forEach((q,i)=>{ const s=mark((r.values||[])[i], Lb.variants[v].keys[i], q[3], qrule(q)); if(s) t+=s; }); }
   Lb.manual.forEach(m=>{ t += +(m[3]==='student'? (r.manual||{})[m[0]] : (st.team? teamRec(st.team, lab)[m[0]] : 0)) || 0; });
   return t;
 }

@@ -12,6 +12,11 @@ def variant(vset, st):
     return int(vset) * 100 + (3 * (t - 1) + m if m <= 3 else 18 + t)
 
 
+def rule_of(K, q):
+    """Tolerance of one question: its own {full, half} (5th item of the question) or the course rule."""
+    return q[4] if len(q) > 4 and isinstance(q[4], dict) else K['rule']
+
+
 def score(C, lab, st, K=None):
     """Marks of one student for one lab. C = one class as returned by db.load(). K = keys pack (with overrides)."""
     K = K or keys(C['course']); lab = str(lab); L = K['labs'][lab]; v = variant(C['vset'], st)
@@ -27,7 +32,8 @@ def score(C, lab, st, K=None):
             except (TypeError, ValueError, IndexError):
                 continue
             err = abs(x / ans[i] - 1)
-            total += q[3] if err <= K['rule']['full'] else (q[3] / 2 if err <= K['rule']['half'] else 0)
+            rule = rule_of(K, q)
+            total += q[3] if err <= rule['full'] else (q[3] / 2 if err <= rule['half'] else 0)
     for m in L['manual']:
         if m[3] == 'student':
             total += float((rec.get('manual') or {}).get(m[0], 0) or 0)

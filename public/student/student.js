@@ -202,7 +202,7 @@ function valueField(L, i, frozen) {
   const r = rev[i], cls = r ? (r.band || (r.ok ? 'ok' : 'bad')) : '';
   return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
     <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
-    ${r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b></span>` : ''}</label>`;
+    ${r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b>${r.tol && r.tol[0] !== 0.1 ? ` <small>(${T(`full marks within ±${Math.round(r.tol[0] * 100)}%, half within ±${Math.round(r.tol[1] * 100)}%`, `đủ điểm trong ±${Math.round(r.tol[0] * 100)}%, nửa điểm trong ±${Math.round(r.tol[1] * 100)}%`)})</small>` : ''}</span>` : ''}</label>`;
 }
 
 function valueFields(L, frozen, indices) {

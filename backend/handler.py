@@ -9,7 +9,7 @@ from .courses import COURSES, asset, keys, keys_live
 from .db import (ROLES, add_hit, allow, as_int, assign_random, check_pw, class_role, connect, count_hits, delete_class, hash_pw,
                  load, new_session, now, set_gradebook, set_sync, set_team_mark, upsert_student, user_from_token, visible_class_ids)
 from .network import lan_ips, qr_svg
-from .scoring import export_xlsx, score, variant
+from .scoring import export_xlsx, score, variant, rule_of
 
 PUBLIC_URL = os.environ.get('PUBLIC_URL', '').rstrip('/')
 ON_VERCEL = bool(os.environ.get('VERCEL'))
@@ -623,9 +623,10 @@ def student_view(C, sid, keypack=None):
         if pub.get('marks') or rec.get('show_marks'):
             item['marks'] = score(C, lab, st, K)
             if V:                               # their own variant keys + band (ok / half / bad = green / orange / red)
-                rule, ans, yours = K['rule'], V['keys'], rec.get('values') or []
+                ans, yours = V['keys'], rec.get('values') or []
                 rows = []
                 for i, q in enumerate(L['questions']):
+                    rule = rule_of(K, q)
                     key = ans[i] if i < len(ans) else None
                     try:
                         x = float(yours[i]) if i < len(yours) and yours[i] not in (None, '') else None
@@ -641,7 +642,8 @@ def student_view(C, sid, keypack=None):
                     elif x is not None and key == 0:
                         if abs(x) <= 1e-12:
                             band = 'ok'
-                    rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': key, 'band': band, 'ok': band == 'ok', 'max': q[3]})
+                    rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': key, 'band': band, 'ok': band == 'ok', 'max': q[3],
+                                 'tol': [rule['full'], rule['half']]})
                 item['review'] = rows
         if pub.get('submit') and v:
             submitted = rec.get('src') == 'web'
