@@ -42,9 +42,6 @@ def notes(slide, text):
 
 def tidy_slide(p, model, extra):
     """New last slide: title bar + logo copied from `model`, the bench photo, a 6-step checklist."""
-    for i, old in enumerate(list(p.slides)):              # running again replaces the slide
-        if any(sh.has_text_frame and sh.text_frame.text == TIDY_TITLE for sh in old.shapes):
-            sid = p.slides._sldIdLst[i]; p.part.drop_rel(sid.rId); p.slides._sldIdLst.remove(sid)
     s = p.slides.add_slide(model.slide_layout)
     for sh in model.shapes:
         if sh.name == 'Title Bar':
@@ -67,6 +64,21 @@ def tidy_slide(p, model, extra):
              'Clear the breadboard. Put the parts back in the parts box, in the right bag'
              + (extra.replace(' (', '. ').replace(')', '') if extra else '') + '.\n'
              'Put the leads, probes and cables in the box behind the trainer. Put the instruments back in their place, like the photo, and push your chair in.')
+
+
+def strip_tidy(p):
+    """Remove the tidy-bench slides made by an earlier run (they are added again, so running twice is safe)."""
+    for sid, sl in reversed(list(zip(list(p.slides._sldIdLst), list(p.slides)))):
+        if any(sh.has_text_frame and sh.text_frame.text == TIDY_TITLE for sh in sl.shapes):
+            p.part.drop_rel(sid.rId); p.slides._sldIdLst.remove(sid)
+    # number the slide files 1..n again: a new slide is named slide<n+1>.xml and must not hit an existing file
+    p.part.rename_slide_parts([x.rId for x in p.slides._sldIdLst])
+
+
+def move(p, slide, index):
+    lst = p.slides._sldIdLst
+    sid = next(x for x, sl in zip(list(lst), list(p.slides)) if sl == slide)
+    lst.remove(sid); lst.insert(index, sid)
 
 
 def lab1(p):
@@ -110,6 +122,13 @@ def lab1(p):
              'Tap Submit, then call me for the tick. To change a number before the tick, tap Unsubmit, edit, and submit again.\n'
              'After the tick, tidy your bench. The next slide shows how.')
     tidy_slide(p, p.slides[85], '')
+    # Lab 1 also shows it at the start, after "Your team and the student page", so the first class knows the rule
+    tidy_slide(p, p.slides[85], '')
+    early = p.slides[len(p.slides) - 1]; move(p, early, 6)
+    notes(early, 'One more rule for every lab. At the end, your bench must look like this photo.\n'
+                 'First wait for my tick. Then switch off everything, clear the breadboard, put the parts back in the parts box, '
+                 'put the cables in the box behind the trainer, and put the instruments in their place.\n'
+                 'You will see this slide again at the end of every lab.')
 
 
 def lab2(p):
@@ -206,4 +225,4 @@ def lab4(p):
 
 for n, fix in ((1, lab1), (2, lab2), (3, lab3), (4, lab4)):
     path = f'{HCM}/Lab{n}/HCM Electronic Circuit Lab {n}.pptx'
-    p = Presentation(path); fix(p); p.save(path); print(n, len(p.slides), 'slides')
+    p = Presentation(path); strip_tidy(p); fix(p); p.save(path); print(n, len(p.slides), 'slides')
