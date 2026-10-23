@@ -60,8 +60,8 @@ img_dst = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/courses/SE009/assets
 os.makedirs(img_dst, exist_ok=True)
 for k in labs['3']['variants']:
     shutil.copy(f'{W}/fig/lab3/v{k}.png', f'{img_dst}/v{k}.png')
-from lab2_team import lab2_team   # Lab 2 Task 2 (RLC) = team work, variant of member 1
-lab2_team(labs)
+from lab2_team import lab2_team, lab2_member4_rc   # Lab 2 Task 2 (RLC) = team work; member 4 gets its own RC
+lab2_team(labs); lab2_member4_rc(labs)
 out = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/courses/SE009/keys.json'
 json.dump({'labs': labs, 'rule': {'full': 0.10, 'half': 0.20}}, open(out, 'w'), ensure_ascii=False, indent=1)
 print('keys ok', {k: len(v['variants']) for k, v in labs.items()})
