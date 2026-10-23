@@ -51,7 +51,8 @@ Dữ liệu (cả ảnh mạch của SV) lưu trong `data/grading.db`. Muốn sa
 Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thông báo vẫn ở Canvas. Trên Canvas **chỉ có thông báo và các cột điểm** – không quiz, không file đề (SV xem đề, nộp bài, tải file mẫu trên trang SV).
 
 **Làm một lần đầu học kỳ (mỗi lớp trên Canvas):**
-- Tạo assignment tên đúng **Lab 1**, **Lab 2**, **Lab 3**, **Lab 4** – điểm tối đa 12, 14, 14, 10 (SE009) – kiểu nộp *No submission*, nhóm assignment "Lab assessment" (trọng số 50%).
+- Tạo **một** assignment tên **Lab** (hoặc "Lab assessment") – điểm tối đa **50** – kiểu nộp *No submission*, trọng số 50%. Web điền **tổng 4 lab** vào cột này (lab chưa chấm tính 0). Nếu đặt điểm tối đa khác (vd 10), web tự quy đổi theo dòng *Points Possible* của file Export.
+  (Vẫn dùng được cách cũ: 4 assignment **Lab 1** … **Lab 4** – 12, 14, 14, 10 điểm.)
 
 **Trong buổi lab:**
 1. Tab **Chấm** → hộp **Trang SV**: bật **Cho SV xem đề** và **Nhận bài**, bấm **QR cho SV** và chiếu lên màn hình.
@@ -62,7 +63,7 @@ Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thô
 
 **Sau buổi lab (giảng viên, khoảng 3 phút):**
 1. Tab **Gửi Canvas** → **Bước 1** xem danh sách cần xử lý (có số nhưng chưa tick, chưa chấm đồ thị / demo…) và sửa ở tab **Chấm**.
-2. **Bước 2**: lần đầu chọn file sổ điểm (Canvas → Grades → **Export**); các lần sau web dùng lại file đã lưu. Đánh dấu lab → **Tải file import Canvas**.
+2. **Bước 2**: lần đầu chọn file sổ điểm (Canvas → Grades → **Export**); các lần sau web dùng lại file đã lưu. Ô **tổng các lab** đã được chọn sẵn → **Tải file import Canvas**. Sau mỗi lab gửi lại một lần (tổng mới thay tổng cũ).
 3. Canvas → **Grades** → **Import** → chọn file vừa tải → kiểm tra → **Save**. Công bố điểm / thông báo cho SV trên Canvas như bình thường.
 4. (Tùy chọn) công bố điểm cho SV: bật **Công bố điểm (cả lớp)**, hoặc mở từng SV → **Công bố điểm cho SV này**.
 

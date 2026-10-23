@@ -19,18 +19,26 @@ function buildImport(rows, labs){
   const hd=rows[0], H=hd.map(x=>x.trim().toLowerCase());
   const iName=H.indexOf('student'), iSis=H.indexOf('sis user id'), iSec=H.indexOf('section');
   if(iName<0||iSec<0) return {error:T('Not a Canvas Gradebook export (columns Student / Section are missing).','Không phải file Export của Canvas Gradebook (thiếu cột Student / Section).')};
-  const labCol={}; hd.forEach((h,i)=>{ const mm=h.trim().match(/^lab\s*(\d+)\b/i); if(mm && labs().includes(mm[1]) && !(mm[1] in labCol) && !/data/i.test(h) && !/(current|final|unposted)\s+(score|grade|points)/i.test(h)) labCol[mm[1]]=i; });
+  const labCol={}; hd.forEach((h,i)=>{ const mm=h.trim().match(/^lab\s*(\d+)\b/i); if(mm && globalThis.labs().includes(mm[1]) && !(mm[1] in labCol) && !/data/i.test(h) && !/(current|final|unposted)\s+(score|grade|points)/i.test(h)) labCol[mm[1]]=i; });
+  // or ONE assignment for all labs ("Lab", "Labs", "Lab assessment"… without a number): gets the total of all labs
+  const totCol=hd.findIndex(h=>/^labs?\b(?!\s*\d)/i.test(h.trim()) && !/data/i.test(h) && !/(current|final|unposted)\s+(score|grade|points)/i.test(h));
   const studs=C().students, match=r=>{ const sis=(iSis>=0?r[iSis]:'').trim(); return studs.find(s=>sis&&s.sid.toLowerCase()===sis.toLowerCase()) || studs.find(s=>norm(s.name)===norm(r[iName])); };
   const data=rows.slice(1).filter(r=>(r[iName]||'').trim() && !/points possible/i.test(r[iName]) && !/^test student$/i.test(r[iName].trim()));
-  const res={labCol, total:data.length, matched:data.filter(match).length, unmatched:data.filter(r=>!match(r)).map(r=>r[iName]),
+  const all=globalThis.labs(), full=all.reduce((a,l)=>a+K().labs[l].total,0);     // (the argument `labs` hides the function)
+  const ppRow=rows.find(r=>/points possible/i.test(r[iName]||'')), pp=totCol>=0&&ppRow? parseFloat(ppRow[totCol]) : NaN;
+  const scale=pp>0? pp/full : 1;           // Canvas assignment out of another number than the lab total: convert
+  const res={labCol, totCol, full, pp:pp>0?pp:full, total:data.length, matched:data.filter(match).length, unmatched:data.filter(r=>!match(r)).map(r=>r[iName]),
              notInFile:studs.filter(s=>!data.some(r=>match(r)===s)).map(s=>s.name)};
-  labs=(labs||[]).filter(l=>l in labCol); if(!labs.length) return res;
-  const keep=[...Array(iSec+1).keys()], cols=keep.concat(labs.map(l=>labCol[l]));
+  const wantTotal=(labs||[]).includes('total') && totCol>=0;
+  labs=(labs||[]).filter(l=>l in labCol); if(!labs.length && !wantTotal) return res;
+  const keep=[...Array(iSec+1).keys()], cols=keep.concat(labs.map(l=>labCol[l]), wantTotal?[totCol]:[]);
+  const value=(st,j)=> j-keep.length<labs.length ? score(st, labs[j-keep.length])
+                      : Math.round(all.reduce((a,l)=>a+score(st,l),0)*scale*100)/100;
   const q=v=>{ v=String(v??''); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
   const out=[cols.map(i=>q(hd[i])).join(',')];
   rows.slice(1).forEach(r=>{ if(!(r[iName]||'').trim()) return; const pp=/points possible/i.test(r[iName]); const st=pp?null:match(r);
-    out.push(cols.map((ci,j)=> j<keep.length? q(r[ci]) : (pp? q(r[ci]) : (st? score(st, labs[j-keep.length]) : ''))).join(',')); });
-  res.csv='﻿'+out.join('\r\n'); res.labs=labs; return res;
+    out.push(cols.map((ci,j)=> j<keep.length? q(r[ci]) : (pp? q(r[ci]) : (st? value(st,j) : ''))).join(',')); });
+  res.csv='﻿'+out.join('\r\n'); res.labs=labs; res.sentTotal=wantTotal; return res;
 }
 function renderSum(m){
   const st=sorted(), lab=S.lab, sy=(C().sync||{})[lab], ch=changedSince(lab), checks=labChecks(lab), gb=S.gbNew||C().gb;
@@ -45,10 +53,12 @@ function renderSum(m){
   let info=null;
   if(gb){ info=buildImport(gb.rows,[]);
     if(info.error) h+=`<p class="zero">${esc(info.error)}</p>`;
-    else if(!Object.keys(info.labCol).length) h+=`<p class="zero">${T('The file has no assignment columns named "Lab 1", "Lab 2"…. Create these assignments on Canvas and export again.','File không có cột assignment tên "Lab 1", "Lab 2"…. Tạo các assignment này trên Canvas rồi Export lại.')}</p>`;
+    else if(!Object.keys(info.labCol).length && info.totCol<0) h+=`<p class="zero">${T('The file has no lab assignment. On Canvas create ONE assignment named "Lab" (for the total of all labs) – or "Lab 1", "Lab 2"… – then export again.','File không có assignment lab. Trên Canvas tạo MỘT assignment tên "Lab" (tổng các lab) – hoặc "Lab 1", "Lab 2"… – rồi Export lại.')}</p>`;
     else { const def=new Set([lab, ...labs().filter(l=>changedSince(l).length)]);
       h+=`<p class="muted">${T(`Matched ${info.matched}/${info.total} students.`,`Khớp ${info.matched}/${info.total} SV.`)}${info.unmatched.length?T(` Not matched (left blank): ${info.unmatched.map(esc).join(', ')}.`,` Không khớp (để trống): ${info.unmatched.map(esc).join(', ')}.`):''}${info.notInFile.length?T(` On this page but not in the file: ${info.notInFile.map(esc).join(', ')}.`,` Có trên web nhưng không có trong file: ${info.notInFile.map(esc).join(', ')}.`):''}</p>
-      <div class="btns"><span class="lbl">${T('Send labs:','Gửi các lab:')}</span>${Object.keys(info.labCol).sort().map(l=>`<label class="btn" style="padding:6px 10px"><input type="checkbox" data-gl="${l}" ${def.has(l)?'checked':''}> Lab ${l}</label>`).join('')}</div>
+      ${info.totCol>=0?`<div class="btns"><label class="btn" style="padding:6px 10px"><input type="checkbox" data-gl="total" checked> ${T(`Column "${esc(gb.rows[0][info.totCol].trim())}": total of all labs`,`Cột "${esc(gb.rows[0][info.totCol].trim())}": tổng các lab`)}</label></div>
+        <p class="muted">${T(`Total /${info.full}`,`Tổng /${info.full}`)}${info.pp!==info.full?T(` → converted to /${info.pp} (points possible of this assignment on Canvas)`,` → quy về /${info.pp} (điểm tối đa của assignment trên Canvas)`):''}. ${T('Labs not graded yet count 0 – send again after each lab.','Lab chưa chấm tính 0 – gửi lại sau mỗi lab.')}</p>`:''}
+      ${Object.keys(info.labCol).length?`<div class="btns"><span class="lbl">${T('Send labs:','Gửi các lab:')}</span>${Object.keys(info.labCol).sort().map(l=>`<label class="btn" style="padding:6px 10px"><input type="checkbox" data-gl="${l}" ${def.has(l)&&info.totCol<0?'checked':''}> Lab ${l}</label>`).join('')}</div>`:''}
       <div class="btns"><button class="on" id="gbdl">${T('Download the Canvas import file','Tải file import Canvas')}</button></div>`; } }
   h += `<h2>${T('Step 3 – On Canvas','Bước 3 – Trên Canvas')}</h2><p class="muted">${T('Canvas → <b>Grades</b> → <b>Import</b> → choose the downloaded file → check the changes → <b>Save</b>. Then post grades / announcements on Canvas as usual.','Canvas → <b>Grades</b> → <b>Import</b> → chọn file vừa tải → kiểm tra các thay đổi → <b>Save</b>. Sau đó công bố điểm / thông báo cho SV trên Canvas như bình thường.')}</p>`;
   h += `<h2>${T('Marks','Bảng điểm')} ${esc(C().name)}</h2><div class="card scroll"><table><tr><th>${T('Name','Họ tên')}</th><th>${T('Team','Nhóm')}</th>${labs().map(l=>`<th>Lab ${l}<br><small>/${K().labs[l].total}</small></th>`).join('')}<th>${T('Total','Tổng')}<br><small>/${labs().reduce((a,l)=>a+K().labs[l].total,0)}</small></th></tr>
@@ -62,8 +72,9 @@ function renderSum(m){
     if(!labs.length){ toast(T('Choose at least 1 lab','Chọn ít nhất 1 lab')); return; }
     const r=buildImport(gb.rows, labs); if(!r.csv){ toast(T('Could not create the file','Không tạo được file')); return; }
     const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([r.csv],{type:'text/csv'}));
-    a.download=`Canvas_import_${C().name.replace(/\W+/g,'_')}_Lab${labs.join('-')}.csv`; a.click();
-    const scores={}; labs.forEach(l=>{ scores[l]={}; C().students.forEach(s=>scores[l][s.sid]=score(s,l)); });
+    a.download=`Canvas_import_${C().name.replace(/\W+/g,'_')}_${r.sentTotal?'Lab_total':'Lab'+r.labs.join('-')}.csv`; a.click();
+    const sent=r.sentTotal? globalThis.labs() : r.labs;          // the total carries every lab
+    const scores={}; sent.forEach(l=>{ scores[l]={}; C().students.forEach(s=>scores[l][s.sid]=score(s,l)); });
     S.data=await api('/api/sync',{cls:S.cls, scores, gb:S.gbNew?S.gbNew.rows:null, gbname:S.gbNew?S.gbNew.name:''}); S.gbNew=null;
     toast(T('File created. Go to Canvas → Grades → Import','Đã tạo file. Vào Canvas → Grades → Import')); renderSum(m); };
 }
