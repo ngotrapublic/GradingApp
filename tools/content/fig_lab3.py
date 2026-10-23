@@ -1,0 +1,20 @@
+import schemdraw, schemdraw.elements as elm, matplotlib
+matplotlib.use('Agg')
+schemdraw.config(fontsize=16, lw=2)
+F='/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/fig/'
+with schemdraw.Drawing(file=F+'d3_inverting.png', dpi=200, show=False) as d:
+    op = elm.Opamp(leads=True).anchor('in1').label('LM358', loc='center', ofst=(-0.3,0), fontsize=13)
+    elm.Label().at(op.in1).label('2', loc='bottom', ofst=(0.25,0.05), fontsize=12)
+    elm.Label().at(op.in2).label('3', loc='top', ofst=(0.25,-0.05), fontsize=12)
+    elm.Label().at(op.out).label('1', loc='top', ofst=(-0.35,-0.05), fontsize=12)
+    elm.Line().at(op.in1).left(0.5); n = d.here; elm.Dot()
+    elm.Resistor().left().length(3).label('$R_1$')
+    elm.Dot(open=True).label('$V_{in}$\n(CH2)', loc='left')
+    elm.Line().at(n).up(2.2)
+    elm.Resistor().right().tox(op.out).label('$R_2$')
+    elm.Line().down().toy(op.out); elm.Dot()
+    elm.Line().at(op.out).right(1.5); elm.Dot(open=True).label('$V_{out}$\n(CH1)', loc='right')
+    elm.Line().at(op.in2).left(0.5); elm.Ground()
+    elm.Line().at(op.vd).up(0.7); elm.Label().at(d.here).label('+6 V (pin 8)', loc='top', fontsize=12)
+    elm.Line().at(op.vs).down(0.7); elm.Label().at(d.here).label('−6 V (pin 4)', loc='bottom', fontsize=12, ofst=(0,-0.25))
+print('ok')

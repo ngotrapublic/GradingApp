@@ -9,3 +9,6 @@ __pycache__/
 .vercel/
 .env*
 .DS_Store
+
+# content scripts: temporary build folder
+tools/content/_build/
