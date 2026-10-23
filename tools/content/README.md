@@ -30,6 +30,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 4. `add_qr.py` – mã QR trang SV trên các slide nộp bài.
 5. `align_web.py` – khớp slide với web (nộp trước rồi gọi tick, 1 ảnh, hộp linh kiện, Lab 2 Task 1/2, micro dây đực–cái,
    slide dọn cụm máy). Chạy lại nhiều lần vẫn an toàn.
+6. `rlc_slides.py` – 5 slide giải thích lọc RLC trong Lab 2 (thông thấp, thông cao, thông dải: vì sao, băng thông BW,
+   cách đo BW). Hình vẽ bằng `fig_rlc_theory.py`. Chạy sau `align_web.py`; chạy lại thì thay slide cũ.
 
 ## Linh kiện
 `bom.py`, `bom2.py`, `mkxlsx.py`, `mk2.py`, `mk3.py`, `shop.py` – tạo file mua linh kiện (giá thegioiic).

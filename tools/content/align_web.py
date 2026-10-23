@@ -36,6 +36,15 @@ def rep(slide, pairs):
         hit[0].text = new
 
 
+def by_title(p, *titles):
+    """The slide whose title bar shows one of these titles (old or new wording), so inserted slides do not shift it."""
+    for s in p.slides:
+        for sh in s.shapes:
+            if sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles:
+                return s
+    raise LookupError(titles)
+
+
 def notes(slide, text):
     slide.notes_slide.notes_text_frame.text = text
 
@@ -132,7 +141,7 @@ def lab1(p):
 
 
 def lab2(p):
-    s = p.slides[4]
+    s = by_title(p, 'Devices and components for this session')
     rep(s, [('For each student:', 'For each student (Task 1) and each team (Task 2):'),
             ('RC warm-up: 1 resistor + 1 capacitor (on your variant card)', 'Task 1, each student: 1 resistor + 1 capacitor (on your card)'),
             ('RLC: 1 inductor 1 mH, capacitors 22 nF and 2.2 nF', 'Task 2, each team: 1 inductor 1 mH, capacitors 22 nF and 2.2 nF')])
@@ -140,20 +149,20 @@ def lab2(p):
              'Task 1 is individual: each student gets one resistor and one capacitor for the RC warm-up.\n'
              'Task 2 is team work: each team gets one inductor, the capacitors and the resistors for one RLC filter.\n'
              'Download the Excel template from the student page now.')
-    s = p.slides[20]
+    s = by_title(p, 'Warm-up exercise – RC cut-off frequency', 'Task 1 (individual) – RC cut-off frequency')
     rep(s, [('Warm-up exercise – RC cut-off frequency', 'Task 1 (individual) – RC cut-off frequency')])
     notes(s, 'Task 1 is individual: 2 points. Your card gives the type, R and C.\n'
              'Calculate fc. Build it. Change the frequency until Vout = 0.707 × Vin. That is your measured fc. Write it in kHz.\n'
              'One student uses the oscilloscope at a time. The others build or calculate. When you finish, give the oscilloscope to the next student.\n'
              'Open your card on the student page now.')
-    s = p.slides[42]
+    s = by_title(p, 'Lab 2 exercise – design and build', 'Task 2 (team) – design and build')
     rep(s, [('Lab 2 exercise – design and build', 'Task 2 (team) – design and build'),
             ('Your variant card gives the ', 'Your card gives the ')])
     notes(s, 'Task 2 is team work. The whole team builds one filter. Everybody in the team has the same Task 2 on the card.\n'
              'Your card gives the filter type and Q. Measure R L. Calculate R total = 203 / Q. Then R = R total − R L. Make R from 47, 100 and 220 Ω.\n'
              'Measure R and the coil together with the ohmmeter. That is your R total for the student page.\n'
              'Show me your calculation before you build.')
-    s = p.slides[43]
+    s = by_title(p, 'Lab 2 exercise – measure and plot', 'Task 2 (team) – measure and plot')
     rep(s, [('Lab 2 exercise – measure and plot', 'Task 2 (team) – measure and plot'),
             (' from the student page (under your Lab 2 card) and open it. For each frequency on your card, measure ',
              ' from the student page (under your Lab 2 card). Share the frequencies on your card: each member measures some of them. Measure '),
@@ -167,18 +176,19 @@ def lab2(p):
              'Low-pass and high-pass: write the highest Vout / Vin. Band-pass: find f L and f H, then BW.\n'
              'Write 1 to 3 sentences of conclusion.\n'
              'Each member submits the team values and one screenshot of the graph on the student page. Not a photo of the circuit. Then call me.')
-    s = p.slides[44]
+    s = by_title(p, 'Lab 2 – What to submit')
     rep(s, [('Warm-up: measured cut-off frequency fc', 'Task 1 (individual): measured cut-off frequency fc'),
             ('Measured ', 'Task 2: measured '),
             ('Frequency of maximum output ', 'Task 2: frequency of maximum output '),
             ('Low-pass / high-pass: highest ', 'Task 2 – low-pass / high-pass: highest '),
+            ('Band-pass: bandwidth BW', 'Band-pass: bandwidth BW   (this row: full marks within ±20 %, half within ±35 %)'),
             ('Graph + conclusion (checked by the lecturer at your bench)', 'Task 2: graph + conclusion (one screenshot on the student page, checked at your bench)'),
             ('Before you leave: submit your values on the ', 'Before you leave: submit on the '),
             (', switch off all instruments and clear your breadboard.', ', get the lecturer’s tick, then tidy your bench (next slide).')])
     notes(s, 'Task 1 is your own value. Task 2 values are the same for the whole team.\n'
              'Type these numbers on the student page, under your card. Use kHz for frequencies. Add one screenshot of your RLC graph.\n'
              'Then call me for the tick. After the tick, tidy your bench. The next slide shows how.')
-    tidy_slide(p, p.slides[44], '')
+    tidy_slide(p, by_title(p, 'Lab 2 – What to submit'), '')
 
 
 def lab3(p):
