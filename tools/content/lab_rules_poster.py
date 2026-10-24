@@ -13,8 +13,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/docs/Lab_rules_poster.pptx'
 PHOTO = f'{HERE}/fig/bench_tidy.jpg'
 ICON = lambda n: f'{HERE}/fig/icons/{n}.png'
-NAVY, GREEN, ORANGE = RGBColor(0x1B, 0x2A, 0x3A), RGBColor(0x2E, 0x7D, 0x32), RGBColor(0xF2, 0xA9, 0x00)
-BOX, ROW, PAGE, WHITE = RGBColor(0xDC, 0xEF, 0xC8), RGBColor(0xE6, 0xE8, 0xE6), RGBColor(0xF2, 0xF3, 0xF2), RGBColor(0xFF, 0xFF, 0xFF)
+# FPT orange: shared by every program in the lab (Asia = green, Gachon = blue)
+NAVY, ACCENT, ACCENT_TXT = RGBColor(0x1B, 0x2A, 0x3A), RGBColor(0xF3, 0x70, 0x21), RGBColor(0xD9, 0x59, 0x0B)
+BOX, ROW, PAGE, WHITE = RGBColor(0xFD, 0xE8, 0xD9), RGBColor(0xE6, 0xE8, 0xE6), RGBColor(0xF2, 0xF3, 0xF2), RGBColor(0xFF, 0xFF, 0xFF)
 W, H = 11.69, 8.27
 FONT = 'Arial'
 
@@ -68,7 +69,7 @@ def text(sh, t, size, color=NAVY, align=PP_ALIGN.LEFT, bold_all=False, margin=0.
 def row(s, x, y, w, h, num, icon, t, size):
     shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.25, y, w - 0.25, h, ROW, 0.25)          # grey band behind number + icon
     pill = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.04, y + (h - 0.32) / 2, 0.5, 0.32, NAVY, 0.5)
-    text(pill, f'{num:02d}', 13, ORANGE, PP_ALIGN.CENTER, bold_all=True, margin=0.0)
+    text(pill, f'{num:02d}', 13, WHITE, PP_ALIGN.CENTER, bold_all=True, margin=0.0)
     ic = min(h - 0.08, 0.44)
     s.shapes.add_picture(ICON(icon), Inches(x + 0.72), Inches(y + (h - ic) / 2), Inches(ic), Inches(ic))
     box = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 1.25, y, w - 1.25, h, BOX, 0.22)
@@ -77,8 +78,8 @@ def row(s, x, y, w, h, num, icon, t, size):
 
 def heading(s, x, y, w, t):
     tb = s.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(0.4))
-    p = tb.text_frame.paragraphs[0]; runs(p, t, 17, GREEN, bold_all=True)
-    shape(s, MSO_SHAPE.RECTANGLE, x + 0.05, y + 0.42, 1.6, 0.05, GREEN)
+    p = tb.text_frame.paragraphs[0]; runs(p, t, 17, ACCENT_TXT, bold_all=True)
+    shape(s, MSO_SHAPE.RECTANGLE, x + 0.05, y + 0.42, 1.6, 0.05, ACCENT)
 
 
 prs = Presentation(); prs.slide_width, prs.slide_height = Inches(W), Inches(H)
@@ -88,7 +89,7 @@ title = s.shapes.add_textbox(Inches(0.45), Inches(0.22), Inches(W - 0.9), Inches
 p = title.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER; runs(p, 'ELECTRONICS LAB RULES', 32, NAVY, bold_all=True)
 sub = s.shapes.add_textbox(Inches(0.45), Inches(0.82), Inches(W - 0.9), Inches(0.35))
 p = sub.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
-runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 14, GREEN)
+runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 14, ACCENT_TXT)
 
 LX, LW, RX, RW, TOP = 0.4, 6.55, 7.2, 4.1, 1.42
 heading(s, LX, TOP, LW, 'RULES')
@@ -101,7 +102,5 @@ for i, (icon, t) in enumerate(LEAVE):
     row(s, RX, TOP + 0.6 + i * (lh + gap), RW, lh, i + 1, icon, t, 10.5)
 py = TOP + 0.6 + 6 * (lh + gap) + 0.05
 pic = s.shapes.add_picture(PHOTO, Inches(RX), Inches(py), Inches(RW))
-band = shape(s, MSO_SHAPE.RECTANGLE, 0, H - 0.42, W, 0.42, GREEN)
-text(band, '+    ' * 30, 12, WHITE, PP_ALIGN.CENTER, bold_all=True, margin=0)
-prs.save(OUT); print('saved', OUT, '| photo bottom at', round(py + pic.height / 914400, 2), 'in; band at', H - 0.42)
+prs.save(OUT); print('saved', OUT, '| photo bottom at', round(py + pic.height / 914400, 2), 'in')
 # PDF:  soffice --headless --convert-to pdf --outdir HCM/docs HCM/docs/Lab_rules_poster.pptx

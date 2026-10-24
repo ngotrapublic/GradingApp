@@ -7,7 +7,7 @@ SRC = os.path.join(os.path.dirname(__file__), '_build', 'material_symbols')
 OUT = os.path.join(os.path.dirname(__file__), 'fig', 'icons')
 ICONS = ['power_settings_new', 'electric_bolt', 'warning', 'electric_meter', 'electrical_services', 'fire_extinguisher',
          'no_food', 'desk', 'report', 'cleaning_services', 'developer_board', 'inventory_2', 'cable', 'check_circle', 'how_to_reg']
-COLOR = (46, 125, 50, 255)
+COLOR = (243, 112, 33, 255)          # FPT orange (neutral for every program in the lab)
 
 
 def render(size=256):
