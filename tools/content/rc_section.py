@@ -33,52 +33,54 @@ xc = lambda f: 1 / (2 * math.pi * f * C)
 ohm = lambda r: f'{r / 1000:.3g} kΩ' if r >= 1000 else f'{r:.3g} Ω'
 
 # ---------------------------------------------------------------- slide text (notes = the same ideas, spoken)
-PLAN = ['In this part we use one circuit: **R = 10 kΩ, C = 100 nF (104)**. Function generator → R → C.',
-        '1. Exercise 1: R then C – change the frequency, watch Vout.',
-        '2. Why does Vout change? A voltage divider.',
-        '3. Exercise 2: swap R and C.',
-        '4. Reading the graph: the −3 dB point.',
-        '5. Exercise 3: measure the cut-off frequency fc.',
-        'Task 1 (marked, on the student page) is at the end of the lab.']
-SCOPE = ['**CH1** (yellow) = Vin. **CH2** (blue) = Vout across C. Vin is 2 Vpp at every frequency.',
-         '**10 Hz**: Vout is as big as Vin.',
-         f'**{FC:.0f} Hz (fc)**: Vout is smaller, and it comes a little later than Vin.',
-         '**1 kHz**: Vout is very small.',
-         'At each frequency, turn the time base (s/div) so that you see 2–3 waves.']
-DIVIDER = ['**Lab 1:** in a voltage divider, the bigger resistor takes the bigger part of the voltage.',
-           'The RC filter is a divider too: **R on top, C at the bottom**. Vout is the voltage on C.',
-           'C acts like a resistor that **changes with frequency**: XC = 1 / (2πfC). The table shows the values.',
-           '**Low frequency:** XC is much bigger than R → C takes almost all of Vin → **Vout ≈ Vin**.',
-           '**High frequency:** XC is much smaller than R → C takes almost nothing → **Vout ≈ 0**.']
-SWAP = ['R and C are swapped. The output (CH2) is now across R.']
-READ = ['**Top: gain in dB** = 20 log (Vout / Vin). **0 dB** means Vout = Vin.',
-        '**Pass band** (left): gain ≈ 0 dB. The signal passes.',
-        '**Corner frequency fc**: the gain is **-3 dB**. −3 dB means Vout = **0.707 × Vin** (half of the power).',
-        '**Why there?** At −3 dB the output is still about 70% of the input: it has not dropped much yet. '
-        'After fc it drops fast: **-20 dB per decade** (10 × the frequency → 10 × smaller Vout). '
-        'So fc is the border between "passes" and "blocked".',
-        '**Stop band** (right): the signal is blocked.',
-        '**Bottom: phase.** Vout comes later than Vin. At fc the shift is −45°.',
-        'High-pass: the same graph, mirrored.']
-CUTOFF_LP = ['The cut-off frequency – the same formula for low-pass and high-pass:',
+PLAN = ['In this part we use one circuit: **R = 10 kΩ and C = 100 nF (code 104)**. The function generator is connected to R, and R is connected to C.',
+        '1. Exercise 1: you build the circuit, change the frequency and watch Vout.',
+        '2. We explain why Vout changes: the circuit is a voltage divider.',
+        '3. Exercise 2: you swap R and C and measure again.',
+        '4. We learn how to read the frequency graph and the −3 dB point.',
+        '5. Exercise 3: you measure the cut-off frequency fc.',
+        'Task 1 (marked on the student page) is at the end of the lab.']
+SCOPE = ['**CH1** (yellow) shows Vin, the input. **CH2** (blue) shows Vout, the voltage across C. The input is 2 Vpp at every frequency.',
+         'At **10 Hz**, Vout is as big as Vin. The signal passes.',
+         f'At **{FC:.0f} Hz** (this is fc), Vout is smaller than Vin. Vout also comes a little later than Vin.',
+         'At **1 kHz**, Vout is very small. The signal is almost blocked.',
+         'Tip: at each frequency, turn the time base knob (s/div) until you see 2 or 3 waves on the screen.']
+DIVIDER = ['Remember Lab 1: in a voltage divider, the **bigger** resistor gets the **bigger** part of the voltage.',
+           'Our RC filter is also a voltage divider. **R** is at the top and **C** is at the bottom. Vout is the voltage across C.',
+           'A capacitor acts like a resistor whose value **changes with the frequency**. We call this value XC: XC = 1 / (2πfC). '
+           'The table shows XC at four frequencies.',
+           'At **low frequency**, XC is much bigger than R. So C gets almost all of Vin, and **Vout is almost equal to Vin**.',
+           'At **high frequency**, XC is much smaller than R. So C gets almost nothing, and **Vout is almost 0**.']
+SWAP = ['Now we swap R and C: the capacitor is at the top and the resistor is at the bottom.',
+        'The output (CH2) is now the voltage across R.']
+READ = ['The top graph shows the **gain** in dB: gain = 20 log (Vout / Vin). **0 dB** means Vout = Vin, so nothing is lost.',
+        '**Pass band** (on the left): the gain is about 0 dB. Low frequencies pass.',
+        '**Corner frequency fc**: here the gain is **-3 dB**. -3 dB means Vout = **0.707 × Vin**. The output has half of the input power.',
+        '**Why do we choose this point?** At -3 dB the output is still 70% of the input, so it has not dropped much yet. '
+        'After fc, the output drops quickly: when the frequency is 10 times higher, Vout is 10 times smaller (-20 dB). '
+        'So fc is the border between "passes" and "is blocked".',
+        '**Stop band** (on the right): high frequencies are blocked.',
+        'The bottom graph shows the **phase**: how late Vout is compared with Vin. At fc, Vout is 45° late.',
+        'The high-pass graph is the same, but mirrored: it passes the high frequencies.']
+CUTOFF_LP = ['The cut-off frequency fc is the border between "passes" and "is blocked". The formula is the same for low-pass and high-pass filters:',
              '**fc = 1 / (2πRC)**',
-             'At fc: Vout = 0.707 × Vin, the **-3 dB point**.',
-             f'Our circuit: R = 10 kΩ, C = 100 nF → fc ≈ {FC:.0f} Hz.']
-CUTOFF_HP = ['The **same formula** for the high-pass filter: fc = 1 / (2πRC).',
-             f'Same R and C → **same fc** ≈ {FC:.0f} Hz.',
-             'At fc: Vout = 0.707 × Vin (−3 dB), as for the low-pass filter.']
+             'At fc, Vout = 0.707 × Vin. This is the **-3 dB point**.',
+             f'For our circuit: R = 10 kΩ and C = 100 nF, so fc ≈ {FC:.0f} Hz.']
+CUTOFF_HP = ['The high-pass filter uses the **same formula**: fc = 1 / (2πRC).',
+             f'R and C are the same as before, so fc is also the same: about {FC:.0f} Hz.',
+             'At fc, Vout = 0.707 × Vin (-3 dB), the same as for the low-pass filter.']
 NOTICE = {
- 'lp': ['**Low frequency** (10 Hz): Vout ≈ Vin. The signal **passes**.',
-        '**High frequency** (10 kHz): Vout is almost 0. The signal is **blocked**.',
-        f'**In between**, Vout falls. It falls around one frequency: the **cut-off frequency fc** (here about {FC:.0f} Hz).',
-        '→ This circuit is a **low-pass filter**: it passes low frequencies.',
-        'Why? See the next slides.'],
- 'hp': ['**Low frequency** (10 Hz): Vout is almost 0. The signal is **blocked**.',
-        '**High frequency** (10 kHz): Vout ≈ Vin. The signal **passes**.',
-        f'**Same R and C → same fc** (about {FC:.0f} Hz).',
-        '**Why?** The same divider, but now Vout is on R. Low f: XC is big, C takes most of Vin, little is left for R. '
-        'High f: XC is small, R takes almost all of Vin.',
-        '→ This circuit is a **high-pass filter**: it passes high frequencies.'],
+ 'lp': ['At **low frequency** (10 Hz), Vout is almost equal to Vin. The signal **passes**.',
+        'At **high frequency** (10 kHz), Vout is almost 0. The signal is **blocked**.',
+        f'**Between** these frequencies, Vout becomes smaller. It drops around one frequency: the **cut-off frequency fc** (here about {FC:.0f} Hz).',
+        'So this circuit is a **low-pass filter**: it lets the low frequencies pass.',
+        'Why does this happen? The next slides explain it.'],
+ 'hp': ['At **low frequency** (10 Hz), Vout is almost 0. The signal is **blocked**.',
+        'At **high frequency** (10 kHz), Vout is almost equal to Vin. The signal **passes**.',
+        f'R and C are the same as before, so **fc is the same** (about {FC:.0f} Hz).',
+        '**Why?** It is the same voltage divider, but now Vout is the voltage across R. At low frequency XC is big, so C gets most of Vin '
+        'and little is left for R. At high frequency XC is small, so R gets almost all of Vin.',
+        'So this circuit is a **high-pass filter**: it lets the high frequencies pass.'],
 }
 OVERVIEW = {'RC filters': ['RC filters', '1st-order low-pass and high-pass', 'Cut-off frequency fc', 'Exercises 1–3, −3 dB point'],
             'Series RLC': ['Series RLC', 'Resonance f0 and quality factor Q', 'Band-pass and bandwidth BW'],
@@ -292,8 +294,8 @@ def run():
     set_notes(s1, spoken(SCOPE))
     s2 = new_slide(p, model, 'Why the output falls – a voltage divider')
     textbox(s2, 0.5, 1.4, 6.4, 5.6, DIVIDER, gap=12)
-    rows = [('f', 'XC (C = 100 nF)', 'R', 'Who takes most of Vin?')] + [
-        (fmt(f), ohm(xc(f)), '10 kΩ', {10: 'C → Vout ≈ Vin', 100: 'C → Vout big', 1000: 'R → Vout small', 10000: 'R → Vout ≈ 0'}[f])
+    rows = [('f', 'XC (C = 100 nF)', 'R', 'Who gets most of Vin?')] + [
+        (fmt(f), ohm(xc(f)), '10 kΩ', {10: 'C, so Vout ≈ Vin', 100: 'C, so Vout is big', 1000: 'R, so Vout is small', 10000: 'R, so Vout ≈ 0'}[f])
         for f in (10, 100, 1000, 10000)]
     tb = s2.shapes.add_table(len(rows), 4, Inches(7.1), Inches(1.4), Inches(5.9), Inches(2.4)); tb.name = MARK
     for i, row in enumerate(rows):
@@ -324,13 +326,13 @@ def run():
             swap_pictures(s, [lp, hp])
         elif 'Low pass filter:' in t:
             graphs = s
-            clear(s); line = 'Both curves bend at fc (next slide).'
-            textbox(s, 7.2, 6.88, 5.6, 0.45, [line], size=14)
+            clear(s); line = 'Both graphs bend at fc. The next slide shows how to read them.'
+            textbox(s, 7.2, 6.72, 5.8, 0.45, [line], size=13)
             set_notes(s, 'Low-pass: lower frequency gives a higher output. High-pass: higher frequency gives a higher output.\n' + line)
         elif 'You already see how capacitors are used in filters' in t:
             swap_pictures(s, [lp, hp])
     s3 = new_slide(p, model, 'Reading the graph – the −3 dB point')
-    textbox(s3, 0.5, 1.3, 6.6, 5.8, READ, size=15, gap=8)
+    textbox(s3, 0.5, 1.2, 6.7, 5.9, READ, size=14, gap=6)
     lp_graph = big_pictures(graphs)[0]                     # the low-pass response picture of the graphs slide
     picture(s3, lp_graph.image.blob, 7.3, 1.2, 5.7, 5.9, top=True)
     set_notes(s3, spoken(READ))
