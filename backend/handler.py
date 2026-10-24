@@ -9,7 +9,7 @@ from .courses import COURSES, asset, keys, keys_live
 from .db import (ROLES, add_hit, allow, as_int, assign_random, check_pw, class_role, connect, count_hits, delete_class, hash_pw,
                  load, new_session, now, set_gradebook, set_sync, set_team_mark, upsert_student, user_from_token, visible_class_ids)
 from .network import lan_ips, qr_svg
-from .scoring import export_xlsx, score, variant, rule_of
+from .scoring import export_xlsx, score, variant, rule_of, qvalue
 
 PUBLIC_URL = os.environ.get('PUBLIC_URL', '').rstrip('/')
 ON_VERCEL = bool(os.environ.get('VERCEL'))
@@ -632,8 +632,21 @@ def student_view(C, sid, keypack=None):
                         x = float(yours[i]) if i < len(yours) and yours[i] not in (None, '') else None
                     except (TypeError, ValueError):
                         x = None
+                    calc = None                         # Lab 2 Task 1: marked on fc from R and C, not on C itself
+                    if x is not None and rule.get('calc'):
+                        try:
+                            calc = qvalue(q, yours, i)
+                        except (TypeError, ValueError, IndexError, ZeroDivisionError):
+                            calc = None
+                    if not q[3]:                        # input only, no marks: no colour, no key
+                        rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': None, 'band': 'none', 'ok': False, 'max': 0,
+                                     'tol': [rule['full'], rule['half']]})
+                        continue
                     band = 'bad'
-                    if x is not None and key not in (None, 0):
+                    if rule.get('calc') and calc is not None and key not in (None, 0):
+                        err = abs(calc / float(key) - 1)
+                        band = 'ok' if err <= rule['full'] else ('half' if err <= rule['half'] else 'bad')
+                    elif not rule.get('calc') and x is not None and key not in (None, 0):
                         err = abs(x / float(key) - 1)
                         if err <= rule['full']:
                             band = 'ok'
@@ -643,7 +656,7 @@ def student_view(C, sid, keypack=None):
                         if abs(x) <= 1e-12:
                             band = 'ok'
                     rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': key, 'band': band, 'ok': band == 'ok', 'max': q[3],
-                                 'tol': [rule['full'], rule['half']]})
+                                 'tol': [rule['full'], rule['half']], 'calc': calc})
                 item['review'] = rows
         if pub.get('submit') and v:
             submitted = rec.get('src') == 'web'

@@ -66,13 +66,15 @@ function panel(s){
   let h = `<div class="panel"><p class="info">${V.info.map(sub).join('<br>')}</p>` +
     (figs.length?`<details class="figs"><summary class="muted">${T('Circuit / task figure','Hình đề bài')}</summary>${figs.map(f=>`<a href="${f}" target="_blank"><img src="${f}" alt=""></a>`).join('')}</details>`:'') + `<div class="scroll"><table><tr><th>${T('Quantity','Đại lượng')}</th><th>${T('Key','Đáp án')}</th><th>${T('Full marks','Đủ điểm')}</th><th>${T('Submitted','SV nộp')}</th><th>${T('Marks','Điểm')}</th></tr>`;
   const editKeys=canManage();
-  Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(r.values||[])[i], mk=mark(x,k,q[3],qrule(q)), tol=qrule(q).full;
+  Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(r.values||[])[i], tol=qrule(q).full, calc=(qrule(q).calc==='rc_fc');
+    if(!q[3]){ h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num">–</td><td class="num">–</td><td class="num">${fmt(x)}</td><td>–</td></tr>`; return; }
+    const y=qval(q, r.values, i), mk=mark(y,k,q[3],qrule(q));
     const cl = mk===null?'':(mk===q[3]?'full':(mk>0?'half':'zero'));
     const keyCell=editKeys
       ? `<input class="keyin" inputmode="decimal" data-keyi="${i}" value="${k??''}">`
       : `<b>${fmt(k)}</b>`;
-    h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num">${keyCell}</td><td class="num">${fmt(k*(1-tol))} – ${fmt(k*(1+tol))}${tol!==K().rule.full?`<br><small class="muted">±${Math.round(tol*100)}%</small>`:''}</td>
-      <td class="num">${fmt(x)}</td><td class="${cl}">${mk===null?'–':(r.tick?mk:'('+mk+')')}/${q[3]}</td></tr>`; });
+    h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}${calc?T(' – marked on f<sub>c</sub> = 1/(2πRC), key = target f<sub>c</sub> (kHz)',' – chấm theo f<sub>c</sub> = 1/(2πRC), đáp án = f<sub>c</sub> mục tiêu (kHz)'):''}</small></td><td class="num">${keyCell}</td><td class="num">${fmt(k*(1-tol))} – ${fmt(k*(1+tol))}${tol!==K().rule.full?`<br><small class="muted">±${Math.round(tol*100)}%</small>`:''}</td>
+      <td class="num">${fmt(x)}${calc&&y!==null?`<br><small class="muted">f<sub>c</sub> = ${fmt(y)} kHz</small>`:''}</td><td class="${cl}">${mk===null?'–':(r.tick?mk:'('+mk+')')}/${q[3]}</td></tr>`; });
   h += `</table></div>`;
   if(editKeys) h += `<p class="muted">${T(`Edit the keys above if they are wrong. Saving applies to <b>every student with variant ${v}</b> and updates automatic marks.`, `Sửa đáp án ở trên nếu sai. Lưu sẽ áp dụng cho <b>mọi SV mã đề ${v}</b> và cập nhật điểm tự tính.`)}${V.keys_edited?` <b>${T('(already edited)','(đã sửa)')}</b>`:''}</p>
     <div class="btns"><button class="on" data-savekeys="${v}">${T('Save answer keys','Lưu đáp án')}</button>${V.keys_edited?`<button data-resetkeys="${v}">${T('Back to original keys','Về đáp án gốc')}</button>`:''}</div>`;

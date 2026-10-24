@@ -1,5 +1,5 @@
 """Variant numbers, the scoring rule (same as the web page) and the Excel export."""
-import io
+import io, math
 
 from .courses import keys
 
@@ -17,6 +17,17 @@ def rule_of(K, q):
     return q[4] if len(q) > 4 and isinstance(q[4], dict) else K['rule']
 
 
+def qvalue(q, values, i):
+    """The number a question is marked on. Usually the submitted value; a question with {'calc': 'rc_fc', 'from': j} is
+    marked on fc = 1 / (2 pi R C) in kHz, from R (ohm, question j) and C (nF, this question): Lab 2 Task 1 (design)."""
+    x = float(values[i])
+    r = q[4] if len(q) > 4 and isinstance(q[4], dict) else {}
+    if r.get('calc') == 'rc_fc':
+        R = float(values[r['from']])
+        return 1 / (2 * math.pi * R * x * 1e-9) / 1e3
+    return x
+
+
 def score(C, lab, st, K=None):
     """Marks of one student for one lab. C = one class as returned by db.load(). K = keys pack (with overrides)."""
     K = K or keys(C['course']); lab = str(lab); L = K['labs'][lab]; v = variant(C['vset'], st)
@@ -27,9 +38,11 @@ def score(C, lab, st, K=None):
     if v and str(v) in L['variants'] and rec.get('tick'):
         ans = L['variants'][str(v)]['keys']
         for i, q in enumerate(L['questions']):
+            if not q[3]:                         # input only (no marks), e.g. R of Lab 2 Task 1
+                continue
             try:
-                x = float((rec.get('values') or [None] * len(ans))[i])
-            except (TypeError, ValueError, IndexError):
+                x = qvalue(q, rec.get('values') or [None] * len(ans), i)
+            except (TypeError, ValueError, IndexError, ZeroDivisionError):
                 continue
             err = abs(x / ans[i] - 1)
             rule = rule_of(K, q)

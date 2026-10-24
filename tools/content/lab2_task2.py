@@ -12,7 +12,7 @@ TASK1 = ['Your card gives the filter type (low-pass or high-pass) and a target c
          'Measure R and C with the multimeter. Calculate fc again with these values.',
          'Build the filter. Function generator: sine, 2 Vpp, High-Z. CH1 = Vin, CH2 = Vout.',
          'Change the frequency until Vout = 0.707 × Vin. This frequency is your measured fc.',
-         'Submit your measured fc in kHz. Show the lecturer your R, C and the oscilloscope.']
+         'Submit the R and C you chose (the printed values). Show the lecturer fc on the oscilloscope.']
 
 
 def slide(p, title):
@@ -65,7 +65,8 @@ def run():
             for row in sh.table.rows:
                 c0 = row.cells[0]
                 if c0.text.startswith('Task 1 (individual)'):
-                    set_text(c0.text_frame.paragraphs[0], 'Task 1 (individual): measured fc, close to the target on your card   (full marks within ±15 %, half within ±30 %)')
+                    set_text(row.cells[1].text_frame.paragraphs[0], 'Ω, nF')
+                    set_text(c0.text_frame.paragraphs[0], 'Task 1 (individual): the R (Ω) and C (nF) you chose. Marks: fc = 1/(2πRC) within ±5 % of the target (half: ±12 %)')
     s = slide(p, 'Task 2 (team) – design and build')
     for para in list(paragraphs(s)):
         t = para.text

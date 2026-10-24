@@ -155,8 +155,8 @@ def lab2(p):
     rep(s, [('Warm-up exercise – RC cut-off frequency', 'Task 1 (individual) – RC cut-off frequency')])
     notes(s, 'Task 1 is individual: 2 points. Your card gives the filter type and a target cut-off frequency.\n'
              'Choose R and C so that 1 over 2 pi R C is as close as possible to the target. Measure R and C, and calculate fc again.\n'
-             'Build it. Change the frequency until Vout = 0.707 × Vin. That is your measured fc. Submit it in kHz, '
-             'and show me your R, C and the oscilloscope.\n'
+             'Build it. Change the frequency until Vout = 0.707 × Vin. That is your measured fc: show it to me on the oscilloscope.\n'
+             'Submit the R and C you chose, the printed values. Full marks when 1 over 2 pi R C is within 5 percent of the target.\n'
              'One student uses the oscilloscope at a time. The others build or calculate. When you finish, give the oscilloscope to the next student.\n'
              'Open your card on the student page now.')
     s = by_title(p, 'Lab 2 exercise – design and build', 'Task 2 (team) – design and build')

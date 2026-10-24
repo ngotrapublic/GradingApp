@@ -81,9 +81,10 @@ TASK1_C = [10e-9, 22e-9, 47e-9]
 
 def lab2_task1_design(labs, sets=(1, 2, 3)):
     """Lecturer, 24/10/2026 (option A): Task 1 is a design. The card gives the filter type and a target cut-off frequency;
-    the student chooses R (13 standard values) and C (10, 22 or 47 nF), builds the filter and measures fc. Key = the target.
+    the student chooses R (13 standard values) and C (10, 22 or 47 nF), builds the filter and checks fc on the scope.
+    The student submits R and C; marks come from fc = 1/(2πRC) vs the target (key).
     Members 1-3 of a team get 3 neighbouring targets of the list (always >= 25 % apart), member 4 is 4 places further.
-    Low-pass / high-pass alternate. Tolerance of this question: full 15 %, half 30 % (best pair <= 3.5 % + C tolerance)."""
+    Low-pass / high-pass alternate. Tolerance: full 5 %, half 12 % (the best pair is always within 3.5 %)."""
     import math
     V = labs['2']['variants']; n = len(TASK1_TARGETS)
     fc = lambda r, c: 1 / (2 * math.pi * r * c)
@@ -101,12 +102,21 @@ def lab2_task1_design(labs, sets=(1, 2, 3)):
                 v['info'][1] = (f'RC (Task 1): {kind}-pass, target fc = {target:g} kHz '
                                 f'(closest: {rs} + {c * 1e9:g} nF = {f / 1e3:.3g} kHz)')
                 v['card'][1] = (f'Task 1 – RC cut-off frequency: design a {kind.lower()}-pass filter with fc = {target:g} kHz. '
-                                f'Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).')
+                                f'Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.')
                 v['figs'][0] = v['figs'][0].rsplit('/', 1)[0] + ('/rc_lp.png' if kind == 'Low' else '/rc_hp.png')
-    q = labs['2']['questions'][0]
-    q[1] = 'fc measured (target on your card)'
-    if len(q) == 4:
-        q.append({'full': 0.15, 'half': 0.30})
-    labs['2']['parts'][0]['note'] = ['Design: choose R and C for the target fc on your card. Build it, measure fc and submit the measured value.',
-                                     'Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Lắp mạch, đo f_c và nộp giá trị đo được.']
+    # the student submits R and C (the design); the measured fc is only checked by the lecturer at the tick.
+    # Question 0 (token kept, so stored records keep their place) = C in nF, marked on fc = 1/(2πRC) vs the target;
+    # question 4 (new, at the end) = R in Ω, input only (0 marks). The student page shows R first, then C.
+    Q = labs['2']['questions']
+    Q[0] = ['Warm-up fc', 'C you chose (Task 1)', 'nF', 2, {'full': 0.05, 'half': 0.12, 'calc': 'rc_fc', 'from': 4}]
+    if len(Q) == 4:
+        Q.append(['Task 1 R', 'R you chose (Task 1)', 'Ω', 0])
+    for v in V.values():
+        if len(v['keys']) == 4:
+            v['keys'].append(0)
+    labs['2']['parts'][0]['questions'] = [4, 0]
+    labs['2']['parts'][0]['note'] = ['Design: choose R and C for the target fc on your card. Submit the R and C you chose (the printed values). '
+                                     'Marks: fc = 1/(2πRC) within ±5 % of the target (half: ±12 %). The lecturer checks fc on your oscilloscope.',
+                                     'Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Nộp R và C đã chọn (giá trị in trên linh kiện). '
+                                     'Điểm: f_c = 1/(2πRC) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %). Giảng viên kiểm tra f_c trên osci.']
     return labs

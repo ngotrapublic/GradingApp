@@ -1995,12 +1995,14 @@
    "questions": [
     [
      "Warm-up fc",
-     "fc measured (target on your card)",
-     "kHz",
+     "C you chose (Task 1)",
+     "nF",
      2,
      {
-      "full": 0.15,
-      "half": 0.3
+      "full": 0.05,
+      "half": 0.12,
+      "calc": "rc_fc",
+      "from": 4
      }
     ],
     [
@@ -2024,6 +2026,12 @@
       "full": 0.2,
       "half": 0.35
      }
+    ],
+    [
+     "Task 1 R",
+     "R you chose (Task 1)",
+     "Ω",
+     0
     ]
    ],
    "variants": {
@@ -2032,7 +2040,8 @@
       5.0,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -2041,7 +2050,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 101   |   Team 1 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2058,7 +2067,8 @@
       7.5,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -2067,7 +2077,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 102   |   Team 1 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2084,7 +2094,8 @@
       10.0,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -2093,7 +2104,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 103   |   Team 1 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2110,7 +2121,8 @@
       15.0,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -2119,7 +2131,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 104   |   Team 2 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2136,7 +2148,8 @@
       0.5,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -2145,7 +2158,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 105   |   Team 2 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2162,7 +2175,8 @@
       0.75,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -2171,7 +2185,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 106   |   Team 2 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2188,7 +2202,8 @@
       1.0,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2197,7 +2212,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 107   |   Team 3 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2214,7 +2229,8 @@
       1.5,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2223,7 +2239,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 108   |   Team 3 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2240,7 +2256,8 @@
       3.5,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2249,7 +2266,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 109   |   Team 3 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2266,7 +2283,8 @@
       5.0,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2275,7 +2293,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 110   |   Team 4 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2292,7 +2310,8 @@
       7.5,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2301,7 +2320,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 111   |   Team 4 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2318,7 +2337,8 @@
       10.0,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2327,7 +2347,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 112   |   Team 4 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2344,7 +2364,8 @@
       15.0,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2353,7 +2374,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 113   |   Team 5 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2370,7 +2391,8 @@
       0.5,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2379,7 +2401,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 114   |   Team 5 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2396,7 +2418,8 @@
       0.75,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2405,7 +2428,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 115   |   Team 5 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2422,7 +2445,8 @@
       1.0,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2431,7 +2455,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 116   |   Team 6 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2448,7 +2472,8 @@
       1.5,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2457,7 +2482,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 117   |   Team 6 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2474,7 +2499,8 @@
       3.5,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2483,7 +2509,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 118   |   Team 6 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2500,7 +2526,8 @@
       0.5,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -2509,7 +2536,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 119   |   Team 1 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2526,7 +2553,8 @@
       1.5,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -2535,7 +2563,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 120   |   Team 2 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2552,7 +2580,8 @@
       7.5,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2561,7 +2590,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 121   |   Team 3 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2578,7 +2607,8 @@
       0.5,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2587,7 +2617,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 122   |   Team 4 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2604,7 +2634,8 @@
       1.5,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2613,7 +2644,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 123   |   Team 5 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2630,7 +2661,8 @@
       7.5,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2639,7 +2671,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 124   |   Team 6 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2656,7 +2688,8 @@
       0.75,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2665,7 +2698,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 201   |   Team 1 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2682,7 +2715,8 @@
       1.0,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2691,7 +2725,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 202   |   Team 1 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2708,7 +2742,8 @@
       1.5,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -2717,7 +2752,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 203   |   Team 1 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2734,7 +2769,8 @@
       3.5,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2743,7 +2779,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 204   |   Team 2 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2760,7 +2796,8 @@
       5.0,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2769,7 +2806,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 205   |   Team 2 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2786,7 +2823,8 @@
       7.5,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -2795,7 +2833,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 206   |   Team 2 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2812,7 +2850,8 @@
       10.0,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2821,7 +2860,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 207   |   Team 3 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2838,7 +2877,8 @@
       15.0,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2847,7 +2887,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 208   |   Team 3 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2864,7 +2904,8 @@
       0.5,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -2873,7 +2914,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 209   |   Team 3 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2890,7 +2931,8 @@
       0.75,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2899,7 +2941,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 210   |   Team 4 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2916,7 +2958,8 @@
       1.0,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2925,7 +2968,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 211   |   Team 4 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2942,7 +2985,8 @@
       1.5,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -2951,7 +2995,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 212   |   Team 4 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2968,7 +3012,8 @@
       3.5,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -2977,7 +3022,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 213   |   Team 5 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -2994,7 +3039,8 @@
       5.0,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3003,7 +3049,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 214   |   Team 5 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3020,7 +3066,8 @@
       7.5,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3029,7 +3076,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 215   |   Team 5 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3046,7 +3093,8 @@
       10.0,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3055,7 +3103,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 216   |   Team 6 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3072,7 +3120,8 @@
       15.0,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3081,7 +3130,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 217   |   Team 6 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3098,7 +3147,8 @@
       0.5,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3107,7 +3157,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 218   |   Team 6 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3124,7 +3174,8 @@
       5.0,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -3133,7 +3184,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 219   |   Team 1 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3150,7 +3201,8 @@
       15.0,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -3159,7 +3211,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 220   |   Team 2 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3176,7 +3228,8 @@
       1.0,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -3185,7 +3238,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 221   |   Team 3 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3202,7 +3255,8 @@
       5.0,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -3211,7 +3265,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 222   |   Team 4 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3228,7 +3282,8 @@
       15.0,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3237,7 +3292,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 223   |   Team 5 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3254,7 +3309,8 @@
       1.0,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3263,7 +3319,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 224   |   Team 6 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3280,7 +3336,8 @@
       7.5,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -3289,7 +3346,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 301   |   Team 1 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3306,7 +3363,8 @@
       10.0,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -3315,7 +3373,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 302   |   Team 1 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3332,7 +3390,8 @@
       15.0,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -3341,7 +3400,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 303   |   Team 1 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3358,7 +3417,8 @@
       0.5,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -3367,7 +3427,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 304   |   Team 2 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3384,7 +3444,8 @@
       0.75,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -3393,7 +3454,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 305   |   Team 2 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3410,7 +3471,8 @@
       1.0,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -3419,7 +3481,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 306   |   Team 2 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3436,7 +3498,8 @@
       1.5,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3445,7 +3508,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 307   |   Team 3 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3462,7 +3525,8 @@
       3.5,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3471,7 +3535,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 308   |   Team 3 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3488,7 +3552,8 @@
       5.0,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3497,7 +3562,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 309   |   Team 3 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3514,7 +3579,8 @@
       7.5,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3523,7 +3589,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 310   |   Team 4 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3540,7 +3606,8 @@
       10.0,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3549,7 +3616,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 311   |   Team 4 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3566,7 +3633,8 @@
       15.0,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3575,7 +3643,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 312   |   Team 4 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3592,7 +3660,8 @@
       0.5,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -3601,7 +3670,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 313   |   Team 5 – Member 1",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3618,7 +3687,8 @@
       0.75,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -3627,7 +3697,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 314   |   Team 5 – Member 2",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3644,7 +3714,8 @@
       1.0,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -3653,7 +3724,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 315   |   Team 5 – Member 3",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3670,7 +3741,8 @@
       1.5,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -3679,7 +3751,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 316   |   Team 6 – Member 1",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3696,7 +3768,8 @@
       3.5,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -3705,7 +3778,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 317   |   Team 6 – Member 2",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3722,7 +3795,8 @@
       5.0,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -3731,7 +3805,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 318   |   Team 6 – Member 3",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3748,7 +3822,8 @@
       0.75,
       81.31156281817417,
       32.352842882598964,
-      12.941137153039584
+      12.941137153039584,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.5",
@@ -3757,7 +3832,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 319   |   Team 1 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3774,7 +3849,8 @@
       3.5,
       67.75963568181182,
       32.352842882598964,
-      10.78428096086632
+      10.78428096086632,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 3",
@@ -3783,7 +3859,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 320   |   Team 2 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 3   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3800,7 +3876,8 @@
       10.0,
       135.51927136362363,
       32.352842882598964,
-      21.56856192173264
+      21.56856192173264,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.5",
@@ -3809,7 +3886,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 321   |   Team 3 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.5   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3826,7 +3903,8 @@
       0.75,
       116.15937545453453,
       32.352842882598964,
-      18.48733879005655
+      18.48733879005655,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 1.75",
@@ -3835,7 +3913,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 322   |   Team 4 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 1.75   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3852,7 +3930,8 @@
       3.5,
       101.63945352271772,
       32.352842882598964,
-      16.176421441299482
+      16.176421441299482,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2",
@@ -3861,7 +3940,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 323   |   Team 5 – Member 4",
-      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3878,7 +3957,8 @@
       10.0,
       90.34618090908242,
       32.352842882598964,
-      14.379041281155095
+      14.379041281155095,
+      0
      ],
      "info": [
       "Band-pass (across R), Q = 2.25",
@@ -3887,7 +3967,7 @@
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 324   |   Team 6 – Member 4",
-      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).",
+      "Task 1 – RC cut-off frequency: design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
       "RLC (team – the same circuit for all members): Band-pass (output across R)",
       "Q = 2.25   (L = 1 mH, C = 22 nF ∥ 2.2 nF)",
       "Frequencies (kHz): 8.1, 16.2, 22.6, 27.5, 32.4, 37.2, 45.3, 64.7, 129.4",
@@ -3923,11 +4003,12 @@
       0
      ],
      "questions": [
+      4,
       0
      ],
      "note": [
-      "Design: choose R and C for the target fc on your card. Build it, measure fc and submit the measured value.",
-      "Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Lắp mạch, đo f_c và nộp giá trị đo được."
+      "Design: choose R and C for the target fc on your card. Submit the R and C you chose (the printed values). Marks: fc = 1/(2πRC) within ±5 % of the target (half: ±12 %). The lecturer checks fc on your oscilloscope.",
+      "Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Nộp R và C đã chọn (giá trị in trên linh kiện). Điểm: f_c = 1/(2πRC) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %). Giảng viên kiểm tra f_c trên osci."
      ]
     },
     {

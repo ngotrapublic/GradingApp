@@ -21,6 +21,21 @@ class Client:
         return code, j
 
 
+import math
+
+
+def answers(lab, v):
+    """What a perfect student submits: the keys, except a design question (Lab 2 Task 1: R, C for a target fc)."""
+    vals = list(KEYS[lab]['variants'][v]['keys'])
+    for i, q in enumerate(KEYS[lab]['questions']):
+        r = q[4] if len(q) > 4 and isinstance(q[4], dict) else {}
+        if r.get('calc') == 'rc_fc':
+            R, C_ = min(((R, C_) for R in (220, 330, 470, 680, 1000, 1500, 2200, 3300, 4700, 6800, 10000, 15000, 22000) for C_ in (10, 22, 47)),
+                        key=lambda p: abs(1 / (2 * math.pi * p[0] * p[1] * 1e-9) / 1e3 / vals[i] - 1))
+            vals[r['from']], vals[i] = R, C_
+    return vals
+
+
 from PIL import Image
 buf = io.BytesIO(); Image.new('RGB', (40, 30), 'gray').save(buf, 'JPEG'); JPG = 'data:image/jpeg;base64,' + base64.b64encode(buf.getvalue()).decode()
 
@@ -49,7 +64,7 @@ for st in C['students']:
     assert view['variant'] == int(v), (view['variant'], v)
     for lab in '1234':
         s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
-        s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': KEYS[lab]['variants'][v]['keys']})
+        s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
     for lab in '1234':
         gv.call('/api/record', {'cls': cid, 'lab': lab, 'sid': st['sid'], 'tick': True})
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'manual': {'graph': 3}})
@@ -78,6 +93,17 @@ for t in range(1, 7):
     k2 = {tuple(KEYS['2']['variants'][x]['keys'][1:]) for x in mem}; k1 = {KEYS['2']['variants'][x]['keys'][0] for x in mem}
     assert len(k2) == 1 and len(k1) == len(mem), (t, mem)
 print('Lab 2 team check ok')
+# Lab 2 Task 1 design rule: R, C giving fc 8 % above the target -> half marks (1 of 2), 3 % -> full
+st = C['students'][0]; v = str(var(st)); vals = answers('2', v); tgt = KEYS['2']['variants'][v]['keys'][0]
+s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
+for off, want in ((1.08, 13), (1.03, 14)):
+    gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': False}); s.call('/api/public/unsubmit', {'cls': cid, 'lab': '2'})
+    vals[0] = 1 / (2 * math.pi * vals[4] * tgt * off * 1e3) * 1e9               # C (nF) for fc = target × off with the same R
+    s.call('/api/public/submit', {'cls': cid, 'lab': '2', 'values': vals})
+    gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': True})
+    m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][1]
+    assert m == want, (off, m, want)
+print('Lab 2 Task 1 (R, C -> fc) rule ok: +8 % half, +3 % full')
 import urllib.request as U
 r=gv.op.open(BASE+'/api/export.xlsx'); b=r.read(); open('/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/_build/e2e_export.xlsx','wb').write(b); print('excel bytes', len(b))
 open('/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/_build/e2e_cookie.txt', 'w').write('lecturer gv / lecturer-2')
