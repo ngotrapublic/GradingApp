@@ -61,7 +61,7 @@ def tidy_slide(p, model, extra):
             s.shapes.add_picture(io.BytesIO(sh.image.blob), sh.left, sh.top, sh.width, sh.height)
     s.shapes.add_picture(PHOTO, Inches(1.4), Inches(1.1), Inches(10.5))
     cols = [['Wait for the lecturer’s tick before you pack up.', 'Switch off every instrument and the PB-503A.', 'Clear the breadboard: no parts, no wires.'],
-            [f'Parts back in the parts box, in the right bag{extra}.', 'Test leads, probes and BNC cables into the box behind the trainer.', 'Instruments in their place, like the photo. Push your chair in.']]
+            [f'Resistors you used: in the bin. Every other part back in its bag{extra}.', 'Test leads, probes and BNC cables into the box behind the trainer.', 'Instruments in their place, like the photo. Push your chair in.']]
     for c, items in enumerate(cols):
         tb = s.shapes.add_textbox(Inches(0.55 + 6.15 * c), Inches(4.85), Inches(6.0), Inches(1.9)); tf = tb.text_frame; tf.word_wrap = True
         for i, t in enumerate(items):
@@ -70,7 +70,7 @@ def tidy_slide(p, model, extra):
             para.space_after = Pt(4)
     notes(s, 'Before you leave, your bench must look like this photo.\n'
              'First wait for my tick. Then switch off every instrument and the trainer.\n'
-             'Clear the breadboard. Put the parts back in the parts box, in the right bag'
+             'Clear the breadboard. The resistors you used go into the bin. Every other part goes back to its bag in the parts box'
              + (extra.replace(' (', '. ').replace(')', '') if extra else '') + '.\n'
              'Put the leads, probes and cables in the box behind the trainer. Put the instruments back in their place, like the photo, and push your chair in.')
 
@@ -136,7 +136,7 @@ def lab1(p):
     team = list(p.slides).index(by_title(p, 'Your team and the student page (10 minutes)', 'Make your team (10 minutes)'))
     early = p.slides[len(p.slides) - 1]; move(p, early, team + 1)
     notes(early, 'One more rule for every lab. At the end, your bench must look like this photo.\n'
-                 'First wait for my tick. Then switch off everything, clear the breadboard, put the parts back in the parts box, '
+                 'First wait for my tick. Then switch off everything, clear the breadboard, put the used resistors in the bin and every other part back in its bag, '
                  'put the cables in the box behind the trainer, and put the instruments in their place.\n'
                  'You will see this slide again at the end of every lab.')
 

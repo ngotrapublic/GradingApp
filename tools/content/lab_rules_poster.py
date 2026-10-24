@@ -35,7 +35,7 @@ RULES = [
 LEAVE = [
     ('power_settings_new', 'Switch off **every instrument** and the trainer.'),
     ('developer_board', 'Clear the breadboard: **no parts, no wires**.'),
-    ('inventory_2', 'Parts back in the parts box, in the right bag. Used or broken parts in the bin.'),
+    ('inventory_2', 'Parts back in the parts box, **in the right bag**. Broken parts in the bin.'),
     ('cable', 'Test leads, probes and BNC cables into the box behind the trainer.'),
     ('check_circle', 'Instruments back in place, **like the photo**. Chairs in, rubbish in the bin.'),
     ('how_to_reg', '**Wait for the lecturer** to check your bench before you go.'),
