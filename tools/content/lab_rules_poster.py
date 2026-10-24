@@ -14,8 +14,9 @@ OUT = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/docs/Lab_rules_poster.pptx'
 PHOTO = f'{HERE}/fig/bench_tidy.jpg'
 ICON = lambda n: f'{HERE}/fig/icons/{n}.png'
 # FPT orange: shared by every program in the lab (Asia = green, Gachon = blue)
-NAVY, ACCENT, ACCENT_TXT = RGBColor(0x1B, 0x2A, 0x3A), RGBColor(0xF3, 0x70, 0x21), RGBColor(0xD9, 0x59, 0x0B)
-BOX, ROW, PAGE, WHITE = RGBColor(0xFD, 0xE8, 0xD9), RGBColor(0xE6, 0xE8, 0xE6), RGBColor(0xF2, 0xF3, 0xF2), RGBColor(0xFF, 0xFF, 0xFF)
+# print-safe: white page, white boxes with a dark-orange border, dark text (readable on a poor or black-and-white printer)
+NAVY, ACCENT, ACCENT_TXT = RGBColor(0x14, 0x1E, 0x2B), RGBColor(0xC2, 0x41, 0x0C), RGBColor(0xC2, 0x41, 0x0C)
+BOX, ROW, PAGE, WHITE = RGBColor(0xFF, 0xFF, 0xFF), None, RGBColor(0xFF, 0xFF, 0xFF), RGBColor(0xFF, 0xFF, 0xFF)
 W, H = 11.69, 8.27
 FONT = 'Arial'
 
@@ -49,9 +50,13 @@ def runs(p, text, size, color=NAVY, bold_all=False):
             r.font.bold = bold_all or part.startswith('**')
 
 
-def shape(s, kind, x, y, w, h, fill, radius=None):
+def shape(s, kind, x, y, w, h, fill, radius=None, border=None):
     sh = s.shapes.add_shape(kind, Inches(x), Inches(y), Inches(w), Inches(h))
-    sh.fill.solid(); sh.fill.fore_color.rgb = fill; sh.line.fill.background(); sh.shadow.inherit = False
+    sh.fill.solid(); sh.fill.fore_color.rgb = fill; sh.shadow.inherit = False
+    if border:
+        sh.line.color.rgb = border; sh.line.width = Pt(1.5)
+    else:
+        sh.line.fill.background()
     style = sh._element.find(qn('p:style'))             # the theme style adds a shadow in some viewers: drop it
     if style is not None:
         sh._element.remove(style)
@@ -67,12 +72,11 @@ def text(sh, t, size, color=NAVY, align=PP_ALIGN.LEFT, bold_all=False, margin=0.
 
 
 def row(s, x, y, w, h, num, icon, t, size):
-    shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.25, y, w - 0.25, h, ROW, 0.25)          # grey band behind number + icon
     pill = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.04, y + (h - 0.32) / 2, 0.5, 0.32, NAVY, 0.5)
     text(pill, f'{num:02d}', 13, WHITE, PP_ALIGN.CENTER, bold_all=True, margin=0.0)
     ic = min(h - 0.08, 0.44)
     s.shapes.add_picture(ICON(icon), Inches(x + 0.72), Inches(y + (h - ic) / 2), Inches(ic), Inches(ic))
-    box = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 1.25, y, w - 1.25, h, BOX, 0.22)
+    box = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 1.25, y, w - 1.25, h, BOX, 0.22, border=ACCENT)
     text(box, t, size)
 
 
@@ -89,7 +93,7 @@ title = s.shapes.add_textbox(Inches(0.45), Inches(0.22), Inches(W - 0.9), Inches
 p = title.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER; runs(p, 'ELECTRONICS LAB RULES', 32, NAVY, bold_all=True)
 sub = s.shapes.add_textbox(Inches(0.45), Inches(0.82), Inches(W - 0.9), Inches(0.35))
 p = sub.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
-runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 14, ACCENT_TXT)
+runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 14, NAVY)
 
 LX, LW, RX, RW, TOP = 0.4, 6.55, 7.2, 4.1, 1.42
 heading(s, LX, TOP, LW, 'RULES')
