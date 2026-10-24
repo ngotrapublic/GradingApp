@@ -44,6 +44,9 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    hình bên phải, 1 câu hỏi cuối). Không chấm điểm. Giá trị minh họa không trùng mã đề, dùng linh kiện còn dư
    (RC 10 kΩ + 104; RLC 1 mH + 104 + 100 Ω; Lab 3, 4 dùng chính mạch của bài). Hình: `fig_practice.py`.
    Chạy sau `align_web.py` và `rlc_slides.py`; chạy lại thì thay các slide bài tập cũ.
+12. `rc_section.py` – Lab 2 phần RC dùng một mạch duy nhất (10 kΩ + 104, fc ≈ 159 Hz) thay mạch 47k của HN, theo thứ tự
+   làm → thấy → giải thích → đo chính xác: bảng 10 Hz…10 kHz, "What do you notice?" có đồ thị, slide màn hình osci,
+   slide chia áp (vì sao Vout giảm), slide "Why 0.707?". Lời giảng = đúng ý trên slide. Chạy **sau** `practice_slides.py`.
 
 > **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
 > `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).
