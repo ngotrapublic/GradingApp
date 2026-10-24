@@ -1,7 +1,8 @@
 """Lab 3: the photo of "Connect the rest of the circuit" was the Hanoi build with its own ±6 V supply (lecturer,
 24/10/2026: not right for HCM, where the ±6 V comes from the PB-503A). It is replaced by the wiring diagram
 fig/p3_wiring.png (fig_practice.py), fitted into the same box. Also: the supply slide and Exercise 1 (voltage
-follower) come before the inverting amplifier. Run after practice_slides.py. Safe to run again."""
+follower) come before the inverting amplifier; no decoupling slides / capacitors (the PB-503A supply is clean).
+Run after practice_slides.py. Safe to run again."""
 from PIL import Image
 from pptx import Presentation
 from pptx.util import Emu
@@ -33,6 +34,19 @@ def run():
     for sid in sids: lst.remove(sid)
     at = list(p.slides).index(intro)
     for k, sid in enumerate(sids): lst.insert(at + k, sid)
+    # no decoupling in Lab 3 (lecturer, 24/10/2026: the PB-503A supply is clean; the Hanoi board had a home-made ±6 V)
+    gone = []
+    for sid, x in reversed(list(zip(list(lst), list(p.slides)))):
+        if title(x) == 'Decoupling the supply rails' or 'We filter it at the DC supply' in text(x):
+            gone.append(title(x) or text(x)[:30]); p.part.drop_rel(sid.rId); lst.remove(sid)
+    p.part.rename_slide_parts([x.rId for x in lst])
+    dev = next(x for x in p.slides if title(x) == 'Devices and components for this session')
+    for sh in dev.shapes:
+        if sh.has_text_frame:
+            for para in list(sh.text_frame.paragraphs):
+                if para.text.startswith('470 µF capacitors') or para.text.startswith('100 nF capacitors'):
+                    para._p.getparent().remove(para._p)
+    if gone: print('Lab 3: removed', gone)
     p.save(DECK); print('Lab 3: wiring diagram on slide', list(p.slides).index(s) + 1,
                         '| supply + Exercise 1 at', [list(p.slides).index(x) + 1 for x in [supply] + ex1], 'before', list(p.slides).index(intro) + 1)
 

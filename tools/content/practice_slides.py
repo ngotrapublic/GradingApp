@@ -95,7 +95,6 @@ LAB = {
     dict(after='Measuring gain and phase', bar='Measuring gain and phase', fig='p3_wiring_small.png',
          head='Exercise 2: Build the first amplifier and measure its gain (10 minutes)',
          steps=['Build the inverting amplifier: R1 = 2.2 kΩ, R2 = 30 kΩ (3 × 10 kΩ), C1 = 1 µF.',
-                'Add the decoupling capacitors: 470 µF on each rail, 100 nF at pins 8 and 4.',
                 'Function generator: sine, 500 Hz, 50 mVpp (easier to read than 10 mVpp).',
                 'CH2 = Vin, CH1 = Vout. Measure both (Pk-Pk). Gain = Vout / Vin.',
                 'Use the cursors to read Δt between the waves. Phase = 360° × Δt × f.'],

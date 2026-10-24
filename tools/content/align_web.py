@@ -198,20 +198,29 @@ def lab2(p):
 
 
 def lab3(p):
+    # 24/10/2026: the ±6 V of the PB-503A is clean, so Lab 3 has no decoupling capacitors (lab3_fixes.py removes those slides)
+    s = by_title(p, 'Lab 3 overview')
+    rep(s, [('±6 V supply, decoupling', '±6 V supply from the PB-503A')])
     s = by_title(p, 'Devices and components for this session')
     rep(s, [('Resistors for your amplifier: take them from the team tray once you know R1 and R2', 'Resistors for your amplifier: take them from the parts box once you know R1 and R2')])
-    notes(s, 'Each student gets one LM358 and two 100 nF capacitors. Each team gets two 470 µF capacitors.\n'
-             'The LM358 and the 470 µF capacitors go back to the parts box at the end. We use them again in Lab 4.')
+    notes(s, 'Each student gets one LM358.\n'
+             'The LM358 goes back to the parts box at the end. We use it again in Lab 4.')
+    s = by_title(p, 'LM358 limits you will meet')
+    rep(s, [(' Small input signals (mV) are easily covered by noise: short wires, decoupling capacitors, good grounding.',
+             ' Small input signals (mV) are easily covered by noise: keep the wires short and use a good ground.')])
     s = by_title(p, 'Lab 3 exercise – find R1 and R2')
     rep(s, [('Call the lecturer. Then submit your values and a photo of your circuit on the student page.',
-             'Submit your values and one photo of your circuit on the student page. Then call the lecturer for the tick.')])
+             'Submit your values and one photo of your circuit on the student page. Then call the lecturer for the tick.'),
+            ('Build the amplifier: ±6 V supply and decoupling capacitors.', 'Build the amplifier with the ±6 V supply of the PB-503A.')])
     s = by_title(p, 'Lab 3 – What to submit')
     rep(s, [('Before you leave: submit your values on the ', 'Before you leave: submit on the '),
             (', return the LM358 and the 470 µF capacitors to the tray, switch off all instruments and clear your breadboard.',
-             ', get the lecturer’s tick, return the LM358 and the 470 µF capacitors to the parts box, then tidy your table (next slide).')])
+             ', get the lecturer’s tick, return the LM358 to the parts box, then tidy your table (next slide).'),
+            (', get the lecturer’s tick, return the LM358 and the 470 µF capacitors to the parts box, then tidy your table (next slide).',
+             ', get the lecturer’s tick, return the LM358 to the parts box, then tidy your table (next slide).')])
     notes(s, 'Type these numbers on the student page, under your card, and add one photo of your circuit. Gain and R2/R1 have no unit. Vout in volts. Phase in degrees.\n'
-             'Then call me for the tick. After the tick: LM358 and 470 µF capacitors back to the parts box, then tidy your table. The next slide shows how.')
-    tidy_slide(p, by_title(p, 'Lab 3 – What to submit'), ' (LM358 and 470 µF too)')
+             'Then call me for the tick. After the tick: the LM358 back to the parts box, then tidy your table. The next slide shows how.')
+    tidy_slide(p, by_title(p, 'Lab 3 – What to submit'), ' (LM358 too)')
 
 
 def lab4(p):
