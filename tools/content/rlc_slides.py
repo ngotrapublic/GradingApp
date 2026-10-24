@@ -1,6 +1,7 @@
 """Lab 2: series RLC. Low-pass and high-pass are explained in detail in the RC part, so here they are one line each on
 "Series RLC – one circuit, three filters" (lecturer, 24/10/2026); band-pass is the main topic, kept short: "only the
-middle passes", bandwidth, measuring BW (inserted after that slide; Exercise 6 comes first: practice, then theory).
+middle passes", bandwidth (inserted after that slide; Exercise 6 comes first: practice, then theory). The measuring steps
+and the BW table are in instrument_slides.py (Task 2 part).
 Plus "Filters in real life" before the Hanoi slides "Where are RLC circuits used?".
 Run after align_web.py; running again replaces the slides.   Figures: fig_rlc_theory.py."""
 import copy, io, re
@@ -81,34 +82,6 @@ SLIDES = [
      'The two edges are f L and f H. There, Vout over Vin is 0.707 times the peak: minus 3 dB.\n'
      'BW = f H minus f L.\n'
      'A bigger R makes the band wider.'),
-    ('Band-pass – measuring BW step by step', [
-        '**Before you start.** Function generator: sine, 2 Vpp, High-Z. Oscilloscope: CH1 = V_{in}, CH2 = V_{out}. '
-        'Press **Measure** and show **Pk-Pk** for CH1 and for CH2. Use the table on the next slide.',
-        '**1. Find the peak.** On the function generator, press **Display Setup**, then the button next to **Freq** (beside the screen). '
-        'Type 32.4 on the number pad and press the button next to **kHz**. Now turn the **round knob** slowly, a little down and a little up. '
-        'The **◄ ►** keys choose which digit the knob changes: start with the 1 kHz digit, then use the 0.1 kHz digit. '
-        '**What you see:** when you come closer to the peak, the CH2 wave (V_{out}) grows. At the peak it is the **biggest** and almost '
-        'as big as the CH1 wave (V_{in}), but a little smaller. After the peak it becomes smaller again. '
-        'Stop where the CH2 wave is the biggest compared with CH1. Write f, V_{in} and V_{out} in **row 1**.',
-        '**2. Calculate the target:** target = 0.707 × the highest V_{out}/V_{in}. Write it in **row 2**.',
-        '**3. Find f_{L}.** Turn the round knob to a **lower** frequency until V_{out}/V_{in} = target. '
-        'Read V_{in} and V_{out} again, because V_{in} changes near the peak. Write them in **row 3**.',
-        '**4. Find f_{H}.** Turn the round knob to a **higher** frequency, past the peak, until V_{out}/V_{in} = target again. Write them in **row 4**.',
-        '**5. Calculate BW = f_{H} − f_{L}.** Write it in **row 5**.'],
-     [],
-     'Before you start: the function generator gives a sine wave, 2 volts peak-to-peak, High-Z. On the oscilloscope, CH1 is Vin and CH2 is Vout. '
-     'Press Measure and show Pk-Pk for CH1 and for CH2. Use the table on the next slide.\n'
-     'Step 1, find the peak. On the function generator, press Display Setup, then the button next to Freq. Type 32.4 and press the button next to kHz. '
-     'Now turn the round knob slowly, a little down and a little up. The left and right arrow keys choose which digit the knob changes: '
-     'start with the 1 kilohertz digit, then use the 0.1 kilohertz digit.\n'
-     'What you see: when you come closer to the peak, the CH2 wave, Vout, grows. At the peak it is the biggest and almost as big as the CH1 wave, Vin, '
-     'but a little smaller. After the peak it becomes smaller again. Stop where the CH2 wave is the biggest compared with CH1. '
-     'Write f, Vin and Vout in row 1.\n'
-     'Step 2: calculate the target, 0.707 times the highest Vout over Vin. Write it in row 2.\n'
-     'Step 3, find f L. Turn the round knob to a lower frequency until Vout over Vin is equal to the target. '
-     'Read Vin and Vout again, because Vin changes near the peak. Write them in row 3.\n'
-     'Step 4, find f H. Turn the knob to a higher frequency, past the peak, until the ratio is equal to the target again. Write them in row 4.\n'
-     'Step 5: calculate BW = f H minus f L and write it in row 5.'),
 ]
 APPS_TITLE = 'Filters in real life'
 APPS = [('Low-pass', 'LP', [('speaker', 'Subwoofer: only the bass'), ('power', 'Power supply: smooth DC'),
@@ -127,9 +100,10 @@ T2_TITLE = 'Task 2 – the formulas you need'
 T2_AFTER = 'Task 2 (team) – design and build'
 T2_DESIGN = ['C = 22 nF + 2.2 nF = **24.2 nF** (capacitors in parallel add up).',
              'f_{0} = 1 / (2π√(LC)) ≈ **32.35 kHz**.   Z_{0} = √(L / C) ≈ **203 Ω**.',
-             '**R_{total} = Z_{0} / Q**. This is the R_{total} you submit.',
+             '**R_{total} = Z_{0} / Q**: the value you need.',
              'Measure R_{L} of your inductor with the ohmmeter. Then **R = R_{total} − R_{L}**.',
-             'Make R from 47 Ω, 100 Ω and 220 Ω. Series: **R_{1} + R_{2}**. Parallel: **R_{1} × R_{2} / (R_{1} + R_{2})**. Choose the closest value.']
+             'Make R from 47 Ω, 100 Ω and 220 Ω. Series: **R_{1} + R_{2}**. Parallel: **R_{1} × R_{2} / (R_{1} + R_{2})**. You can use up to 3 resistors. Choose the closest value.',
+             'Then measure R and the inductor together with the ohmmeter. **Submit this measured R_{total}.**']
 T2_EXPECT = ['**Low-pass:**   f_{max} = f_{0} × √(1 − 1/(2Q²))',
              'peak V_{out}/V_{in} = Q / √(1 − 1/(4Q²))',
              '**High-pass:**   f_{max} = f_{0} / √(1 − 1/(2Q²))',
@@ -140,8 +114,9 @@ T2_EXAMPLE = ('**Example** (Q = 4, not on any card): R_{total} = 203 Ω / 4 ≈ 
               'The closest combination is 220 Ω ∥ 47 Ω ≈ 38.7 Ω.')
 T2_SAY = ('These are all the formulas you need for Task 2.\n'
           'Design. The two capacitors are in parallel, so they add up: 24.2 nanofarad. Then f0 is about 32.35 kilohertz and Z0 is about 203 ohms. '
-          'R total = Z0 over Q: this is the R total you submit. Measure R L of your inductor, then R = R total minus R L. '
-          'Make R from 47, 100 and 220 ohm resistors: in series they add up, in parallel R1 times R2 over R1 plus R2. Choose the closest value.\n'
+          'R total = Z0 over Q: the value you need. Measure R L of your inductor, then R = R total minus R L. '
+          'Make R from 47, 100 and 220 ohm resistors: in series they add up, in parallel R1 times R2 over R1 plus R2. You can use up to 3 resistors. Choose the closest value. '
+          'Then measure R and the inductor together with the ohmmeter, and submit this measured R total.\n'
           'What to expect. Low-pass: f max = f0 times the square root of 1 minus 1 over 2 Q squared, and the peak is Q over the square root of '
           '1 minus 1 over 4 Q squared. High-pass: f max = f0 divided by the same square root, and the same peak. Band-pass: f max = f0 and BW = f0 over Q. '
           'Compare your measured values with these values in your conclusion.\n'
@@ -149,22 +124,9 @@ T2_SAY = ('These are all the formulas you need for Task 2.\n'
           'The closest combination is 220 ohms parallel 47 ohms, about 38.7 ohms.')
 BEFORE_APPS = 'Where are RLC circuits used?'
 
-BW_TABLE_TITLE = 'Band-pass – BW table'
-BW_ROWS = [('Step', 'f (kHz)', 'V_{in} (CH1, Vpp)', 'V_{out} (CH2, Vpp)', 'V_{out} / V_{in}'),
-           ('1. Peak', '', '', '', ''),
-           ('2. Target = 0.707 × peak', '–', '–', '–', ''),
-           ('3. f_{L} (below the peak)', '', '', '', ''),
-           ('4. f_{H} (above the peak)', '', '', '', ''),
-           ('5. BW = f_{H} − f_{L}', '', '–', '–', '–')]
-BW_TABLE_SAY = ('Fill in this table step by step: row 1 is the peak, row 2 is the target, row 3 is f L, row 4 is f H, and row 5 is the bandwidth.\n'
-                'Common mistakes. Do not use 0.707 times Vin: use 0.707 times the highest Vout over Vin. '
-                'Do not read Vin only once: near the peak it changes, so read CH1 and CH2 again at f L and at f H. '
-                'Do not take f L and f H from the 9 frequencies on your card: they are too far apart. Turn the knob to find them.')
-MISTAKES = ['Do not use 0.707 × V_{in}. Use 0.707 × the **highest V_{out}/V_{in}**.',
-            'Do not read V_{in} only once. Near f_{0}, V_{in} changes. Read **CH1 and CH2 again** at f_{L} and at f_{H}.',
-            'Do not take f_{L} and f_{H} from the 9 frequencies on your card. They are too far apart. **Turn the knob** to find them.']
 OLD = {'Low-pass RLC – output across C', 'High-pass RLC – output across L',     # removed 24/10/2026
-       'Band-pass RLC – why only a band passes'}
+       'Band-pass RLC – why only a band passes',
+       'Band-pass – measuring BW step by step', 'Band-pass – BW table'}               # now in instrument_slides.py
 THREE = ['One RLC circuit (L = 1 mH, C = 22 nF ∥ 2.2 nF) can make three filters. It depends on where you measure the output.',
          'Across **C**: a **low-pass** filter. Across **L**: a **high-pass** filter. They work like the RC filters. '
          'Near f_{0} their output can be bigger than the input (a peak at f_{max}). Low-pass and high-pass teams measure this peak in Task 2.',
@@ -179,7 +141,7 @@ THREE_SAY = ('One RLC circuit can make three filters. It depends on where you me
 
 def run():
     p = Presentation(DECK)
-    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, BW_TABLE_TITLE, T2_TITLE}
+    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, T2_TITLE}
     lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):          # an earlier run: remove, then add again
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in sl.shapes):
@@ -208,26 +170,9 @@ def run():
             pic(s, name, x, y, w)
         s.notes_slide.notes_text_frame.text = note
         sid = lst[-1]; lst.remove(sid); lst.insert(at + k, sid)
-    # the BW table to fill in, right after the steps
-    s = new_slide(p, model, BW_TABLE_TITLE)
-    tb = s.shapes.add_table(len(BW_ROWS), 5, Inches(0.5), Inches(1.25), Inches(12.3), Inches(3.4))
-    for r, row in enumerate(BW_ROWS):
-        for c, v in enumerate(row):
-            cell = tb.table.cell(r, c); cell.text = ''
-            add_runs(cell.text_frame.paragraphs[0], f'**{v}**' if r == 0 or c == 0 else v, 15)
-            if r == 0:
-                for run in cell.text_frame.paragraphs[0].runs: run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
-    for c, w in enumerate((3.5, 1.8, 2.3, 2.4, 2.3)):
-        tb.table.columns[c].width = Inches(w)
-    text_box(s, 0.5, 4.95, 12.3, 2.0, ['•  ' + m for m in MISTAKES], size=15, box=True, title='Common mistakes')
-    s.notes_slide.notes_text_frame.text = BW_TABLE_SAY
-    steps = next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == 'Band-pass – measuring BW step by step'
-                                              for sh in x.shapes))
-    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(steps) + 1, sid)
-
     # Task 2: every formula the team needs, right after "Task 2 (team) – design and build"
     s = new_slide(p, model, T2_TITLE)
-    text_box(s, 0.45, 1.2, 6.3, 4.6, T2_DESIGN, size=17, box=True, title='1. Design: find R')
+    text_box(s, 0.45, 1.2, 6.3, 4.6, T2_DESIGN, size=16, box=True, title='1. Design: find R')
     text_box(s, 6.95, 1.2, 5.9, 4.6, T2_EXPECT, size=17, box=True, title='2. What to expect (theory)')
     text_box(s, 0.45, 5.95, 12.4, 0.9, [T2_EXAMPLE], size=16)
     s.notes_slide.notes_text_frame.text = T2_SAY
