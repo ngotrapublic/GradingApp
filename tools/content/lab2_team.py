@@ -72,3 +72,41 @@ def lab2_bandpass(labs):
     L2['parts'][1]['title'] = ['Task 2 – band-pass RLC filter (team – one circuit for the whole team)',
                                'Bài 2 – Bộ lọc thông dải RLC (làm nhóm – cả nhóm chung một mạch)']
     return labs
+
+
+TASK1_TARGETS = [0.5, 0.75, 1.0, 1.5, 3.5, 5.0, 7.5, 10.0, 15.0]     # kHz; each has an R, C pair within 3.5 % (see below)
+TASK1_R = [220, 330, 470, 680, 1000, 1500, 2200, 3300, 4700, 6800, 10000, 15000, 22000]
+TASK1_C = [10e-9, 22e-9, 47e-9]
+
+
+def lab2_task1_design(labs, sets=(1, 2, 3)):
+    """Lecturer, 24/10/2026 (option A): Task 1 is a design. The card gives the filter type and a target cut-off frequency;
+    the student chooses R (13 standard values) and C (10, 22 or 47 nF), builds the filter and measures fc. Key = the target.
+    Members 1-3 of a team get 3 neighbouring targets of the list (always >= 25 % apart), member 4 is 4 places further.
+    Low-pass / high-pass alternate. Tolerance of this question: full 15 %, half 30 % (best pair <= 3.5 % + C tolerance)."""
+    import math
+    V = labs['2']['variants']; n = len(TASK1_TARGETS)
+    fc = lambda r, c: 1 / (2 * math.pi * r * c)
+    for s in sets:
+        for t in range(1, 7):
+            for m in (1, 2, 3, 4):
+                v = V.get(str(s * 100 + 3 * (t - 1) + m if m < 4 else s * 100 + 18 + t))
+                if v is None:
+                    continue
+                k = (s * 5 + (t - 1) * 3 + (m - 1 if m < 4 else 4)) % n
+                target = TASK1_TARGETS[k]; kind = ('Low', 'High')[(t + m) % 2]
+                f, r, c = min(((fc(r, c), r, c) for r in TASK1_R for c in TASK1_C), key=lambda x: abs(x[0] / (target * 1e3) - 1))
+                rs = f'{r / 1000:g} kΩ' if r >= 1000 else f'{r} Ω'
+                v['keys'][0] = target
+                v['info'][1] = (f'RC (Task 1): {kind}-pass, target fc = {target:g} kHz '
+                                f'(closest: {rs} + {c * 1e9:g} nF = {f / 1e3:.3g} kHz)')
+                v['card'][1] = (f'Task 1 – RC cut-off frequency: design a {kind.lower()}-pass filter with fc = {target:g} kHz. '
+                                f'Choose R and C yourself (R: 220 Ω … 22 kΩ, C: 10, 22 or 47 nF).')
+                v['figs'][0] = v['figs'][0].rsplit('/', 1)[0] + ('/rc_lp.png' if kind == 'Low' else '/rc_hp.png')
+    q = labs['2']['questions'][0]
+    q[1] = 'fc measured (target on your card)'
+    if len(q) == 4:
+        q.append({'full': 0.15, 'half': 0.30})
+    labs['2']['parts'][0]['note'] = ['Design: choose R and C for the target fc on your card. Build it, measure fc and submit the measured value.',
+                                     'Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Lắp mạch, đo f_c và nộp giá trị đo được.']
+    return labs
