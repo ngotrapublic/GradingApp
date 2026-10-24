@@ -1,97 +1,103 @@
-"""A4 wall poster for the shared electronics lab: general rules + tidy-up before leaving (not tied to one course).
-Writes HCM/docs/Lab_rules_poster.pptx (editable); export the PDF with LibreOffice (see the end of this file)."""
-import re
+"""Bench sign for the shared electronics lab (A4 landscape, laminated, one per bench), in the style of the Hanoi
+lab poster: numbered rows with an icon and one short sentence. Left: RULES (10). Right: BEFORE YOU LEAVE (6) + photo.
+Icons: poster_icons.py (Google Material Symbols). Writes HCM/docs/Lab_rules_poster.pptx; PDF via LibreOffice (end)."""
+import os, re
 from pptx import Presentation
-from pptx.util import Inches, Pt, Emu
+from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
-from pptx.oxml.ns import qn
-from lxml import etree
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/docs/Lab_rules_poster.pptx'
-PHOTO = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/fig/bench_tidy.jpg'
-GREEN, LIGHT, DARK, GREY = RGBColor(0x54, 0x9E, 0x39), RGBColor(0xEE, 0xF6, 0xE8), RGBColor(0x1D, 0x2A, 0x17), RGBColor(0x55, 0x55, 0x55)
-W, H, M = 8.27, 11.69, 0.5                      # A4 portrait, margin
+PHOTO = f'{HERE}/fig/bench_tidy.jpg'
+ICON = lambda n: f'{HERE}/fig/icons/{n}.png'
+NAVY, GREEN, ORANGE = RGBColor(0x1B, 0x2A, 0x3A), RGBColor(0x2E, 0x7D, 0x32), RGBColor(0xF2, 0xA9, 0x00)
+BOX, ROW, PAGE, WHITE = RGBColor(0xDC, 0xEF, 0xC8), RGBColor(0xE6, 0xE8, 0xE6), RGBColor(0xF2, 0xF3, 0xF2), RGBColor(0xFF, 0xFF, 0xFF)
+W, H = 11.69, 8.27
+FONT = 'Arial'
 
-SAFETY = [
-    'Switch the power **off** before you change a circuit.',
-    'Set the **current limit** on the DC power supply before you connect your circuit.',
-    'Check **polarity** before you switch on: electrolytic capacitors, diodes, ICs, power supply.',
-    'Never leave a **powered circuit** alone.',
-    'Smell, smoke or a hot part? **Switch off at once** and call the lecturer.',
-    'Never open an instrument or touch mains plugs and sockets.',
-    'Know where the **main power switch** and the **fire extinguisher** are.',
-    'No food or drinks on the benches.',
-]
-EQUIPMENT = [
-    'Use only the bench you are given. Do not move instruments, cables or parts to another bench or out of the lab.',
-    'Choose the right **multimeter mode and range** before you measure. Never measure **current or resistance** across a power source.',
-    'Unplug cables by the plug, not the wire. Handle probes with care.',
-    'Keep bags off the benches and the walkways clear.',
-    'Something missing or broken? **Tell the lecturer.** Do not repair it yourself.',
+RULES = [
+    ('power_settings_new', 'Switch the power **off** before you change a circuit.'),
+    ('electric_bolt', 'Set the **current limit** and check **polarity** before you switch on.'),
+    ('warning', 'Never leave a powered circuit alone. Smell, smoke or heat? **Switch off** and call the lecturer.'),
+    ('electric_meter', 'Choose the right **multimeter mode and range**. Never measure current or resistance across a power source.'),
+    ('electrical_services', 'Never open an instrument or touch mains plugs and sockets.'),
+    ('fire_extinguisher', 'Know where the **main power switch** and the **fire extinguisher** are.'),
+    ('no_food', 'No food or drinks. Keep bags off the benches and the walkways clear.'),
+    ('desk', 'Use only your bench. Do not move instruments, cables or parts to another bench or out of the lab.'),
+    ('report', 'Something missing or broken? **Tell the lecturer.** Do not repair it yourself.'),
+    ('cleaning_services', 'Before you leave, **tidy your bench** (see "Before you leave").'),
 ]
 LEAVE = [
-    'Switch off **every instrument** and the trainer.',
-    'Clear the breadboard: **no parts, no wires**.',
-    'Parts back in the parts box, in the right bag. Used or broken parts in the bin.',
-    'Test leads, probes and BNC cables into the box behind the trainer.',
-    'Instruments back in place, **like the photo**. Chairs in, rubbish in the bin.',
-    '**Wait for the lecturer** to check your bench before you go.',
+    ('power_settings_new', 'Switch off **every instrument** and the trainer.'),
+    ('developer_board', 'Clear the breadboard: **no parts, no wires**.'),
+    ('inventory_2', 'Parts back in the parts box, in the right bag. Used or broken parts in the bin.'),
+    ('cable', 'Test leads, probes and BNC cables into the box behind the trainer.'),
+    ('check_circle', 'Instruments back in place, **like the photo**. Chairs in, rubbish in the bin.'),
+    ('how_to_reg', '**Wait for the lecturer** to check your bench before you go.'),
 ]
 
 
-def runs(p, text, size, color=DARK):
+def runs(p, text, size, color=NAVY, bold_all=False):
     for part in re.split(r'(\*\*.*?\*\*)', text):
         if part:
             r = p.add_run(); r.text = part.strip('*') if part.startswith('**') else part
-            r.font.size = Pt(size); r.font.name = 'Arial'; r.font.color.rgb = color; r.font.bold = part.startswith('**')
+            r.font.size = Pt(size); r.font.name = FONT; r.font.color.rgb = color
+            r.font.bold = bold_all or part.startswith('**')
 
 
-def listing(p, numbered):
-    """Real bullet / auto-number with a hanging indent (editable in PowerPoint)."""
-    pPr = p._p.get_or_add_pPr(); pPr.set('marL', str(Inches(0.3))); pPr.set('indent', str(-Inches(0.3)))
-    for tag in ('a:buClr', 'a:buFont', 'a:buChar', 'a:buAutoNum', 'a:buNone'):
-        for el in pPr.findall(qn(tag)): pPr.remove(el)
-    clr = etree.SubElement(pPr, qn('a:buClr')); etree.SubElement(clr, qn('a:srgbClr')).set('val', '549E39')
-    if numbered:
-        etree.SubElement(pPr, qn('a:buFont')).set('typeface', 'Arial')
-        etree.SubElement(pPr, qn('a:buAutoNum')).set('type', 'arabicPeriod')
-    else:
-        etree.SubElement(pPr, qn('a:buFont')).set('typeface', 'Arial')
-        etree.SubElement(pPr, qn('a:buChar')).set('char', '•')
+def shape(s, kind, x, y, w, h, fill, radius=None):
+    sh = s.shapes.add_shape(kind, Inches(x), Inches(y), Inches(w), Inches(h))
+    sh.fill.solid(); sh.fill.fore_color.rgb = fill; sh.line.fill.background(); sh.shadow.inherit = False
+    if radius is not None:
+        sh.adjustments[0] = radius
+    return sh
 
 
-def section(s, y, title, items, numbered=False, size=14.5, h=None):
-    bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(M), Inches(y), Inches(W - 2 * M), Inches(0.36))
-    bar.fill.solid(); bar.fill.fore_color.rgb = LIGHT; bar.line.fill.background(); bar.shadow.inherit = False
-    tf = bar.text_frame; tf.margin_left = Inches(0.12); tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    tf.paragraphs[0].alignment = PP_ALIGN.LEFT; runs(tf.paragraphs[0], f'**{title}**', 17, GREEN)
-    tb = s.shapes.add_textbox(Inches(M), Inches(y + 0.42), Inches(W - 2 * M), Inches(h or 2)); tf = tb.text_frame; tf.word_wrap = True
-    tf.margin_left = Inches(0.1); tf.margin_top = Inches(0.02)
-    for i, t in enumerate(items):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        listing(p, numbered); runs(p, t, size); p.space_after = Pt(3)
-    return tb
+def text(sh, t, size, color=NAVY, align=PP_ALIGN.LEFT, bold_all=False, margin=0.12):
+    tf = sh.text_frame; tf.word_wrap = True; tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    tf.margin_left = tf.margin_right = Inches(margin); tf.margin_top = tf.margin_bottom = Inches(0.02)
+    p = tf.paragraphs[0]; p.alignment = align; runs(p, t, size, color, bold_all)
+
+
+def row(s, x, y, w, h, num, icon, t, size):
+    shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.25, y, w - 0.25, h, ROW, 0.25)          # grey band behind number + icon
+    pill = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x, y + (h - 0.4) / 2, 0.62, 0.4, NAVY, 0.5)
+    text(pill, f'{num:02d}', 17, ORANGE, PP_ALIGN.CENTER, bold_all=True, margin=0.02)
+    ic = min(h - 0.08, 0.44)
+    s.shapes.add_picture(ICON(icon), Inches(x + 0.72), Inches(y + (h - ic) / 2), Inches(ic), Inches(ic))
+    box = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 1.25, y, w - 1.25, h, BOX, 0.22)
+    text(box, t, size)
+
+
+def heading(s, x, y, w, t):
+    tb = s.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(0.4))
+    p = tb.text_frame.paragraphs[0]; runs(p, t, 17, GREEN, bold_all=True)
+    shape(s, MSO_SHAPE.RECTANGLE, x + 0.05, y + 0.42, 1.6, 0.05, GREEN)
 
 
 prs = Presentation(); prs.slide_width, prs.slide_height = Inches(W), Inches(H)
 s = prs.slides.add_slide(prs.slide_layouts[6])
-top = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, Inches(1.05))
-top.fill.solid(); top.fill.fore_color.rgb = GREEN; top.line.fill.background(); top.shadow.inherit = False
-tf = top.text_frame; tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER; runs(p, '**ELECTRONICS LAB – RULES**', 30, RGBColor(0xFF, 0xFF, 0xFF))
-sub = s.shapes.add_textbox(Inches(M), Inches(1.12), Inches(W - 2 * M), Inches(0.4)); p = sub.text_frame.paragraphs[0]
-p.alignment = PP_ALIGN.CENTER; runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 13, GREY)
-p.runs[0].font.italic = True
+shape(s, MSO_SHAPE.RECTANGLE, 0, 0, W, H, PAGE)
+title = s.shapes.add_textbox(Inches(0.45), Inches(0.22), Inches(W - 0.9), Inches(0.6))
+p = title.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER; runs(p, 'ELECTRONICS LAB RULES', 32, NAVY, bold_all=True)
+sub = s.shapes.add_textbox(Inches(0.45), Inches(0.82), Inches(W - 0.9), Inches(0.35))
+p = sub.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
+runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 14, GREEN)
 
-section(s, 1.58, '1.  Safety', SAFETY, h=3.0)
-section(s, 4.9, '2.  Equipment', EQUIPMENT, h=2.4)
-section(s, 7.45, '3.  Before you leave', LEAVE, numbered=True, h=2.2)
-pic = s.shapes.add_picture(PHOTO, Inches(M), Inches(9.72))
-k = Inches(W - 2 * M) / pic.width; pic.width = int(pic.width * k); pic.height = int(pic.height * k)
-if pic.top + pic.height > Inches(H - 0.25):                         # keep it on the page
-    k = (Inches(H - 0.25) - pic.top) / pic.height; pic.height = int(pic.height * k); pic.width = int(pic.width * k)
-    pic.left = int((prs.slide_width - pic.width) / 2)
-prs.save(OUT); print('saved', OUT)
+LX, LW, RX, RW, TOP = 0.4, 6.55, 7.2, 4.1, 1.42
+heading(s, LX, TOP, LW, 'RULES')
+rh, gap = 0.5, 0.085
+for i, (icon, t) in enumerate(RULES):
+    row(s, LX, TOP + 0.6 + i * (rh + gap), LW, rh, i + 1, icon, t, 11.5)
+heading(s, RX, TOP, RW, 'BEFORE YOU LEAVE')
+lh = 0.52
+for i, (icon, t) in enumerate(LEAVE):
+    row(s, RX, TOP + 0.6 + i * (lh + gap), RW, lh, i + 1, icon, t, 10.5)
+py = TOP + 0.6 + 6 * (lh + gap) + 0.05
+pic = s.shapes.add_picture(PHOTO, Inches(RX), Inches(py), Inches(RW))
+band = shape(s, MSO_SHAPE.RECTANGLE, 0, H - 0.42, W, 0.42, GREEN)
+text(band, '+    ' * 30, 12, WHITE, PP_ALIGN.CENTER, bold_all=True, margin=0)
+prs.save(OUT); print('saved', OUT, '| photo bottom at', round(py + pic.height / 914400, 2), 'in; band at', H - 0.42)
 # PDF:  soffice --headless --convert-to pdf --outdir HCM/docs HCM/docs/Lab_rules_poster.pptx
