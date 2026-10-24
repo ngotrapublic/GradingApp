@@ -7,6 +7,7 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.oxml.ns import qn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/docs/Lab_rules_poster.pptx'
@@ -50,6 +51,9 @@ def runs(p, text, size, color=NAVY, bold_all=False):
 def shape(s, kind, x, y, w, h, fill, radius=None):
     sh = s.shapes.add_shape(kind, Inches(x), Inches(y), Inches(w), Inches(h))
     sh.fill.solid(); sh.fill.fore_color.rgb = fill; sh.line.fill.background(); sh.shadow.inherit = False
+    style = sh._element.find(qn('p:style'))             # the theme style adds a shadow in some viewers: drop it
+    if style is not None:
+        sh._element.remove(style)
     if radius is not None:
         sh.adjustments[0] = radius
     return sh
@@ -63,8 +67,8 @@ def text(sh, t, size, color=NAVY, align=PP_ALIGN.LEFT, bold_all=False, margin=0.
 
 def row(s, x, y, w, h, num, icon, t, size):
     shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.25, y, w - 0.25, h, ROW, 0.25)          # grey band behind number + icon
-    pill = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x, y + (h - 0.4) / 2, 0.62, 0.4, NAVY, 0.5)
-    text(pill, f'{num:02d}', 17, ORANGE, PP_ALIGN.CENTER, bold_all=True, margin=0.02)
+    pill = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 0.04, y + (h - 0.32) / 2, 0.5, 0.32, NAVY, 0.5)
+    text(pill, f'{num:02d}', 13, ORANGE, PP_ALIGN.CENTER, bold_all=True, margin=0.0)
     ic = min(h - 0.08, 0.44)
     s.shapes.add_picture(ICON(icon), Inches(x + 0.72), Inches(y + (h - ic) / 2), Inches(ic), Inches(ic))
     box = shape(s, MSO_SHAPE.ROUNDED_RECTANGLE, x + 1.25, y, w - 1.25, h, BOX, 0.22)
