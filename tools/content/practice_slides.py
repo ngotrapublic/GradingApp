@@ -111,6 +111,16 @@ LAB = {
          answer=['The output cannot go higher than the supply (+6 V) or lower than −6 V. In fact it stops a little before.',
                  'When the wave wants to go further, it is cut flat: **clipping**.',
                  'So keep the input small enough: the output must not be flat.']),
+    # lecturer, 24/10/2026: Lab 3 was short; the table and "What do you notice?" come from lab3_freq.py
+    dict(before='Use low (audio) frequencies', bar='Gain and frequency', fig='p3_wiring_small.png',
+         head='Exercise 4: Does the gain change with the frequency? (20 minutes)',
+         steps=['Keep your amplifier from Exercise 2 (R1 = 2.2 kΩ, R2 = 30 kΩ, C1 = 1 µF).',
+                'Function generator: sine, 50 mVpp. Keep 50 mVpp, change only the frequency.',
+                'Set each frequency of the table (next slide). Measure Vin (CH2) and Vout (CH1), Pk-Pk.',
+                'If the wave does not fit on the screen, press Autoset.',
+                'Gain = Vout / Vin. Write it in the table and draw the graph.'],
+         ask='Is the gain the same at every frequency?',
+         answer=None),
 ],
 4: [
     dict(after='Now connect the oscilloscope to the speaker and observe', bar='Testing 8-Ω speaker', fig=('Using normal 1X cable',),
@@ -277,8 +287,10 @@ def answer_slide(p, model, ex):
     return s
 
 
-def run():
+def run(labs=None):
     for n, exercises in LAB.items():
+        if labs and n not in labs:
+            continue
         path = f'{HCM}/Lab{n}/HCM Electronic Circuit Lab {n}.pptx'
         p = Presentation(path); lst = p.slides._sldIdLst
         for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):
@@ -302,4 +314,5 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    import sys
+    run([int(x) for x in sys.argv[1:]])           # e.g. `practice_slides.py 3`: only Lab 3
