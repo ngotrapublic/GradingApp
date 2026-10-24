@@ -36,6 +36,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    giảng viên) sau slide nhóm của Lab 1. Cùng bố cục với `public/js/core/benchmap.js`. Chạy sau `align_web.py`.
 8. `parts_slide.py` – slide "Parts: use up or give back" sau "Find your bench" (Lab 1): chỉ điện trở là tiêu hao, mọi
    linh kiện khác (tụ, cuộn 1 mH, LM358, micro, LED, 470 µF) trả về đúng túi. Chạy sau `bench_map_slide.py`.
+9. `welcome_notice.py` – hộp nhắc trên slide tên môn (Lab 1): chưa bày đồ ra bàn (laptop, tập vở, cặp), giữ điện thoại
+   để đăng nhập trang SV. Chạy lại thì thay hộp cũ.
 
 ## Linh kiện
 `bom.py`, `bom2.py`, `mkxlsx.py`, `mk2.py`, `mk3.py`, `shop.py` – tạo file mua linh kiện (giá thegioiic).
