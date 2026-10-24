@@ -68,14 +68,14 @@ def theory_graph():
     return path
 
 
-def add_runs(para, text, size=16, color=DARK):
+def add_runs(para, text, size=18, color=DARK):
     for part in re.split(r'(\*\*.*?\*\*)', text):
         if part:
             r = para.add_run(); r.text = part.strip('*'); r.font.size = Pt(size); r.font.name = 'Rockwell'
             r.font.bold = part.startswith('**'); r.font.color.rgb = color
 
 
-def textbox(s, x, y, w, h, lines, size=16, gap=10):
+def textbox(s, x, y, w, h, lines, size=18, gap=10):
     tb = s.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h)); tb.name = MARK
     tf = tb.text_frame; tf.word_wrap = True
     for i, line in enumerate(lines):

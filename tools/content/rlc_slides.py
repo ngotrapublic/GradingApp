@@ -1,5 +1,5 @@
 """Lab 2: series RLC. Low-pass and high-pass are explained in detail in the RC part, so here they are one line each on
-"Series RLC – one circuit, three filters" (lecturer, 24/10/2026); band-pass is the main topic, kept short: "only the
+"Series RLC – one circuit, three filters" (lecturer, 24/10/2026; no L, C values there, theory only); band-pass is the main topic, kept short: "only the
 middle passes", bandwidth (inserted after that slide; Exercise 6 comes first: practice, then theory). The measuring steps
 and the BW table are in instrument_slides.py (Task 2 part).
 Plus "Filters in real life" before the Hanoi slides "Where are RLC circuits used?".
@@ -104,11 +104,9 @@ T2_DESIGN = ['C = 22 nF + 2.2 nF = **24.2 nF** (capacitors in parallel add up).'
              'Measure R_{L} of your inductor with the ohmmeter. Then **R = R_{total} − R_{L}**.',
              'Make R from 47 Ω, 100 Ω and 220 Ω. Series: **R_{1} + R_{2}**. Parallel: **R_{1} × R_{2} / (R_{1} + R_{2})**. You can use up to 3 resistors. Choose the closest value.',
              'Then measure R and the inductor together with the ohmmeter. **Submit this measured R_{total}.**']
-T2_EXPECT = ['**Low-pass:**   f_{max} = f_{0} × √(1 − 1/(2Q²))',
-             'peak V_{out}/V_{in} = Q / √(1 − 1/(4Q²))',
-             '**High-pass:**   f_{max} = f_{0} / √(1 − 1/(2Q²))',
-             'peak: the same as the low-pass filter',
-             '**Band-pass:**   f_{max} = f_{0}   and   **BW = f_{0} / Q**',
+T2_EXPECT = ['**f_{max} = f_{0}** ≈ 32.35 kHz: the peak.',
+             '**BW = f_{0} / Q**.',
+             'f_{L} and f_{H}: where V_{out}/V_{in} = 0.707 × the peak.',
              'Compare your measured values with these values in your conclusion.']
 T2_EXAMPLE = ('**Example** (Q = 4, not on any card): R_{total} = 203 Ω / 4 ≈ 50.8 Ω. If R_{L} = 10 Ω, then R = 50.8 − 10 = 40.8 Ω. '
               'The closest combination is 220 Ω ∥ 47 Ω ≈ 38.7 Ω.')
@@ -117,8 +115,7 @@ T2_SAY = ('These are all the formulas you need for Task 2.\n'
           'R total = Z0 over Q: the value you need. Measure R L of your inductor, then R = R total minus R L. '
           'Make R from 47, 100 and 220 ohm resistors: in series they add up, in parallel R1 times R2 over R1 plus R2. You can use up to 3 resistors. Choose the closest value. '
           'Then measure R and the inductor together with the ohmmeter, and submit this measured R total.\n'
-          'What to expect. Low-pass: f max = f0 times the square root of 1 minus 1 over 2 Q squared, and the peak is Q over the square root of '
-          '1 minus 1 over 4 Q squared. High-pass: f max = f0 divided by the same square root, and the same peak. Band-pass: f max = f0 and BW = f0 over Q. '
+          'What to expect. f max = f0, about 32.35 kilohertz: the peak. BW = f0 over Q. f L and f H are where Vout over Vin is 0.707 times the peak. '
           'Compare your measured values with these values in your conclusion.\n'
           'Example with Q = 4, which is not on any card: R total is about 50.8 ohms. If R L is 10 ohms, R is 40.8 ohms. '
           'The closest combination is 220 ohms parallel 47 ohms, about 38.7 ohms.')
@@ -126,19 +123,16 @@ BEFORE_APPS = 'Where are RLC circuits used?'
 
 OLD = {'Low-pass RLC – output across C', 'High-pass RLC – output across L',     # removed 24/10/2026
        'Band-pass RLC – why only a band passes',
-       'Band-pass – measuring BW step by step', 'Band-pass – BW table'}               # now in instrument_slides.py
-THREE = ['One RLC circuit (L = 1 mH, C = 22 nF ∥ 2.2 nF) can make three filters. It depends on where you measure the output.',
-         'Across **C**: a **low-pass** filter. Across **L**: a **high-pass** filter. They work like the RC filters. '
-         'Near f_{0} their output can be bigger than the input (a peak at f_{max}). Low-pass and high-pass teams measure this peak in Task 2.',
+       'Band-pass – measuring BW step by step', 'Band-pass – BW table',               # now in instrument_slides.py
+       'Series RLC – key formulas'}                                                   # removed by the lecturer's request
+THREE = ['One RLC circuit can make three filters. It depends on where you measure the output.',
+         'Across **C**: a **low-pass** filter. Across **L**: a **high-pass** filter. They work like the RC filters.',
          'Across **R**: a **band-pass** filter. It passes only the **middle** frequencies, around f_{0}.',
          'Always put the output part at the **ground side**, so both probe grounds are on the same point.']
-
 THREE_SAY = ('One RLC circuit can make three filters. It depends on where you measure the output.\n'
-             'Across C: a low-pass filter. Across L: a high-pass filter. They work like the RC filters. '
-             'Near f0 their output can be bigger than the input: a peak at f max. Low-pass and high-pass teams measure this peak in Task 2.\n'
+             'Across C: a low-pass filter. Across L: a high-pass filter. They work like the RC filters.\n'
              'Across R: a band-pass filter. It passes only the middle frequencies, around f0.\n'
              'Always put the output part at the ground side, so both probe grounds are on the same point.')
-
 def run():
     p = Presentation(DECK)
     titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, T2_TITLE}
@@ -158,12 +152,12 @@ def run():
     for r in list(tf.paragraphs[0].runs):
         r._r.getparent().remove(r._r)
     for k, t in enumerate(THREE):
-        par = tf.paragraphs[0] if k == 0 else tf.add_paragraph(); add_runs(par, t, 15); par.space_after = Pt(6)
+        par = tf.paragraphs[0] if k == 0 else tf.add_paragraph(); add_runs(par, t, 19); par.space_after = Pt(8)
     model.notes_slide.notes_text_frame.text = THREE_SAY
     for k, (title, paras, figs, note) in enumerate(t for t in SLIDES if t[0] not in OLD):
         s = new_slide(p, model, title)
         if figs:
-            text_box(s, 0.55, 1.2, 6.5 if figs[0][1] < 8 else 7.4, 5.8, paras, size=17)
+            text_box(s, 0.55, 1.2, 6.5 if figs[0][1] < 8 else 7.4, 5.8, paras, size=20)
         else:
             text_box(s, 0.55, 1.15, 12.3, 6.0, paras, size=17)
         for name, x, y, w in figs:
@@ -172,8 +166,8 @@ def run():
         sid = lst[-1]; lst.remove(sid); lst.insert(at + k, sid)
     # Task 2: every formula the team needs, right after "Task 2 (team) – design and build"
     s = new_slide(p, model, T2_TITLE)
-    text_box(s, 0.45, 1.2, 6.3, 4.6, T2_DESIGN, size=16, box=True, title='1. Design: find R')
-    text_box(s, 6.95, 1.2, 5.9, 4.6, T2_EXPECT, size=17, box=True, title='2. What to expect (theory)')
+    text_box(s, 0.45, 1.2, 6.3, 4.6, T2_DESIGN, size=17, box=True, title='1. Design: find R')
+    text_box(s, 6.95, 1.2, 5.9, 4.6, T2_EXPECT, size=19, box=True, title='2. What to expect (theory)')
     text_box(s, 0.45, 5.95, 12.4, 0.9, [T2_EXAMPLE], size=16)
     s.notes_slide.notes_text_frame.text = T2_SAY
     t2 = next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == T2_AFTER for sh in x.shapes))

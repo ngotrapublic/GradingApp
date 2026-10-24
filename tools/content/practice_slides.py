@@ -28,7 +28,7 @@ LAB = {
                 'Measure R with the multimeter. Write it down.',
                 'Build the circuit. CH1 = Vin, CH2 = Vout (across C).',
                 'Function generator: sine, 2 Vpp, High-Z.',
-                'For each frequency (10 Hz, 100 Hz, 200 Hz, 1 kHz, 10 kHz): press the button next to Freq, type the number, press the button next to Hz or kHz. Write what you see in the table (next slide).'],
+                'Set 10 Hz, 100 Hz, 200 Hz, 1 kHz and 10 kHz. Write what you see in the table (next slide).'],
          ask='What happens to Vout when the frequency goes up?',
          answer=None),
     dict(after='Swap R and C: a high-pass filter', bar='1st order RC circuits', fig='p2_hp.png',
@@ -76,8 +76,8 @@ LAB = {
          steps=['Take L = 1 mH, C = 100 nF (104) and R = 100 Ω. Calculate f0 = 1 / (2π√(LC)).',
                 'Build the circuit. R at the ground side. CH1 = Vin, CH2 = Vout (across R).',
                 'Function generator: sine, 2 Vpp, High-Z.',
-                'For each frequency in the table: press the button next to Freq, type the number, press the button next to kHz. Read Vin and Vout (Measure → Pk-Pk). Write them in the table (next slide).',
-                'Calculate Vout / Vin and draw the graph.'],
+                'At each frequency in the table (next slide), read Vin (CH1) and Vout (CH2).',
+                'Calculate Vout / Vin. Then draw the graph.'],
          ask='Where is your peak? Is it at f0? Why is the highest Vout / Vin below 1?',
          answer=None),     # answered by "What do you notice?" after the table (rlc_table.py)
 ],
@@ -231,7 +231,7 @@ def textbox(s, x, y, w, h, name=None):
     return tf
 
 
-def run_(para, text, size=16, color=DARK):
+def run_(para, text, size=18, color=DARK):
     r = para.add_run(); r.text = text
     r.font.size = Pt(size); r.font.name = 'Rockwell'; r.font.color.rgb = color
     return r
@@ -257,11 +257,11 @@ def add(p, model, ex):
         elif sh.name.startswith('Logo'):
             s.shapes.add_picture(io.BytesIO(sh.image.blob), sh.left, sh.top, sh.width, sh.height)
     tf = textbox(s, 0.6, 1.45, 7.3, 0.45, MARK); run_(tf.paragraphs[0], ex['head'])
-    tf = textbox(s, 0.65, 2.15, 7.0, 3.4)
+    tf = textbox(s, 0.65, 2.05, 7.2, 3.9)
     for i, t in enumerate(ex['steps']):
         para = tf.paragraphs[0] if i == 0 else tf.add_paragraph(); numbered(para); run_(para, t)
         para.space_after = Pt(6)
-    tf = textbox(s, 0.65, 5.75, 7.0, 0.8); run_(tf.paragraphs[0], ex['ask'])
+    tf = textbox(s, 0.65, 6.15, 7.2, 0.8); run_(tf.paragraphs[0], ex['ask'])
     # figure on the right, fitted into the free area, top-aligned like the Lab 1 slides
     if isinstance(ex['fig'], str):
         from PIL import Image
@@ -288,14 +288,14 @@ def answer_slide(p, model, ex):
             s.shapes.add_picture(io.BytesIO(sh.image.blob), sh.left, sh.top, sh.width, sh.height)
     head = re.sub(r':.*', ' – answer', ex['head'])
     tf = textbox(s, 0.6, 1.45, 12.0, 0.45, MARK); run_(tf.paragraphs[0], head)
-    tf = textbox(s, 0.65, 2.15, 12.0, 0.8); run_(tf.paragraphs[0], ex['ask'].replace('−', '-'), 18).font.bold = True   # bold: '−' is missing in some fonts
+    tf = textbox(s, 0.65, 2.15, 12.0, 0.8); run_(tf.paragraphs[0], ex['ask'].replace('−', '-'), 20).font.bold = True   # bold: '−' is missing in some fonts
     tf = textbox(s, 0.65, 3.0, 11.8, 3.8)
     for i, line in enumerate(ex['answer']):
         para = tf.paragraphs[0] if i == 0 else tf.add_paragraph(); para.space_after = Pt(12)
         for part in re.split(r'(\*\*.*?\*\*)', line):
             if part:
                 bold = part.startswith('**')
-                run_(para, part.strip('*').replace('−', '-') if bold else part, 18).font.bold = bold
+                run_(para, part.strip('*').replace('−', '-') if bold else part, 20).font.bold = bold
     s.notes_slide.notes_text_frame.text = '\n'.join([head, ex['ask']] + [x.replace('**', '') for x in ex['answer']])
     return s
 

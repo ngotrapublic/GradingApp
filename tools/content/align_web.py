@@ -24,13 +24,14 @@ def runs(slide):
 
 
 def rep(slide, pairs):
-    """Replace whole runs (exact text); each must exist once. Already-new text is skipped (safe to run twice)."""
+    """Replace whole runs (exact text); each must exist at most once. Text that is not found is skipped (safe to run again)."""
     rs = list(runs(slide))
     if all(any(r.text == new for r in rs) for _, new in pairs):     # already done (some pairs swap texts)
         return
     for old, new in pairs:
         hit = [r for r in rs if r.text == old]
-        if not hit and any(r.text == new for r in rs):
+        if not hit:
+            # done before, or changed later: subscripts.py splits runs ("f" + "c"), lab2_task2.py rewrites Task 2 for band-pass
             continue
         assert len(hit) == 1, (old, len(hit))
         hit[0].text = new
@@ -147,8 +148,8 @@ def lab2(p):
             ('RC warm-up: 1 resistor + 1 capacitor (on your variant card)', 'Task 1, each student: 1 resistor + 1 capacitor (on your card)'),
             ('RLC: 1 inductor 1 mH, capacitors 22 nF and 2.2 nF', 'Task 2, each team: 1 inductor 1 mH, capacitors 22 nF and 2.2 nF')])
     notes(s, 'Each team uses the oscilloscope, function generator, multimeter and PB-503A.\n'
-             'Task 1 is individual: each student gets one resistor and one capacitor for the RC warm-up.\n'
-             'Task 2 is team work: each team gets one inductor, the capacitors and the resistors for one RLC filter.\n'
+             'Task 1 is individual: each student gets one resistor and one capacitor for the RC cut-off frequency.\n'
+             'Task 2 is team work: each team gets one inductor, the capacitors and the resistors for one band-pass RLC filter.\n'
              'Download the Excel template from the student page now.')
     s = by_title(p, 'Warm-up exercise – RC cut-off frequency', 'Task 1 (individual) – RC cut-off frequency')
     rep(s, [('Warm-up exercise – RC cut-off frequency', 'Task 1 (individual) – RC cut-off frequency')])
@@ -160,7 +161,8 @@ def lab2(p):
     rep(s, [('Lab 2 exercise – design and build', 'Task 2 (team) – design and build'),
             ('Your variant card gives the ', 'Your card gives the ')])
     notes(s, 'Task 2 is team work. The whole team builds one filter. Everybody in the team has the same Task 2 on the card.\n'
-             'Your card gives the filter type and Q. Measure R L. Calculate R total = 203 / Q. Then R = R total − R L. Make R from 47, 100 and 220 Ω.\n'
+             'Every team builds a band-pass filter: the output is across R. Your card gives Q. Measure R L. Calculate R total = 203 / Q. '
+             'Then R = R total − R L. Make R from 47, 100 and 220 Ω.\n'
              'Measure R and the coil together with the ohmmeter. That is your R total for the student page.\n'
              'Show me your calculation before you build.')
     s = by_title(p, 'Lab 2 exercise – measure and plot', 'Task 2 (team) – measure and plot')
@@ -174,7 +176,7 @@ def lab2(p):
     notes(s, 'Download the Excel file from the student page, under your Lab 2 card.\n'
              'Share the work: each member measures some of the frequencies on the card. Use Measure, Pk-Pk on CH1 and CH2. Do not count squares.\n'
              'Type the values into the Excel file. The graph draws itself. Add at most 2 points near the peak.\n'
-             'Low-pass and high-pass: write the highest Vout / Vin. Band-pass: find f L and f H, then BW.\n'
+             'Find f L and f H, then BW. Use the method of Exercise 7.\n'
              'Write 1 to 3 sentences of conclusion.\n'
              'Each member submits the team values and one screenshot of the graph on the student page. Not a photo of the circuit. Then call me.')
     s = by_title(p, 'Lab 2 – What to submit')

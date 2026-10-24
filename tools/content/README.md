@@ -51,9 +51,12 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 14. `instrument_slides.py` – Lab 2: cách bấm máy có ảnh thật đánh số nút (osci TBS1052C, máy phát AFG1022) trước Exercise 1;
    Exercise 7 (bài tập trên lớp, mạch của Exercise 6): tìm đỉnh, tìm f_L, f_H, BW, bảng, trả lời. Task 2 (chấm điểm) chỉ
    thêm 1 dòng "dùng cách của Exercise 7". Ảnh: `fig_instruments.py` (lấy từ Lab 1).
-15. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
+15. `lab2_task2.py` – Lab 2 Task 2 = thông dải cho mọi nhóm: sửa chữ các slide design and build, measure and plot, What to
+   submit (đáp án: `lab2_team.lab2_bandpass`, đã áp vào `keys.json`).
+16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
+17. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 
-Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `instrument_slides.py` → `subscripts.py`.
+Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `instrument_slides.py` → `lab2_task2.py` → `notes_cleanup.py` → `subscripts.py`.
 
 > **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
 > `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).

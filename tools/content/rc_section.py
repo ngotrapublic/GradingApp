@@ -33,13 +33,13 @@ xc = lambda f: 1 / (2 * math.pi * f * C)
 ohm = lambda r: f'{r / 1000:.3g} kΩ' if r >= 1000 else f'{r:.3g} Ω'
 
 # ---------------------------------------------------------------- slide text (notes = the same ideas, spoken)
-PLAN = ['In this part we use one circuit: **R = 10 kΩ and C = 100 nF (code 104)**. The function generator is connected to R, and R is connected to C.',
-        '1. Exercise 1: you build the circuit, change the frequency and watch Vout.',
-        '2. We explain why Vout changes: the circuit is a voltage divider.',
-        '3. Exercise 2: you swap R and C and measure again.',
-        '4. We learn how to read the frequency graph and the −3 dB point.',
-        '5. Exercise 3: you measure the cut-off frequency fc.',
-        'Task 1 (marked on the student page) is at the end of the lab.']
+PLAN = ['We use one circuit: **R = 10 kΩ, C = 100 nF (104)**.',
+        '1. Exercise 1: build it and change the frequency.',
+        '2. Why does Vout change? A voltage divider.',
+        '3. Exercise 2: swap R and C.',
+        '4. Reading the graph: the −3 dB point.',
+        '5. Exercise 3: measure the cut-off frequency fc.',
+        'Task 1 (marked) is at the end of the lab.']
 SCOPE = ['**CH1** (yellow) shows Vin, the input. **CH2** (blue) shows Vout, the voltage across C. The input is 2 Vpp at every frequency.',
          'At **10 Hz**, Vout is as big as Vin. The signal passes.',
          f'At **{FC:.0f} Hz** (this is fc), Vout is smaller than Vin. Vout also comes a little later than Vin.',
@@ -53,15 +53,13 @@ DIVIDER = ['Remember Lab 1: in a voltage divider, the **bigger** resistor gets t
            'At **high frequency**, XC is much smaller than R. So C gets almost nothing, and **Vout is almost 0**.']
 SWAP = ['Now we swap R and C: the capacitor is at the top and the resistor is at the bottom.',
         'The output (CH2) is now the voltage across R.']
-READ = ['The top graph shows the **gain** in dB: gain = 20 log (Vout / Vin). **0 dB** means Vout = Vin, so nothing is lost.',
-        '**Pass band** (on the left): the gain is about 0 dB. Low frequencies pass.',
-        '**Corner frequency fc**: here the gain is **-3 dB**. -3 dB means Vout = **0.707 × Vin**. The output has half of the input power.',
-        '**Why do we choose this point?** At -3 dB the output is still 70% of the input, so it has not dropped much yet. '
-        'After fc, the output drops quickly: when the frequency is 10 times higher, Vout is 10 times smaller (-20 dB). '
+READ = ['Top graph: the **gain** in dB. **0 dB** means Vout = Vin.',
+        '**Pass band** (left): the low frequencies pass.',
+        '**Corner frequency fc**: the gain is **-3 dB**, so Vout = **0.707 × Vin**. The output has half of the power.',
+        '**Why this point?** Here the output is still 70% of the input: it has not dropped much. After fc it drops fast. '
         'So fc is the border between "passes" and "is blocked".',
-        '**Stop band** (on the right): high frequencies are blocked.',
-        'The bottom graph shows the **phase**: how late Vout is compared with Vin. At fc, Vout is 45° late.',
-        'The high-pass graph is the same, but mirrored: it passes the high frequencies.']
+        '**Stop band** (right): the high frequencies are blocked.',
+        'Bottom graph: the **phase**. At fc, Vout is 45° late.']
 CUTOFF_LP = ['The cut-off frequency fc is the border between "passes" and "is blocked". The formula is the same for low-pass and high-pass filters:',
              '**fc = 1 / (2πRC)**',
              'At fc, Vout = 0.707 × Vin. This is the **-3 dB point**.',
@@ -84,10 +82,10 @@ NOTICE = {
 }
 OVERVIEW = {'RC filters': ['RC filters', '1st-order low-pass and high-pass', 'Cut-off frequency fc', 'Exercises 1–3, −3 dB point'],
             'Series RLC': ['Series RLC', 'Resonance f0 and quality factor Q', 'Band-pass and bandwidth BW'],
-            'box4': ['Marked tasks (end of the lab)', 'Task 1: RC cut-off (individual)', 'Task 2: series RLC (team)', 'Measure, plot and conclude']}
+            'box4': ['Marked tasks (end of the lab)', 'Task 1: RC cut-off (individual)', 'Task 2: band-pass RLC (team)', 'Measure, plot and conclude']}
 BOX4 = ('Lab 2 exercise', 'Practice, then marks', 'Marked tasks (end of the lab)')     # first line of box 4, old or new
 OVERVIEW_SAY = ('Today has 4 parts: RC filters with Exercises 1 to 3 and the minus 3 dB point, capacitors, series RLC with the band-pass filter and its bandwidth, '
-                'and at the end of the lab the marked tasks: Task 1, RC cut-off, individual, and Task 2, series RLC, as a team: '
+                'and at the end of the lab the marked tasks: Task 1, RC cut-off, individual, and Task 2, a band-pass RLC filter, as a team: '
                 'measure, plot and conclude.\n'
                 'Reminder: at the start, the instruments are in their default state. Before you measure: check 1X or 10X on the '
                 'oscilloscope, and set the function generator to High-Z.')
@@ -157,14 +155,14 @@ def is_practice(s):
     return any(sh.name == PRACTICE for sh in s.shapes)
 
 
-def add_runs(para, text, size=16, color=DARK):
+def add_runs(para, text, size=18, color=DARK):
     for part in re.split(r'(\*\*.*?\*\*)', text):
         if part:
             r = para.add_run(); r.text = part.strip('*'); r.font.size = Pt(size); r.font.name = 'Rockwell'
             r.font.bold = part.startswith('**'); r.font.color.rgb = color
 
 
-def textbox(s, x, y, w, h, lines, size=16, gap=10):
+def textbox(s, x, y, w, h, lines, size=18, gap=10):
     tb = s.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h)); tb.name = MARK
     tf = tb.text_frame; tf.word_wrap = True
     for i, line in enumerate(lines):
@@ -273,7 +271,7 @@ def run():
 
     # plan (the old Hanoi step slide)
     s = (find(p, 'We now construct RC circuits', False) or find(p, 'We build RC circuits', False)
-         or find(p, 'In this part we use one circuit'))
+         or find(p, 'In this part we use one circuit', False) or find(p, 'We use one circuit: '))
     for sh in list(s.shapes):
         if sh.has_text_frame and 'We now construct RC circuits' in sh.text_frame.text:
             sh._element.getparent().remove(sh._element)
@@ -332,7 +330,7 @@ def run():
         elif 'You already see how capacitors are used in filters' in t:
             swap_pictures(s, [lp, hp])
     s3 = new_slide(p, model, 'Reading the graph – the −3 dB point')
-    textbox(s3, 0.5, 1.2, 6.7, 5.9, READ, size=14, gap=6)
+    textbox(s3, 0.5, 1.2, 6.7, 5.9, READ, size=17, gap=8)
     lp_graph = big_pictures(graphs)[0]                     # the low-pass response picture of the graphs slide
     picture(s3, lp_graph.image.blob, 7.3, 1.2, 5.7, 5.9, top=True)
     set_notes(s3, spoken(READ))
@@ -342,7 +340,6 @@ def run():
     cut = [s for s in p.slides if any(sh.name.startswith(MARK + ' cutoff') for sh in s.shapes) or
            b'You should also know the formula' in __import__('lxml.etree', fromlist=['x']).tostring(s._element)]
     assert len(cut) == 2, len(cut)
-    callout = 'New word: Cut-off frequency (fc). Cut-off frequency (fc) means: where Vout = 0.707 × Vin. Say it with me: Cut-off frequency (fc).'
     for s, kind in zip(cut, ('lp', 'hp')):
         for ac in s._element.findall('.//{http://schemas.openxmlformats.org/markup-compatibility/2006}AlternateContent'):
             ac.getparent().remove(ac)
@@ -350,7 +347,7 @@ def run():
         lines = CUTOFF_LP if kind == 'lp' else CUTOFF_HP
         textbox(s, 0.47, 1.5, 6.2, 4.4, lines, gap=14).name = MARK + ' cutoff'
         swap_pictures(s, [lp if kind == 'lp' else hp])
-        set_notes(s, spoken(lines) + ('\n' + callout if kind == 'lp' else ''))
+        set_notes(s, spoken(lines))
     # the marked Task 1 goes to the end of the lab, right before Task 2 ("Lab 2 exercise" section)
     task1 = find(p, 'Task 1 (individual) – RC cut-off frequency')
     task2 = find(p, 'Series RLC filter')
