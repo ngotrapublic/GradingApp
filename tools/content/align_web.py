@@ -205,9 +205,6 @@ def lab3(p):
     rep(s, [('Resistors for your amplifier: take them from the team tray once you know R1 and R2', 'Resistors for your amplifier: take them from the parts box once you know R1 and R2')])
     notes(s, 'Each student gets one LM358.\n'
              'The LM358 goes back to the parts box at the end. We use it again in Lab 4.')
-    s = by_title(p, 'LM358 limits you will meet')
-    rep(s, [(' Small input signals (mV) are easily covered by noise: short wires, decoupling capacitors, good grounding.',
-             ' Small input signals (mV) are easily covered by noise: keep the wires short and use a good ground.')])
     s = by_title(p, 'Lab 3 exercise – find R1 and R2')
     rep(s, [('Call the lecturer. Then submit your values and a photo of your circuit on the student page.',
              'Submit your values and one photo of your circuit on the student page. Then call the lecturer for the tick.'),
