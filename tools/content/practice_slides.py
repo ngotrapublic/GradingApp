@@ -28,7 +28,7 @@ LAB = {
                 'Measure R with the multimeter. Write it down.',
                 'Build the circuit. CH1 = Vin, CH2 = Vout (across C).',
                 'Function generator: sine, 2 Vpp, High-Z.',
-                'Set 10 Hz, 100 Hz, 200 Hz, 1 kHz, 10 kHz. Write what you see in the table (next slide).'],
+                'For each frequency (10 Hz, 100 Hz, 200 Hz, 1 kHz, 10 kHz): press the button next to Freq, type the number, press the button next to Hz or kHz. Write what you see in the table (next slide).'],
          ask='What happens to Vout when the frequency goes up?',
          answer=None),
     dict(after='Swap R and C: a high-pass filter', bar='1st order RC circuits', fig='p2_hp.png',
@@ -76,7 +76,7 @@ LAB = {
          steps=['Take L = 1 mH, C = 100 nF (104) and R = 100 Ω. Calculate f0 = 1 / (2π√(LC)).',
                 'Build the circuit. R at the ground side. CH1 = Vin, CH2 = Vout (across R).',
                 'Function generator: sine, 2 Vpp, High-Z.',
-                'Set 2, 5, 10, 16, 25, 50, 100 kHz. At each frequency, read Vin and Vout (Measure → Pk-Pk). Write them in the table (next slide).',
+                'For each frequency in the table: press the button next to Freq, type the number, press the button next to kHz. Read Vin and Vout (Measure → Pk-Pk). Write them in the table (next slide).',
                 'Calculate Vout / Vin and draw the graph.'],
          ask='Where is your peak? Is it at f0? Why is the highest Vout / Vin below 1?',
          answer=None),     # answered by "What do you notice?" after the table (rlc_table.py)

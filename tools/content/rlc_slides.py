@@ -82,21 +82,28 @@ SLIDES = [
      'BW = f H minus f L.\n'
      'A bigger R makes the band wider.'),
     ('Band-pass – measuring BW step by step', [
-        '1.  Set the function generator near **f_{0}** (about 32.4 kHz). Turn the frequency knob slowly. Find the frequency where V_{out}/V_{in} is the **highest**. Write this value down (for example 0.80).',
-        '2.  Calculate the **target**: target = 0.707 × the highest value (for example 0.707 × 0.80 = 0.57).',
-        '3.  Turn the frequency **down** (below f_{0}) until V_{out}/V_{in} is equal to the target. This frequency is **f_{L}**.',
-        '4.  Turn the frequency **up** (above f_{0}) until V_{out}/V_{in} is equal to the target again. This frequency is **f_{H}**.',
-        '5.  Calculate **BW = f_{H} − f_{L}**.'],
+        '**Before you start.** Function generator: sine, 2 Vpp, High-Z. Oscilloscope: CH1 = V_{in}, CH2 = V_{out}. '
+        'Press **Measure** and show **Pk-Pk** for CH1 and for CH2. Use the table on the next slide.',
+        '**1. Find the peak.** On the function generator, press **Display Setup**, then the button next to **Freq** (beside the screen). '
+        'Type 32.4 on the number pad and press the button next to **kHz**. Now turn the **round knob** slowly, a little down and a little up. '
+        'The **◄ ►** keys choose which digit the knob changes: start with the 1 kHz digit, then use the 0.1 kHz digit. '
+        'Stop where V_{out}/V_{in} is the highest. Write f, V_{in} and V_{out} in **row 1**.',
+        '**2. Calculate the target:** target = 0.707 × the highest V_{out}/V_{in}. Write it in **row 2**.',
+        '**3. Find f_{L}.** Turn the round knob to a **lower** frequency until V_{out}/V_{in} = target. '
+        'Read V_{in} and V_{out} again, because V_{in} changes near the peak. Write them in **row 3**.',
+        '**4. Find f_{H}.** Turn the round knob to a **higher** frequency, past the peak, until V_{out}/V_{in} = target again. Write them in **row 4**.',
+        '**5. Calculate BW = f_{H} − f_{L}.** Write it in **row 5**.'],
      [],
-     'Now how to measure the bandwidth at your table. There are five steps.\n'
-     'One: set the generator near f0, about 32.4 kilohertz. Turn the knob slowly and find the highest Vout over Vin. Write it down.\n'
-     'Two: calculate the target: 0.707 times the highest value.\n'
-     'Three: turn the frequency down until Vout over Vin is equal to the target. This frequency is f L.\n'
-     'Four: turn the frequency up, past f0, until the ratio is equal to the target again. This frequency is f H.\n'
-     'Five: calculate BW = f H minus f L.\n'
-     'Common mistakes. Do not use 0.707 times Vin: use 0.707 times the highest Vout over Vin. '
-     'Do not read Vin only once: near f0 it changes, so read CH1 and CH2 again at f L and at f H. '
-     'Do not take f L and f H from the 9 frequencies on your card: they are too far apart. Turn the knob to find them.'),
+     'Before you start: the function generator gives a sine wave, 2 volts peak-to-peak, High-Z. On the oscilloscope, CH1 is Vin and CH2 is Vout. '
+     'Press Measure and show Pk-Pk for CH1 and for CH2. Use the table on the next slide.\n'
+     'Step 1, find the peak. On the function generator, press Display Setup, then the button next to Freq. Type 32.4 and press the button next to kHz. '
+     'Now turn the round knob slowly, a little down and a little up. The left and right arrow keys choose which digit the knob changes: '
+     'start with the 1 kilohertz digit, then use the 0.1 kilohertz digit. Stop where Vout over Vin is the highest. Write f, Vin and Vout in row 1.\n'
+     'Step 2: calculate the target, 0.707 times the highest Vout over Vin. Write it in row 2.\n'
+     'Step 3, find f L. Turn the round knob to a lower frequency until Vout over Vin is equal to the target. '
+     'Read Vin and Vout again, because Vin changes near the peak. Write them in row 3.\n'
+     'Step 4, find f H. Turn the knob to a higher frequency, past the peak, until the ratio is equal to the target again. Write them in row 4.\n'
+     'Step 5: calculate BW = f H minus f L and write it in row 5.'),
 ]
 APPS_TITLE = 'Filters in real life'
 APPS = [('Low-pass', 'LP', [('speaker', 'Subwoofer: only the bass'), ('power', 'Power supply: smooth DC'),
@@ -113,6 +120,17 @@ APPS_SAY = ('Filters are everywhere.\n'
             'Band-pass: a radio receives one station. Wi-Fi uses one channel. An equalizer has bands for bass, middle and treble.')
 BEFORE_APPS = 'Where are RLC circuits used?'
 
+BW_TABLE_TITLE = 'Band-pass – BW table'
+BW_ROWS = [('Step', 'f (kHz)', 'V_{in} (CH1, Vpp)', 'V_{out} (CH2, Vpp)', 'V_{out} / V_{in}'),
+           ('1. Peak', '', '', '', ''),
+           ('2. Target = 0.707 × peak', '–', '–', '–', ''),
+           ('3. f_{L} (below the peak)', '', '', '', ''),
+           ('4. f_{H} (above the peak)', '', '', '', ''),
+           ('5. BW = f_{H} − f_{L}', '', '–', '–', '–')]
+BW_TABLE_SAY = ('Fill in this table step by step: row 1 is the peak, row 2 is the target, row 3 is f L, row 4 is f H, and row 5 is the bandwidth.\n'
+                'Common mistakes. Do not use 0.707 times Vin: use 0.707 times the highest Vout over Vin. '
+                'Do not read Vin only once: near the peak it changes, so read CH1 and CH2 again at f L and at f H. '
+                'Do not take f L and f H from the 9 frequencies on your card: they are too far apart. Turn the knob to find them.')
 MISTAKES = ['Do not use 0.707 × V_{in}. Use 0.707 × the **highest V_{out}/V_{in}**.',
             'Do not read V_{in} only once. Near f_{0}, V_{in} changes. Read **CH1 and CH2 again** at f_{L} and at f_{H}.',
             'Do not take f_{L} and f_{H} from the 9 frequencies on your card. They are too far apart. **Turn the knob** to find them.']
@@ -132,7 +150,7 @@ THREE_SAY = ('One RLC circuit can make three filters. It depends on where you me
 
 def run():
     p = Presentation(DECK)
-    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE}
+    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, BW_TABLE_TITLE}
     lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):          # an earlier run: remove, then add again
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in sl.shapes):
@@ -156,12 +174,28 @@ def run():
         if figs:
             text_box(s, 0.55, 1.2, 6.5 if figs[0][1] < 8 else 7.4, 5.8, paras, size=17)
         else:
-            text_box(s, 0.55, 1.2, 7.3, 5.8, paras, size=16)
-            text_box(s, 8.2, 1.3, 4.6, 4.2, ['•  ' + m for m in MISTAKES], size=15, box=True, title='Common mistakes')
+            text_box(s, 0.55, 1.15, 12.3, 6.0, paras, size=17)
         for name, x, y, w in figs:
             pic(s, name, x, y, w)
         s.notes_slide.notes_text_frame.text = note
         sid = lst[-1]; lst.remove(sid); lst.insert(at + k, sid)
+    # the BW table to fill in, right after the steps
+    s = new_slide(p, model, BW_TABLE_TITLE)
+    tb = s.shapes.add_table(len(BW_ROWS), 5, Inches(0.5), Inches(1.25), Inches(12.3), Inches(3.4))
+    for r, row in enumerate(BW_ROWS):
+        for c, v in enumerate(row):
+            cell = tb.table.cell(r, c); cell.text = ''
+            add_runs(cell.text_frame.paragraphs[0], f'**{v}**' if r == 0 or c == 0 else v, 15)
+            if r == 0:
+                for run in cell.text_frame.paragraphs[0].runs: run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+    for c, w in enumerate((3.5, 1.8, 2.3, 2.4, 2.3)):
+        tb.table.columns[c].width = Inches(w)
+    text_box(s, 0.5, 4.95, 12.3, 2.0, ['•  ' + m for m in MISTAKES], size=15, box=True, title='Common mistakes')
+    s.notes_slide.notes_text_frame.text = BW_TABLE_SAY
+    steps = next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == 'Band-pass – measuring BW step by step'
+                                              for sh in x.shapes))
+    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(steps) + 1, sid)
+
     # "Filters in real life": three columns, each with the response shape and three examples (icon + a few words)
     s = new_slide(p, model, APPS_TITLE)
     for k, (head, kind, items) in enumerate(APPS):
