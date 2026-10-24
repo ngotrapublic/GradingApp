@@ -84,5 +84,19 @@ def bp_q():
     fig.tight_layout(); fig.savefig(f'{OUT}/rlc_bp_q.png'); plt.close(fig)
 
 
-lp_hp('LP', 'rlc_lp_curve'); lp_hp('HP', 'rlc_hp_curve'); xlxc(); bp_bw(); bp_q()
+
+def three():
+    """The three filters of one RLC circuit on one graph: low-pass, band-pass (the middle), high-pass."""
+    fig, ax = plt.subplots(figsize=(6.4, 4.2), dpi=150)
+    ax.axvspan(F0 / 1.6, F0 * 1.6, color=G, alpha=0.10)
+    ax.plot(f, H('LP', 0.71), color=OR, lw=2.6, label='across C: low-pass')
+    ax.plot(f, H('BP', 2.0), color=G, lw=3.0, label='across R: band-pass')
+    ax.plot(f, H('HP', 0.71), color=BL, lw=2.6, label='across L: high-pass')
+    axes(ax); ax.set_ylim(0, 1.15); ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.17), ncol=3, frameon=False, fontsize=10)
+    ax.text(F0, 0.08, 'the middle', color=G, ha='center', fontsize=12, weight='bold')
+    ax.text(5e3, 0.08, 'low', color=OR, fontsize=12); ax.text(250e3, 0.08, 'high', color=BL, fontsize=12, ha='right')
+    fig.tight_layout(); fig.savefig(f'{OUT}/rlc_three.png'); plt.close(fig)
+
+
+lp_hp('LP', 'rlc_lp_curve'); lp_hp('HP', 'rlc_hp_curve'); xlxc(); bp_bw(); bp_q(); three()
 print('figures written to', OUT)

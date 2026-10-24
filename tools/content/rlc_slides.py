@@ -1,6 +1,7 @@
 """Lab 2: series RLC. Low-pass and high-pass are explained in detail in the RC part, so here they are one line each on
-"Series RLC – one circuit, three filters" (lecturer, 24/10/2026); band-pass is the main topic: three slides (why only a
-band passes, bandwidth, measuring BW), inserted after that slide.
+"Series RLC – one circuit, three filters" (lecturer, 24/10/2026); band-pass is the main topic, kept short: "only the
+middle passes", bandwidth, measuring BW (inserted after that slide; Exercise 6 comes first: practice, then theory).
+Plus "Filters in real life" before the Hanoi slides "Where are RLC circuits used?".
 Run after align_web.py; running again replaces the slides.   Figures: fig_rlc_theory.py."""
 import copy, io, re
 from pptx import Presentation
@@ -60,79 +61,82 @@ def pic(slide, name, x, y, w):
 
 
 SLIDES = [
-    ('Band-pass RLC – why only a band passes', [
-        'The output is the voltage across **R**: V_{out} = I × R. When the current I is big, V_{out} is big. When I is small, V_{out} is small.',
-        'L and C both resist AC current. This "AC resistance" is called **reactance**: X_{C} for the capacitor, X_{L} for the inductor. It is measured in ohms (Ω).',
-        '**Below f_{0}** (low frequency): X_{C} = 1/(2πfC) is very big. The capacitor blocks the current, so V_{out} is small.',
-        '**Above f_{0}** (high frequency): X_{L} = 2πfL is very big. The inductor blocks the current, so V_{out} is small.',
-        '**At f_{0}**: X_{L} and X_{C} are equal (about 203 Ω). They work in opposite directions, so together they become zero. '
-        'Now only R limits the current. The current is the biggest, so V_{out} is the biggest.',
-        'The highest V_{out}/V_{in} is a little **below 1**: the coil wire has a small resistance R_{L}, and part of the voltage is lost there.',
-        'So the circuit lets a **band** of frequencies around f_{0} pass. It blocks lower and higher frequencies. That is why it is called **band-pass**.'],
-     [('rlc_xlxc.png', 7.25, 1.2, 5.7), ('d2_bp.png', 8.6, 5.05, 3.0)],
-     'The output is the voltage across R: Vout = I times R. When the current is big, Vout is big. When the current is small, Vout is small.\n'
-     'L and C both resist AC current. This AC resistance is called reactance: X C for the capacitor, X L for the inductor. It is measured in ohms.\n'
-     'Below f0, at low frequency, X C is very big. The capacitor blocks the current, so Vout is small.\n'
-     'Above f0, at high frequency, X L is very big. The inductor blocks the current, so Vout is small.\n'
-     'At f0, X L and X C are equal, about 203 ohms. They work in opposite directions, so together they become zero. '
-     'Now only R limits the current. The current is the biggest, so Vout is the biggest. Look at the graph: the two lines cross at f0.\n'
-     'The highest Vout over Vin is a little below 1: the coil wire has a small resistance R L, and part of the voltage is lost there.\n'
-     'So the circuit lets a band of frequencies around f0 pass. It blocks lower and higher frequencies. That is why it is called band-pass.'),
+    ('Band-pass RLC – only the middle passes', [
+        'A low-pass filter passes the **low** frequencies. A high-pass filter passes the **high** frequencies. '
+        'A band-pass filter passes only the **middle**: a band of frequencies around f_{0}.',
+        '**Below f_{0}**, the capacitor blocks the current. **Above f_{0}**, the inductor blocks the current.',
+        '**At f_{0}**, nothing blocks the current. The current is the biggest, so V_{out} (across R) is the biggest.'],
+     [('rlc_three.png', 7.25, 1.3, 5.8)],
+     'A low-pass filter passes the low frequencies. A high-pass filter passes the high frequencies. '
+     'A band-pass filter passes only the middle: a band of frequencies around f0.\n'
+     'Below f0, the capacitor blocks the current. Above f0, the inductor blocks the current.\n'
+     'At f0, nothing blocks the current. The current is the biggest, so Vout across R is the biggest.'),
     ('Band-pass – bandwidth (BW)', [
-        'The band has two edges: **f_{L}** (the low edge) and **f_{H}** (the high edge).',
-        'At each edge, V_{out}/V_{in} is **0.707 × the highest value**. This is the same -3 dB rule as for the RC filters: '
-        'the output still has 70% of its highest value.',
-        'The **bandwidth** is the width of the band: **BW = f_{H} − f_{L}** (in kHz).',
-        'In theory, **BW = f_{0} / Q = R_{total} / (2πL)**. A bigger R gives a wider band. A smaller R gives a narrow, sharp band (lower graph).',
-        'Note: f_{0} is **not** exactly in the middle of f_{L} and f_{H}. The correct rule is **f_{0} = √(f_{L} × f_{H})**.'],
+        'The band has two edges, **f_{L}** and **f_{H}**. At each edge, V_{out}/V_{in} = **0.707 × the highest value** (the -3 dB rule, like the RC filters).',
+        'The **bandwidth** is the width of the band: **BW = f_{H} − f_{L}**.',
+        'A bigger R gives a wider band. A smaller R gives a narrow, sharp band (lower graph).'],
      [('rlc_bp_bw.png', 8.3, 1.12, 4.45), ('rlc_bp_q.png', 8.3, 4.08, 4.45)],
-     'The band has two edges: f L, the low edge, and f H, the high edge.\n'
-     'At each edge, Vout over Vin is 0.707 times the highest value. This is the same minus 3 dB rule as for the RC filters: '
-     'the output still has 70 percent of its highest value.\n'
-     'The bandwidth is the width of the band: BW = f H minus f L, in kilohertz.\n'
-     'In theory, BW = f0 over Q, or R total over 2 pi L. A bigger R gives a wider band. A smaller R gives a narrow, sharp band: look at the lower graph.\n'
-     'Note: f0 is not exactly in the middle of f L and f H. The correct rule is: f0 is the square root of f L times f H.'),
+     'The band has two edges, f L and f H. At each edge, Vout over Vin is 0.707 times the highest value: the minus 3 dB rule, like the RC filters.\n'
+     'The bandwidth is the width of the band: BW = f H minus f L.\n'
+     'A bigger R gives a wider band. A smaller R gives a narrow, sharp band. Look at the lower graph.'),
     ('Band-pass – measuring BW step by step', [
         '1.  Set the function generator near **f_{0}** (about 32.4 kHz). Turn the frequency knob slowly. Find the frequency where V_{out}/V_{in} is the **highest**. Write this value down (for example 0.80).',
         '2.  Calculate the **target**: target = 0.707 × the highest value (for example 0.707 × 0.80 = 0.57).',
         '3.  Turn the frequency **down** (below f_{0}) until V_{out}/V_{in} is equal to the target. This frequency is **f_{L}**.',
         '4.  Turn the frequency **up** (above f_{0}) until V_{out}/V_{in} is equal to the target again. This frequency is **f_{H}**.',
-        '5.  Calculate **BW = f_{H} − f_{L}**. Check your result: √(f_{L} × f_{H}) should be close to f_{0}.'],
+        '5.  Calculate **BW = f_{H} − f_{L}**.'],
      [],
      'Now how to measure the bandwidth at your table. There are five steps.\n'
      'One: set the generator near f0, about 32.4 kilohertz. Turn the knob slowly and find the highest Vout over Vin. Write it down.\n'
      'Two: calculate the target: 0.707 times the highest value.\n'
      'Three: turn the frequency down until Vout over Vin is equal to the target. This frequency is f L.\n'
      'Four: turn the frequency up, past f0, until the ratio is equal to the target again. This frequency is f H.\n'
-     'Five: calculate BW = f H minus f L. Check that the square root of f L times f H is close to f0.\n'
+     'Five: calculate BW = f H minus f L.\n'
      'Common mistakes. Do not use 0.707 times Vin: use 0.707 times the highest Vout over Vin. '
      'Do not read Vin only once: near f0 it changes, so read CH1 and CH2 again at f L and at f H. '
      'Do not take f L and f H from the 9 frequencies on your card: they are too far apart. Turn the knob to find them.'),
 ]
+APPS_TITLE = 'Filters in real life'
+APPS = [('Low-pass: passes low frequencies', [
+            'A **subwoofer** gets only the bass (the low sounds) of the music.',
+            'A **power supply** filter removes fast noise and gives a smooth DC voltage.',
+            'Before a microcontroller measures a signal, a low-pass filter removes the high-frequency noise.']),
+        ('High-pass: passes high frequencies', [
+            'A **tweeter** (a small speaker) gets only the treble (the high sounds).',
+            'A **coupling capacitor** blocks DC and lets the audio signal pass. You use one in Lab 4.',
+            'A microphone **low-cut** switch removes wind noise and the 50 Hz hum.']),
+        ('Band-pass: passes only the middle', [
+            'A **radio** receives one station: its LC circuit passes only the frequency of that station.',
+            '**Wi-Fi** and mobile phones pass only their own channel and block the others.',
+            'An audio **equalizer** has separate bands for bass, middle and treble.'])]
+APPS_SAY = ('Filters are everywhere. Low-pass: a subwoofer gets only the bass of the music. A power supply filter removes fast noise '
+            'and gives a smooth DC voltage. Before a microcontroller measures a signal, a low-pass filter removes the high-frequency noise.\n'
+            'High-pass: a tweeter, a small speaker, gets only the treble. A coupling capacitor blocks DC and lets the audio signal pass: '
+            'you use one in Lab 4. A microphone low-cut switch removes wind noise and the 50 hertz hum.\n'
+            'Band-pass: a radio receives one station, because its LC circuit passes only the frequency of that station. '
+            'Wi-Fi and mobile phones pass only their own channel. An audio equalizer has separate bands for bass, middle and treble.')
+BEFORE_APPS = 'Where are RLC circuits used?'
+
 MISTAKES = ['Do not use 0.707 × V_{in}. Use 0.707 × the **highest V_{out}/V_{in}**.',
             'Do not read V_{in} only once. Near f_{0}, V_{in} changes. Read **CH1 and CH2 again** at f_{L} and at f_{H}.',
             'Do not take f_{L} and f_{H} from the 9 frequencies on your card. They are too far apart. **Turn the knob** to find them.']
-OLD = {'Low-pass RLC – output across C', 'High-pass RLC – output across L'}     # removed 24/10/2026
-THREE = ['The circuit has L = 1 mH and C = 22 nF ∥ 2.2 nF. The same current flows through R, L and C. The type of filter depends on where you measure the output.',
-         'If you measure the output across **C**, you get a **low-pass** filter. If you measure it across **L**, you get a **high-pass** filter. '
-         'They work like the RC filters you built before.',
-         'One difference: near f_{0}, the output of these two filters can be **bigger than the input**. The highest point is at f_{max}. '
-         'In Task 2, the low-pass and high-pass teams measure f_{max} and the highest V_{out}/V_{in}.',
-         'If you measure the output across **R**, you get a **band-pass** filter: only frequencies near f_{0} can pass. '
-         'This filter is new for you, so the next slides explain it step by step.',
-         'Always put the output part at the **ground side**. Then both probe grounds are connected to the same point.']
-THREE_SAY = ('The circuit has L = 1 millihenry and C = 22 nanofarad parallel 2.2 nanofarad. The same current flows through R, L and C. '
-             'The type of filter depends on where you measure the output.\n'
-             'If you measure the output across C, you get a low-pass filter. If you measure it across L, you get a high-pass filter. '
-             'They work like the RC filters you built before.\n'
-             'One difference: near f0, the output of these two filters can be bigger than the input. The highest point is at f max. '
-             'In Task 2, the low-pass and high-pass teams measure f max and the highest Vout over Vin.\n'
-             'If you measure the output across R, you get a band-pass filter: only frequencies near f0 can pass. '
-             'This filter is new for you, so the next slides explain it step by step.\n'
-             'Always put the output part at the ground side. Then both probe grounds are connected to the same point.')
+OLD = {'Low-pass RLC – output across C', 'High-pass RLC – output across L',     # removed 24/10/2026
+       'Band-pass RLC – why only a band passes'}
+THREE = ['One RLC circuit (L = 1 mH, C = 22 nF ∥ 2.2 nF) can make three filters. It depends on where you measure the output.',
+         'Across **C**: a **low-pass** filter. Across **L**: a **high-pass** filter. They work like the RC filters. '
+         'Near f_{0} their output can be bigger than the input (a peak at f_{max}). Low-pass and high-pass teams measure this peak in Task 2.',
+         'Across **R**: a **band-pass** filter. It passes only the **middle** frequencies, around f_{0}.',
+         'Always put the output part at the **ground side**, so both probe grounds are on the same point.']
+
+THREE_SAY = ('One RLC circuit can make three filters. It depends on where you measure the output.\n'
+             'Across C: a low-pass filter. Across L: a high-pass filter. They work like the RC filters. '
+             'Near f0 their output can be bigger than the input: a peak at f max. Low-pass and high-pass teams measure this peak in Task 2.\n'
+             'Across R: a band-pass filter. It passes only the middle frequencies, around f0.\n'
+             'Always put the output part at the ground side, so both probe grounds are on the same point.')
+
 def run():
     p = Presentation(DECK)
-    titles = {t for t, *_ in SLIDES} | OLD
+    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE}
     lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):          # an earlier run: remove, then add again
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in sl.shapes):
@@ -141,7 +145,8 @@ def run():
     slides = list(p.slides)
     model = next(s for s in slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == AFTER for sh in s.shapes))
     at = slides.index(model) + 1
-    tb = next(sh for sh in model.shapes if sh.has_text_frame and 'Where you take the output' in sh.text_frame.text)
+    tb = next(sh for sh in model.shapes if sh.has_text_frame and any(k in sh.text_frame.text for k in
+              ('Where you take the output', 'where you measure the output', 'It depends on where you measure')))
     tf = tb.text_frame
     for para in tf.paragraphs[1:]:
         para._p.getparent().remove(para._p)
@@ -153,7 +158,7 @@ def run():
     for k, (title, paras, figs, note) in enumerate(t for t in SLIDES if t[0] not in OLD):
         s = new_slide(p, model, title)
         if figs:
-            text_box(s, 0.55, 1.2, 6.5 if figs[0][1] < 8 else 7.4, 5.8, paras, size=15)
+            text_box(s, 0.55, 1.2, 6.5 if figs[0][1] < 8 else 7.4, 5.8, paras, size=17)
         else:
             text_box(s, 0.55, 1.2, 7.3, 5.8, paras, size=16)
             text_box(s, 8.2, 1.3, 4.6, 4.2, ['•  ' + m for m in MISTAKES], size=15, box=True, title='Common mistakes')
@@ -161,6 +166,13 @@ def run():
             pic(s, name, x, y, w)
         s.notes_slide.notes_text_frame.text = note
         sid = lst[-1]; lst.remove(sid); lst.insert(at + k, sid)
+    # "Filters in real life": three boxes, right before the Hanoi slides "Where are RLC circuits used?"
+    s = new_slide(p, model, APPS_TITLE)
+    for k, (head, items) in enumerate(APPS):
+        text_box(s, 0.45 + k * 4.2, 1.3, 4.0, 5.4, ['•  ' + t for t in items], size=17, box=True, title=head)
+    s.notes_slide.notes_text_frame.text = APPS_SAY
+    ref = next(x for x in p.slides if any(sh.has_text_frame and BEFORE_APPS in sh.text_frame.text for sh in x.shapes))
+    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(ref), sid)
     p.save(DECK)
     print('Lab 2:', len(p.slides), 'slides; RLC theory slides at', [i + 1 for i, s in enumerate(p.slides)
           if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in s.shapes)])
