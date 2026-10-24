@@ -87,7 +87,9 @@ SLIDES = [
         '**1. Find the peak.** On the function generator, press **Display Setup**, then the button next to **Freq** (beside the screen). '
         'Type 32.4 on the number pad and press the button next to **kHz**. Now turn the **round knob** slowly, a little down and a little up. '
         'The **◄ ►** keys choose which digit the knob changes: start with the 1 kHz digit, then use the 0.1 kHz digit. '
-        'Stop where V_{out}/V_{in} is the highest. Write f, V_{in} and V_{out} in **row 1**.',
+        '**What you see:** when you come closer to the peak, the CH2 wave (V_{out}) grows. At the peak it is the **biggest** and almost '
+        'as big as the CH1 wave (V_{in}), but a little smaller. After the peak it becomes smaller again. '
+        'Stop where the CH2 wave is the biggest compared with CH1. Write f, V_{in} and V_{out} in **row 1**.',
         '**2. Calculate the target:** target = 0.707 × the highest V_{out}/V_{in}. Write it in **row 2**.',
         '**3. Find f_{L}.** Turn the round knob to a **lower** frequency until V_{out}/V_{in} = target. '
         'Read V_{in} and V_{out} again, because V_{in} changes near the peak. Write them in **row 3**.',
@@ -98,7 +100,10 @@ SLIDES = [
      'Press Measure and show Pk-Pk for CH1 and for CH2. Use the table on the next slide.\n'
      'Step 1, find the peak. On the function generator, press Display Setup, then the button next to Freq. Type 32.4 and press the button next to kHz. '
      'Now turn the round knob slowly, a little down and a little up. The left and right arrow keys choose which digit the knob changes: '
-     'start with the 1 kilohertz digit, then use the 0.1 kilohertz digit. Stop where Vout over Vin is the highest. Write f, Vin and Vout in row 1.\n'
+     'start with the 1 kilohertz digit, then use the 0.1 kilohertz digit.\n'
+     'What you see: when you come closer to the peak, the CH2 wave, Vout, grows. At the peak it is the biggest and almost as big as the CH1 wave, Vin, '
+     'but a little smaller. After the peak it becomes smaller again. Stop where the CH2 wave is the biggest compared with CH1. '
+     'Write f, Vin and Vout in row 1.\n'
      'Step 2: calculate the target, 0.707 times the highest Vout over Vin. Write it in row 2.\n'
      'Step 3, find f L. Turn the round knob to a lower frequency until Vout over Vin is equal to the target. '
      'Read Vin and Vout again, because Vin changes near the peak. Write them in row 3.\n'
