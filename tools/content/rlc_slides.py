@@ -1,5 +1,6 @@
-"""Lab 2: five slides that explain the series RLC filters (low-pass, high-pass, and band-pass in detail – the
-theory course does not cover band-pass). Inserted after "Series RLC – one circuit, three filters".
+"""Lab 2: series RLC. Low-pass and high-pass are explained in detail in the RC part, so here they are one line each on
+"Series RLC – one circuit, three filters" (lecturer, 24/10/2026); band-pass is the main topic: three slides (why only a
+band passes, bandwidth, measuring BW), inserted after that slide.
 Run after align_web.py; running again replaces the slides.   Figures: fig_rlc_theory.py."""
 import copy, io, re
 from pptx import Presentation
@@ -59,32 +60,6 @@ def pic(slide, name, x, y, w):
 
 
 SLIDES = [
-    ('Low-pass RLC – output across C', [
-        '**Low frequency:** C is almost an open circuit. Almost no current flows, so almost no voltage is lost on R and L: **V_{out} ≈ V_{in}**.',
-        '**High frequency:** C is almost a short circuit: **V_{out} → 0**. It falls fast: about ÷100 for each ×10 in frequency.',
-        '**Near f_{0}:** L and C pass energy back and forth, so V_{out} can be **bigger than V_{in}**. The highest V_{out}/V_{in} is at f_{max}, a little **below** f_{0}.',
-        '**Bigger Q** (smaller R_{total}) → higher and sharper peak. With Q below 0.71 there is no peak.',
-        '**You measure:** f_{max} and the highest V_{out}/V_{in}.'],
-     [('rlc_lp_curve.png', 7.25, 1.2, 5.7), ('d2_lp.png', 8.6, 5.05, 3.0)],
-     'Low-pass: the output is across the capacitor.\n'
-     'At low frequency the capacitor is almost open. Almost no current flows, so the output is almost equal to the input.\n'
-     'At high frequency the capacitor is almost a short circuit, so the output goes to zero, and it falls fast.\n'
-     'Near f0 something new happens: L and C pass energy back and forth. The output can be bigger than the input. '
-     'Look at the green curve: three times bigger. The highest point is f max, a little below f0.\n'
-     'A bigger Q gives a higher and sharper peak. Q bigger means R total smaller.\n'
-     'Low-pass teams measure f max and the highest Vout over Vin.'),
-    ('High-pass RLC – output across L', [
-        '**Low frequency:** L is almost a short circuit: **V_{out} ≈ 0**.',
-        '**High frequency:** L is almost an open circuit, so all the voltage is on L: **V_{out} ≈ V_{in}**.',
-        '**Near f_{0}:** the same resonance as the low-pass. The highest V_{out}/V_{in} is at f_{max}, a little **above** f_{0}.',
-        '**It is the mirror of the low-pass:** the same peak height, but the peak is on the other side of f_{0}.',
-        '**You measure:** f_{max} and the highest V_{out}/V_{in}.'],
-     [('rlc_hp_curve.png', 7.25, 1.2, 5.7), ('d2_hp.png', 8.6, 5.05, 3.0)],
-     'High-pass: the output is across the inductor.\n'
-     'At low frequency the inductor is almost a short circuit, so the output is almost zero.\n'
-     'At high frequency the inductor is almost open, so all the voltage is on it: the output is equal to the input.\n'
-     'Near f0 we have the same resonance. Now the peak is a little above f0. It is the mirror of the low-pass.\n'
-     'High-pass teams also measure f max and the highest Vout over Vin.'),
     ('Band-pass RLC – why only a band passes', [
         'The output is across **R**: V_{out} = I × R. So V_{out} follows the **current**.',
         '**Below f_{0}:** X_{C} = 1/(2πfC) is big → C blocks → small current.',
@@ -137,9 +112,24 @@ MISTAKES = ['Using 0.707 × V_{in}. Use 0.707 × the **highest V_{out}/V_{in}**.
             'Taking f_{L} and f_{H} from the 9 points of your card: they are too far apart. **Turn the knob.**']
 
 
+OLD = {'Low-pass RLC – output across C', 'High-pass RLC – output across L'}     # removed 24/10/2026
+THREE = ['L = 1 mH, C = 22 nF ∥ 2.2 nF. The same current flows through R, L and C. Where you take the output decides the filter:',
+         'Across **C** → **low-pass**, across **L** → **high-pass**: they work like the RC filters. New: near f_{0} the output '
+         'can be **bigger than V_{in}** (a peak at f_{max}). Low-pass and high-pass teams measure f_{max} and the highest '
+         'V_{out}/V_{in} in Task 2.',
+         'Across **R** → **band-pass**: only a band of frequencies around f_{0} passes. This is new – the next slides explain it.',
+         'Put the output component at the **ground side**, so both probe grounds are on the same node.']
+THREE_SAY = ('One series RLC circuit can make three filters. It depends on where you take the output.\n'
+             'Across C is a low-pass filter, across L is a high-pass filter. They work like the RC filters. '
+             'New: near f0 the output can be bigger than the input: a peak at f max. '
+             'Low-pass and high-pass teams measure f max and the highest Vout over Vin in Task 2.\n'
+             'Across R is a band-pass filter: only a band of frequencies around f0 passes. This is new: the next slides explain it.\n'
+             'Put the output part at the ground side, so both probe grounds are on the same point.')
+
+
 def run():
     p = Presentation(DECK)
-    titles = {t for t, *_ in SLIDES}
+    titles = {t for t, *_ in SLIDES} | OLD
     lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):          # an earlier run: remove, then add again
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in sl.shapes):
@@ -148,7 +138,16 @@ def run():
     slides = list(p.slides)
     model = next(s for s in slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == AFTER for sh in s.shapes))
     at = slides.index(model) + 1
-    for k, (title, paras, figs, note) in enumerate(SLIDES):
+    tb = next(sh for sh in model.shapes if sh.has_text_frame and 'Where you take the output' in sh.text_frame.text)
+    tf = tb.text_frame
+    for para in tf.paragraphs[1:]:
+        para._p.getparent().remove(para._p)
+    for r in list(tf.paragraphs[0].runs):
+        r._r.getparent().remove(r._r)
+    for k, t in enumerate(THREE):
+        par = tf.paragraphs[0] if k == 0 else tf.add_paragraph(); add_runs(par, t, 16); par.space_after = Pt(8)
+    model.notes_slide.notes_text_frame.text = THREE_SAY
+    for k, (title, paras, figs, note) in enumerate(t for t in SLIDES if t[0] not in OLD):
         s = new_slide(p, model, title)
         if figs:
             text_box(s, 0.55, 1.2, 6.5 if figs[0][1] < 8 else 7.4, 5.7, paras, size=16)

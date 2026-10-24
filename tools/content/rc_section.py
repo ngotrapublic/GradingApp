@@ -81,9 +81,10 @@ NOTICE = {
         '→ This circuit is a **high-pass filter**: it passes high frequencies.'],
 }
 OVERVIEW = {'RC filters': ['RC filters', '1st-order low-pass and high-pass', 'Cut-off frequency fc', 'Exercises 1–3, −3 dB point'],
+            'Series RLC': ['Series RLC', 'Resonance f0 and quality factor Q', 'Band-pass and bandwidth BW'],
             'box4': ['Marked tasks (end of the lab)', 'Task 1: RC cut-off (individual)', 'Task 2: series RLC (team)', 'Measure, plot and conclude']}
 BOX4 = ('Lab 2 exercise', 'Practice, then marks', 'Marked tasks (end of the lab)')     # first line of box 4, old or new
-OVERVIEW_SAY = ('Today has 4 parts: RC filters with Exercises 1 to 3 and the minus 3 dB point, capacitors, series RLC, '
+OVERVIEW_SAY = ('Today has 4 parts: RC filters with Exercises 1 to 3 and the minus 3 dB point, capacitors, series RLC with the band-pass filter and its bandwidth, '
                 'and at the end of the lab the marked tasks: Task 1, RC cut-off, individual, and Task 2, series RLC, as a team: '
                 'measure, plot and conclude.\n'
                 'Reminder: at the start, the instruments are in their default state. Before you measure: check 1X or 10X on the '
@@ -260,7 +261,7 @@ def run():
             continue
         paras = [para for para in sh.text_frame.paragraphs if para.runs]
         first = paras[0].runs[0].text if paras else ''
-        lines = OVERVIEW['RC filters'] if first == 'RC filters' else OVERVIEW['box4'] if first in BOX4 else None
+        lines = OVERVIEW.get(first) if first in ('RC filters', 'Series RLC') else OVERVIEW['box4'] if first in BOX4 else None
         if lines:
             assert len(paras) == len(lines), (first, len(paras))
             for para, t in zip(paras, lines):
