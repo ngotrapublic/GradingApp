@@ -48,29 +48,47 @@ def lab2_member4_rc(labs, sets=(1, 2, 3)):
     return labs
 
 
-def lab2_bandpass(labs):
-    """Lecturer, 24/10/2026: Task 2 is band-pass for every team (output across R); Task 1 is "RC cut-off frequency", not a
-    warm-up. Keys: R_total = Z0 / Q (unchanged), f_max = f0, last value = BW = f0 / Q. Question tokens stay the same
-    (records already stored keep their meaning); only labels change. Safe to run again."""
-    import math, re
-    L2 = labs['2']; V = L2['variants']
-    f0 = 1 / (2 * math.pi * math.sqrt(1e-3 * (22e-9 + 2.2e-9)))
-    for v in V.values():
-        Q = float(re.search(r'Q = ([0-9.]+)', v['info'][0]).group(1))
-        v['keys'][2] = f0 / 1e3; v['keys'][3] = f0 / Q / 1e3
-        v['info'][0] = f'Band-pass (across R), Q = {Q:g}'
-        v['info'][2] = 'Last value: bandwidth BW (kHz)'
-        v['info'][1] = v['info'][1].replace('RC warm-up:', 'RC (Task 1):')
-        v['card'][1] = v['card'][1].replace('Warm-up: RC ', 'Task 1 – RC cut-off frequency: ')
-        v['card'][2] = 'RLC (team – the same circuit for all members): Band-pass (output across R)'
-        v['figs'][1] = v['figs'][1].rsplit('/', 1)[0] + '/rlc_bp.png'
-    q = L2['questions']
-    q[0][1] = 'fc (cut-off frequency)'
-    q[2][1] = 'f_max (the peak, = f0)'
-    q[3][1], q[3][2] = 'BW', 'kHz'
+TASK2 = [(10e-9, 100), (22e-9, 100), (47e-9, 100), (10e-9, 220), (22e-9, 220), (47e-9, 220)]   # (C, R) per team, L = 1 mH
+
+
+def lab2_task2_measure(labs, sets=(1, 2, 3)):
+    """Lecturer, 24/10/2026: Task 2 = measure a band-pass RLC filter, the same as Exercises 6-7, with the team's own C and R
+    (one capacitor, one resistor; L = 1 mH): no design, no Q, no capacitors in parallel. The team submits f0 (4 marks) and
+    BW (5 marks, tolerance 20 % / 35 %); keys f0 = 1/(2π√(LC)), BW = R/(2πL) (the coil wire R_L is ignored).
+    Each class: the 6 teams get the 6 (C, R) pairs, rotated by class. 9 frequencies on the card around f0.
+    Sets the final Lab 2 question list: [C (Task 1), f0, BW, R (Task 1)] and keys [target fc, f0, BW, 0]."""
+    import math
+    L2 = labs['2']; V = L2['variants']; L = 1e-3
+    for s in sets:
+        for t in range(1, 7):
+            C, R = TASK2[(t - 1 + 2 * s) % 6]
+            f0 = 1 / (2 * math.pi * math.sqrt(L * C)) / 1e3; bw = R / (2 * math.pi * L) / 1e3
+            freqs = ', '.join(f'{f0 * k:.1f}' for k in (0.25, 0.4, 0.6, 0.8, 1.0, 1.25, 1.6, 2.5, 4.0))
+            for m in (1, 2, 3, 4):
+                v = V.get(str(s * 100 + 3 * (t - 1) + m if m < 4 else s * 100 + 18 + t))
+                if v is None:
+                    continue
+                v['keys'] = [v['keys'][0], f0, bw, 0]
+                v['info'][0] = f'Band-pass (across R): C = {C * 1e9:g} nF, R = {R} Ω (f0 = {f0:.2f} kHz, BW = {bw:.2f} kHz)'
+                v['info'][2] = 'Task 2: f0 and BW (kHz)'
+                v['card'][2:6] = ['RLC (team – the same circuit for all members): Band-pass (output across R)',
+                                  f'L = 1 mH, C = {C * 1e9:g} nF, R = {R} Ω',
+                                  f'Frequencies (kHz): {freqs}',
+                                  '+ at most 2 extra points near the peak.']
+                v['figs'][1] = v['figs'][1].rsplit('/', 1)[0] + '/rlc_bp.png'
+    L2['questions'] = [['Warm-up fc', 'C you chose (Task 1)', 'nF', 2, {'full': 0.05, 'half': 0.12, 'calc': 'rc_fc', 'from': 3}],
+                       ['f0', 'f0 (the peak frequency)', 'kHz', 4],
+                       ['BW', 'BW = fH − fL', 'kHz', 5, {'full': 0.2, 'half': 0.35}],
+                       ['Task 1 R', 'R you chose (Task 1)', 'Ω', 0]]
+    L2['parts'][0]['questions'] = [3, 0]
+    L2['parts'][1]['questions'] = [1, 2]
     L2['parts'][0]['title'] = ['Task 1 – RC cut-off frequency (individual)', 'Bài 1 – Tần số cắt mạch RC (làm cá nhân)']
     L2['parts'][1]['title'] = ['Task 2 – band-pass RLC filter (team – one circuit for the whole team)',
                                'Bài 2 – Bộ lọc thông dải RLC (làm nhóm – cả nhóm chung một mạch)']
+    L2['parts'][1]['note'] = ['The whole team builds the same band-pass filter (L, C, R on the card), measures the frequencies on the card, '
+                              'finds the peak f0 and the bandwidth BW (as in Exercise 7). Each student types the team values and uploads the graph.',
+                              'Cả nhóm lắp cùng một mạch thông dải (L, C, R trên đề), đo các tần số trên đề, tìm đỉnh f0 và băng thông BW '
+                              '(như Exercise 7). Mỗi SV tự nhập số của nhóm và tải ảnh đồ thị.']
     return labs
 
 
@@ -104,17 +122,7 @@ def lab2_task1_design(labs, sets=(1, 2, 3)):
                 v['card'][1] = (f'Task 1 – RC cut-off frequency: design a {kind.lower()}-pass filter with fc = {target:g} kHz. '
                                 f'Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.')
                 v['figs'][0] = v['figs'][0].rsplit('/', 1)[0] + ('/rc_lp.png' if kind == 'Low' else '/rc_hp.png')
-    # the student submits R and C (the design); the measured fc is only checked by the lecturer at the tick.
-    # Question 0 (token kept, so stored records keep their place) = C in nF, marked on fc = 1/(2πRC) vs the target;
-    # question 4 (new, at the end) = R in Ω, input only (0 marks). The student page shows R first, then C.
-    Q = labs['2']['questions']
-    Q[0] = ['Warm-up fc', 'C you chose (Task 1)', 'nF', 2, {'full': 0.05, 'half': 0.12, 'calc': 'rc_fc', 'from': 4}]
-    if len(Q) == 4:
-        Q.append(['Task 1 R', 'R you chose (Task 1)', 'Ω', 0])
-    for v in V.values():
-        if len(v['keys']) == 4:
-            v['keys'].append(0)
-    labs['2']['parts'][0]['questions'] = [4, 0]
+    # the student submits R and C (the design); marks from fc = 1/(2πRC) vs the target. Question layout: lab2_task2_measure.
     labs['2']['parts'][0]['note'] = ['Design: choose R and C for the target fc on your card. Submit the R and C you chose (the printed values). '
                                      'Marks: fc = 1/(2πRC) within ±5 % of the target (half: ±12 %). The lecturer checks fc on your oscilloscope.',
                                      'Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Nộp R và C đã chọn (giá trị in trên linh kiện). '

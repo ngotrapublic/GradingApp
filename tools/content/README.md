@@ -51,8 +51,10 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 14. `instrument_slides.py` – Lab 2: cách bấm máy có ảnh thật đánh số nút (osci TBS1052C, máy phát AFG1022) trước Exercise 1;
    Exercise 7 (bài tập trên lớp, mạch của Exercise 6): tìm đỉnh, tìm f_L, f_H, BW, bảng, trả lời. Task 2 (chấm điểm) chỉ
    thêm 1 dòng "dùng cách của Exercise 7". Ảnh: `fig_instruments.py` (lấy từ Lab 1).
-15. `lab2_task2.py` – Lab 2 Task 2 = thông dải cho mọi nhóm: sửa chữ các slide design and build, measure and plot, What to
-   submit (đáp án: `lab2_team.lab2_bandpass`, đã áp vào `keys.json`).
+15. `lab2_task2.py` – Lab 2: Task 1 = thiết kế (nộp R, C; chấm f_c = 1/(2πRC) so với mục tiêu); Task 2 = đo mạch thông dải
+   giống Exercise 6–7 với C, R của nhóm (nộp f_0, BW). Sửa chữ các slide Task 1, Task 2, Devices, Real components, What to
+   submit. Đáp án: `lab2_team.lab2_task1_design`, `lab2_team.lab2_task2_measure` (đã áp vào `keys.json`). File Excel mẫu:
+   `lab2_template.py`.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
 17. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 

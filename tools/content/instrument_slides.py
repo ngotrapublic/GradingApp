@@ -57,11 +57,11 @@ ANSWER = ['**Theory:** BW = (R + R_{L}) / (2πL). With R = 100 Ω and R_{L} ≈ 
           'BW ≈ 110 Ω / (2π × 1 mH) ≈ **17.5 kHz**.',
           'Then f_{L} is about **9 kHz** and f_{H} about **27 kHz**. Check: √(f_{L} × f_{H}) ≈ f_{0} ≈ 15.9 kHz.',
           'A difference of 10–20% is normal: L (±10%) and C are not exact, and reading 0.707 on the screen is not exact.',
-          'In Task 2 you use the same method to find f_{max}, f_{L} and f_{H} of your team filter.']
+          'In Task 2 you use the same method to find f_{0}, f_{L} and f_{H} of your team filter.']
 OLD = {'Task 2 – find the peak (all teams)', 'Task 2 – find fL, fH and BW (band-pass teams)', 'Task 2 – BW table',  # 24/10/2026: not Task 2
        'Exercise 7 – measure the bandwidth (1/3)', 'Exercise 7 – measure the bandwidth (2/3)',
        'Exercise 7 – measure the bandwidth (3/3)'}                                           # the table slide was removed
-PLOT_LINE = 'To find f_{max}, f_{L} and f_{H}, use the method of Exercise 7 (turn the knob slowly).'
+PLOT_LINE = 'To find f_{0}, f_{L} and f_{H}, use the method of Exercise 7 (turn the knob slowly).'
 TITLES = {SCOPE[0], GEN[0], PEAK[0], EDGES[0], ANSWER_TITLE} | OLD
 
 
@@ -130,8 +130,8 @@ def run():
     # Task 2 (marked): one line that points to the method of Exercise 7
     plot = find_title(p, 'Task 2 (team) – measure and plot')
     for sh in plot.shapes:
-        if sh.has_text_frame and 'Find the highest' in sh.text_frame.text and 'Exercise 7' not in sh.text_frame.text:
-            para = next(x for x in sh.text_frame.paragraphs if 'Find the highest' in x.text)
+        if sh.has_text_frame and 'Find the ' in sh.text_frame.text and 'Exercise 7' not in sh.text_frame.text:
+            para = next(x for x in sh.text_frame.paragraphs if x.text.startswith('Find the highest') or x.text.startswith('Find the peak'))
             size = next((r.font.size for r in para.runs if r.font.size), None)
             new = para._p.addnext(copy.deepcopy(para._p)) or para._p.getnext()
             from pptx.text.text import _Paragraph

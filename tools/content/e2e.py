@@ -98,7 +98,8 @@ st = C['students'][0]; v = str(var(st)); vals = answers('2', v); tgt = KEYS['2']
 s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
 for off, want in ((1.08, 13), (1.03, 14)):
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': False}); s.call('/api/public/unsubmit', {'cls': cid, 'lab': '2'})
-    vals[0] = 1 / (2 * math.pi * vals[4] * tgt * off * 1e3) * 1e9               # C (nF) for fc = target × off with the same R
+    ri = KEYS['2']['questions'][0][4]['from']                                      # index of R (Task 1)
+    vals[0] = 1 / (2 * math.pi * vals[ri] * tgt * off * 1e3) * 1e9              # C (nF) for fc = target × off with the same R
     s.call('/api/public/submit', {'cls': cid, 'lab': '2', 'values': vals})
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': True})
     m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][1]

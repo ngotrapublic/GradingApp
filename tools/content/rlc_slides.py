@@ -96,35 +96,13 @@ APPS_SAY = ('Filters are everywhere.\n'
             'High-pass: a tweeter gets only the treble. A microphone uses a high-pass filter to remove wind noise. '
             'A coupling capacitor blocks DC: you use one in Lab 4.\n'
             'Band-pass: a radio receives one station. Wi-Fi uses one channel. An equalizer has bands for bass, middle and treble.')
-T2_TITLE = 'Task 2 – the formulas you need'
-T2_AFTER = 'Task 2 (team) – design and build'
-T2_DESIGN = ['C = 22 nF + 2.2 nF = **24.2 nF** (capacitors in parallel add up).',
-             'f_{0} = 1 / (2π√(LC)) ≈ **32.35 kHz**.   Z_{0} = √(L / C) ≈ **203 Ω**.',
-             '**R_{total} = Z_{0} / Q**: the value you need.',
-             'Measure R_{L} of your inductor with the ohmmeter. Then **R = R_{total} − R_{L}**.',
-             'Make R from 47 Ω, 100 Ω and 220 Ω. Series: **R_{1} + R_{2}**. Parallel: **R_{1} × R_{2} / (R_{1} + R_{2})**. You can use up to 3 resistors. Choose the closest value.',
-             'Then measure R and the inductor together with the ohmmeter. **Submit this measured R_{total}.**']
-T2_EXPECT = ['**f_{max} = f_{0}** ≈ 32.35 kHz: the peak.',
-             '**BW = f_{0} / Q**.',
-             'f_{L} and f_{H}: where V_{out}/V_{in} = 0.707 × the peak.',
-             'Compare your measured values with these values in your conclusion.']
-T2_EXAMPLE = ('**Example** (Q = 4, not on any card): R_{total} = 203 Ω / 4 ≈ 50.8 Ω. If R_{L} = 10 Ω, then R = 50.8 − 10 = 40.8 Ω. '
-              'The closest combination is 220 Ω ∥ 47 Ω ≈ 38.7 Ω.')
-T2_SAY = ('These are all the formulas you need for Task 2.\n'
-          'Design. The two capacitors are in parallel, so they add up: 24.2 nanofarad. Then f0 is about 32.35 kilohertz and Z0 is about 203 ohms. '
-          'R total = Z0 over Q: the value you need. Measure R L of your inductor, then R = R total minus R L. '
-          'Make R from 47, 100 and 220 ohm resistors: in series they add up, in parallel R1 times R2 over R1 plus R2. You can use up to 3 resistors. Choose the closest value. '
-          'Then measure R and the inductor together with the ohmmeter, and submit this measured R total.\n'
-          'What to expect. f max = f0, about 32.35 kilohertz: the peak. BW = f0 over Q. f L and f H are where Vout over Vin is 0.707 times the peak. '
-          'Compare your measured values with these values in your conclusion.\n'
-          'Example with Q = 4, which is not on any card: R total is about 50.8 ohms. If R L is 10 ohms, R is 40.8 ohms. '
-          'The closest combination is 220 ohms parallel 47 ohms, about 38.7 ohms.')
 BEFORE_APPS = 'Where are RLC circuits used?'
 
 OLD = {'Low-pass RLC – output across C', 'High-pass RLC – output across L',     # removed 24/10/2026
        'Band-pass RLC – why only a band passes',
        'Band-pass – measuring BW step by step', 'Band-pass – BW table',               # now in instrument_slides.py
-       'Series RLC – key formulas'}                                                   # removed by the lecturer's request
+       'Series RLC – key formulas',                                                   # removed by the lecturer's request
+       'Task 2 – the formulas you need'}                                              # Task 2 is a measurement now (no design)
 THREE = ['One RLC circuit can make three filters. It depends on where you measure the output.',
          'Across **C**: a **low-pass** filter. Across **L**: a **high-pass** filter. They work like the RC filters.',
          'Across **R**: a **band-pass** filter. It passes only the **middle** frequencies, around f_{0}.',
@@ -135,7 +113,7 @@ THREE_SAY = ('One RLC circuit can make three filters. It depends on where you me
              'Always put the output part at the ground side, so both probe grounds are on the same point.')
 def run():
     p = Presentation(DECK)
-    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, T2_TITLE}
+    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE}
     lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):          # an earlier run: remove, then add again
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in sl.shapes):
@@ -164,15 +142,6 @@ def run():
             pic(s, name, x, y, w)
         s.notes_slide.notes_text_frame.text = note
         sid = lst[-1]; lst.remove(sid); lst.insert(at + k, sid)
-    # Task 2: every formula the team needs, right after "Task 2 (team) – design and build"
-    s = new_slide(p, model, T2_TITLE)
-    text_box(s, 0.45, 1.2, 6.3, 4.6, T2_DESIGN, size=17, box=True, title='1. Design: find R')
-    text_box(s, 6.95, 1.2, 5.9, 4.6, T2_EXPECT, size=19, box=True, title='2. What to expect (theory)')
-    text_box(s, 0.45, 5.95, 12.4, 0.9, [T2_EXAMPLE], size=16)
-    s.notes_slide.notes_text_frame.text = T2_SAY
-    t2 = next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == T2_AFTER for sh in x.shapes))
-    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(t2) + 1, sid)
-
     # "Filters in real life": three columns, each with the response shape and three examples (icon + a few words)
     s = new_slide(p, model, APPS_TITLE)
     for k, (head, kind, items) in enumerate(APPS):
@@ -187,7 +156,7 @@ def run():
     # before the Hanoi slides "Where are RLC circuits used?"; the lecturer removed them (24/10/2026): then after "Real components"
     ref = next((x for x in p.slides if any(sh.has_text_frame and BEFORE_APPS in sh.text_frame.text for sh in x.shapes)), None)
     after = ref is None
-    ref = ref or next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == 'Real components at 32 kHz'
+    ref = ref or next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in ('Real components at 32 kHz', 'Real components')
                                                  for sh in x.shapes))
     sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(ref) + (1 if after else 0), sid)
     p.save(DECK)

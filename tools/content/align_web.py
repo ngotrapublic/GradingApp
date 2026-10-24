@@ -159,14 +159,15 @@ def lab2(p):
              'Submit the R and C you chose, the printed values. Full marks when 1 over 2 pi R C is within 5 percent of the target.\n'
              'One student uses the oscilloscope at a time. The others build or calculate. When you finish, give the oscilloscope to the next student.\n'
              'Open your card on the student page now.')
-    s = by_title(p, 'Lab 2 exercise – design and build', 'Task 2 (team) – design and build')
+    s = by_title(p, 'Lab 2 exercise – design and build', 'Task 2 (team) – design and build', 'Task 2 (team) – build the filter')
     rep(s, [('Lab 2 exercise – design and build', 'Task 2 (team) – design and build'),
             ('Your variant card gives the ', 'Your card gives the ')])
     notes(s, 'Task 2 is team work. The whole team builds one filter. Everybody in the team has the same Task 2 on the card.\n'
-             'Every team builds a band-pass filter: the output is across R. Your card gives Q. Measure R L. Calculate R total = 203 / Q. '
-             'Then R = R total − R L. Make R from 47, 100 and 220 Ω.\n'
-             'Measure R and the coil together with the ohmmeter. That is your R total for the student page.\n'
-             'Show me your calculation before you build.')
+             'Every team builds a band-pass filter, the same circuit as in Exercise 6. Your card gives C and R. L is 1 millihenry.\n'
+             'Take the inductor, the capacitor and the resistor on your card. Build the filter: generator, L, C, then R to ground. '
+             'The output, CH2, is across R.\n'
+             'Function generator: sine, 2 volts peak-to-peak, High-Z. CH1 is Vin, CH2 is Vout.\n'
+             'Before you measure, calculate f0 = 1 over 2 pi root L C, and BW = R over 2 pi L.')
     s = by_title(p, 'Lab 2 exercise – measure and plot', 'Task 2 (team) – measure and plot')
     rep(s, [('Lab 2 exercise – measure and plot', 'Task 2 (team) – measure and plot'),
             (' from the student page (under your Lab 2 card) and open it. For each frequency on your card, measure ',
@@ -177,7 +178,7 @@ def lab2(p):
             (' your graph. Add a photo of your circuit on the student page.', ' your graph.')])
     notes(s, 'Download the Excel file from the student page, under your Lab 2 card.\n'
              'Share the work: each member measures some of the frequencies on the card. Use Measure, Pk-Pk on CH1 and CH2. Do not count squares.\n'
-             'Type the values into the Excel file. The graph draws itself. Add at most 2 points near the peak.\n'
+             'Type your frequencies and values into the Excel file. The graph draws itself. Add at most 2 points near the peak.\n'
              'Find f L and f H, then BW. Use the method of Exercise 7.\n'
              'Write 1 to 3 sentences of conclusion.\n'
              'Each member submits the team values and one screenshot of the graph on the student page. Not a photo of the circuit. Then call me.')
