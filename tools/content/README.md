@@ -40,13 +40,14 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    để đăng nhập trang SV. Chạy lại thì thay hộp cũ.
 10. `table_words.py` – phòng HCM chỉ có bàn ghế, không có "bench": đổi bench → table trong chữ và lời giảng của 4 bộ
    slide. Chạy **trước** bước 5 (để các script tìm thấy slide cũ theo tiêu đề mới) và chạy lại ở cuối.
-11. `practice_slides.py` – Lab 2–4: slide bài tập nhỏ theo kiểu Lab 1 mới ("Exercise N: … (X minutes)", các bước đánh số,
-   hình bên phải, 1 câu hỏi cuối). Không chấm điểm. Giá trị minh họa không trùng mã đề, dùng linh kiện còn dư
-   (RC 10 kΩ + 104; RLC 1 mH + 104 + 100 Ω; Lab 3, 4 dùng chính mạch của bài). Hình: `fig_practice.py`.
-   Chạy sau `align_web.py` và `rlc_slides.py`; chạy lại thì thay các slide bài tập cũ.
-12. `rc_section.py` – Lab 2 phần RC dùng một mạch duy nhất (10 kΩ + 104, fc ≈ 159 Hz) thay mạch 47k của HN, theo thứ tự
-   làm → thấy → giải thích → đo chính xác: bảng 10 Hz…10 kHz, "What do you notice?" có đồ thị, slide màn hình osci,
-   slide chia áp (vì sao Vout giảm), slide "Why 0.707?". Lời giảng = đúng ý trên slide. Chạy **sau** `practice_slides.py`.
+11. `practice_slides.py` – Lab 2–4: bài tập nhỏ theo kiểu Lab 1 ("Exercise N: … (X minutes)", bước đánh số, hình bên phải,
+   1 câu hỏi cuối), **gom thành 1 khối** (slide "Practice exercises" + các bài) ngay trước bài chấm điểm đầu tiên.
+   Không chấm điểm. Giá trị minh họa không trùng mã đề (RC 10 kΩ + 104; RLC 1 mH + 104 + 100 Ω). Hình: `fig_practice.py`.
+12. `rc_section.py` – Lab 2: lý thuyết trước (RC một mạch 10 kΩ + 104, chia áp, đồ thị và điểm −3 dB, công thức f_c; không
+   tính trở kháng), rồi khối bài tập (2 bảng đi sau Exercise 1, 2), rồi Task 1, Task 2. Chạy **sau** `practice_slides.py`.
+13. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
+
+Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `subscripts.py`.
 
 > **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
 > `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).
