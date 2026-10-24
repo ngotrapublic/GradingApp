@@ -123,6 +123,30 @@ APPS_SAY = ('Filters are everywhere.\n'
             'High-pass: a tweeter gets only the treble. A microphone uses a high-pass filter to remove wind noise. '
             'A coupling capacitor blocks DC: you use one in Lab 4.\n'
             'Band-pass: a radio receives one station. Wi-Fi uses one channel. An equalizer has bands for bass, middle and treble.')
+T2_TITLE = 'Task 2 – the formulas you need'
+T2_AFTER = 'Task 2 (team) – design and build'
+T2_DESIGN = ['C = 22 nF + 2.2 nF = **24.2 nF** (capacitors in parallel add up).',
+             'f_{0} = 1 / (2π√(LC)) ≈ **32.35 kHz**.   Z_{0} = √(L / C) ≈ **203 Ω**.',
+             '**R_{total} = Z_{0} / Q**. This is the R_{total} you submit.',
+             'Measure R_{L} of your inductor with the ohmmeter. Then **R = R_{total} − R_{L}**.',
+             'Make R from 47 Ω, 100 Ω and 220 Ω. Series: **R_{1} + R_{2}**. Parallel: **R_{1} × R_{2} / (R_{1} + R_{2})**. Choose the closest value.']
+T2_EXPECT = ['**Low-pass:**   f_{max} = f_{0} × √(1 − 1/(2Q²))',
+             'peak V_{out}/V_{in} = Q / √(1 − 1/(4Q²))',
+             '**High-pass:**   f_{max} = f_{0} / √(1 − 1/(2Q²))',
+             'peak: the same as the low-pass filter',
+             '**Band-pass:**   f_{max} = f_{0}   and   **BW = f_{0} / Q**',
+             'Compare your measured values with these values in your conclusion.']
+T2_EXAMPLE = ('**Example** (Q = 4, not on any card): R_{total} = 203 Ω / 4 ≈ 50.8 Ω. If R_{L} = 10 Ω, then R = 50.8 − 10 = 40.8 Ω. '
+              'The closest combination is 220 Ω ∥ 47 Ω ≈ 38.7 Ω.')
+T2_SAY = ('These are all the formulas you need for Task 2.\n'
+          'Design. The two capacitors are in parallel, so they add up: 24.2 nanofarad. Then f0 is about 32.35 kilohertz and Z0 is about 203 ohms. '
+          'R total = Z0 over Q: this is the R total you submit. Measure R L of your inductor, then R = R total minus R L. '
+          'Make R from 47, 100 and 220 ohm resistors: in series they add up, in parallel R1 times R2 over R1 plus R2. Choose the closest value.\n'
+          'What to expect. Low-pass: f max = f0 times the square root of 1 minus 1 over 2 Q squared, and the peak is Q over the square root of '
+          '1 minus 1 over 4 Q squared. High-pass: f max = f0 divided by the same square root, and the same peak. Band-pass: f max = f0 and BW = f0 over Q. '
+          'Compare your measured values with these values in your conclusion.\n'
+          'Example with Q = 4, which is not on any card: R total is about 50.8 ohms. If R L is 10 ohms, R is 40.8 ohms. '
+          'The closest combination is 220 ohms parallel 47 ohms, about 38.7 ohms.')
 BEFORE_APPS = 'Where are RLC circuits used?'
 
 BW_TABLE_TITLE = 'Band-pass – BW table'
@@ -155,7 +179,7 @@ THREE_SAY = ('One RLC circuit can make three filters. It depends on where you me
 
 def run():
     p = Presentation(DECK)
-    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, BW_TABLE_TITLE}
+    titles = {t for t, *_ in SLIDES} | OLD | {APPS_TITLE, BW_TABLE_TITLE, T2_TITLE}
     lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):          # an earlier run: remove, then add again
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in sl.shapes):
@@ -200,6 +224,15 @@ def run():
     steps = next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == 'Band-pass – measuring BW step by step'
                                               for sh in x.shapes))
     sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(steps) + 1, sid)
+
+    # Task 2: every formula the team needs, right after "Task 2 (team) – design and build"
+    s = new_slide(p, model, T2_TITLE)
+    text_box(s, 0.45, 1.2, 6.3, 4.6, T2_DESIGN, size=17, box=True, title='1. Design: find R')
+    text_box(s, 6.95, 1.2, 5.9, 4.6, T2_EXPECT, size=17, box=True, title='2. What to expect (theory)')
+    text_box(s, 0.45, 5.95, 12.4, 0.9, [T2_EXAMPLE], size=16)
+    s.notes_slide.notes_text_frame.text = T2_SAY
+    t2 = next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == T2_AFTER for sh in x.shapes))
+    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(t2) + 1, sid)
 
     # "Filters in real life": three columns, each with the response shape and three examples (icon + a few words)
     s = new_slide(p, model, APPS_TITLE)
