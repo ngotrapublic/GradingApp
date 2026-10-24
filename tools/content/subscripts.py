@@ -6,7 +6,7 @@ import copy, re
 from pptx import Presentation
 
 HCM = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM'
-WORD = re.compile(r'\b(?:(f)(c|0|L|H|max)|(V)(in|out)(,pp)?|(V)(cc|ee|CC|EE)|(V)(R|C|L)|(X)(C|L)|(R)(L|total)(?! circuit)|(Z)(0))\b(?! circuit)')
+WORD = re.compile(r'\b(?:(f)(c|0|L|H|max)|(V)(in|out)(,pp)?|(V)(cc|ee|CC|EE)|(V)(R|C|L)|(X)(C|L)|(R)(L|total|eq)(?! circuit)|(Z)(0))\b(?! circuit)')
 
 
 def pieces(text):

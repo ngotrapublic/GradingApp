@@ -55,6 +55,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    giống Exercise 6–7 với C, R của nhóm (nộp f_0, BW). Sửa chữ các slide Task 1, Task 2, Devices, Real components, What to
    submit. Đáp án: `lab2_team.lab2_task1_design`, `lab2_team.lab2_task2_measure` (đã áp vào `keys.json`). File Excel mẫu:
    `lab2_template.py`.
+16. `review_reveal.py` – Lab 2–4: slide "Review – words from Lab N" hiện đáp án từng dòng khi bấm (khung chữ đặt lên từng ô,
+   hiệu ứng Appear); bỏ slide "(answers)". Chạy lại không làm gì nữa.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
 17. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 
