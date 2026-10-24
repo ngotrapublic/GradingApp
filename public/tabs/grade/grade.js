@@ -17,9 +17,13 @@ function renderGrade(m){
     ${(()=>{ const ch=changedSince(S.lab); return ch.length? `<div class="card" style="padding:10px 12px;background:#fff7e0;border-color:#e0a800">${T(`Lab ${S.lab}: <b>${ch.length} student(s)</b> with marks not yet sent to Canvas.`,`Lab ${S.lab}: <b>${ch.length} SV</b> có điểm chưa đưa lên Canvas.`)} <a href="#" id="gosend">${T('Go to Canvas tab →','Gửi Canvas →')}</a></div>`:''; })()}
     ${pubBox()}
     <input type="search" id="q" placeholder="${T('Search name / student ID / variant','Tìm tên / MSSV / mã đề')}" value="${esc(S.q)}" style="margin-bottom:10px">`;
+  { const notes={}; for(let b=1;b<=6;b++){ const mem=st.filter(s=>+s.team===b); if(mem.length) notes[b]=`${mem.filter(s=>rec(s.sid).tick).length}/${mem.length} ✓`; }
+    html += `<details class="mapbox" ${S.bench?'open':''}><summary class="muted">${T('Room map – tap a bench to show only that team','Sơ đồ phòng – bấm vào cụm để chỉ hiện nhóm đó')}${S.bench?` · <b>${T('Bench','Cụm')} ${S.bench}</b>`:''}</summary>
+      ${benchMap({active:S.bench, clickable:true, notes})}${S.bench?`<div class="btns"><button id="allbench">${T('Show all benches','Hiện tất cả các cụm')}</button></div>`:''}</details>`; }
   if(!st.length) html += `<p class="muted">${T('No students yet. Go to the <b>Class</b> tab to import the class list.','Chưa có danh sách SV. Vào tab <b>Lớp &amp; nhóm</b> để nhập danh sách.')}</p>`;
   const teams={}; st.forEach(s=>{ const k=s.team||'–'; (teams[k]=teams[k]||[]).push(s); });
   for(const [t, arr] of Object.entries(teams)){
+    if(S.bench && String(t)!==String(S.bench)) continue;
     const vis = arr.filter(s=>!q || s.name.toLowerCase().includes(q) || s.sid.toLowerCase().includes(q) || String(variant(s)||'').includes(q));
     if(!vis.length) continue;
     let head = `<div class="team"><span class="sp">${t==='–'?T('No team','Chưa có nhóm'):T('Team ','Nhóm ')+t}</span>`;
@@ -34,6 +38,8 @@ function renderGrade(m){
       return row; }).join('') + `</div>`;
   }
   m.innerHTML = html; bindSeg(m);
+  m.querySelectorAll('[data-bench]').forEach(g=>g.onclick=()=>{ S.bench = String(S.bench)===g.dataset.bench? null : g.dataset.bench; renderGrade(m); });
+  if($('#allbench')) $('#allbench').onclick=()=>{ S.bench=null; renderGrade(m); };
   if($('#gosend')) $('#gosend').onclick=e=>{e.preventDefault(); S.view='sum'; render();};
   $('#q').oninput=e=>{S.q=e.target.value; const p=e.target.selectionStart; renderGrade(m); const n=$('#q'); n.focus(); n.setSelectionRange(p,p);};
   m.querySelectorAll('.st').forEach(e=>e.onclick=()=>{S.open = S.open===e.dataset.sid? null : e.dataset.sid; renderGrade(m);});

@@ -115,7 +115,8 @@ function render() {
     <div class="sub">${esc(I.sid)} | ${esc(I.className)} | ${esc(I.term)}</div>`;
   if (I.team) {
     h += `<div class="teambig"><div><b>${I.team}</b>${T('Team / bench', 'Nhóm / cụm máy')}</div><div><b>${I.member}</b>${T('Member', 'Thành viên')}</div><div><b>${I.variant}</b>${T('Variant', 'Mã đề')}</div></div>
-      <div class="sub">${T('Your team', 'Cùng nhóm')}: ${I.teammates.length ? I.teammates.map(esc).join(', ') : '–'}</div>`;
+      <div class="sub">${T('Your team', 'Cùng nhóm')}: ${I.teammates.length ? I.teammates.map(esc).join(', ') : '–'}</div>
+      <div class="mapbox"><div class="sub">${T(`Your bench: <b>${I.team}</b> (orange). Bench 1 is on the lecturer's left; the numbers go clockwise.`, `Cụm của bạn: <b>${I.team}</b> (màu cam). Cụm 1 ở bên trái giảng viên, đánh số theo chiều kim đồng hồ.`)}</div>${benchMap({ mine: I.team })}</div>`;
   } else {
     h += `<p class="muted">${T('You are not in a team yet. Ask the lecturer.', 'Bạn chưa có nhóm. Hỏi giảng viên.')}</p>`;
   }

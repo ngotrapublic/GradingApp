@@ -91,7 +91,7 @@ def move(p, slide, index):
 
 
 def lab1(p):
-    s = p.slides[4]
+    s = by_title(p, 'How each lab session is marked')
     rep(s, [('Call the lecturer', 'Submit on the student page'),
             ('The lecturer checks ', 'Enter your values, add '),
             ('one reading', 'one photo'),
@@ -107,21 +107,21 @@ def lab1(p):
              'Step 4: call me. I check one number on your instrument. It must be the same as what you submitted. Then I give you a tick. Do not pack up before the tick.\n'
              'The rule is simple: error 10% or less = full marks. 10 to 20% = half. More than 20%, or no tick = 0.\n'
              'If your answer is 1.27 mA, what do you type? … The answer is: 1.27 — number only.')
-    s = p.slides[8]
+    s = by_title(p, 'Devices and components for this session')
     rep(s, [('Reusable parts (LED…) go back to the tray at the end of the session.', 'Reusable parts (LED…) go back to the parts box at the end of the session.'),
             ('Resistors for your variant (listed on your card)', 'Resistors from the parts box: 220, 330, 470, 680 Ω, 1k, 1.5k, 2.2k, 3.3k, 4.7k, 6.8k, 10k, 15k, 22k Ω')])
     notes(s, 'Each team has one PB-503A trainer. It has a breadboard, DC supplies and a speaker.\n'
              'You also have a multimeter, an oscilloscope and a function generator.\n'
              'Take the resistors you need from the parts box of your bench. There are 13 standard values.\n'
              'Look at the PB-503A on your bench. Here is the breadboard, here are the supply outputs, and here is the speaker.')
-    s = p.slides[84]
+    s = by_title(p, 'Lab 1 exercise – Equivalent resistance')
     rep(s, [('Call the lecturer. Then submit your numbers and a photo of your circuit on the student page.',
              'Submit your numbers and one photo of your circuit on the student page. Then call the lecturer for the tick.')])
     notes(s, 'Look at the circuit. R A and R B are in parallel. Then R C and R D are in series.\n'
              'Your card gives R A, R B, R C and R D. These values are not sold. You must make each one from two standard resistors. For example, 5.7 kilo-ohm is 1 kilo-ohm plus 4.7 kilo-ohm.\n'
              'Follow the steps. Measure R eq before you connect the supply.\n'
              'Open your card on the student page now. Take the resistors from the parts box.')
-    s = p.slides[85]
+    s = by_title(p, 'Lab 1 – What to submit')
     rep(s, [('Add 1–3 photos of your real circuit.', 'Add one photo of your real circuit.'),
             ('Before you leave: (1) submit your values on the ', 'Before you leave: (1) submit on the '),
             (', (2) switch off all instruments, (3) put parts back in the tray, (4) clear your breadboard.', ', (2) call the lecturer for the tick, (3) tidy your bench (next slide).')])
@@ -130,10 +130,11 @@ def lab1(p):
              'Use your measured values, not calculated values.\n'
              'Tap Submit, then call me for the tick. To change a number before the tick, tap Unsubmit, edit, and submit again.\n'
              'After the tick, tidy your bench. The next slide shows how.')
-    tidy_slide(p, p.slides[85], '')
+    tidy_slide(p, by_title(p, 'Lab 1 – What to submit'), '')
     # Lab 1 also shows it at the start, after "Your team and the student page", so the first class knows the rule
-    tidy_slide(p, p.slides[85], '')
-    early = p.slides[len(p.slides) - 1]; move(p, early, 6)
+    tidy_slide(p, by_title(p, 'Lab 1 – What to submit'), '')
+    team = list(p.slides).index(by_title(p, 'Your team and the student page (10 minutes)', 'Make your team (10 minutes)'))
+    early = p.slides[len(p.slides) - 1]; move(p, early, team + 1)
     notes(early, 'One more rule for every lab. At the end, your bench must look like this photo.\n'
                  'First wait for my tick. Then switch off everything, clear the breadboard, put the parts back in the parts box, '
                  'put the cables in the box behind the trainer, and put the instruments in their place.\n'

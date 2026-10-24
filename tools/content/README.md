@@ -32,6 +32,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    slide dọn cụm máy). Chạy lại nhiều lần vẫn an toàn.
 6. `rlc_slides.py` – 5 slide giải thích lọc RLC trong Lab 2 (thông thấp, thông cao, thông dải: vì sao, băng thông BW,
    cách đo BW). Hình vẽ bằng `fig_rlc_theory.py`. Chạy sau `align_web.py`; chạy lại thì thay slide cũ.
+7. `bench_map_slide.py` – slide "Find your bench" (sơ đồ phòng chữ U, đánh số theo chiều kim đồng hồ, cụm 1 bên trái
+   giảng viên) sau slide nhóm của Lab 1. Cùng bố cục với `public/js/core/benchmap.js`. Chạy sau `align_web.py`.
 
 ## Linh kiện
 `bom.py`, `bom2.py`, `mkxlsx.py`, `mk2.py`, `mk3.py`, `shop.py` – tạo file mua linh kiện (giá thegioiic).

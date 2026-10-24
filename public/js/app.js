@@ -21,7 +21,7 @@ function render(){
       <button class="qrbtn" id="acct" title="${esc(me.username)}">👤</button></div>
     ${hasCls?`<div class="row" style="margin-top:8px"><select id="cls" style="flex:1;max-width:none">${opts}</select></div>`:''}
     <nav>${tabs.map(([k,t])=>`<button data-v="${k}" class="${S.view===k?'on':''}">${t}</button>`).join('')}</nav></header><main id="main"></main>`;
-  if(hasCls) $('#cls').onchange=e=>{S.cls=e.target.value;localStorage.setItem('cls',S.cls);S.open=null;S.preview=null;S.draft=null;S.gbNew=null;
+  if(hasCls) $('#cls').onchange=e=>{S.cls=e.target.value;localStorage.setItem('cls',S.cls);S.open=null;S.bench=null;S.preview=null;S.draft=null;S.gbNew=null;
     if(!labs().includes(S.lab)) S.lab=labs()[0]; render();};
   app.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;S.preview=null;render();});
   $('#qr').onclick=showQR; $('#acct').onclick=showAccount; bindLangToggle(app);
