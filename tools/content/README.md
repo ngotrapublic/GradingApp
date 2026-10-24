@@ -41,10 +41,11 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 10. `table_words.py` – phòng HCM chỉ có bàn ghế, không có "bench": đổi bench → table trong chữ và lời giảng của 4 bộ
    slide. Chạy **trước** bước 5 (để các script tìm thấy slide cũ theo tiêu đề mới) và chạy lại ở cuối.
 11. `practice_slides.py` – Lab 2–4: bài tập nhỏ theo kiểu Lab 1 ("Exercise N: … (X minutes)", bước đánh số, hình bên phải,
-   1 câu hỏi cuối), **gom thành 1 khối** (slide "Practice exercises" + các bài) ngay trước bài chấm điểm đầu tiên.
-   Không chấm điểm. Giá trị minh họa không trùng mã đề (RC 10 kΩ + 104; RLC 1 mH + 104 + 100 Ω). Hình: `fig_practice.py`.
-12. `rc_section.py` – Lab 2: lý thuyết trước (RC một mạch 10 kΩ + 104, chia áp, đồ thị và điểm −3 dB, công thức f_c; không
-   tính trở kháng), rồi khối bài tập (2 bảng đi sau Exercise 1, 2), rồi Task 1, Task 2. Chạy **sau** `practice_slides.py`.
+   1 câu hỏi cuối), xen trong bài giảng, ngay sau phần lý thuyết liên quan. Không chấm điểm.
+   (Bài chấm điểm trên app mới để cuối buổi.) Giá trị minh họa không trùng mã đề (RC 10 kΩ + 104; RLC 1 mH + 104 + 100 Ω). Hình: `fig_practice.py`.
+12. `rc_section.py` – Lab 2 phần RC: một mạch 10 kΩ + 104; Exercise 1 → bảng → nhận xét → màn hình osci → chia áp →
+   đổi R, C → Exercise 2 → bảng → nhận xét → đồ thị, điểm −3 dB → công thức f_c → Exercise 3 (không tính trở kháng).
+   Task 1 (chấm điểm) dời xuống cuối buổi, ngay trước Task 2. Chạy **sau** `practice_slides.py`.
 13. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 
 Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `subscripts.py`.

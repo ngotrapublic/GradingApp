@@ -1,11 +1,10 @@
 """Lab 2, part 1 (first-order RC) and the order of the lab (lecturer, 24/10/2026):
 - one circuit for the whole part: R = 10 kOhm + C = 100 nF (104), 2 Vpp, fc = 1/(2 pi R C) = 159 Hz (not the Hanoi
   47k + 47k + 0.1 uF circuit);
-- theory first, simple (no impedance calculation): plan, breadboard photo, oscilloscope view, voltage divider,
-  high-pass, the two response graphs + "Reading the graph – the -3 dB point", cut-off formula;
-- all practice exercises in one block at the end, right before Task 1; Task 1 moves down to just before Task 2
-  ("Lab 2 exercise"), so the order is theory (RC, capacitors, inductors, RLC) -> practice block -> Task 1 -> Task 2;
-  the two tables (and the hidden "What do you notice?" answer slides) follow Exercise 1 and Exercise 2;
+- simple theory (no impedance calculation): oscilloscope view, voltage divider, high-pass, the two response graphs +
+  "Reading the graph – the -3 dB point", cut-off formula;
+- Task 1 moves down to just before Task 2 ("Lab 2 exercise"): the marked tasks are at the end of the lab; the practice exercises stay in the lesson
+  (Exercise 1 -> table -> "What do you notice?" -> why; Exercise 3 after the cut-off formula);
 - every idea in the speaker notes is also on the slide.
 Removed: the Hanoi photo "For the first circuit", "analyse these circuits" (impedance), the earlier "Why 0.707?" slide.
 Run after practice_slides.py, then subscripts.py. Running again gives the same slides."""
@@ -34,10 +33,13 @@ xc = lambda f: 1 / (2 * math.pi * f * C)
 ohm = lambda r: f'{r / 1000:.3g} kΩ' if r >= 1000 else f'{r:.3g} Ω'
 
 # ---------------------------------------------------------------- slide text (notes = the same ideas, spoken)
-PLAN = ['In this part we use one circuit: **R = 10 kΩ, C = 100 nF (104)**.',
-        'Function generator → R → C. Vout is across C.',
-        'First the theory: what the circuit does, and why.',
-        'At the end of the lab you build it and measure it (practice exercises).']
+PLAN = ['In this part we use one circuit: **R = 10 kΩ, C = 100 nF (104)**. Function generator → R → C.',
+        '1. Exercise 1: R then C – change the frequency, watch Vout.',
+        '2. Why does Vout change? A voltage divider.',
+        '3. Exercise 2: swap R and C.',
+        '4. Reading the graph: the −3 dB point.',
+        '5. Exercise 3: measure the cut-off frequency fc.',
+        'Task 1 (marked, on the student page) is at the end of the lab.']
 SCOPE = ['**CH1** (yellow) = Vin. **CH2** (blue) = Vout across C. Vin is 2 Vpp at every frequency.',
          '**10 Hz**: Vout is as big as Vin.',
          f'**{FC:.0f} Hz (fc)**: Vout is smaller, and it comes a little later than Vin.',
@@ -48,9 +50,7 @@ DIVIDER = ['**Lab 1:** in a voltage divider, the bigger resistor takes the bigge
            'C acts like a resistor that **changes with frequency**: XC = 1 / (2πfC). The table shows the values.',
            '**Low frequency:** XC is much bigger than R → C takes almost all of Vin → **Vout ≈ Vin**.',
            '**High frequency:** XC is much smaller than R → C takes almost nothing → **Vout ≈ 0**.']
-SWAP = ['R and C are swapped. The output (CH2) is now across R.',
-        'Same divider, but now Vout is on R. Low frequency: C takes almost all of Vin → **Vout ≈ 0**. '
-        'High frequency: R takes almost all of Vin → **Vout ≈ Vin**.']
+SWAP = ['R and C are swapped. The output (CH2) is now across R.']
 READ = ['**Top: gain in dB** = 20 log (Vout / Vin). **0 dB** means Vout = Vin.',
         '**Pass band** (left): gain ≈ 0 dB. The signal passes.',
         '**Corner frequency fc**: the gain is **-3 dB**. −3 dB means Vout = **0.707 × Vin** (half of the power).',
@@ -71,17 +71,21 @@ NOTICE = {
  'lp': ['**Low frequency** (10 Hz): Vout ≈ Vin. The signal **passes**.',
         '**High frequency** (10 kHz): Vout is almost 0. The signal is **blocked**.',
         f'**In between**, Vout falls. It falls around one frequency: the **cut-off frequency fc** (here about {FC:.0f} Hz).',
-        '→ This circuit is a **low-pass filter**: it passes low frequencies.'],
+        '→ This circuit is a **low-pass filter**: it passes low frequencies.',
+        'Why? See the next slides.'],
  'hp': ['**Low frequency** (10 Hz): Vout is almost 0. The signal is **blocked**.',
         '**High frequency** (10 kHz): Vout ≈ Vin. The signal **passes**.',
         f'**Same R and C → same fc** (about {FC:.0f} Hz).',
+        '**Why?** The same divider, but now Vout is on R. Low f: XC is big, C takes most of Vin, little is left for R. '
+        'High f: XC is small, R takes almost all of Vin.',
         '→ This circuit is a **high-pass filter**: it passes high frequencies.'],
 }
-OVERVIEW = [('Warm-up exercise', 'Reading the graph: −3 dB'), ('Lab 2 exercise', 'Practice, then marks'),
-            ('Design for your Q', 'Practice exercises 1–6'), ('Measure the frequency response', 'Task 1: RC cut-off (individual)'),
-            ('Plot and conclude', 'Task 2: series RLC (team)')]
-OVERVIEW_SAY = ('Today has 4 parts: RC filters, capacitors and inductors, series RLC, then the practice exercises and the marked tasks: '
-                'Task 1, RC cut-off, individual, and Task 2, series RLC, as a team.\n'
+OVERVIEW = {'RC filters': ['RC filters', '1st-order low-pass and high-pass', 'Cut-off frequency fc', 'Exercises 1–3, −3 dB point'],
+            'box4': ['Marked tasks (end of the lab)', 'Task 1: RC cut-off (individual)', 'Task 2: series RLC (team)', 'Measure, plot and conclude']}
+BOX4 = ('Lab 2 exercise', 'Practice, then marks', 'Marked tasks (end of the lab)')     # first line of box 4, old or new
+OVERVIEW_SAY = ('Today has 4 parts: RC filters with Exercises 1 to 3 and the minus 3 dB point, capacitors, series RLC, '
+                'and at the end of the lab the marked tasks: Task 1, RC cut-off, individual, and Task 2, series RLC, as a team: '
+                'measure, plot and conclude.\n'
                 'Reminder: at the start, the instruments are in their default state. Before you measure: check 1X or 10X on the '
                 'oscilloscope, and set the function generator to High-Z.')
 
@@ -252,11 +256,16 @@ def run():
     # overview: the new order of the lab
     s = find(p, 'Lab 2 overview')
     for sh in s.shapes:
-        if sh.has_text_frame:
-            for para in sh.text_frame.paragraphs:
-                for r in para.runs:
-                    for old, new in OVERVIEW:
-                        if r.text == old: r.text = new
+        if not sh.has_text_frame:
+            continue
+        paras = [para for para in sh.text_frame.paragraphs if para.runs]
+        first = paras[0].runs[0].text if paras else ''
+        lines = OVERVIEW['RC filters'] if first == 'RC filters' else OVERVIEW['box4'] if first in BOX4 else None
+        if lines:
+            assert len(paras) == len(lines), (first, len(paras))
+            for para, t in zip(paras, lines):
+                para.runs[0].text = t
+                for r in para.runs[1:]: r._r.getparent().remove(r._r)
     set_notes(s, OVERVIEW_SAY)
 
     # plan (the old Hanoi step slide)
@@ -305,7 +314,6 @@ def run():
     swap_pictures(s, [hp])
     set_notes(s, 'Swap R and C: a high-pass filter.\n' + spoken(SWAP))
     swap = s
-    move_after(p, [s1, s2, swap], photo)                   # plan, photo, scope, divider, high-pass
 
     # theory slides with circuits: our circuits; the response graphs + "Reading the graph"
     graphs = None
@@ -340,14 +348,10 @@ def run():
         textbox(s, 0.47, 1.5, 6.2, 4.4, lines, gap=14).name = MARK + ' cutoff'
         swap_pictures(s, [lp if kind == 'lp' else hp])
         set_notes(s, spoken(lines) + ('\n' + callout if kind == 'lp' else ''))
-    move_after(p, [cut[1]], cut[0])
-
-    # practice block -> right before Task 1, Task 1 -> right before Task 2 ("Lab 2 exercise" section)
+    # the marked Task 1 goes to the end of the lab, right before Task 2 ("Lab 2 exercise" section)
     task1 = find(p, 'Task 1 (individual) – RC cut-off frequency')
     task2 = find(p, 'Series RLC filter')
     move_before(p, [task1], task2)
-    block = [s for s in p.slides if is_practice(s)]
-    move_before(p, block, task1)
 
     # tables and the hidden answer slides follow Exercise 1 and Exercise 2
     tables = [s for s in p.slides if any(sh.has_table and sh.table.cell(0, 0).text.startswith('Generated frequency') for sh in s.shapes)]
@@ -367,14 +371,16 @@ def run():
         clear(s); textbox(s, 0.47, 2.1, 6.2, 4.8, NOTICE[kind])
         picture(s, notice_graph(kind), 6.9, 1.45, 6.1, 4.6, top=True)
         set_notes(s, 'What do you notice?\n' + spoken(NOTICE[kind]))
-    ex = {k: find(p, f'Exercise {k}:') for k in (1, 2)}
-    move_after(p, [tables[0], notice[0]], ex[1])
-    move_after(p, [tables[1], notice[1]], ex[2])
+    # order of the RC part: plan, photo, Exercise 1, table, notice, oscilloscope, divider, high-pass, Exercise 2, table,
+    # notice, ... response graphs, reading the graph, ..., cut-off (low-pass), Exercise 3, cut-off (high-pass)
+    ex = {k: next(sl for sl in p.slides if is_practice(sl) and f'Exercise {k}:' in text_of(sl)) for k in (1, 2, 3)}
+    move_after(p, [ex[1], tables[0], notice[0], s1, s2, swap, ex[2], tables[1], notice[1]], photo)
+    move_after(p, [ex[3], cut[1]], cut[0])
 
     p.save(DECK)
     idx = lambda s: list(p.slides).index(s) + 1
     print('Lab 2:', ', '.join(f'{idx(s)} {n}' for s, n in [(plan, 'plan'), (s1, 'scope'), (s2, 'divider'), (swap, 'high-pass'),
-          (graphs, 'graphs'), (s3, 'reading -3 dB'), (cut[0], 'cut-off'), (block[0], 'practice block'), (tables[0], 'table LP'),
+          (graphs, 'graphs'), (s3, 'reading -3 dB'), (cut[0], 'cut-off'), (ex[3], 'Exercise 3'), (tables[0], 'table LP'),
           (tables[1], 'table HP'), (task1, 'Task 1'), (task2, 'Task 2')]), '|', len(p.slides), 'slides')
 
 
