@@ -127,7 +127,7 @@ rows = [['Value to submit (student page)', 'Unit', 'Marks'],
         ['Measured R_total (R + inductor, DC)', 'Ω', '3'],
         ['Frequency of maximum output f_max', 'kHz', '3'],
         ['- Low-pass / high-pass: highest Vout/Vin\n- Band-pass: bandwidth BW', '–\nkHz', '3'],
-        ['Graph + conclusion (checked by the lecturer at your bench)', '–', '3'],
+        ['Graph + conclusion (checked by the lecturer at your table)', '–', '3'],
         ['**Total**', '', '**14**']]
 s_sub = dk.new_slide(header(ids, 'Lab 2 – What to submit') + table(ids, 0.55, 1.3, [8.0, 1.3, 1.1], rows, sz=16, row_h=0.55)
     + textbox(ids, 0.55, 5.9, 12.2, 1.0, para('Before you leave: submit your values on the **student page**, switch off all instruments and clear your breadboard.', 18)))

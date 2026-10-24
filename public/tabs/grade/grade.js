@@ -18,8 +18,8 @@ function renderGrade(m){
     ${pubBox()}
     <input type="search" id="q" placeholder="${T('Search name / student ID / variant','Tìm tên / MSSV / mã đề')}" value="${esc(S.q)}" style="margin-bottom:10px">`;
   { const notes={}; for(let b=1;b<=6;b++){ const mem=st.filter(s=>+s.team===b); if(mem.length) notes[b]=`${mem.filter(s=>rec(s.sid).tick).length}/${mem.length} ✓`; }
-    html += `<details class="mapbox" ${S.bench?'open':''}><summary class="muted">${T('Room map – tap a bench to show only that team','Sơ đồ phòng – bấm vào cụm để chỉ hiện nhóm đó')}${S.bench?` · <b>${T('Bench','Cụm')} ${S.bench}</b>`:''}</summary>
-      ${benchMap({active:S.bench, clickable:true, notes})}${S.bench?`<div class="btns"><button id="allbench">${T('Show all benches','Hiện tất cả các cụm')}</button></div>`:''}</details>`; }
+    html += `<details class="mapbox" ${S.bench?'open':''}><summary class="muted">${T('Room map – tap a table to show only that team','Sơ đồ phòng – bấm vào bàn để chỉ hiện nhóm đó')}${S.bench?` · <b>${T('Table','Bàn')} ${S.bench}</b>`:''}</summary>
+      ${benchMap({active:S.bench, clickable:true, notes})}${S.bench?`<div class="btns"><button id="allbench">${T('Show all tables','Hiện tất cả các bàn')}</button></div>`:''}</details>`; }
   if(!st.length) html += `<p class="muted">${T('No students yet. Go to the <b>Class</b> tab to import the class list.','Chưa có danh sách SV. Vào tab <b>Lớp &amp; nhóm</b> để nhập danh sách.')}</p>`;
   const teams={}; st.forEach(s=>{ const k=s.team||'–'; (teams[k]=teams[k]||[]).push(s); });
   for(const [t, arr] of Object.entries(teams)){

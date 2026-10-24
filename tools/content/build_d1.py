@@ -50,7 +50,7 @@ rows = [['Component', 'Weight', 'Details'],
         ['**Final exam**', '50%', '- Practical exam, 3 hours\n- Random groups of up to 3 students, from your own class\n- Group marks + individual marks (each member measures and explains)'],
         ['**Total**', '100%', '']]
 s_ass = dk.new_slide(header(ids, 'Assessment') + table(ids, 0.55, 1.4, [2.8, 1.2, 8.2], rows, sz=16, row_h=1.0)
-    + textbox(ids, 0.55, 5.6, 12.2, 1.2, para('Teams: make a team of **3 students** today. You keep the same team and the same bench for Lab 1 to Lab 4. Each student still has **their own** exercise.', 18)))
+    + textbox(ids, 0.55, 5.6, 12.2, 1.2, para('Teams: make a team of **3 students** today. You keep the same team and the same table for Lab 1 to Lab 4. Each student still has **their own** exercise.', 18)))
 
 # ---- how each lab session is marked ----
 ids = Ids()
@@ -71,12 +71,12 @@ ids = Ids()
 w, g = 2.85, 0.3
 steps = [('Teams are ready', ['**3 students** per team (one team of 4 if needed).', 'Made at random by the system, in your class.']),
          ('Sign in', ['Scan the QR. Type your student ID, check your name.', 'First time: create a password and remember it.']),
-         ('Find your team', ['The student page shows your team, member and variant.', 'Team number = bench number.']),
-         ('Check your bench', ['Trainer, multimeter, oscilloscope, function generator.', 'Tell me if something is missing.'])]
+         ('Find your team', ['The student page shows your team, member and variant.', 'Team number = table number.']),
+         ('Check your table', ['Trainer, multimeter, oscilloscope, function generator.', 'Tell me if something is missing.'])]
 s_team = dk.new_slide(header(ids, 'Your team and the student page (10 minutes)')
     + ''.join(card(ids, 0.55 + i * (w + g), 1.3, w, 3.1, i + 1, t, b, sz=15) for i, (t, b) in enumerate(steps))
     + textbox(ids, 0.55, 4.8, 12.2, 2.0,
-        para('Your team stays the same for **Lab 1 to Lab 4**. You use the same bench every time.', 17, bullet='dot')
+        para('Your team stays the same for **Lab 1 to Lab 4**. You use the same table every time.', 17, bullet='dot')
         + para('Your member number (1, 2, 3, or 4 in a team of 4) is used for your variant card in every lab.', 17, bullet='dot')
         + para('The final exam groups are different: they are drawn at random on the exam day.', 17, bullet='dot'), fill='F3F7F0', line='B7CFA8', geom='roundRect', inset=0.12))
 

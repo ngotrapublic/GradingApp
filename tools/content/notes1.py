@@ -25,11 +25,11 @@ SAY: Step 4: before you leave, enter your numbers on the student page, under you
 SAY: The rule is simple: error 10% or less = full marks. 10 to 20% = half. More than 20%, or no tick = 0.
 ASK: If your answer is 1.27 mA, what do you type? (1.27 — number only.)""",
 5.5: """SAY: Now we take 10 minutes for your team and the student page.
-SAY: Your teams are ready. The system made them at random, from your class. 3 students per team. We have only 6 benches, so in a class of 19 one team has 4.
+SAY: Your teams are ready. The system made them at random, from your class. 3 students per team. We have only 6 tables, so in a class of 19 one team has 4.
 SAY: Take your phone and scan the QR code on the screen. Type your student ID. Check that the name is your name.
 SAY: The first time, you create a password, at least 6 characters. Remember it. You use it in every lab. If you forget it, ask me and I reset it.
-SAY: The student page shows your team, your member number and your variant. Your team number is your bench number. Your member number is used for your card in every lab.
-SAY: Now go to your bench and check: trainer, multimeter, oscilloscope, function generator. Tell me if something is missing.
+SAY: The student page shows your team, your member number and your variant. Your team number is your table number. Your member number is used for your card in every lab.
+SAY: Now go to your table and check: trainer, multimeter, oscilloscope, function generator. Tell me if something is missing.
 SAY: Your team stays the same for Lab 1 to Lab 4. The exam groups are different: they are random.
 TIP: Before the class: import the class list on the web (tab Students) – teams are drawn at once. Show the student QR (tab Grade → QR for students).""",
 6: """SAY: This is what we have in an electronics lab: power supplies, oscilloscope, function generator, multimeter, and components.
@@ -37,7 +37,7 @@ SAY: Today we use the multimeter, the DC power supply, the oscilloscope and the 
 7: """SAY: Lab rules. Please listen carefully.
 SAY: No food and no drinks in the lab. Do not connect the output of one device to another device without checking.
 SAY: Always check the power supply before you connect it. If you are not sure, ask me.
-SAY: At the end, clean your bench.""",
+SAY: At the end, clean your table.""",
 8: """SAY: Each team has one PB-503A trainer. It has a breadboard, DC supplies and a speaker.
 SAY: You also have a multimeter, an oscilloscope and a function generator.
 SAY: Each student gets resistors for their own variant.

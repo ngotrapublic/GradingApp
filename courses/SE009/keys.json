@@ -3968,7 +3968,7 @@
      "<b>Bài 1</b> = RC cá nhân. <b>Bài 2</b> = RLC nhóm (chung một mạch). Nhập số, tải <b>đúng một ảnh đồ thị RLC Bài 2</b> (không phải ảnh breadboard), rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span>"
     ],
     "check": [
-     "They will check the numbers <span class=\"nowrap\">on the <b>instrument</b></span> against what you submitted, and your <b>RLC graph photo</b>, then confirm at your bench.",
+     "They will check the numbers <span class=\"nowrap\">on the <b>instrument</b></span> against what you submitted, and your <b>RLC graph photo</b>, then confirm at your table.",
      "Họ sẽ đối chiếu số <span class=\"nowrap\">trên <b>máy đo</b></span> với số bạn nộp, và xem <b>ảnh đồ thị RLC</b>, rồi xác nhận tại cụm máy."
     ],
     "need": [

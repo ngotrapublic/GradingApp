@@ -2,7 +2,7 @@
 import re
 
 DO = {
- 'DO: Show the PB-503A, point to the breadboard, the supply outputs and the speaker.': 'Look at the PB-503A on your bench. Here is the breadboard, here are the supply outputs, and here is the speaker.',
+ 'DO: Show the PB-503A, point to the breadboard, the supply outputs and the speaker.': 'Look at the PB-503A on your table. Here is the breadboard, here are the supply outputs, and here is the speaker.',
  'DO: Show the multimeter. Point to the dial, the screen and the three sockets.': 'Look at the multimeter: the dial, the screen and the three sockets.',
  'DO: Read one resistor together with the students using the table.': "Let's read one resistor together with this table.",
  'DO: Set the multimeter to Ω. Touch both ends of a resistor. Do not touch the metal with your fingers.': 'Set your multimeter to Ω. Touch both ends of a resistor. Do not touch the metal with your fingers.',

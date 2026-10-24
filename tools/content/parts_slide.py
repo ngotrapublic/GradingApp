@@ -1,4 +1,4 @@
-"""Lab 1: slide "Parts: use up or give back" right after "Find your bench".
+"""Lab 1: slide "Parts: use up or give back" right after "Find your table".
 Rule (lecturer, 2026-10-24): only resistors are used up; every other part goes back to its bag.
 Run after bench_map_slide.py; running again replaces the slide."""
 import copy, io, re
@@ -9,7 +9,7 @@ from pptx.enum.shapes import MSO_SHAPE
 
 DECK = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/Lab1/HCM Electronic Circuit Lab 1.pptx'
 TITLE = 'Parts: use up or give back'
-AFTER = 'Find your bench'
+AFTER = 'Find your table'
 DARK, GREEN, FILL, LINE = RGBColor(0x22, 0x22, 0x22), RGBColor(0x54, 0x9E, 0x39), RGBColor(0xF3, 0xF7, 0xF0), RGBColor(0xB7, 0xCF, 0xA8)
 RED, RED_FILL, RED_LINE = RGBColor(0xB0, 0x3A, 0x2E), RGBColor(0xFB, 0xEE, 0xEC), RGBColor(0xE3, 0xB4, 0xAE)
 
@@ -61,7 +61,7 @@ def run():
     for i, t in enumerate(RULES):
         q = tf.paragraphs[0] if i == 0 else tf.add_paragraph(); para_runs(q, t, 20); q.space_after = Pt(6)
     s.notes_slide.notes_text_frame.text = (
-        'Every bench has a parts box with small bags. Each bag has one value on its label.\n'
+        'Every table has a parts box with small bags. Each bag has one value on its label.\n'
         'Only resistors are used up. A resistor you used in your circuit goes into the bin.\n'
         'Every other part goes back to its bag: capacitors, the 1 mH inductor, the LM358, the microphone, the LED and the big 470 microfarad capacitors.\n'
         'For a capacitor, read the code on it, for example 104 or 223, and find the bag with that value.\n'

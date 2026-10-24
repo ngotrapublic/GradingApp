@@ -1,6 +1,6 @@
 """Align the 4 HCM decks with the web workflow (run on the final decks, after add_qr.py):
-submit on the student page first, then the lecturer's tick, then tidy the bench; one photo; parts box;
-Lab 2 Task 1 individual / Task 2 team; microphone on female-male jumpers; a 'tidy your bench' slide with the photo."""
+submit on the student page first, then the lecturer's tick, then tidy the table; one photo; parts box;
+Lab 2 Task 1 individual / Task 2 team; microphone on female-male jumpers; a 'tidy your table' slide with the photo."""
 import copy, io
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -8,7 +8,7 @@ from pptx.dml.color import RGBColor
 
 HCM = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM'
 PHOTO = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/fig/bench_tidy.jpg'
-TIDY_TITLE = 'Before you leave – make your bench look like this'
+TIDY_TITLE = 'Before you leave – make your table look like this'
 
 
 def runs(slide):
@@ -50,7 +50,7 @@ def notes(slide, text):
 
 
 def tidy_slide(p, model, extra):
-    """New last slide: title bar + logo copied from `model`, the bench photo, a 6-step checklist."""
+    """New last slide: title bar + logo copied from `model`, the table photo, a 6-step checklist."""
     s = p.slides.add_slide(model.slide_layout)
     for sh in model.shapes:
         if sh.name == 'Title Bar':
@@ -68,7 +68,7 @@ def tidy_slide(p, model, extra):
             para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
             r = para.add_run(); r.text = f'{3 * c + i + 1}.  {t}'; r.font.size = Pt(15); r.font.name = 'Arial'; r.font.color.rgb = RGBColor(0x22, 0x22, 0x22)
             para.space_after = Pt(4)
-    notes(s, 'Before you leave, your bench must look like this photo.\n'
+    notes(s, 'Before you leave, your table must look like this photo.\n'
              'First wait for my tick. Then switch off every instrument and the trainer.\n'
              'Clear the breadboard. The resistors you used go into the bin. Every other part goes back to its bag in the parts box'
              + (extra.replace(' (', '. ').replace(')', '') if extra else '') + '.\n'
@@ -112,8 +112,8 @@ def lab1(p):
             ('Resistors for your variant (listed on your card)', 'Resistors from the parts box: 220, 330, 470, 680 Ω, 1k, 1.5k, 2.2k, 3.3k, 4.7k, 6.8k, 10k, 15k, 22k Ω')])
     notes(s, 'Each team has one PB-503A trainer. It has a breadboard, DC supplies and a speaker.\n'
              'You also have a multimeter, an oscilloscope and a function generator.\n'
-             'Take the resistors you need from the parts box of your bench. There are 13 standard values.\n'
-             'Look at the PB-503A on your bench. Here is the breadboard, here are the supply outputs, and here is the speaker.')
+             'Take the resistors you need from the parts box of your table. There are 13 standard values.\n'
+             'Look at the PB-503A on your table. Here is the breadboard, here are the supply outputs, and here is the speaker.')
     s = by_title(p, 'Lab 1 exercise – Equivalent resistance')
     rep(s, [('Call the lecturer. Then submit your numbers and a photo of your circuit on the student page.',
              'Submit your numbers and one photo of your circuit on the student page. Then call the lecturer for the tick.')])
@@ -124,18 +124,18 @@ def lab1(p):
     s = by_title(p, 'Lab 1 – What to submit')
     rep(s, [('Add 1–3 photos of your real circuit.', 'Add one photo of your real circuit.'),
             ('Before you leave: (1) submit your values on the ', 'Before you leave: (1) submit on the '),
-            (', (2) switch off all instruments, (3) put parts back in the tray, (4) clear your breadboard.', ', (2) call the lecturer for the tick, (3) tidy your bench (next slide).')])
+            (', (2) switch off all instruments, (3) put parts back in the tray, (4) clear your breadboard.', ', (2) call the lecturer for the tick, (3) tidy your table (next slide).')])
     notes(s, 'Type these 4 numbers on the student page, under your card. Use the unit in the table.\n'
              'Add one photo of your real circuit. The photo is required.\n'
              'Use your measured values, not calculated values.\n'
              'Tap Submit, then call me for the tick. To change a number before the tick, tap Unsubmit, edit, and submit again.\n'
-             'After the tick, tidy your bench. The next slide shows how.')
+             'After the tick, tidy your table. The next slide shows how.')
     tidy_slide(p, by_title(p, 'Lab 1 – What to submit'), '')
     # Lab 1 also shows it at the start, after "Your team and the student page", so the first class knows the rule
     tidy_slide(p, by_title(p, 'Lab 1 – What to submit'), '')
     team = list(p.slides).index(by_title(p, 'Your team and the student page (10 minutes)', 'Make your team (10 minutes)'))
     early = p.slides[len(p.slides) - 1]; move(p, early, team + 1)
-    notes(early, 'One more rule for every lab. At the end, your bench must look like this photo.\n'
+    notes(early, 'One more rule for every lab. At the end, your table must look like this photo.\n'
                  'First wait for my tick. Then switch off everything, clear the breadboard, put the used resistors in the bin and every other part back in its bag, '
                  'put the cables in the box behind the trainer, and put the instruments in their place.\n'
                  'You will see this slide again at the end of every lab.')
@@ -183,12 +183,12 @@ def lab2(p):
             ('Frequency of maximum output ', 'Task 2: frequency of maximum output '),
             ('Low-pass / high-pass: highest ', 'Task 2 – low-pass / high-pass: highest '),
             ('Band-pass: bandwidth BW', 'Band-pass: bandwidth BW   (this row: full marks within ±20 %, half within ±35 %)'),
-            ('Graph + conclusion (checked by the lecturer at your bench)', 'Task 2: graph + conclusion (one screenshot on the student page, checked at your bench)'),
+            ('Graph + conclusion (checked by the lecturer at your table)', 'Task 2: graph + conclusion (one screenshot on the student page, checked at your table)'),
             ('Before you leave: submit your values on the ', 'Before you leave: submit on the '),
-            (', switch off all instruments and clear your breadboard.', ', get the lecturer’s tick, then tidy your bench (next slide).')])
+            (', switch off all instruments and clear your breadboard.', ', get the lecturer’s tick, then tidy your table (next slide).')])
     notes(s, 'Task 1 is your own value. Task 2 values are the same for the whole team.\n'
              'Type these numbers on the student page, under your card. Use kHz for frequencies. Add one screenshot of your RLC graph.\n'
-             'Then call me for the tick. After the tick, tidy your bench. The next slide shows how.')
+             'Then call me for the tick. After the tick, tidy your table. The next slide shows how.')
     tidy_slide(p, by_title(p, 'Lab 2 – What to submit'), '')
 
 
@@ -203,9 +203,9 @@ def lab3(p):
     s = p.slides[36]
     rep(s, [('Before you leave: submit your values on the ', 'Before you leave: submit on the '),
             (', return the LM358 and the 470 µF capacitors to the tray, switch off all instruments and clear your breadboard.',
-             ', get the lecturer’s tick, return the LM358 and the 470 µF capacitors to the parts box, then tidy your bench (next slide).')])
+             ', get the lecturer’s tick, return the LM358 and the 470 µF capacitors to the parts box, then tidy your table (next slide).')])
     notes(s, 'Type these numbers on the student page, under your card, and add one photo of your circuit. Gain and R2/R1 have no unit. Vout in volts. Phase in degrees.\n'
-             'Then call me for the tick. After the tick: LM358 and 470 µF capacitors back to the parts box, then tidy your bench. The next slide shows how.')
+             'Then call me for the tick. After the tick: LM358 and 470 µF capacitors back to the parts box, then tidy your table. The next slide shows how.')
     tidy_slide(p, p.slides[36], ' (LM358 and 470 µF too)')
 
 
@@ -230,7 +230,7 @@ def lab4(p):
              'Submit your value and one photo of your circuit on the student page. Then call me for the tick.')
     s = p.slides[91]
     rep(s, [('Before you leave: switch off all instruments, return the op-amp, the microphone and the 470 µF capacitors to the tray, clear your breadboard.',
-             'Before you leave: return the op-amp, the microphone (with its jumpers) and the 470 µF capacitors to the parts box, then tidy your bench (next slide).')])
+             'Before you leave: return the op-amp, the microphone (with its jumpers) and the 470 µF capacitors to the parts box, then tidy your table (next slide).')])
     tidy_slide(p, p.slides[84], ' (LM358, microphone, 470 µF too)')
 
 

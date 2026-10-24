@@ -114,9 +114,9 @@ function render() {
   let h = head + `<main><div class="card who"><div class="nm">${esc(I.name)}</div>
     <div class="sub">${esc(I.sid)} | ${esc(I.className)} | ${esc(I.term)}</div>`;
   if (I.team) {
-    h += `<div class="teambig"><div><b>${I.team}</b>${T('Team / bench', 'Nhóm / cụm máy')}</div><div><b>${I.member}</b>${T('Member', 'Thành viên')}</div><div><b>${I.variant}</b>${T('Variant', 'Mã đề')}</div></div>
+    h += `<div class="teambig"><div><b>${I.team}</b>${T('Team / table', 'Nhóm / bàn')}</div><div><b>${I.member}</b>${T('Member', 'Thành viên')}</div><div><b>${I.variant}</b>${T('Variant', 'Mã đề')}</div></div>
       <div class="sub">${T('Your team', 'Cùng nhóm')}: ${I.teammates.length ? I.teammates.map(esc).join(', ') : '–'}</div>
-      <div class="mapbox"><div class="sub">${T(`Your bench: <b>${I.team}</b> (orange). Bench 1 is on the lecturer's left; the numbers go clockwise.`, `Cụm của bạn: <b>${I.team}</b> (màu cam). Cụm 1 ở bên trái giảng viên, đánh số theo chiều kim đồng hồ.`)}</div>${benchMap({ mine: I.team })}</div>`;
+      <div class="mapbox"><div class="sub">${T(`Your table: <b>${I.team}</b> (orange). Table 1 is on the lecturer's left; the numbers go clockwise.`, `Bàn của bạn: <b>${I.team}</b> (màu cam). Bàn 1 ở bên trái giảng viên, đánh số theo chiều kim đồng hồ.`)}</div>${benchMap({ mine: I.team })}</div>`;
   } else {
     h += `<p class="muted">${T('You are not in a team yet. Ask the lecturer.', 'Bạn chưa có nhóm. Hỏi giảng viên.')}</p>`;
   }
@@ -244,8 +244,8 @@ function submitForm(L) {
   const S_ = L.submit, frozen = !!(S_.locked || S_.submitted || L.review);
   const split = !!(L.parts && L.parts.length);
   const ph = L.photo || {};
-  const howto1 = ph.howto || ['Measure on your bench, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo trên cụm máy, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>'];
-  const howto4 = ph.check || ['They will check the number <span class="nowrap">on the <b>instrument</b></span> (must match what you submitted), your circuit and photo, then confirm at your bench. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số <span class="nowrap">trên <b>máy đo</b></span> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại cụm máy. Chỉ sau khi được xác nhận thì số đo mới tính điểm.'];
+  const howto1 = ph.howto || ['Measure at your table, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo tại bàn của bạn, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>'];
+  const howto4 = ph.check || ['They will check the number <span class="nowrap">on the <b>instrument</b></span> (must match what you submitted), your circuit and photo, then confirm at your table. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số <span class="nowrap">trên <b>máy đo</b></span> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại bàn của bạn. Chỉ sau khi được xác nhận thì số đo mới tính điểm.'];
   const head = ph.head || ['Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)'];
   const empty = ph.empty || ['No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.'];
   const btn = ph.btn || ['Take / choose a photo', 'Chụp / chọn ảnh'];
@@ -255,7 +255,7 @@ function submitForm(L) {
     <ol>
       <li>${T(howto1[0], howto1[1])}</li>
       <li>${T('To change after submitting: tap <b>Unsubmit</b>, edit, then submit again.', 'Muốn sửa sau khi đã nộp: bấm <b>Hủy nộp</b>, sửa, rồi nộp lại.')}</li>
-      <li>${T('<b>Call the lecturer or TA to your bench.</b> Do not pack up or leave until they have ticked you. Submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống cụm máy của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick. Chỉ nộp trên điện thoại là chưa đủ.')}</li>
+      <li>${T('<b>Call the lecturer or TA to your table.</b> Do not pack up or leave until they have ticked you. Submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống bàn của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick. Chỉ nộp trên điện thoại là chưa đủ.')}</li>
       <li>${T(howto4[0], howto4[1])}</li>
     </ol></div>`;
   if (!split) h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;

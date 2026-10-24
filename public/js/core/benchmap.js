@@ -1,5 +1,6 @@
-// Room map of the lab: 6 benches in a U, 2 per side, numbered clockwise; bench 1 is on the lecturer's left.
-// The lecturer's desk and the board are at the open end of the U (bottom of the drawing).
+// Room map of the lab: 6 tables in a U, 2 per side, numbered clockwise; table 1 is on the lecturer's left.
+// The lecturer's desk and the TV are at the open end of the U (bottom of the drawing); the far wall has only a window.
+// (Identifiers still say "bench": a bench = one team's table.)
 // benchMap({mine, active, clickable, notes}) -> SVG string. mine = the student's bench (filled),
 // active = bench chosen as a filter (lecturer page), notes = {bench: 'small text under the number'}.
 const BENCHES = {
@@ -21,7 +22,7 @@ function benchMap({mine=null, active=null, clickable=false, notes={}}={}){
   }
   s+=`<rect x="36" y="74" width="28" height="8" rx="1.5" fill="#eee" stroke="${navy}" stroke-width="0.5"/>`;
   s+=`<text x="50" y="79.4" text-anchor="middle" font-size="3.6" fill="${navy}">${T('Lecturer','Giảng viên')}</text>`;
-  s+=`<rect x="32" y="86" width="36" height="1.6" fill="${navy}"/><text x="50" y="84.6" text-anchor="middle" font-size="3" fill="#666">${T('Board','Bảng')}</text>`;
+  s+=`<rect x="67" y="75" width="10" height="6" rx="0.8" fill="${navy}"/><text x="72" y="79.1" text-anchor="middle" font-size="3.2" fill="#fff">TV</text>`;
   // dashed arc inside the U: the order of the numbers (clockwise, seen from above)
   s+=`<defs><marker id="ah" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#aaa"/></marker></defs>`;
   s+=`<path d="M 23 62 Q 23 26 50 26 Q 77 26 77 60" fill="none" stroke="#aaa" stroke-width="0.6" stroke-dasharray="1.5 1.2" marker-end="url(#ah)"/>`;

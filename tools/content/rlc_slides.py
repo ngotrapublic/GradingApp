@@ -122,7 +122,7 @@ SLIDES = [
         '4.  Turn the frequency **up**, past f_{0}, until V_{out}/V_{in} = target again. This is **f_{H}**.',
         '5.  **BW = f_{H} − f_{L}**. Check: √(f_{L} × f_{H}) should be close to f_{0}.'],
      [],
-     'Now how to measure the bandwidth on the bench. Five steps.\n'
+     'Now how to measure the bandwidth at your table. Five steps.\n'
      'One: go near f0 and turn the frequency slowly. Find the highest Vout over Vin. Write it down.\n'
      'Two: multiply it by 0.707. That is your target.\n'
      'Three: turn the frequency down until the ratio equals the target. That is f L.\n'

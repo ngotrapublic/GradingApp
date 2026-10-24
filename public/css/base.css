@@ -59,7 +59,7 @@ h2{font-size:17px;margin:14px 0 8px}
 .pad{padding:10px 12px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 details summary{cursor:pointer;margin-top:6px}
-/* room map (lab benches in a U) */
+/* room map (lab tables in a U) */
 .benchmap{display:block;width:100%;max-width:360px;margin:6px auto;font-family:inherit}
 .mapbox{margin:6px 0 10px}
 .benchmap [data-bench]:hover rect{opacity:.85}

@@ -1,4 +1,4 @@
-"""Bench sign for the shared electronics lab (A4 landscape, laminated, one per bench), in the style of the Hanoi
+"""Table sign for the shared electronics lab (A4 landscape, laminated, one per table), in the style of the Hanoi
 lab poster: numbered rows with an icon and one short sentence. Left: RULES (10). Right: BEFORE YOU LEAVE (6) + photo.
 Icons: poster_icons.py (Google Material Symbols). Writes HCM/docs/Lab_rules_poster.pptx; PDF via LibreOffice (end)."""
 import os, re
@@ -27,10 +27,10 @@ RULES = [
     ('electric_meter', 'Choose the right **multimeter mode and range**. Never measure current or resistance across a power source.'),
     ('electrical_services', 'Never open an instrument or touch mains plugs and sockets.'),
     ('fire_extinguisher', 'Know where the **main power switch** and the **fire extinguisher** are.'),
-    ('no_food', 'No food or drinks. Keep bags off the benches and the walkways clear.'),
-    ('desk', 'Use only your bench. Do not move instruments, cables or parts to another bench or out of the lab.'),
+    ('no_food', 'No food or drinks. Keep bags off the tables and the walkways clear.'),
+    ('desk', 'Use only your table. Do not move instruments, cables or parts to another table or out of the lab.'),
     ('report', 'Something missing or broken? **Tell the lecturer.** Do not repair it yourself.'),
-    ('cleaning_services', 'Before you leave, **tidy your bench** (see "Before you leave").'),
+    ('cleaning_services', 'Before you leave, **tidy your table** (see "Before you leave").'),
 ]
 LEAVE = [
     ('power_settings_new', 'Switch off **every instrument** and the trainer.'),
@@ -38,7 +38,7 @@ LEAVE = [
     ('inventory_2', 'Parts back in the parts box, **in the right bag**. Broken parts in the bin.'),
     ('cable', 'Test leads, probes and BNC cables into the box behind the trainer.'),
     ('check_circle', 'Instruments back in place, **like the photo**. Chairs in, rubbish in the bin.'),
-    ('how_to_reg', '**Wait for the lecturer** to check your bench before you go.'),
+    ('how_to_reg', '**Wait for the lecturer** to check your table before you go.'),
 ]
 
 
@@ -93,7 +93,7 @@ title = s.shapes.add_textbox(Inches(0.45), Inches(0.22), Inches(W - 0.9), Inches
 p = title.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER; runs(p, 'ELECTRONICS LAB RULES', 32, NAVY, bold_all=True)
 sub = s.shapes.add_textbox(Inches(0.45), Inches(0.82), Inches(W - 0.9), Inches(0.35))
 p = sub.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
-runs(p, 'This lab is shared by many classes. Leave your bench the way you want to find it.', 14, NAVY)
+runs(p, 'This lab is shared by many classes. Leave your table the way you want to find it.', 14, NAVY)
 
 LX, LW, RX, RW, TOP = 0.4, 6.55, 7.2, 4.1, 1.42
 heading(s, LX, TOP, LW, 'RULES')

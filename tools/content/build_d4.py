@@ -92,7 +92,7 @@ ids = Ids()
 rows = [['', 'Final exam'], ['Duration', '3 hours (about 90 minutes of work + setup, instructions and questions)'],
         ['Groups', 'Random groups of up to 3 students, drawn within your class on the exam day'],
         ['Marks', '- Group work: 35 points\n- Individual: 15 points (contribution + personal skills)'],
-        ['Allowed', 'Lab instruments and components on your bench. No help from other groups.'],
+        ['Allowed', 'Lab instruments and components on your table. No help from other groups.'],
         ['Important', '- The instruments start in their default state. Set them up yourself.\n- A member who does nothing fails the exam.']]
 s_fmt = dk.new_slide(header(ids, 'Final exam – format') + table(ids, 0.55, 1.3, [2.2, 10.0], rows, sz=17, row_h=0.8))
 

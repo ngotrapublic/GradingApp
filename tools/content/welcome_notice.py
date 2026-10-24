@@ -1,5 +1,5 @@
 """Lab 1, title slide: a notice that students do not unpack yet (they sit anywhere during the introduction and move
-to their bench after "Find your bench"). Phones stay out: they sign in on the student page at the team slide.
+to their table after "Find your table"). Phones stay out: they sign in on the student page at the team slide.
 Running again replaces the notice."""
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -11,9 +11,9 @@ from pptx.oxml.ns import qn
 DECK = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/Lab1/HCM Electronic Circuit Lab 1.pptx'
 NAME = 'Welcome Notice'
 DARK, ORANGE, FILL = RGBColor(0x22, 0x22, 0x22), RGBColor(0xC2, 0x41, 0x0C), RGBColor(0xFF, 0xF7, 0xF2)
-LINES = ['**Please do not unpack yet.** Keep laptops, notebooks and bags off the bench.',
+LINES = ['**Please do not unpack yet.** Keep laptops, notebooks and bags off the table.',
          'Keep your **phone** – you need it in a few minutes.']
-SAY = ('Please do not unpack yet. Keep your laptops, notebooks and bags off the bench. You will move to your bench '
+SAY = ('Please do not unpack yet. Keep your laptops, notebooks and bags off the table. You will move to your table '
        'after the introduction. Keep your phone: you need it to sign in on the student page.')
 
 
