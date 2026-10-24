@@ -53,26 +53,57 @@ def xlxc():
 
 
 def bp_bw():
+    """Bandwidth, as simple as possible: the peak, the 0.707 × peak line, f_L, f_H and the BW arrow."""
     Q = 4.0; share = 0.15                                  # example only (no variant has Q = 4); 15 % of R_total is the coil wire
-    y = H('BP', Q, Rl_share=share); top = y.max(); lim = 0.707 * top
+    fz = np.linspace(18e3, 52e3, 800); y = H('BP', Q, f=fz, Rl_share=share); top = y.max(); lim = 0.707 * top
     fl = F0 * (math.sqrt(1 + 1 / (4 * Q * Q)) - 1 / (2 * Q)); fh = F0 * (math.sqrt(1 + 1 / (4 * Q * Q)) + 1 / (2 * Q))
-    fig, ax = plt.subplots(figsize=(6.4, 4.2), dpi=150)
-    y = H('BP', Q, f=(fz := np.linspace(15e3, 62e3, 800)), Rl_share=share)
-    ax.plot(fz, y, color=G, lw=2.4)
-    ax.axhline(top, color='#bbb', lw=1, ls='--'); ax.text(61.5e3, top + 0.02, f'highest = {top:.2f}', color='#666', fontsize=11, ha='right')
-    ax.axhline(lim, color=OR, lw=1.3, ls='--'); ax.text(61.5e3, lim + 0.02, f'0.707 × highest = {lim:.2f}', color=OR, fontsize=11, ha='right')
-    for x, t, dx in ((fl, '$f_L$', -1.2e3), (fh, '$f_H$', 1.2e3)):
-        ax.plot([x, x], [0, lim], color=OR, lw=1.2, ls=':'); ax.plot([x], [lim], 'o', color=OR, ms=7)
-        ax.text(x + dx, lim + 0.05, t, color=OR, ha='right' if dx < 0 else 'left', fontsize=13, weight='bold')
-    ax.plot([F0, F0], [0, top], color='#bbb', lw=1, ls=':')
-    ax.annotate('', (fl, lim * 0.45), (fh, lim * 0.45), arrowprops=dict(arrowstyle='<->', color=BL, lw=1.6))
-    ax.text(math.sqrt(fl * fh), lim * 0.5, 'BW', color=BL, ha='center', va='bottom', weight='bold')
-    ax.text(22.8e3, 1.0, f'Example: Q = 4\n$f_L$ ≈ {fl/1e3:.1f} kHz\n$f_H$ ≈ {fh/1e3:.1f} kHz\nBW ≈ {(fh-fl)/1e3:.1f} kHz = $f_0$ / Q',
-            ha='center', va='top', fontsize=11, color='#333', bbox=dict(boxstyle='round', fc='#f3f7f0', ec='#b7cfa8'))
-    ax.set_xlim(15e3, 62e3); ax.set_ylim(0, 1.05); ax.set_xlabel('Frequency (kHz)'); ax.set_ylabel('$V_{out}$ / $V_{in}$')
-    ax.set_xticks([20e3, F0, 40e3, 50e3, 60e3]); ax.set_xticklabels(['20', '$f_0$ = 32.4', '40', '50', '60'])
-    ax.grid(True, color='#e5e5e5'); [ax.spines[k].set_visible(False) for k in ('top', 'right')]
+    fig, ax = plt.subplots(figsize=(7.0, 4.6), dpi=150)
+    ax.fill_between(fz, 0, y, where=(fz >= fl) & (fz <= fh), color=G, alpha=0.12)
+    ax.plot(fz, y, color=G, lw=3)
+    ax.axhline(top, color='#999', lw=1.2, ls='--'); ax.text(51.5e3, top + 0.025, 'peak', color='#555', fontsize=14, ha='right')
+    ax.axhline(lim, color=OR, lw=1.5, ls='--'); ax.text(51.5e3, lim + 0.025, '0.707 × peak', color=OR, fontsize=14, ha='right')
+    for x, t, dx in ((fl, '$f_L$', -0.6e3), (fh, '$f_H$', 0.6e3)):
+        ax.plot([x, x], [0, lim], color=OR, lw=1.3, ls=':'); ax.plot([x], [lim], 'o', color=OR, ms=9)
+        ax.text(x + dx, lim + 0.06, t, color=OR, ha='right' if dx < 0 else 'left', fontsize=17, weight='bold')
+    ax.annotate('', (fl, 0.2), (fh, 0.2), arrowprops=dict(arrowstyle='<->', color=BL, lw=2))
+    ax.text(F0, 0.24, 'BW = $f_H$ − $f_L$', color=BL, ha='center', va='bottom', fontsize=15, weight='bold')
+    ax.set_xlim(fz[0], fz[-1]); ax.set_ylim(0, 1.0); ax.set_xlabel('frequency', fontsize=13); ax.set_ylabel('$V_{out}$ / $V_{in}$', fontsize=13)
+    ax.set_xticks([F0]); ax.set_xticklabels(['$f_0$']); ax.set_yticks([0, 0.5, 1.0])
+    for k in ('top', 'right'): ax.spines[k].set_visible(False)
     fig.tight_layout(); fig.savefig(f'{OUT}/rlc_bp_bw.png'); plt.close(fig)
+
+
+def minis():
+    """Small response shapes for "Filters in real life": low-pass, high-pass, band-pass (no numbers)."""
+    for kind, Q, c in (('LP', 0.71, OR), ('HP', 0.71, BL), ('BP', 2.0, G)):
+        fig, ax = plt.subplots(figsize=(3.0, 1.3), dpi=170)
+        ax.plot(f, H(kind, Q), color=c, lw=3.5); ax.set_xscale('log'); ax.set_xlim(f[0], f[-1]); ax.set_ylim(0, 1.15)
+        ax.set_xticks([]); ax.set_yticks([]); ax.set_xlabel('frequency', fontsize=10, color='#666')
+        for k in ('top', 'right'): ax.spines[k].set_visible(False)
+        fig.tight_layout(pad=0.2); fig.savefig(f'{OUT}/rlc_mini_{kind}.png'); plt.close(fig)
+
+
+def icons():
+    """Material Symbols (Rounded, filled; Apache 2.0) for "Filters in real life", in the colour of each filter.
+    Needs the font in _build/material_symbols (see poster_icons.py); the PNGs are kept in fig/icons."""
+    import os
+    from PIL import Image, ImageDraw, ImageFont
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), '_build', 'material_symbols')
+    if not os.path.exists(os.path.join(src, 'MaterialSymbolsRounded.ttf')):
+        print('font not found: icons not rendered again'); return
+    cp = dict(l.split() for l in open(os.path.join(src, 'MaterialSymbolsRounded.codepoints')))
+    font = ImageFont.truetype(os.path.join(src, 'MaterialSymbolsRounded.ttf'), 230)
+    axes_ = {a['name'].decode() if isinstance(a['name'], bytes) else a['name']: a for a in font.get_variation_axes()}
+    want = {'Fill': 1, 'Weight': 500, 'Grade': 0, 'Optical size': 48}
+    font.set_variation_by_axes([want.get(n, a['default']) for n, a in axes_.items()])
+    for kind, names, c in (('LP', ('speaker', 'power', 'memory'), OR), ('HP', ('volume_up', 'mic', 'block'), BL),
+                           ('BP', ('radio', 'wifi', 'equalizer'), G)):
+        rgb = tuple(int(c[k:k + 2], 16) for k in (1, 3, 5)) + (255,)
+        for name in names:
+            ch = chr(int(cp[name], 16)); im = Image.new('RGBA', (256, 256), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+            l, t, r, b = d.textbbox((0, 0), ch, font=font)
+            d.text(((256 - (r - l)) / 2 - l, (256 - (b - t)) / 2 - t), ch, font=font, fill=rgb)
+            im.save(f'{OUT}/icons/life_{kind}_{name}.png')
 
 
 def bp_q():
@@ -98,5 +129,5 @@ def three():
     fig.tight_layout(); fig.savefig(f'{OUT}/rlc_three.png'); plt.close(fig)
 
 
-lp_hp('LP', 'rlc_lp_curve'); lp_hp('HP', 'rlc_hp_curve'); xlxc(); bp_bw(); bp_q(); three()
+lp_hp('LP', 'rlc_lp_curve'); lp_hp('HP', 'rlc_hp_curve'); xlxc(); bp_bw(); bp_q(); three(); minis(); icons()
 print('figures written to', OUT)

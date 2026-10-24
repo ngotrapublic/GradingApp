@@ -72,13 +72,15 @@ SLIDES = [
      'Below f0, the capacitor blocks the current. Above f0, the inductor blocks the current.\n'
      'At f0, nothing blocks the current. The current is the biggest, so Vout across R is the biggest.'),
     ('Band-pass – bandwidth (BW)', [
-        'The band has two edges, **f_{L}** and **f_{H}**. At each edge, V_{out}/V_{in} = **0.707 × the highest value** (the -3 dB rule, like the RC filters).',
-        'The **bandwidth** is the width of the band: **BW = f_{H} − f_{L}**.',
-        'A bigger R gives a wider band. A smaller R gives a narrow, sharp band (lower graph).'],
-     [('rlc_bp_bw.png', 8.3, 1.12, 4.45), ('rlc_bp_q.png', 8.3, 4.08, 4.45)],
-     'The band has two edges, f L and f H. At each edge, Vout over Vin is 0.707 times the highest value: the minus 3 dB rule, like the RC filters.\n'
-     'The bandwidth is the width of the band: BW = f H minus f L.\n'
-     'A bigger R gives a wider band. A smaller R gives a narrow, sharp band. Look at the lower graph.'),
+        '**Bandwidth (BW)** tells you how wide the band is.',
+        'The two edges are **f_{L}** and **f_{H}**. There, V_{out}/V_{in} = **0.707 × the peak** (-3 dB).',
+        '**BW = f_{H} − f_{L}**',
+        'A bigger R makes the band wider.'],
+     [('rlc_bp_bw.png', 7.1, 1.5, 5.9)],
+     'Bandwidth, BW, tells you how wide the band is.\n'
+     'The two edges are f L and f H. There, Vout over Vin is 0.707 times the peak: minus 3 dB.\n'
+     'BW = f H minus f L.\n'
+     'A bigger R makes the band wider.'),
     ('Band-pass – measuring BW step by step', [
         '1.  Set the function generator near **f_{0}** (about 32.4 kHz). Turn the frequency knob slowly. Find the frequency where V_{out}/V_{in} is the **highest**. Write this value down (for example 0.80).',
         '2.  Calculate the **target**: target = 0.707 × the highest value (for example 0.707 × 0.80 = 0.57).',
@@ -97,24 +99,18 @@ SLIDES = [
      'Do not take f L and f H from the 9 frequencies on your card: they are too far apart. Turn the knob to find them.'),
 ]
 APPS_TITLE = 'Filters in real life'
-APPS = [('Low-pass: passes low frequencies', [
-            'A **subwoofer** gets only the bass (the low sounds) of the music.',
-            'A **power supply** filter removes fast noise and gives a smooth DC voltage.',
-            'Before a microcontroller measures a signal, a low-pass filter removes the high-frequency noise.']),
-        ('High-pass: passes high frequencies', [
-            'A **tweeter** (a small speaker) gets only the treble (the high sounds).',
-            'A **coupling capacitor** blocks DC and lets the audio signal pass. You use one in Lab 4.',
-            'A microphone **low-cut** switch removes wind noise and the 50 Hz hum.']),
-        ('Band-pass: passes only the middle', [
-            'A **radio** receives one station: its LC circuit passes only the frequency of that station.',
-            '**Wi-Fi** and mobile phones pass only their own channel and block the others.',
-            'An audio **equalizer** has separate bands for bass, middle and treble.'])]
-APPS_SAY = ('Filters are everywhere. Low-pass: a subwoofer gets only the bass of the music. A power supply filter removes fast noise '
-            'and gives a smooth DC voltage. Before a microcontroller measures a signal, a low-pass filter removes the high-frequency noise.\n'
-            'High-pass: a tweeter, a small speaker, gets only the treble. A coupling capacitor blocks DC and lets the audio signal pass: '
-            'you use one in Lab 4. A microphone low-cut switch removes wind noise and the 50 hertz hum.\n'
-            'Band-pass: a radio receives one station, because its LC circuit passes only the frequency of that station. '
-            'Wi-Fi and mobile phones pass only their own channel. An audio equalizer has separate bands for bass, middle and treble.')
+APPS = [('Low-pass', 'LP', [('speaker', 'Subwoofer: only the bass'), ('power', 'Power supply: smooth DC'),
+                              ('memory', 'Sensor input: less noise')]),
+        ('High-pass', 'HP', [('volume_up', 'Tweeter: only the treble'), ('mic', 'Microphone: no wind noise'),
+                               ('block', 'Coupling capacitor: blocks DC (Lab 4)')]),
+        ('Band-pass', 'BP', [('radio', 'Radio: one station'), ('wifi', 'Wi-Fi: one channel'),
+                               ('equalizer', 'Equalizer: bass, middle, treble')])]
+APPS_SAY = ('Filters are everywhere.\n'
+            'Low-pass: a subwoofer gets only the bass of the music. A power supply filter gives a smooth DC voltage. '
+            'A sensor input uses a low-pass filter to get less noise.\n'
+            'High-pass: a tweeter gets only the treble. A microphone uses a high-pass filter to remove wind noise. '
+            'A coupling capacitor blocks DC: you use one in Lab 4.\n'
+            'Band-pass: a radio receives one station. Wi-Fi uses one channel. An equalizer has bands for bass, middle and treble.')
 BEFORE_APPS = 'Where are RLC circuits used?'
 
 MISTAKES = ['Do not use 0.707 × V_{in}. Use 0.707 × the **highest V_{out}/V_{in}**.',
@@ -166,13 +162,23 @@ def run():
             pic(s, name, x, y, w)
         s.notes_slide.notes_text_frame.text = note
         sid = lst[-1]; lst.remove(sid); lst.insert(at + k, sid)
-    # "Filters in real life": three boxes, right before the Hanoi slides "Where are RLC circuits used?"
+    # "Filters in real life": three columns, each with the response shape and three examples (icon + a few words)
     s = new_slide(p, model, APPS_TITLE)
-    for k, (head, items) in enumerate(APPS):
-        text_box(s, 0.45 + k * 4.2, 1.3, 4.0, 5.4, ['•  ' + t for t in items], size=17, box=True, title=head)
+    for k, (head, kind, items) in enumerate(APPS):
+        x = 0.45 + k * 4.2
+        text_box(s, x, 1.15, 4.0, 0.5, [f'**{head}**'], size=20)
+        pic(s, f'rlc_mini_{kind}.png', x + 0.3, 1.7, 3.3)
+        for r, (icon, label) in enumerate(items):
+            y = 3.35 + r * 1.2
+            s.shapes.add_picture(f'{FIG}/icons/life_{kind}_{icon}.png', Inches(x + 0.1), Inches(y), Inches(0.9), Inches(0.9))
+            text_box(s, x + 1.1, y + 0.08, 2.9, 0.9, [label], size=17)
     s.notes_slide.notes_text_frame.text = APPS_SAY
-    ref = next(x for x in p.slides if any(sh.has_text_frame and BEFORE_APPS in sh.text_frame.text for sh in x.shapes))
-    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(ref), sid)
+    # before the Hanoi slides "Where are RLC circuits used?"; the lecturer removed them (24/10/2026): then after "Real components"
+    ref = next((x for x in p.slides if any(sh.has_text_frame and BEFORE_APPS in sh.text_frame.text for sh in x.shapes)), None)
+    after = ref is None
+    ref = ref or next(x for x in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == 'Real components at 32 kHz'
+                                                 for sh in x.shapes))
+    sid = lst[-1]; lst.remove(sid); lst.insert(list(p.slides).index(ref) + (1 if after else 0), sid)
     p.save(DECK)
     print('Lab 2:', len(p.slides), 'slides; RLC theory slides at', [i + 1 for i, s in enumerate(p.slides)
           if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() in titles for sh in s.shapes)])
