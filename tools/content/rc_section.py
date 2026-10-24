@@ -375,7 +375,8 @@ def run():
     # notice, ... response graphs, reading the graph, ..., cut-off (low-pass), Exercise 3, cut-off (high-pass)
     ex = {k: next(sl for sl in p.slides if is_practice(sl) and f'Exercise {k}:' in text_of(sl)) for k in (1, 2, 3)}
     move_after(p, [ex[1], tables[0], notice[0], s1, s2, swap, ex[2], tables[1], notice[1]], photo)
-    move_after(p, [ex[3], cut[1]], cut[0])
+    ans3 = next(sl for sl in p.slides if is_practice(sl) and 'Exercise 3 – answer' in text_of(sl))
+    move_after(p, [ex[3], ans3, cut[1]], cut[0])
 
     p.save(DECK)
     idx = lambda s: list(p.slides).index(s) + 1
