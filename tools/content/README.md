@@ -46,9 +46,11 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 12. `rc_section.py` – Lab 2 phần RC: một mạch 10 kΩ + 104; Exercise 1 → bảng → nhận xét → màn hình osci → chia áp →
    đổi R, C → Exercise 2 → bảng → nhận xét → đồ thị, điểm −3 dB → công thức f_c → Exercise 3 (không tính trở kháng).
    Task 1 (chấm điểm) dời xuống cuối buổi, ngay trước Task 2. Chạy **sau** `practice_slides.py`.
-13. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
+13. `rlc_table.py` – Lab 2 Exercise 6 (thông dải, 1 mH + 104 + 100 Ω) giống phần RC: bảng 7 tần số + khung vẽ đồ thị, rồi
+   "What do you notice?" có đồ thị lý thuyết. Chạy sau `rc_section.py`.
+14. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 
-Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `subscripts.py`.
+Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `subscripts.py`.
 
 > **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
 > `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).

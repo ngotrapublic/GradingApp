@@ -358,7 +358,8 @@ def run():
 
     # tables and the hidden answer slides follow Exercise 1 and Exercise 2
     tables = [s for s in p.slides if any(sh.has_table and sh.table.cell(0, 0).text.startswith('Generated frequency') for sh in s.shapes)]
-    notice = [s for s in p.slides if any(sh.has_text_frame and sh.text_frame.text.strip() == 'What do you notice?' for sh in s.shapes)]
+    notice = [s for s in p.slides if any(sh.has_text_frame and sh.text_frame.text.strip() == 'What do you notice?' for sh in s.shapes)
+              and not any(sh.name.startswith('RLC Table') for sh in s.shapes)]      # RLC Table: the band-pass one (rlc_table.py)
     assert len(tables) == 2 and len(notice) == 2
     for s, kind in zip(tables, ('lp', 'hp')):
         t = next(sh for sh in s.shapes if sh.has_table).table
