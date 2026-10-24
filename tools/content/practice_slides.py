@@ -82,7 +82,7 @@ LAB = {
          answer=None),     # answered by "What do you notice?" after the table (rlc_table.py)
 ],
 3: [
-    dict(after='Connect 6V to Vs+ pin', bar='Constructing first amplifier', fig='p3_follower.png',
+    dict(after='Supplying the op-amp from the PB-503A', bar='Constructing first amplifier', fig='p3_follower.png',
          head='Exercise 1: A voltage follower (5 minutes)',
          steps=['Connect pin 1 (output) to pin 2 (− input).',
                 'Function generator to pin 3 (+ input): sine, 1 Vpp, 1 kHz.',

@@ -56,7 +56,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    submit. Đáp án: `lab2_team.lab2_task1_design`, `lab2_team.lab2_task2_measure` (đã áp vào `keys.json`). File Excel mẫu:
    `lab2_template.py`.
 16. `lab3_fixes.py` – Lab 3: thay ảnh mạch của HN (nguồn ±6 V tự chế) ở slide "Connect the rest of the circuit" bằng sơ
-   đồ đấu dây với nguồn ±6 V của PB-503A (`fig/p3_wiring.png`, vẽ bằng `fig_practice.py`).
+   đồ đấu dây với nguồn ±6 V của PB-503A (`fig/p3_wiring.png`, vẽ bằng `fig_practice.py`); đưa slide cấp nguồn và
+   Exercise 1 (mạch đệm) lên trước mạch khuếch đại đảo. Chạy sau `practice_slides.py`.
 16. `review_reveal.py` – Lab 2–4: slide "Review – words from Lab N" hiện đáp án từng dòng khi bấm (khung chữ đặt lên từng ô,
    hiệu ứng Appear); bỏ slide "(answers)". Chạy lại không làm gì nữa.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
