@@ -193,47 +193,49 @@ def lab2(p):
 
 
 def lab3(p):
-    s = p.slides[4]
+    s = by_title(p, 'Devices and components for this session')
     rep(s, [('Resistors for your amplifier: take them from the team tray once you know R1 and R2', 'Resistors for your amplifier: take them from the parts box once you know R1 and R2')])
     notes(s, 'Each student gets one LM358 and two 100 nF capacitors. Each team gets two 470 µF capacitors.\n'
              'The LM358 and the 470 µF capacitors go back to the parts box at the end. We use them again in Lab 4.')
-    s = p.slides[35]
+    s = by_title(p, 'Lab 3 exercise – find R1 and R2')
     rep(s, [('Call the lecturer. Then submit your values and a photo of your circuit on the student page.',
              'Submit your values and one photo of your circuit on the student page. Then call the lecturer for the tick.')])
-    s = p.slides[36]
+    s = by_title(p, 'Lab 3 – What to submit')
     rep(s, [('Before you leave: submit your values on the ', 'Before you leave: submit on the '),
             (', return the LM358 and the 470 µF capacitors to the tray, switch off all instruments and clear your breadboard.',
              ', get the lecturer’s tick, return the LM358 and the 470 µF capacitors to the parts box, then tidy your table (next slide).')])
     notes(s, 'Type these numbers on the student page, under your card, and add one photo of your circuit. Gain and R2/R1 have no unit. Vout in volts. Phase in degrees.\n'
              'Then call me for the tick. After the tick: LM358 and 470 µF capacitors back to the parts box, then tidy your table. The next slide shows how.')
-    tidy_slide(p, p.slides[36], ' (LM358 and 470 µF too)')
+    tidy_slide(p, by_title(p, 'Lab 3 – What to submit'), ' (LM358 and 470 µF too)')
 
 
 def lab4(p):
-    s = p.slides[4]
+    s = by_title(p, 'Devices and components for this session')
     rep(s, [('LM358 op-amp, electret microphone with soldered leads', 'LM358 op-amp, electret microphone on 2 female–male jumper wires'),
             ('Return the op-amp, the microphone and the 470 µF capacitors to the tray at the end.', 'Return the op-amp, the microphone (with its jumpers) and the 470 µF capacitors to the parts box at the end.')])
     notes(s, 'You need the PB-503A with its speaker, the instruments, one LM358, one microphone and these parts.\n'
              'The microphone has two short legs. A female–male jumper wire is pushed onto each leg. Keep the jumpers on the microphone and handle it carefully.')
-    s = p.slides[39]
+    s = by_title(p, 'Electret test circuit on the PB-503A')
     rep(s, [('The microphone leads are short: they are soldered to wires so that it fits the breadboard. Handle it carefully.',
              'The microphone legs are short: a female–male jumper is pushed onto each leg; plug the male ends into the breadboard. Black jumper = case pin = ground.')])
     notes(s, 'This is the circuit on the PB-503A. Use the +6 V output for the bias resistor.\n'
              'Your microphone has a jumper wire on each leg. The black jumper is on the pin connected to the metal case. It goes to ground.\n'
              'Do not pull the jumpers off the microphone. Show me your connections before you switch on.')
-    s = p.slides[84]
+    s = by_title(p, 'Lab 4 – what is marked')
     rep(s, [('Submit your value and a photo of your circuit on the ', 'Submit your value and one photo of your circuit on the '),
             (' before the exam review.', ', then call the lecturer for the tick – before the exam review.')])
     notes(s, 'Team demo: 4 points. Speak into the microphone. I must hear you in the speaker.\n'
              'Then each member does one measurement alone: 6 points. Look at your card: member 1, 2, 3, or 4 in a team of 4.\n'
              'Disconnect the microphone. Put 10 mVpp from the function generator into stage 1. Measure the Vpp asked on your card.\n'
              'Submit your value and one photo of your circuit on the student page. Then call me for the tick.')
-    s = p.slides[91]
+    s = by_title(p, 'Practice – break & fix')
     rep(s, [('Before you leave: switch off all instruments, return the op-amp, the microphone and the 470 µF capacitors to the tray, clear your breadboard.',
              'Before you leave: return the op-amp, the microphone (with its jumpers) and the 470 µF capacitors to the parts box, then tidy your table (next slide).')])
-    tidy_slide(p, p.slides[84], ' (LM358, microphone, 470 µF too)')
+    tidy_slide(p, by_title(p, 'Lab 4 – what is marked'), ' (LM358, microphone, 470 µF too)')
 
 
-for n, fix in ((1, lab1), (2, lab2), (3, lab3), (4, lab4)):
+import sys
+# Lab 1 was edited by hand on 24/10/2026: only with --force, otherwise Labs 2-4
+for n, fix in (((1, lab1),) if '--force' in sys.argv else ()) + ((2, lab2), (3, lab3), (4, lab4)):
     path = f'{HCM}/Lab{n}/HCM Electronic Circuit Lab {n}.pptx'
     p = Presentation(path); strip_tidy(p); fix(p); p.save(path); print(n, len(p.slides), 'slides')

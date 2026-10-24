@@ -40,6 +40,13 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    để đăng nhập trang SV. Chạy lại thì thay hộp cũ.
 10. `table_words.py` – phòng HCM chỉ có bàn ghế, không có "bench": đổi bench → table trong chữ và lời giảng của 4 bộ
    slide. Chạy **trước** bước 5 (để các script tìm thấy slide cũ theo tiêu đề mới) và chạy lại ở cuối.
+11. `practice_slides.py` – Lab 2–4: slide bài tập nhỏ theo kiểu Lab 1 mới ("Exercise N: … (X minutes)", các bước đánh số,
+   hình bên phải, 1 câu hỏi cuối). Không chấm điểm. Giá trị minh họa không trùng mã đề, dùng linh kiện còn dư
+   (RC 10 kΩ + 104; RLC 1 mH + 104 + 100 Ω; Lab 3, 4 dùng chính mạch của bài). Hình: `fig_practice.py`.
+   Chạy sau `align_web.py` và `rlc_slides.py`; chạy lại thì thay các slide bài tập cũ.
+
+> **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
+> `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).
 
 ## Linh kiện
 `bom.py`, `bom2.py`, `mkxlsx.py`, `mk2.py`, `mk3.py`, `shop.py` – tạo file mua linh kiện (giá thegioiic).

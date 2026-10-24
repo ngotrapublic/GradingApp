@@ -36,6 +36,9 @@ def draw():
 
 
 def run():
+    import sys
+    if '--force' not in sys.argv:           # Lab 1 was edited by hand on 24/10/2026: running this would undo it
+        raise SystemExit('Lab 1 is edited by hand since 24/10/2026 - not changed (add --force to run anyway)')
     draw()
     p = Presentation(DECK); lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):

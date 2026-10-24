@@ -40,6 +40,9 @@ def box(s, x, y, w, h, head, items, color, fill, line):
 
 
 def run():
+    import sys
+    if '--force' not in sys.argv:           # Lab 1 was edited by hand on 24/10/2026: running this would undo it
+        raise SystemExit('Lab 1 is edited by hand since 24/10/2026 - not changed (add --force to run anyway)')
     p = Presentation(DECK); lst = p.slides._sldIdLst
     for sid, sl in reversed(list(zip(list(lst), list(p.slides)))):
         if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == TITLE for sh in sl.shapes):

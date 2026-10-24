@@ -18,6 +18,9 @@ SAY = ('Please do not unpack yet. Keep your laptops, notebooks and bags off the 
 
 
 def run():
+    import sys
+    if '--force' not in sys.argv:           # Lab 1 was edited by hand on 24/10/2026: running this would undo it
+        raise SystemExit('Lab 1 is edited by hand since 24/10/2026 - not changed (add --force to run anyway)')
     p = Presentation(DECK); s = p.slides[0]
     for sh in list(s.shapes):
         if sh.name == NAME:
