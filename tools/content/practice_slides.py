@@ -25,8 +25,8 @@ LAB = {
          steps=['Take R = 10 kΩ and C = 100 nF (code 104) from the parts box.',
                 'Measure R with the multimeter. Write it down.',
                 'Build the circuit. CH1 = Vin, CH2 = Vout (across C).',
-                'Function generator: sine, 2 Vpp, High-Z, 20 Hz.',
-                'Raise the frequency: 20, 50, 100, 200, 500 Hz, 1 kHz, 2 kHz. Watch CH2.'],
+                'Function generator: sine, 2 Vpp, High-Z.',
+                'Set 10 Hz, 100 Hz, 200 Hz, 1 kHz, 10 kHz. Write what you see in the table (next slide).'],
          ask='What happens to Vout when the frequency goes up?',
          say='Now you build one. Use 10 kilo-ohm and the 104 capacitor, not the values in the picture. '
              'Keep the amplitude at 2 volts peak-to-peak and change only the frequency. Watch the output on channel 2.'),
@@ -34,8 +34,8 @@ LAB = {
          head='Exercise 2: Swap R and C – a high-pass filter (5 minutes)',
          steps=['Swap R and C: the capacitor is now in series, the resistor goes to ground.',
                 'CH2 = Vout across R.',
-                'Use the same frequencies as in Exercise 1.',
-                'Compare Vout with Exercise 1.'],
+                'Use the same frequencies: 10 Hz, 100 Hz, 200 Hz, 1 kHz, 10 kHz.',
+                'Fill in the second table (next slide). Compare it with the first one.'],
          ask='Which frequencies pass now? Which are blocked?',
          say='Same parts, other places. The capacitor is in series and the resistor goes to ground. '
              'Use the same frequencies and compare with Exercise 1.'),
