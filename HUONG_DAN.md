@@ -60,7 +60,7 @@ Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thô
 3. Giảng viên / TA đi tick trên điện thoại – số SV nộp và ảnh mạch hiện ngay trong khung chấm. Đã tick thì số và ảnh của SV bị khóa.
 4. Hết giờ: tắt **Nhận bài**.
    SV nào không nộp được trên điện thoại: xem số trên máy đo của SV rồi nhập ở mục **Nhập / sửa số tay** trong khung chấm.
-   **Bài nhóm (Lab 3):** một bạn trong nhóm nộp số + ảnh cho cả nhóm. Các bạn còn lại mở trang SV trên điện thoại của mình và
+   **Bài nhóm (Lab 3, Lab 4):** một bạn trong nhóm bấm **Nộp cho cả nhóm** (số + ảnh). Các bạn còn lại mở trang SV trên điện thoại của mình và
    bấm **Xác nhận** – chỉ khi có đi học và làm cùng nhóm. SV chưa xác nhận thì không có số, nên không có điểm bài đo (dù cả nhóm
    đã nộp). Trong khung chấm: chip *Đã xác nhận (nhóm)*; nút **Xác nhận thay SV này** (khi SV có mặt nhưng điện thoại hỏng…)
    hoặc **Bỏ xác nhận của SV này** (SV không có mặt); nút **Tick … SV đã nộp / xác nhận** ở đầu mỗi nhóm để tick cả nhóm một lần.

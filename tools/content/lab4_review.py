@@ -7,6 +7,7 @@
    low-pass filter with the parts on the table. Each has its answer slide (practice_slides.add / answer_slide).
 3. One final circuit instead of version 1 + version 2 (see one_final).
 4. Review fixes (see review): language, untaught words, HN numbers, the marked measurement (also on the cards).
+5. Lab 4 marks are team work: four values, one member submits, the others confirm (lab4_team, lab4_keys).
 Run after practice_slides.py (`practice_slides.py 4` removes the practice slides), before subscripts.py. Safe to run again."""
 import copy, hashlib, re, unicodedata
 import schemdraw, schemdraw.elements as elm
@@ -269,6 +270,65 @@ def review(p):
     return n
 
 
+# 5. Lab 4 is team work too (lecturer, 29/10/2026: "the circuit is hard"): the team measures all four values (stage 1 and
+#    stage 2, 1 kHz and 5 kHz, 1.5 marks each) and one member submits them for the team, the others confirm
+#    (keys.json: team_submit). Team demo 4 + measurements 6 = 10, as before.
+LAB4_ROWS = [['Value', 'Measurement (microphone and speaker disconnected; function generator High-Z, 10 mVpp sine at the stage-1 input)', 'Unit'],
+             ['1', 'Vpp at the output of stage 1, f = 1 kHz', 'mVpp'], ['2', 'Vpp at the output of stage 2, f = 1 kHz', 'mVpp'],
+             ['3', 'Vpp at the output of stage 1, f = 5 kHz', 'mVpp'], ['4', 'Vpp at the output of stage 2, f = 5 kHz', 'mVpp']]
+LAB4_MARKS = [['Item', 'Marks'], ['Team demo: speak into the microphone, the lecturer hears you in the speaker', '4'],
+              ['The four team measurements (1.5 each), submitted on the student page', '6'], ['Total', '10']]
+LAB4_SUBMIT = ('One member submits the four values and one photo of your circuit on the student page. The others tap Confirm '
+               'on their own phone. Then call the lecturer for the tick – before the exam review.')
+LAB4_SAY = ('Lab 4 is team work. Team demo: 4 points. Speak into the microphone. I must hear you in the speaker.\n'
+            'Then the team measures four values: 6 points, 1.5 each. Disconnect the microphone and the speaker. Set the function '
+            'generator to High-Z and put 10 millivolts peak to peak into stage 1. Measure V p p at the output of stage 1 and of '
+            'stage 2, at 1 kilohertz and at 5 kilohertz.\n'
+            'One member submits the four values and one photo of your circuit on the student page. The others tap Confirm on '
+            'their own phone. Then call me for the tick.')
+LAB4_OVERVIEW = ('Today each team builds one circuit together. The team measures four values for marks: one member submits, '
+                 'the others confirm (see the last slides).')
+
+
+def lab4_team(p):
+    from lab3_rlc import table_rows                     # (lab3_rlc imports this file)
+    ov = next(s for s in p.slides if title(s) == 'Lab 4 overview')
+    for sh in ov.shapes:
+        if sh.has_text_frame and sh.text_frame.text.startswith('Today each team builds one circuit together'):
+            set_para(sh.text_frame.paragraphs[0], LAB4_OVERVIEW)
+    nt = ov.notes_slide.notes_text_frame
+    nt.text = nt.text.replace('Today each team builds one circuit together. Then each person does one measurement alone for marks.',
+                              'Today each team builds one circuit together. The team measures four values for marks. One member submits, the others confirm.')
+    m = next(s for s in p.slides if title(s) == 'Lab 4 – what is marked')
+    tables = sorted([sh for sh in m.shapes if sh.has_table], key=lambda x: x.top)
+    table_rows(tables[0].table, LAB4_ROWS); table_rows(tables[1].table, LAB4_MARKS)
+    for sh in m.shapes:
+        if sh.has_text_frame and sh.text_frame.text.startswith(('Submit your value', 'One member submits the four values')):
+            set_para(sh.text_frame.paragraphs[0], LAB4_SUBMIT)
+    m.notes_slide.notes_text_frame.text = LAB4_SAY
+
+
+def lab4_keys():
+    import json
+    K = json.load(open(KEYS, encoding='utf-8')); L = K['labs']['4']; V = L['variants']
+    var = lambda s, t, m: str(s * 100 + 3 * (t - 1) + m if m < 4 else s * 100 + 18 + t)
+    if len(L['questions']) == 1:                        # still one value per member: collect the four of team 1
+        vals = {s: [V[var(s, 1, m)]['keys'][0] for m in (1, 2, 3, 4)] for s in sorted({int(v) // 100 for v in V})}
+        for v, X in V.items():
+            s = int(v) // 100; n = int(v) % 100; t, m_ = ((n - 1) // 3 + 1, (n - 1) % 3 + 1) if n <= 18 else (n - 18, 4)
+            X['keys'] = vals[s]
+            X['info'] = ['Team: stage 1 and stage 2 output, 1 kHz and 5 kHz', '10 mVpp input (High-Z), microphone and speaker disconnected']
+            X['card'] = [f'Electric Circuit Lab – LAB 4   |   Variant {v}   |   Team {t} – Member {m_}',
+                         'Team task – the same for all members.',
+                         'Function generator: High-Z, 10 mVpp sine at the stage-1 input', 'Microphone and speaker disconnected.',
+                         'Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).',
+                         'One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm.']
+        L['questions'] = [['S1 1k', 'Stage 1 output, 1 kHz', 'mVpp', 1.5], ['S2 1k', 'Stage 2 output, 1 kHz', 'mVpp', 1.5],
+                          ['S1 5k', 'Stage 1 output, 5 kHz', 'mVpp', 1.5], ['S2 5k', 'Stage 2 output, 5 kHz', 'mVpp', 1.5]]
+    L['team_submit'] = True
+    json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+
+
 def title(s):
     return next((sh.text_frame.text.strip() for sh in s.shapes if sh.name == 'Title Bar'), '')
 
@@ -289,6 +349,7 @@ def run():
     gone = drop(p, lambda s: any(d in ps.text_of(s) for d in DROP))
     v1 = one_final(p)
     fixed = review(p)
+    lab4_team(p)
     # recap: no decoupling line on the slide or in the notes
     rec = next(s for s in p.slides if title(s).startswith('Recap – the inverting amplifier'))
     for sh in rec.shapes:
@@ -318,6 +379,7 @@ def run():
     at = list(p.slides).index(ref) + 1
     for k, sid in enumerate(sids): lst.insert(at + k, sid)
     p.save(DECK)
+    lab4_keys()
     left = [i + 1 for i, s in enumerate(p.slides) if 'ecoupl' in ps.text_of(s) and s._element.get('show') != '0']
     print(f'Lab 4: {gone} decoupling slides removed | {v1} version-1 slides removed | {fixed} texts reviewed | exam practice at {at + 1}-{at + len(new)} | {len(p.slides)} slides |'
           f' "decoupl" still on visible slides: {left}')

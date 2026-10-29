@@ -285,16 +285,23 @@ function submitForm(L) {
   const btn = ph.btn || ['Take / choose a photo', 'Chụp / chọn ảnh'];
   const cap = ph.capture === false ? '' : ' capture="environment"';
   let h = `<div class="submit">`;
-  if (!S_.locked && !L.review) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
+  if (!S_.locked && !L.review && L.team) h += `<div class="howto"><b>${T('Team task – how to finish', 'Bài nhóm – cách kết thúc')}</b>
+    <ol>
+      <li>${T('Measure together. <b>One member</b> types the team\'s values below, adds the photo, then taps <b>Submit for the team.</b>', 'Cả nhóm cùng đo. <b>Một bạn</b> nhập số của nhóm vào các ô bên dưới, thêm ảnh, rồi bấm <b>Nộp cho cả nhóm.</b>')}</li>
+      <li>${T('The other members open the student page on <b>their own phone</b> and tap <b>Confirm</b>. Confirm only if you were here: a member who does not confirm gets no marks for the values.', 'Các bạn còn lại mở trang SV trên <b>điện thoại của mình</b> và bấm <b>Xác nhận</b>. Chỉ xác nhận nếu có mặt: bạn nào không xác nhận thì không có điểm phần số đo.')}</li>
+      <li>${T('To change after submitting: the member who submitted taps <b>Unsubmit</b>, edits and submits again. The others confirm again.', 'Muốn sửa sau khi nộp: bạn đã nộp bấm <b>Hủy nộp</b>, sửa rồi nộp lại. Các bạn khác xác nhận lại.')}</li>
+      <li>${T('<b>Call the lecturer or TA to your table.</b> They check the instrument and tick every member who confirmed. Do not pack up before the tick.', '<b>Gọi giảng viên hoặc TA xuống bàn.</b> Họ kiểm tra trên máy đo và tick các bạn đã xác nhận. Chưa được tháo mạch khi chưa tick.')}</li>
+    </ol></div>`;
+  else if (!S_.locked && !L.review) h += `<div class="howto"><b>${T('How to finish this lab', 'Cách kết thúc lab này')}</b>
     <ol>
       <li>${T(howto1[0], howto1[1])}</li>
       <li>${T('To change after submitting: tap <b>Unsubmit</b>, edit, then submit again.', 'Muốn sửa sau khi đã nộp: bấm <b>Hủy nộp</b>, sửa, rồi nộp lại.')}</li>
       <li>${T('<b>Call the lecturer or TA to your table.</b> Do not pack up or leave until they have ticked you. Submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống bàn của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick. Chỉ nộp trên điện thoại là chưa đủ.')}</li>
       <li>${T(howto4[0], howto4[1])}</li>
     </ol></div>`;
-  if (L.team) h += `<p class="muted">${T('Team task: one member submits for the whole team (values + photo). The others open this page on their own phone and tap <b>Confirm</b>.', 'Bài nhóm: một bạn nộp cho cả nhóm (số + ảnh). Các bạn còn lại mở trang này trên điện thoại của mình và bấm <b>Xác nhận</b>.')}</p>`;
-  if (!split) h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
+  if (!split) h += `<div class="subhead">${L.team ? T('Your team\'s values', 'Số liệu đo của nhóm') : T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
+  else if (S_.submitted && L.team) h += `<p class="ok">${T('Submitted for the team. Your teammates now tap Confirm on their own phone.', 'Đã nộp cho cả nhóm. Các bạn cùng nhóm giờ bấm Xác nhận trên điện thoại của mình.')}</p>`;
   else if (S_.submitted) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
   h += split ? partsBody(L, frozen) : valueFields(L, frozen);
   const P = S_.photos || [];
@@ -303,8 +310,8 @@ function submitForm(L) {
   h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${frozen ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
   if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T(btn[0], btn[1])}<input type="file" accept="image/*"${cap} data-photo="${L.lab}" hidden></label>`;
   if (S_.locked || L.review) { /* view only */ }
-  else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
-  else h += `<button class="big on" data-send="${L.lab}">${T('Submit', 'Nộp')}</button>`;
+  else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${L.team ? T('Unsubmit to edit (the team confirms again)', 'Hủy nộp để sửa (cả nhóm xác nhận lại)') : T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
+  else h += `<button class="big on" data-send="${L.lab}">${L.team ? T('Submit for the team', 'Nộp cho cả nhóm') : T('Submit', 'Nộp')}</button>`;
   if (S_.time) h += `<p class="muted">${T('Last submitted', 'Nộp lần cuối')}: ${esc(S_.time)}</p>`;
   if (L.team && L.team.me === 'submitted') h += teamMembers(L.team);
   if (!frozen) h += `<p class="muted">${T('Use real measured values, in the unit shown.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh.')}</p>`;

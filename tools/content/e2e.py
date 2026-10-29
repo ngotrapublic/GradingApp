@@ -63,7 +63,7 @@ for st in C['students']:
     view = s.call(f'/api/public/class/{cid}')[1]
     assert view['variant'] == int(v), (view['variant'], v)
     for lab in '1234':
-        if lab == '3':                     # team lab: the first member of the team submits, the others confirm
+        if KEYS[lab].get('team_submit'):   # team lab: the first member of the team submits, the others confirm
             code, _ = s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)}, ok=False)
             if code == 400:                # no photo yet: this member is the first of the team
                 s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})

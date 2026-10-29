@@ -5584,28 +5584,49 @@
    ],
    "questions": [
     [
-     "Measured Vpp",
-     "Vpp",
-     "mV",
-     6
+     "S1 1k",
+     "Stage 1 output, 1 kHz",
+     "mVpp",
+     1.5
+    ],
+    [
+     "S2 1k",
+     "Stage 2 output, 1 kHz",
+     "mVpp",
+     1.5
+    ],
+    [
+     "S1 5k",
+     "Stage 1 output, 5 kHz",
+     "mVpp",
+     1.5
+    ],
+    [
+     "S2 5k",
+     "Stage 2 output, 5 kHz",
+     "mVpp",
+     1.5
     ]
    ],
    "variants": {
     "101": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 101",
-      "Team 1 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 101   |   Team 1 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5613,19 +5634,22 @@
     },
     "102": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 102",
-      "Team 1 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 102   |   Team 1 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5633,19 +5657,22 @@
     },
     "103": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 103",
-      "Team 1 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 103   |   Team 1 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5653,19 +5680,22 @@
     },
     "104": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 104",
-      "Team 2 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 104   |   Team 2 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5673,19 +5703,22 @@
     },
     "105": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 105",
-      "Team 2 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 105   |   Team 2 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5693,19 +5726,22 @@
     },
     "106": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 106",
-      "Team 2 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 106   |   Team 2 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5713,19 +5749,22 @@
     },
     "107": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 107",
-      "Team 3 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 107   |   Team 3 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5733,19 +5772,22 @@
     },
     "108": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 108",
-      "Team 3 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 108   |   Team 3 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5753,19 +5795,22 @@
     },
     "109": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 109",
-      "Team 3 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 109   |   Team 3 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5773,19 +5818,22 @@
     },
     "110": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 110",
-      "Team 4 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 110   |   Team 4 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5793,19 +5841,22 @@
     },
     "111": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 111",
-      "Team 4 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 111   |   Team 4 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5813,19 +5864,22 @@
     },
     "112": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 112",
-      "Team 4 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 112   |   Team 4 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5833,19 +5887,22 @@
     },
     "113": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 113",
-      "Team 5 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 113   |   Team 5 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5853,19 +5910,22 @@
     },
     "114": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 114",
-      "Team 5 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 114   |   Team 5 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5873,19 +5933,22 @@
     },
     "115": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 115",
-      "Team 5 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 115   |   Team 5 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5893,19 +5956,22 @@
     },
     "116": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 116",
-      "Team 6 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 116   |   Team 6 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5913,19 +5979,22 @@
     },
     "117": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 117",
-      "Team 6 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 117   |   Team 6 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5933,19 +6002,22 @@
     },
     "118": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 118",
-      "Team 6 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 118   |   Team 6 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5953,19 +6025,22 @@
     },
     "119": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 119",
-      "Team 1 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 119   |   Team 1 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5973,19 +6048,22 @@
     },
     "120": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 120",
-      "Team 2 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 120   |   Team 2 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -5993,19 +6071,22 @@
     },
     "121": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 121",
-      "Team 3 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 121   |   Team 3 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6013,19 +6094,22 @@
     },
     "122": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 122",
-      "Team 4 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 122   |   Team 4 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6033,19 +6117,22 @@
     },
     "123": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 123",
-      "Team 5 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 123   |   Team 5 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6053,19 +6140,22 @@
     },
     "124": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 124",
-      "Team 6 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 124   |   Team 6 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6073,19 +6163,22 @@
     },
     "201": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 201",
-      "Team 1 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 201   |   Team 1 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6093,19 +6186,22 @@
     },
     "202": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 202",
-      "Team 1 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 202   |   Team 1 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6113,19 +6209,22 @@
     },
     "203": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 203",
-      "Team 1 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 203   |   Team 1 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6133,19 +6232,22 @@
     },
     "204": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 204",
-      "Team 2 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 204   |   Team 2 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6153,19 +6255,22 @@
     },
     "205": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 205",
-      "Team 2 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 205   |   Team 2 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6173,19 +6278,22 @@
     },
     "206": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 206",
-      "Team 2 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 206   |   Team 2 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6193,19 +6301,22 @@
     },
     "207": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 207",
-      "Team 3 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 207   |   Team 3 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6213,19 +6324,22 @@
     },
     "208": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 208",
-      "Team 3 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 208   |   Team 3 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6233,19 +6347,22 @@
     },
     "209": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 209",
-      "Team 3 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 209   |   Team 3 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6253,19 +6370,22 @@
     },
     "210": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 210",
-      "Team 4 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 210   |   Team 4 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6273,19 +6393,22 @@
     },
     "211": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 211",
-      "Team 4 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 211   |   Team 4 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6293,19 +6416,22 @@
     },
     "212": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 212",
-      "Team 4 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 212   |   Team 4 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6313,19 +6439,22 @@
     },
     "213": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 213",
-      "Team 5 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 213   |   Team 5 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6333,19 +6462,22 @@
     },
     "214": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 214",
-      "Team 5 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 214   |   Team 5 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6353,19 +6485,22 @@
     },
     "215": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 215",
-      "Team 5 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 215   |   Team 5 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6373,19 +6508,22 @@
     },
     "216": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 216",
-      "Team 6 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 216   |   Team 6 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6393,19 +6531,22 @@
     },
     "217": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 217",
-      "Team 6 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 217   |   Team 6 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6413,19 +6554,22 @@
     },
     "218": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 218",
-      "Team 6 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 218   |   Team 6 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6433,19 +6577,22 @@
     },
     "219": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 219",
-      "Team 1 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 219   |   Team 1 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6453,19 +6600,22 @@
     },
     "220": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 220",
-      "Team 2 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 220   |   Team 2 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6473,19 +6623,22 @@
     },
     "221": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 221",
-      "Team 3 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 221   |   Team 3 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6493,19 +6646,22 @@
     },
     "222": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 222",
-      "Team 4 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 222   |   Team 4 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6513,19 +6669,22 @@
     },
     "223": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 223",
-      "Team 5 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 223   |   Team 5 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6533,19 +6692,22 @@
     },
     "224": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 224",
-      "Team 6 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 224   |   Team 6 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6553,19 +6715,22 @@
     },
     "301": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 301",
-      "Team 1 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 301   |   Team 1 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6573,19 +6738,22 @@
     },
     "302": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 302",
-      "Team 1 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 302   |   Team 1 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6593,19 +6761,22 @@
     },
     "303": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 303",
-      "Team 1 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 303   |   Team 1 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6613,19 +6784,22 @@
     },
     "304": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 304",
-      "Team 2 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 304   |   Team 2 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6633,19 +6807,22 @@
     },
     "305": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 305",
-      "Team 2 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 305   |   Team 2 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6653,19 +6830,22 @@
     },
     "306": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 306",
-      "Team 2 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 306   |   Team 2 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6673,19 +6853,22 @@
     },
     "307": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 307",
-      "Team 3 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 307   |   Team 3 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6693,19 +6876,22 @@
     },
     "308": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 308",
-      "Team 3 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 308   |   Team 3 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6713,19 +6899,22 @@
     },
     "309": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 309",
-      "Team 3 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 309   |   Team 3 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6733,19 +6922,22 @@
     },
     "310": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 310",
-      "Team 4 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 310   |   Team 4 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6753,19 +6945,22 @@
     },
     "311": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 311",
-      "Team 4 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 311   |   Team 4 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6773,19 +6968,22 @@
     },
     "312": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 312",
-      "Team 4 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 312   |   Team 4 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6793,19 +6991,22 @@
     },
     "313": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 313",
-      "Team 5 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 313   |   Team 5 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6813,19 +7014,22 @@
     },
     "314": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 314",
-      "Team 5 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 314   |   Team 5 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6833,19 +7037,22 @@
     },
     "315": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 315",
-      "Team 5 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 315   |   Team 5 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6853,19 +7060,22 @@
     },
     "316": {
      "keys": [
-      134.00379893045493
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 1: Stage 1 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 316",
-      "Team 6 – Member 1",
+      "Electric Circuit Lab – LAB 4   |   Variant 316   |   Team 6 – Member 1",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6873,19 +7083,22 @@
     },
     "317": {
      "keys": [
-      286.28084316960826
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 2: Stage 2 output, 1 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 317",
-      "Team 6 – Member 2",
+      "Electric Circuit Lab – LAB 4   |   Variant 317   |   Team 6 – Member 2",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6893,19 +7106,22 @@
     },
     "318": {
      "keys": [
-      99.23552500766279
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
+      212.00316706182502
      ],
      "info": [
-      "Member 3: Stage 1 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 318",
-      "Team 6 – Member 3",
+      "Electric Circuit Lab – LAB 4   |   Variant 318   |   Team 6 – Member 3",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 1, f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6913,19 +7129,22 @@
     },
     "319": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 319",
-      "Team 1 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 319   |   Team 1 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6933,19 +7152,22 @@
     },
     "320": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 320",
-      "Team 2 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 320   |   Team 2 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6953,19 +7175,22 @@
     },
     "321": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 321",
-      "Team 3 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 321   |   Team 3 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6973,19 +7198,22 @@
     },
     "322": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 322",
-      "Team 4 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 322   |   Team 4 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -6993,19 +7221,22 @@
     },
     "323": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 323",
-      "Team 5 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 323   |   Team 5 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
@@ -7013,25 +7244,29 @@
     },
     "324": {
      "keys": [
+      134.00379893045493,
+      286.28084316960826,
+      99.23552500766279,
       212.00316706182502
      ],
      "info": [
-      "Member 4: Stage 2 output, 5 kHz",
+      "Team: stage 1 and stage 2 output, 1 kHz and 5 kHz",
       "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
-      "Electric Circuit Lab – LAB 4   |   Variant 324",
-      "Team 6 – Member 4",
+      "Electric Circuit Lab – LAB 4   |   Variant 324   |   Team 6 – Member 4",
+      "Team task – the same for all members.",
       "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
       "Microphone and speaker disconnected.",
-      "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
-      "Submit in mVpp + a photo of your circuit on the student page (QR)."
+      "Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).",
+      "One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm."
      ],
      "figs": [
       "/courses/SE009/img/lab4_circuit.png"
      ]
     }
-   }
+   },
+   "team_submit": true
   }
  },
  "rule": {
