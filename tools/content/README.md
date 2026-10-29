@@ -61,15 +61,17 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 16. `lab2_instruments.py` – Lab 2: chép phần osci + máy phát (slide "Overview of AC lab instruments" … "Step 5. Rotate the
    Multipurpose knob") từ Lab 1 sang Lab 2, sau slide Devices; Exercise 8, 9, 10, 10 → A, B, C, D. Lab 1 giữ nguyên.
    Chạy lại thì thay bản chép cũ.
+16. `lab2_demo.py` – Lab 2: Exercise 6–7 thành phần GV làm mẫu (SV chỉ tự đo một lần ở Task 2); đổi tiêu đề và các chỗ
+   "Exercise 6/7" trên slide và lời giảng. Chạy sau `lab2_instruments.py`.
 16. `lab3_freq.py` – Lab 3, Exercise 4 (đáp tuyến tần số của mạch Exercise 2): bảng 9 tần số 20 Hz – 200 kHz + đồ thị
-   trống, rồi "What do you notice?" với đường lý thuyết (f_L ≈ 72 Hz do R1, C1; f_H ≈ 68 kHz do LM358); sửa slide "Use low
+   trống, rồi "What do you notice?" với đường lý thuyết – cả 3 slide đang ẨN (HIDE = True), chỉ bật cho lớp nhanh (f_L ≈ 72 Hz do R1, C1; f_H ≈ 68 kHz do LM358); sửa slide "Use low
    (audio) frequencies" thành lời giải thích. Chạy sau `lab3_fixes.py`. `practice_slides.py 3` chỉ chạy lại Lab 3.
 16. `review_reveal.py` – Lab 2–4: slide "Review – words from Lab N" hiện đáp án từng dòng khi bấm (khung chữ đặt lên từng ô,
    hiệu ứng Appear); bỏ slide "(answers)". Chạy lại không làm gì nữa.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
 17. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 
-Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `instrument_slides.py` → `lab2_task2.py` → `lab2_instruments.py` → (Lab 3: `lab3_fixes.py` → `lab3_freq.py`) → `notes_cleanup.py` → `subscripts.py`.
+Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `instrument_slides.py` → `lab2_task2.py` → `lab2_instruments.py` → `lab2_demo.py` → (Lab 3: `lab3_fixes.py` → `lab3_freq.py`) → `notes_cleanup.py` → `subscripts.py`.
 
 > **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
 > `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).

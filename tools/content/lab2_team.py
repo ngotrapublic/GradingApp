@@ -86,9 +86,9 @@ def lab2_task2_measure(labs, sets=(1, 2, 3)):
     L2['parts'][1]['title'] = ['Task 2 – band-pass RLC filter (team – one circuit for the whole team)',
                                'Bài 2 – Bộ lọc thông dải RLC (làm nhóm – cả nhóm chung một mạch)']
     L2['parts'][1]['note'] = ['The whole team builds the same band-pass filter (L, C, R on the card), measures the frequencies on the card, '
-                              'finds the peak f0 and the bandwidth BW (as in Exercise 7). Each student types the team values and uploads the graph.',
+                              'finds the peak f0 and the bandwidth BW (as in the lecturer's demo). Each student types the team values and uploads the graph.',
                               'Cả nhóm lắp cùng một mạch thông dải (L, C, R trên đề), đo các tần số trên đề, tìm đỉnh f0 và băng thông BW '
-                              '(như Exercise 7). Mỗi SV tự nhập số của nhóm và tải ảnh đồ thị.']
+                              '(như phần GV làm mẫu). Mỗi SV tự nhập số của nhóm và tải ảnh đồ thị.']
     return labs
 
 

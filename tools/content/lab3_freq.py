@@ -4,7 +4,9 @@ R2 = 30 kOhm, C1 = 1 uF, LM358) at 9 frequencies, the same way as the tables of 
 "Use low (audio) frequencies" after it becomes the explanation of the high end.
 Theory: C1 and R1 are an RC high-pass (fL = 1/(2 pi R1 C1) = 72 Hz); the LM358 (gain-bandwidth about 1 MHz) gives
 fH = 1 MHz / (1 + R2/R1) = 68 kHz. Run after practice_slides.py and lab3_fixes.py, before subscripts.py.
-Running again replaces the two slides."""
+Running again replaces the two slides.
+Lecturer, 29/10/2026 (students are slower than planned): Exercise 4, the table and the notice slide are HIDDEN – the lecturer
+shows them only to a fast class (PowerPoint: right-click the slide > Hide Slide). HIDE = False shows them."""
 import math, re
 import numpy as np
 import matplotlib
@@ -20,6 +22,7 @@ R1, R2, C1, GBW = 2.2e3, 30e3, 1e-6, 1e6
 G, FL, FH = R2 / R1, 1 / (2 * math.pi * R1 * C1), GBW / (1 + R2 / R1)
 ROWS = [20, 50, 100, 500, 1e3, 10e3, 50e3, 100e3, 200e3]
 MARK = rlc_table.MARK
+HIDE = True
 MODEL = 'Devices and components for this session'
 rlc_table.BAR = 'Gain and frequency'
 LOW = 'Use low (audio) frequencies'
@@ -30,7 +33,7 @@ NOTICE = [f'In the **middle** (about 200 Hz – 20 kHz), the gain is about **{G:
           f'fc = 1 / (2π × R1 × C1) ≈ {FL:.0f} Hz.',
           'At **high frequency** (100 kHz, 200 kHz), the gain is small again. The next slide explains why.',
           'So only the **middle frequencies** get the full gain.']
-LOW_TEXT = ['Your graph shows it: at **high frequency**, the gain goes down. The LM358 is **not fast** enough.',
+LOW_TEXT = ['At **high frequency**, the gain goes down. The LM358 is **not fast** enough.',
             'With a **bigger gain**, the gain goes down at an even lower frequency.',
             'In this lab, use **100 Hz – 2 kHz**.']
 
@@ -102,6 +105,9 @@ def run():
         sid = lst[list(p.slides).index(s)]; lst.remove(sid)
         lst.insert(list(p.slides).index(ex4) + 1, sid)
 
+    for s in (ex4, t, n):
+        if HIDE: s._element.set('show', '0')
+        else: s._element.attrib.pop('show', None)
     # "Use low (audio) frequencies" now explains the high end of the graph
     low = next(s for s in p.slides if any(sh.name == 'Title Bar' and sh.text_frame.text.strip() == LOW for sh in s.shapes))
     body = next(sh for sh in low.shapes if sh.has_text_frame and sh.name != 'Title Bar' and 'LM358' in sh.text_frame.text)
