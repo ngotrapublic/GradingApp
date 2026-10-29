@@ -216,13 +216,13 @@ def lab3(p):
     for sh, lines in zip(boxes, [['', '**Series RLC**', 'Inductors', 'Resonance f0, band-pass, bandwidth BW', 'Demo by the lecturer'],
                                  ['', '**Op-amp basics**', 'LM358: pins and ratings', '±6 V supply from the PB-503A'],
                                  ['', '**Inverting amplifier**', 'Measure gain and phase', 'Clipping'],
-                                 ['', '**Lab 3 tasks (end of the lab)**', 'Task 1: band-pass RLC (team)', 'Task 2: amplifier from a screen (individual)']]):
+                                 ['', '**Lab 3 tasks (end of the lab)**', 'Task 1: band-pass RLC (team)', 'Task 2: amplifier from a screen (team)']]):
         set_box(sh, lines)
     set_box(box(ov, 'You will study op-amps'), ['You will study op-amps in detail later. Today you learn just enough to build and measure '
-                                               'an inverting amplifier. Each team builds one amplifier; in Task 2 each member puts in their own R1 and R2.'])
+                                               'an inverting amplifier. Both Lab 3 tasks are team work: one RLC filter and one amplifier per team.'])
     ov.notes_slide.notes_text_frame.text = ('Today: the series RLC filter, op-amp basics, the LM358 chip, how to measure gain and phase, '
         'and the two Lab 3 tasks.\nYou will study op-amps in detail later. Today we learn only what we need to build one. '
-        'Each team builds one amplifier. In Task 2, each member puts in their own R1 and R2.')
+        'Both Lab 3 tasks are team work: each team builds one RLC filter and one amplifier.')
     dev = p.slides[find(p, lambda s: title_of(s) == 'Devices and components for this session')]
     styled_box(box(dev, 'For each team'), [
         ('For each team:', 0),
@@ -230,41 +230,46 @@ def lab3(p):
         ('1 inductor 1 mH, the capacitor C and the resistor R on your card (Task 1)', 1),
         (f'Excel file “{TEMPLATE}” (student page) on your laptop', 1),
         ('1 LM358 op-amp (return it at the end – we use it again in Lab 4)', 1),
-        ('For each student:', 0),
         ('R1 and R2 for Task 2: take them from the parts box once you know them', 1)])
     dev.notes_slide.notes_text_frame.text = ('Each team gets one inductor, the capacitor and the resistor on the card for Task 1, and one LM358.\n'
         'The LM358 goes back to the parts box at the end. We use it again in Lab 4.\n'
-        'Download the Excel template from the student page now. For Task 2, each student takes R1 and R2 from the parts box.')
+        'Download the Excel template from the student page now. For Task 2, take R1 and R2 from the parts box when you know them.')
     d = p.slides[find(p, lambda s: any(t.startswith(('Lab 3 exercise\n', 'Lab 3 tasks\n')) for t in texts(s)))]
-    set_box(box(d, 'Lab 3'), ['Lab 3 tasks', 'Task 1: RLC filter (team)', 'Task 2: from a screen to the circuit (individual)'])
-    d.notes_slide.notes_text_frame.text = 'Now the Lab 3 tasks: 16 points. Task 1 is team work. Task 2 is your own.'
-    t = p.slides[find(p, lambda s: title_of(s).startswith(('Lab 3 exercise – find R1', 'Task 2 (individual) – find R1')))]
-    replace_in(t, [('Lab 3 exercise – find R1 and R2', 'Task 2 (individual) – find R1 and R2'),
-                   ('Build the amplifier with the ±6 V supply of the PB-503A.',
-                    'Your team builds one amplifier (±6 V from the PB-503A). In turn, each member puts in their own R1 and R2.')], notes=False)
+    set_box(box(d, 'Lab 3'), ['Lab 3 tasks', 'Task 1: RLC filter (team)', 'Task 2: from a screen to the circuit (team)'])
+    d.notes_slide.notes_text_frame.text = 'Now the Lab 3 tasks: 16 points. Both tasks are team work.'
+    t = p.slides[find(p, lambda s: title_of(s).startswith(('Lab 3 exercise – find R1', 'Task 2 (individual) – find R1', 'Task 2 (team) – find R1')))]
+    replace_in(t, [('Lab 3 exercise – find R1 and R2', 'Task 2 (team) – find R1 and R2'),
+                   ('Task 2 (individual) – find R1 and R2', 'Task 2 (team) – find R1 and R2'),
+                   ('Your team builds one amplifier (±6 V from the PB-503A). In turn, each member puts in their own R1 and R2.',
+                    'Build the amplifier with the ±6 V supply of the PB-503A.')], notes=False)
     for para in box(t, 'Your card shows').text_frame.paragraphs:
-        if para.text.startswith('Submit your values'):
-            set_para(para, 'Submit your values on the student page. Then show the lecturer your screen.')
-    nt = t.notes_slide.notes_text_frame
-    nt.text = nt.text.replace('Build it, set', 'Your team builds one amplifier. In turn, each member puts in their own R1 and R2, sets') \
-                     .replace('Build it, ', 'Your team builds one amplifier. In turn, each member puts in their own R1 and R2, ')
-    nt.text = nt.text.replace('and make your screen look like', 'and makes the screen look like')
+        if para.text.startswith('Your card shows an oscilloscope screen') and 'same screen' not in para.text:
+            set_para(para, para.text.replace('= output.', '= output. Everybody in the team has the same screen.'))
+        if para.text.startswith(('Submit your values', 'Each member submits')):
+            set_para(para, 'Each member submits the team values on the student page. Then show the lecturer your screen.')
+    t.notes_slide.notes_text_frame.text = (
+        'Task 2 is also team work. Everybody in the team has the same oscilloscope screen on the card. Blue is the input, '
+        'yellow is the output.\nRead the two Pk-Pk values in the Measurements box, on the right of the screen. Gain = V out / V in. '
+        'Then choose R1 and R2 so that R2 / R1 = gain.\nThe numbers at the bottom, like 500 millivolts per div, are the size of one '
+        'square of the grid. They are not the signal.\nBuild the amplifier with the plus and minus 6 volts of the PB-503A. Set the '
+        'function generator like the blue signal, and make your screen look like the card. Measure V out and the phase shift.\n'
+        'Each member submits the team values on the student page. Then show me your screen.')
     w = p.slides[find(p, lambda s: title_of(s) == 'Lab 3 – What to submit')]
     tbl = next(sh.table for sh in w.shapes if sh.has_table)
     table_rows(tbl, [['Value to submit (student page)', 'Unit', 'Marks'],
                      ['Task 1 (team): peak frequency f0', 'kHz', '3'],
                      ['Task 1 (team): BW = fH − fL (full ±20 %, half ±35 %)', 'kHz', '3'],
                      ['Task 1: graph + conclusion (one screenshot)', '–', '2'],
-                     ['Task 2: gain read from the screen on your card', '–', '2'],
-                     ['Task 2: R2 / R1 of your resistors (printed values)', '–', '2'],
-                     ['Task 2: measured Vout,pp', 'V', '2'],
-                     ['Task 2: measured phase shift', 'degrees', '2'],
+                     ['Task 2 (team): gain read from the screen on your card', '–', '2'],
+                     ['Task 2 (team): R2 / R1 of your resistors (printed values)', '–', '2'],
+                     ['Task 2 (team): measured Vout,pp', 'V', '2'],
+                     ['Task 2 (team): measured phase shift', 'degrees', '2'],
                      ['Total', '', '16']])
     for row in tbl.rows: row.height = 365760                     # 0.4 in: the table ends above the text below it
     w.notes_slide.notes_text_frame.text = (
         'Task 1 values are the same for the whole team. Use kilohertz for f 0 and BW. Add one screenshot of your team\'s RLC graph.\n'
-        'Task 2 is your own: gain and R2 over R1 have no unit, V out in volts, the phase in degrees.\n'
-        'Then call me for the tick. I check your Task 2 screen on the oscilloscope. After the tick: the LM358 back to the '
+        'Task 2 values are also the same for the whole team: gain and R2 over R1 have no unit, V out in volts, the phase in degrees.\n'
+        'Then call me for the tick. I check your team\'s Task 2 screen on the oscilloscope. After the tick: the LM358 back to the '
         'parts box, then tidy your table. The next slide shows how.')
 
 
@@ -322,7 +327,7 @@ def decks():
 def keys():
     K = json.load(open(KEYS, encoding='utf-8')); L2, L3 = K['labs']['2'], K['labs']['3']
     if not any(q[0] == 'f0' for q in L2['questions']):
-        print('keys: already moved'); return
+        print('keys: already moved'); team_task2(K); return
     for v, V2 in L2['variants'].items():
         V3 = L3['variants'][v]
         fc, f0, bw = V2['keys'][0], V2['keys'][1], V2['keys'][2]
@@ -384,8 +389,43 @@ def keys():
                                'Điểm: 6 khi f_c = 1/(2πRC) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem '
                                'Vout = 0,707 × Vin tại f_c của bạn trên osci.']}])
     for k in ('files', 'photo'): L2.pop(k, None)
-    json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    team_task2(K)
     print('keys: Lab 2 =', L2['total'], '| Lab 3 =', L3['total'], '| total', sum(L['total'] for L in K['labs'].values()))
+
+
+T2_CARD = ['Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.',
+           'Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.']
+
+
+def team_task2(K):
+    """Lecturer, 29/10/2026: Lab 3 has two tasks and both are team work (no time for one amplifier per student). The
+    whole team gets the amplifier variant of one member: member 1 for teams 1 and 4, member 2 for teams 2 and 5, member 3
+    for teams 3 and 6, so neighbouring tables have different resistor pairs. Keys, info and screen image are copied."""
+    L3 = K['labs']['3']; V = L3['variants']
+    for s in sorted({int(v) // 100 for v in V}):
+        for t in range(1, 7):
+            src = V[str(s * 100 + 3 * (t - 1) + (t - 1) % 3 + 1)]
+            for m in (1, 2, 3, 4):
+                v = V.get(str(s * 100 + 3 * (t - 1) + m if m < 4 else s * 100 + 18 + t))
+                if v is None:
+                    continue
+                if v is not src:
+                    v['keys'][:4] = src['keys'][:4]; v['info'][:2] = src['info'][:2]; v['image'] = src['image']
+                v['card'][5:7] = T2_CARD
+    L3['parts'][1]['title'] = ['Task 2 – inverting amplifier from an oscilloscope screen (team – the same screen for all members)',
+                               'Bài 2 – Mạch khuếch đại đảo từ màn hình osci (làm nhóm – cả nhóm chung một màn hình)']
+    L3['parts'][1]['note'] = ['The whole team has the same screen. Find R1 and R2, build one LM358 amplifier, set the function generator '
+                              'like CH2 on your card and measure. Each student types the team values. The lecturer checks your screen at the tick.',
+                              'Cả nhóm chung một màn hình. Tìm R1, R2, lắp một mạch LM358, chỉnh máy phát giống CH2 trên đề rồi đo. '
+                              'Mỗi SV tự nhập số của nhóm. Giảng viên kiểm tra màn hình osci khi tick.']
+    L3['photo']['howto'] = ['<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work: type your team\'s values, upload '
+                            '<b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo), then <span class="nowrap">tap <b>Submit.</b></span>',
+                            '<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm: nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC '
+                            'Bài 1</b> (không phải ảnh breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>']
+    L3['photo']['check'] = ['They will check your team\'s Task 2 screen <span class="nowrap">on the <b>oscilloscope</b></span> and your '
+                            '<b>RLC graph</b>, then confirm at your table.',
+                            'Họ sẽ xem màn hình Bài 2 của nhóm <span class="nowrap">trên <b>osci</b></span> và <b>đồ thị RLC</b>, rồi xác nhận tại cụm máy.']
+    json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 
 if __name__ == '__main__':

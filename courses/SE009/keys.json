@@ -3340,8 +3340,8 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -3352,16 +3352,16 @@
     },
     "102": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      3.1333333333333333,
+      5.454545454545454,
+      5.454545454545454,
+      3.2727272727272725,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.08 Vpp, f = 500 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.6 Vpp, f = 300 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3370,28 +3370,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v102.png"
+     "image": "lab3/v101.png"
     },
     "103": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      2.41025641025641,
+      5.454545454545454,
+      5.454545454545454,
+      3.2727272727272725,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 2 Vpp, f = 700 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.6 Vpp, f = 300 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3400,28 +3400,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v103.png"
+     "image": "lab3/v101.png"
     },
     "104": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      4.363636363636363,
+      39.166666666666664,
+      39.166666666666664,
+      3.9166666666666665,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.8 Vpp, f = 1000 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.1 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3430,15 +3430,15 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v104.png"
+     "image": "lab3/v105.png"
     },
     "105": {
      "keys": [
@@ -3460,8 +3460,8 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -3472,16 +3472,16 @@
     },
     "106": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      3.615384615384615,
+      39.166666666666664,
+      39.166666666666664,
+      3.9166666666666665,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 3 Vpp, f = 2000 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.1 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3490,28 +3490,28 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v106.png"
+     "image": "lab3/v105.png"
     },
     "107": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      5.454545454545454,
+      1.205128205128205,
+      1.205128205128205,
+      4.82051282051282,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 1 Vpp, f = 200 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 4 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3520,28 +3520,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v107.png"
+     "image": "lab3/v109.png"
     },
     "108": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      4.699999999999999,
+      1.205128205128205,
+      1.205128205128205,
+      4.82051282051282,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.12 Vpp, f = 300 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 4 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3550,15 +3550,15 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v108.png"
+     "image": "lab3/v109.png"
     },
     "109": {
      "keys": [
@@ -3580,8 +3580,8 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -3610,8 +3610,8 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -3622,16 +3622,16 @@
     },
     "111": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      5.874999999999999,
+      5.454545454545454,
+      5.454545454545454,
+      6.545454545454545,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.15 Vpp, f = 1000 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 1.2 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3640,28 +3640,28 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v111.png"
+     "image": "lab3/v110.png"
     },
     "112": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      6.0256410256410255,
+      5.454545454545454,
+      5.454545454545454,
+      6.545454545454545,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 5 Vpp, f = 1500 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 1.2 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3670,28 +3670,28 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v112.png"
+     "image": "lab3/v110.png"
     },
     "113": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      1.6363636363636362,
+      39.166666666666664,
+      39.166666666666664,
+      1.9583333333333333,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.3 Vpp, f = 2000 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.05 Vpp, f = 200 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3700,15 +3700,15 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v113.png"
+     "image": "lab3/v114.png"
     },
     "114": {
      "keys": [
@@ -3730,8 +3730,8 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -3742,16 +3742,16 @@
     },
     "115": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      1.205128205128205,
+      39.166666666666664,
+      39.166666666666664,
+      1.9583333333333333,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 1 Vpp, f = 300 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.05 Vpp, f = 200 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3760,28 +3760,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v115.png"
+     "image": "lab3/v114.png"
     },
     "116": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      2.1818181818181817,
+      1.205128205128205,
+      1.205128205128205,
+      1.8076923076923075,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.4 Vpp, f = 500 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 1.5 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3790,28 +3790,28 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v116.png"
+     "image": "lab3/v118.png"
     },
     "117": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      2.3499999999999996,
+      1.205128205128205,
+      1.205128205128205,
+      1.8076923076923075,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.06 Vpp, f = 700 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 1.5 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3820,15 +3820,15 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v117.png"
+     "image": "lab3/v118.png"
     },
     "118": {
      "keys": [
@@ -3850,8 +3850,8 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -3864,14 +3864,14 @@
      "keys": [
       5.454545454545454,
       5.454545454545454,
-      6.545454545454545,
+      3.2727272727272725,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
       "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 1.2 Vpp, f = 1500 Hz",
+      "Vin = 0.6 Vpp, f = 300 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -3880,28 +3880,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v119.png"
+     "image": "lab3/v101.png"
     },
     "120": {
      "keys": [
       39.166666666666664,
       39.166666666666664,
-      1.9583333333333333,
+      3.9166666666666665,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
       "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.05 Vpp, f = 500 Hz",
+      "Vin = 0.1 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3910,28 +3910,28 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v120.png"
+     "image": "lab3/v105.png"
     },
     "121": {
      "keys": [
       1.205128205128205,
       1.205128205128205,
-      1.8076923076923075,
+      4.82051282051282,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
       "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 1.5 Vpp, f = 2000 Hz",
+      "Vin = 4 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3940,28 +3940,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v121.png"
+     "image": "lab3/v109.png"
     },
     "122": {
      "keys": [
       5.454545454545454,
       5.454545454545454,
-      3.2727272727272725,
+      6.545454545454545,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
       "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.6 Vpp, f = 200 Hz",
+      "Vin = 1.2 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -3970,28 +3970,28 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v122.png"
+     "image": "lab3/v110.png"
     },
     "123": {
      "keys": [
       39.166666666666664,
       39.166666666666664,
-      3.9166666666666665,
+      1.9583333333333333,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
       "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.1 Vpp, f = 1000 Hz",
+      "Vin = 0.05 Vpp, f = 200 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4000,28 +4000,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v123.png"
+     "image": "lab3/v114.png"
     },
     "124": {
      "keys": [
       1.205128205128205,
       1.205128205128205,
-      4.82051282051282,
+      1.8076923076923075,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
       "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 4 Vpp, f = 300 Hz",
+      "Vin = 1.5 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4030,15 +4030,15 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v124.png"
+     "image": "lab3/v118.png"
     },
     "201": {
      "keys": [
@@ -4060,8 +4060,8 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4072,16 +4072,16 @@
     },
     "202": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      4.699999999999999,
+      5.454545454545454,
+      5.454545454545454,
+      5.454545454545454,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.12 Vpp, f = 700 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 1 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4090,28 +4090,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v202.png"
+     "image": "lab3/v201.png"
     },
     "203": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      4.82051282051282,
+      5.454545454545454,
+      5.454545454545454,
+      5.454545454545454,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 4 Vpp, f = 1000 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 1 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4120,28 +4120,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v203.png"
+     "image": "lab3/v201.png"
     },
     "204": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      6.545454545454545,
+      39.166666666666664,
+      39.166666666666664,
+      5.874999999999999,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 1.2 Vpp, f = 1500 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.15 Vpp, f = 2000 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4150,15 +4150,15 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v204.png"
+     "image": "lab3/v205.png"
     },
     "205": {
      "keys": [
@@ -4180,8 +4180,8 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4192,16 +4192,16 @@
     },
     "206": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      6.0256410256410255,
+      39.166666666666664,
+      39.166666666666664,
+      5.874999999999999,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 5 Vpp, f = 200 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.15 Vpp, f = 2000 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4210,28 +4210,28 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v206.png"
+     "image": "lab3/v205.png"
     },
     "207": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      1.6363636363636362,
+      1.205128205128205,
+      1.205128205128205,
+      1.205128205128205,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.3 Vpp, f = 300 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 1 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4240,28 +4240,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v207.png"
+     "image": "lab3/v209.png"
     },
     "208": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      1.9583333333333333,
+      1.205128205128205,
+      1.205128205128205,
+      1.205128205128205,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.05 Vpp, f = 500 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 1 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4270,15 +4270,15 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v208.png"
+     "image": "lab3/v209.png"
     },
     "209": {
      "keys": [
@@ -4300,8 +4300,8 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4330,8 +4330,8 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4342,16 +4342,16 @@
     },
     "211": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      2.3499999999999996,
+      5.454545454545454,
+      5.454545454545454,
+      2.1818181818181817,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.06 Vpp, f = 1500 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.4 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4360,28 +4360,28 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v211.png"
+     "image": "lab3/v210.png"
     },
     "212": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      1.8076923076923075,
+      5.454545454545454,
+      5.454545454545454,
+      2.1818181818181817,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 1.5 Vpp, f = 2000 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.4 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4390,28 +4390,28 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v212.png"
+     "image": "lab3/v210.png"
     },
     "213": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      3.2727272727272725,
+      39.166666666666664,
+      39.166666666666664,
+      3.1333333333333333,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.6 Vpp, f = 200 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.08 Vpp, f = 300 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4420,15 +4420,15 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v213.png"
+     "image": "lab3/v214.png"
     },
     "214": {
      "keys": [
@@ -4450,8 +4450,8 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4462,16 +4462,16 @@
     },
     "215": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      2.41025641025641,
+      39.166666666666664,
+      39.166666666666664,
+      3.1333333333333333,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 2 Vpp, f = 500 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.08 Vpp, f = 300 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4480,28 +4480,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v215.png"
+     "image": "lab3/v214.png"
     },
     "216": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      4.363636363636363,
+      1.205128205128205,
+      1.205128205128205,
+      3.615384615384615,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.8 Vpp, f = 700 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 3 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4510,28 +4510,28 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v216.png"
+     "image": "lab3/v218.png"
     },
     "217": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      3.9166666666666665,
+      1.205128205128205,
+      1.205128205128205,
+      3.615384615384615,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.1 Vpp, f = 1000 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 3 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4540,15 +4540,15 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v217.png"
+     "image": "lab3/v218.png"
     },
     "218": {
      "keys": [
@@ -4570,8 +4570,8 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4584,14 +4584,14 @@
      "keys": [
       5.454545454545454,
       5.454545454545454,
-      2.1818181818181817,
+      5.454545454545454,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
       "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.4 Vpp, f = 2000 Hz",
+      "Vin = 1 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4600,28 +4600,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v219.png"
+     "image": "lab3/v201.png"
     },
     "220": {
      "keys": [
       39.166666666666664,
       39.166666666666664,
-      3.1333333333333333,
+      5.874999999999999,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
       "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.08 Vpp, f = 700 Hz",
+      "Vin = 0.15 Vpp, f = 2000 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4630,28 +4630,28 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v220.png"
+     "image": "lab3/v205.png"
     },
     "221": {
      "keys": [
       1.205128205128205,
       1.205128205128205,
-      3.615384615384615,
+      1.205128205128205,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
       "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 3 Vpp, f = 200 Hz",
+      "Vin = 1 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4660,28 +4660,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v221.png"
+     "image": "lab3/v209.png"
     },
     "222": {
      "keys": [
       5.454545454545454,
       5.454545454545454,
-      5.454545454545454,
+      2.1818181818181817,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
       "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 1 Vpp, f = 300 Hz",
+      "Vin = 0.4 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4690,28 +4690,28 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v222.png"
+     "image": "lab3/v210.png"
     },
     "223": {
      "keys": [
       39.166666666666664,
       39.166666666666664,
-      5.874999999999999,
+      3.1333333333333333,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
       "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.15 Vpp, f = 1500 Hz",
+      "Vin = 0.08 Vpp, f = 300 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4720,28 +4720,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v223.png"
+     "image": "lab3/v214.png"
     },
     "224": {
      "keys": [
       1.205128205128205,
       1.205128205128205,
-      1.205128205128205,
+      3.615384615384615,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
       "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 1 Vpp, f = 500 Hz",
+      "Vin = 3 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -4750,15 +4750,15 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v224.png"
+     "image": "lab3/v218.png"
     },
     "301": {
      "keys": [
@@ -4780,8 +4780,8 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4792,16 +4792,16 @@
     },
     "302": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      1.9583333333333333,
+      5.454545454545454,
+      5.454545454545454,
+      1.6363636363636362,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.05 Vpp, f = 1000 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.3 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4810,28 +4810,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v302.png"
+     "image": "lab3/v301.png"
     },
     "303": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      1.205128205128205,
+      5.454545454545454,
+      5.454545454545454,
+      1.6363636363636362,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 1 Vpp, f = 1500 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.3 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4840,28 +4840,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v303.png"
+     "image": "lab3/v301.png"
     },
     "304": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      2.1818181818181817,
+      39.166666666666664,
+      39.166666666666664,
+      2.3499999999999996,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.4 Vpp, f = 2000 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.06 Vpp, f = 200 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4870,15 +4870,15 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v304.png"
+     "image": "lab3/v305.png"
     },
     "305": {
      "keys": [
@@ -4900,8 +4900,8 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -4912,16 +4912,16 @@
     },
     "306": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      1.8076923076923075,
+      39.166666666666664,
+      39.166666666666664,
+      2.3499999999999996,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 1.5 Vpp, f = 300 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.06 Vpp, f = 200 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4930,28 +4930,28 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v306.png"
+     "image": "lab3/v305.png"
     },
     "307": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      3.2727272727272725,
+      1.205128205128205,
+      1.205128205128205,
+      2.41025641025641,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.6 Vpp, f = 500 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 2 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4960,28 +4960,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v307.png"
+     "image": "lab3/v309.png"
     },
     "308": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      3.1333333333333333,
+      1.205128205128205,
+      1.205128205128205,
+      2.41025641025641,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.08 Vpp, f = 700 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 2 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -4990,15 +4990,15 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v308.png"
+     "image": "lab3/v309.png"
     },
     "309": {
      "keys": [
@@ -5020,8 +5020,8 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -5050,8 +5050,8 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -5062,16 +5062,16 @@
     },
     "311": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      3.9166666666666665,
+      5.454545454545454,
+      5.454545454545454,
+      4.363636363636363,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.1 Vpp, f = 2000 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.8 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5080,28 +5080,28 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v311.png"
+     "image": "lab3/v310.png"
     },
     "312": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      3.615384615384615,
+      5.454545454545454,
+      5.454545454545454,
+      4.363636363636363,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 3 Vpp, f = 200 Hz",
+      "R1 = 220Ω, R2 = 1.2kΩ",
+      "Vin = 0.8 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5110,28 +5110,28 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v312.png"
+     "image": "lab3/v310.png"
     },
     "313": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      5.454545454545454,
+      39.166666666666664,
+      39.166666666666664,
+      4.699999999999999,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 1 Vpp, f = 300 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.12 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5140,15 +5140,15 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v313.png"
+     "image": "lab3/v314.png"
     },
     "314": {
      "keys": [
@@ -5170,8 +5170,8 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -5182,16 +5182,16 @@
     },
     "315": {
      "keys": [
-      1.205128205128205,
-      1.205128205128205,
-      4.82051282051282,
+      39.166666666666664,
+      39.166666666666664,
+      4.699999999999999,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
-      "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 4 Vpp, f = 700 Hz",
+      "R1 = 1.2kΩ, R2 = 47kΩ",
+      "Vin = 0.12 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5200,28 +5200,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v315.png"
+     "image": "lab3/v314.png"
     },
     "316": {
      "keys": [
-      5.454545454545454,
-      5.454545454545454,
-      6.545454545454545,
+      1.205128205128205,
+      1.205128205128205,
+      6.0256410256410255,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
-      "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 1.2 Vpp, f = 1000 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 5 Vpp, f = 2000 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5230,28 +5230,28 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v316.png"
+     "image": "lab3/v318.png"
     },
     "317": {
      "keys": [
-      39.166666666666664,
-      39.166666666666664,
-      5.874999999999999,
+      1.205128205128205,
+      1.205128205128205,
+      6.0256410256410255,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
-      "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.15 Vpp, f = 1500 Hz",
+      "R1 = 3.9kΩ, R2 = 4.7kΩ",
+      "Vin = 5 Vpp, f = 2000 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5260,15 +5260,15 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v317.png"
+     "image": "lab3/v318.png"
     },
     "318": {
      "keys": [
@@ -5290,8 +5290,8 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
@@ -5304,14 +5304,14 @@
      "keys": [
       5.454545454545454,
       5.454545454545454,
-      4.363636363636363,
+      1.6363636363636362,
       180.0,
       50.329212104487034,
       15.915494309189533
      ],
      "info": [
       "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.8 Vpp, f = 200 Hz",
+      "Vin = 0.3 Vpp, f = 700 Hz",
       "Band-pass (across R): C = 10 nF, R = 100 Ω (f0 = 50.33 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -5320,28 +5320,28 @@
       "L = 1 mH, C = 10 nF, R = 100 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v319.png"
+     "image": "lab3/v301.png"
     },
     "320": {
      "keys": [
       39.166666666666664,
       39.166666666666664,
-      4.699999999999999,
+      2.3499999999999996,
       180.0,
       33.931947878728494,
       15.915494309189533
      ],
      "info": [
       "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.12 Vpp, f = 1000 Hz",
+      "Vin = 0.06 Vpp, f = 200 Hz",
       "Band-pass (across R): C = 22 nF, R = 100 Ω (f0 = 33.93 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -5350,28 +5350,28 @@
       "L = 1 mH, C = 22 nF, R = 100 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v320.png"
+     "image": "lab3/v305.png"
     },
     "321": {
      "keys": [
       1.205128205128205,
       1.205128205128205,
-      6.0256410256410255,
+      2.41025641025641,
       180.0,
       23.21513442094721,
       15.915494309189533
      ],
      "info": [
       "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 5 Vpp, f = 300 Hz",
+      "Vin = 2 Vpp, f = 1000 Hz",
       "Band-pass (across R): C = 47 nF, R = 100 Ω (f0 = 23.22 kHz, BW = 15.92 kHz)"
      ],
      "card": [
@@ -5380,28 +5380,28 @@
       "L = 1 mH, C = 47 nF, R = 100 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v321.png"
+     "image": "lab3/v309.png"
     },
     "322": {
      "keys": [
       5.454545454545454,
       5.454545454545454,
-      1.6363636363636362,
+      4.363636363636363,
       180.0,
       50.329212104487034,
       35.01408748021697
      ],
      "info": [
       "R1 = 220Ω, R2 = 1.2kΩ",
-      "Vin = 0.3 Vpp, f = 500 Hz",
+      "Vin = 0.8 Vpp, f = 1500 Hz",
       "Band-pass (across R): C = 10 nF, R = 220 Ω (f0 = 50.33 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5410,28 +5410,28 @@
       "L = 1 mH, C = 10 nF, R = 220 Ω",
       "Frequencies (kHz): 12.6, 20.1, 30.2, 40.3, 50.3, 62.9, 80.5, 125.8, 201.3",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v322.png"
+     "image": "lab3/v310.png"
     },
     "323": {
      "keys": [
       39.166666666666664,
       39.166666666666664,
-      2.3499999999999996,
+      4.699999999999999,
       180.0,
       33.931947878728494,
       35.01408748021697
      ],
      "info": [
       "R1 = 1.2kΩ, R2 = 47kΩ",
-      "Vin = 0.06 Vpp, f = 2000 Hz",
+      "Vin = 0.12 Vpp, f = 500 Hz",
       "Band-pass (across R): C = 22 nF, R = 220 Ω (f0 = 33.93 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5440,28 +5440,28 @@
       "L = 1 mH, C = 22 nF, R = 220 Ω",
       "Frequencies (kHz): 8.5, 13.6, 20.4, 27.1, 33.9, 42.4, 54.3, 84.8, 135.7",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v323.png"
+     "image": "lab3/v314.png"
     },
     "324": {
      "keys": [
       1.205128205128205,
       1.205128205128205,
-      2.41025641025641,
+      6.0256410256410255,
       180.0,
       23.21513442094721,
       35.01408748021697
      ],
      "info": [
       "R1 = 3.9kΩ, R2 = 4.7kΩ",
-      "Vin = 2 Vpp, f = 700 Hz",
+      "Vin = 5 Vpp, f = 2000 Hz",
       "Band-pass (across R): C = 47 nF, R = 220 Ω (f0 = 23.22 kHz, BW = 35.01 kHz)"
      ],
      "card": [
@@ -5470,15 +5470,15 @@
       "L = 1 mH, C = 47 nF, R = 220 Ω",
       "Frequencies (kHz): 5.8, 9.3, 13.9, 18.6, 23.2, 29.0, 37.1, 58.0, 92.9",
       "+ at most 2 extra points near the peak.",
-      "Task 2 – inverting amplifier (your own): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
-      "Find R1 and R2 from the screen. Put them into your team's amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
+      "Task 2 – inverting amplifier (team – the same screen for all members): LM358, supply ±6 V. CH2 (blue) = input, CH1 (yellow) = output.",
+      "Find R1 and R2 from the screen, build the amplifier and make your screen look the same. Measure Vout,pp and the phase shift.",
       "Submit + one screenshot of your team's RLC graph on the student page (QR)."
      ],
      "figs": [
       "/courses/SE009/img/lab3_circuit.png",
       "/courses/SE009/img/rlc_bp.png"
      ],
-     "image": "lab3/v324.png"
+     "image": "lab3/v318.png"
     }
    },
    "files": [
@@ -5515,8 +5515,8 @@
     },
     {
      "title": [
-      "Task 2 – inverting amplifier from an oscilloscope screen (individual)",
-      "Bài 2 – Mạch khuếch đại đảo từ màn hình osci (cá nhân)"
+      "Task 2 – inverting amplifier from an oscilloscope screen (team – the same screen for all members)",
+      "Bài 2 – Mạch khuếch đại đảo từ màn hình osci (làm nhóm – cả nhóm chung một màn hình)"
      ],
      "cardSlice": [
       5,
@@ -5533,8 +5533,8 @@
       3
      ],
      "note": [
-      "Your team builds one LM358 amplifier. In turn, put in your own R1 and R2, set the function generator like CH2 on your card and measure. The lecturer checks your screen at the tick.",
-      "Cả nhóm lắp chung một mạch LM358. Lần lượt từng bạn lắp R1, R2 của mình, chỉnh máy phát giống CH2 trên đề rồi đo. Giảng viên kiểm tra màn hình osci khi tick."
+      "The whole team has the same screen. Find R1 and R2, build one LM358 amplifier, set the function generator like CH2 on your card and measure. Each student types the team values. The lecturer checks your screen at the tick.",
+      "Cả nhóm chung một màn hình. Tìm R1, R2, lắp một mạch LM358, chỉnh máy phát giống CH2 trên đề rồi đo. Mỗi SV tự nhập số của nhóm. Giảng viên kiểm tra màn hình osci khi tick."
      ]
     }
    ],
@@ -5552,12 +5552,12 @@
      "Tải ảnh chụp đồ thị"
     ],
     "howto": [
-     "<b>Task 1</b> = team RLC (one shared circuit). <b>Task 2</b> = your own amplifier. Type your values, upload <b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo), then <span class=\"nowrap\">tap <b>Submit.</b></span>",
-     "<b>Bài 1</b> = RLC nhóm (chung một mạch). <b>Bài 2</b> = mạch khuếch đại của bạn. Nhập số, tải <b>đúng một ảnh đồ thị RLC Bài 1</b> (không phải ảnh breadboard), rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span>"
+     "<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work: type your team's values, upload <b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo), then <span class=\"nowrap\">tap <b>Submit.</b></span>",
+     "<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm: nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC Bài 1</b> (không phải ảnh breadboard), rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span>"
     ],
     "check": [
-     "They will check your Task 2 screen <span class=\"nowrap\">on the <b>oscilloscope</b></span> and your <b>RLC graph</b>, then confirm at your table.",
-     "Họ sẽ xem màn hình Bài 2 <span class=\"nowrap\">trên <b>osci</b></span> và <b>đồ thị RLC</b>, rồi xác nhận tại cụm máy."
+     "They will check your team's Task 2 screen <span class=\"nowrap\">on the <b>oscilloscope</b></span> and your <b>RLC graph</b>, then confirm at your table.",
+     "Họ sẽ xem màn hình Bài 2 của nhóm <span class=\"nowrap\">trên <b>osci</b></span> và <b>đồ thị RLC</b>, rồi xác nhận tại cụm máy."
     ],
     "need": [
      "Upload one screenshot of your Task 1 RLC graph first (not the circuit).",

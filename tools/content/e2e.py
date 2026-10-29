@@ -88,12 +88,12 @@ s.call('/api/public/submit', {'cls': cid, 'lab': '1', 'values': [k[0] * 1.09, k[
 gv.call('/api/record', {'cls': cid, 'lab': '1', 'sid': st['sid'], 'tick': True})
 m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][0]
 print('tolerance test Lab 1 (expect 3+1.5+0+3 = 7.5):', m)
-# Lab 3 Task 1 (RLC): same keys inside each team; Lab 2 task (RC): different for every member
+# Lab 3 (both tasks): same keys inside each team; Lab 2 task (RC): different for every member
 for t in range(1, 7):
     mem = [str(var(x)) for x in C['students'] if x['team'] == t]
-    k2 = {tuple(KEYS['3']['variants'][x]['keys'][4:]) for x in mem}; k1 = {KEYS['2']['variants'][x]['keys'][0] for x in mem}
+    k2 = {tuple(KEYS['3']['variants'][x]['keys']) for x in mem}; k1 = {KEYS['2']['variants'][x]['keys'][0] for x in mem}
     assert len(k2) == 1 and len(k1) == len(mem), (t, mem)
-print('Lab 3 RLC team check ok')
+print('Lab 3 team check ok (RLC and amplifier)')
 # Lab 2 task design rule: R, C giving fc 8 % above the target -> half marks (3 of 6, + 6 on the scope), 3 % -> full
 st = C['students'][0]; v = str(var(st)); vals = answers('2', v); tgt = KEYS['2']['variants'][v]['keys'][0]
 s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
