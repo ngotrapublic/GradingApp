@@ -71,7 +71,10 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    giữ (có trong sơ đồ). Thêm phần ôn thi sau "Skills checklist": Exercise 6 ghép điện trở, Exercise 7 cài máy từ trạng
    thái mặc định (osci Default Setup, máy phát 50 Ω), Exercise 8 thiết kế lọc thông thấp 1 kHz bằng linh kiện trên bàn; mỗi bài
    có slide đáp án. Chỉ còn một mạch final (bỏ version 1: lỗi "tắt sau 1 phút" là do nguồn ±6 V tự chế của HN; điểm chấm
-   dùng giá trị version 2). Chạy sau `practice_slides.py` (chạy `practice_slides.py 4` sẽ xóa phần ôn thi), trước `subscripts.py`.
+   dùng giá trị version 2), bỏ cả slide tụ 0.1 µF ở chân nguồn và xóa C4, C5 trên các ảnh sơ đồ (`fig/hn_s3_*_noc45.png`,
+   thẻ đề `lab4_circuit.png`). Rà lại trước buổi học: sửa câu chữ HN, từ chưa dạy trong bảng từ vựng, ẩn 2 slide HN tính f_c
+   với 8 Ω (sai so với đáp án Exercise 2), bài chấm điểm ghi rõ tháo micro và loa, máy phát High-Z (cả thẻ đề trong
+   `keys.json`). Chạy sau `practice_slides.py` (chạy `practice_slides.py 4` sẽ xóa phần ôn thi), trước `subscripts.py`.
 16. `review_reveal.py` – Lab 2–4: slide "Review – words from Lab N" hiện đáp án từng dòng khi bấm (khung chữ đặt lên từng ô,
    hiệu ứng Appear); bỏ slide "(answers)". Chạy lại không làm gì nữa.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).

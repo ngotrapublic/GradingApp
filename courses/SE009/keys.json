@@ -5559,13 +5559,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 101",
       "Team 1 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5579,13 +5579,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 102",
       "Team 1 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5599,13 +5599,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 103",
       "Team 1 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5619,13 +5619,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 104",
       "Team 2 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5639,13 +5639,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 105",
       "Team 2 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5659,13 +5659,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 106",
       "Team 2 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5679,13 +5679,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 107",
       "Team 3 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5699,13 +5699,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 108",
       "Team 3 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5719,13 +5719,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 109",
       "Team 3 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5739,13 +5739,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 110",
       "Team 4 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5759,13 +5759,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 111",
       "Team 4 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5779,13 +5779,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 112",
       "Team 4 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5799,13 +5799,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 113",
       "Team 5 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5819,13 +5819,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 114",
       "Team 5 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5839,13 +5839,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 115",
       "Team 5 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5859,13 +5859,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 116",
       "Team 6 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5879,13 +5879,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 117",
       "Team 6 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5899,13 +5899,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 118",
       "Team 6 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5919,13 +5919,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 119",
       "Team 1 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5939,13 +5939,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 120",
       "Team 2 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5959,13 +5959,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 121",
       "Team 3 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5979,13 +5979,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 122",
       "Team 4 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -5999,13 +5999,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 123",
       "Team 5 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6019,13 +6019,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 124",
       "Team 6 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6039,13 +6039,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 201",
       "Team 1 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6059,13 +6059,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 202",
       "Team 1 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6079,13 +6079,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 203",
       "Team 1 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6099,13 +6099,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 204",
       "Team 2 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6119,13 +6119,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 205",
       "Team 2 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6139,13 +6139,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 206",
       "Team 2 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6159,13 +6159,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 207",
       "Team 3 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6179,13 +6179,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 208",
       "Team 3 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6199,13 +6199,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 209",
       "Team 3 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6219,13 +6219,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 210",
       "Team 4 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6239,13 +6239,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 211",
       "Team 4 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6259,13 +6259,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 212",
       "Team 4 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6279,13 +6279,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 213",
       "Team 5 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6299,13 +6299,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 214",
       "Team 5 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6319,13 +6319,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 215",
       "Team 5 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6339,13 +6339,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 216",
       "Team 6 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6359,13 +6359,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 217",
       "Team 6 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6379,13 +6379,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 218",
       "Team 6 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6399,13 +6399,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 219",
       "Team 1 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6419,13 +6419,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 220",
       "Team 2 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6439,13 +6439,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 221",
       "Team 3 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6459,13 +6459,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 222",
       "Team 4 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6479,13 +6479,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 223",
       "Team 5 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6499,13 +6499,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 224",
       "Team 6 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6519,13 +6519,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 301",
       "Team 1 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6539,13 +6539,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 302",
       "Team 1 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6559,13 +6559,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 303",
       "Team 1 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6579,13 +6579,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 304",
       "Team 2 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6599,13 +6599,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 305",
       "Team 2 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6619,13 +6619,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 306",
       "Team 2 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6639,13 +6639,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 307",
       "Team 3 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6659,13 +6659,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 308",
       "Team 3 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6679,13 +6679,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 309",
       "Team 3 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6699,13 +6699,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 310",
       "Team 4 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6719,13 +6719,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 311",
       "Team 4 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6739,13 +6739,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 312",
       "Team 4 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6759,13 +6759,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 313",
       "Team 5 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6779,13 +6779,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 314",
       "Team 5 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6799,13 +6799,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 315",
       "Team 5 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6819,13 +6819,13 @@
      ],
      "info": [
       "Member 1: Stage 1 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 316",
       "Team 6 – Member 1",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6839,13 +6839,13 @@
      ],
      "info": [
       "Member 2: Stage 2 output, 1 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 317",
       "Team 6 – Member 2",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 1 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6859,13 +6859,13 @@
      ],
      "info": [
       "Member 3: Stage 1 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 318",
       "Team 6 – Member 3",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 1, f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6879,13 +6879,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 319",
       "Team 1 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6899,13 +6899,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 320",
       "Team 2 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6919,13 +6919,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 321",
       "Team 3 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6939,13 +6939,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 322",
       "Team 4 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6959,13 +6959,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 323",
       "Team 5 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],
@@ -6979,13 +6979,13 @@
      ],
      "info": [
       "Member 4: Stage 2 output, 5 kHz",
-      "10 mVpp input, electret disconnected"
+      "10 mVpp input (High-Z), microphone and speaker disconnected"
      ],
      "card": [
       "Electric Circuit Lab – LAB 4   |   Variant 324",
       "Team 6 – Member 4",
-      "Function generator: 10 mVpp sine at the stage-1 input",
-      "Electret disconnected.",
+      "Function generator: High-Z, 10 mVpp sine at the stage-1 input",
+      "Microphone and speaker disconnected.",
       "Measure: Vpp at the output of stage 2 (final output), f = 5 kHz",
       "Submit in mVpp + a photo of your circuit on the student page (QR)."
      ],

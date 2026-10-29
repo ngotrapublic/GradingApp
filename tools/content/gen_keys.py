@@ -32,7 +32,7 @@ for k, d in g['D3'].items():
     labs['3']['variants'][k] = {'keys': [d['gain'], d['gain'], d['vout'], 180.0],
         'info': [f'R1 = {f(d["r1"])}Ω, R2 = {f(d["r2"])}Ω', f'Vin = {d["vin"]:g} Vpp, f = {d["f"]} Hz']}
 for k, d in g['D4'].items():
-    labs['4']['variants'][k] = {'keys': [d['vpp']], 'info': [f'Member {d["member"]}: {T4[d["member"] - 1]}', '10 mVpp input, electret disconnected']}
+    labs['4']['variants'][k] = {'keys': [d['vpp']], 'info': [f'Member {d["member"]}: {T4[d["member"] - 1]}', '10 mVpp input (High-Z), microphone and speaker disconnected']}
 # student-facing card text (no answers) – written by make_labfiles.py
 cards = json.load(open(f'{W}/cards.json', encoding='utf8'))
 for lab, L_ in labs.items():
@@ -44,7 +44,7 @@ os.makedirs(SIMG, exist_ok=True)
 for src, dst in [('d1_circuit.png', 'lab1_circuit.png'), ('d2_rc_lp.png', 'rc_lp.png'), ('d2_rc_hp.png', 'rc_hp.png'),
                  ('d2_lp.png', 'rlc_lp.png'), ('d2_hp.png', 'rlc_hp.png'), ('d2_bp.png', 'rlc_bp.png')]:
     shutil.copy(f'{FIG}/{src}', f'{SIMG}/{dst}')
-Image.open(f'{W}/fig/hn_s3_final2_nodiv.png').crop((0, 305, 1216, 790)).save(f'{SIMG}/lab4_circuit.png')   # HN final circuit v2 without the 12 V / 1 MΩ block
+Image.open(f'{W}/fig/hn_s3_final2_noc45.png').crop((0, 305, 1216, 790)).save(f'{SIMG}/lab4_circuit.png')   # HN final circuit v2 without the 12 V / 1 MΩ block and without C4, C5 (lab4_review.py)
 for k in labs['1']['variants']: labs['1']['variants'][k]['figs'] = ['/courses/SE009/img/lab1_circuit.png']
 for k, d in g['D2'].items():
     labs['2']['variants'][k]['figs'] = [f"/courses/SE009/img/rc_{'lp' if d['rc_kind'] == 'Low-pass' else 'hp'}.png",

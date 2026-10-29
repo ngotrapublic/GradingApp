@@ -74,7 +74,7 @@ s_photo = dk.new_slide(header(ids, 'Example – final circuit on the PB-503A')
 # ---- Lab 4 marks ----
 ids = Ids(); s_sec1 = hn_section(dk, 'Lab 4 – marks')
 ids = Ids()
-rows = [['Member (see your card)', 'Measurement (electret disconnected, function generator = 10 mVpp sine at the stage-1 input)', 'Unit'],
+rows = [['Member (see your card)', 'Measurement (microphone and speaker disconnected; function generator High-Z, 10 mVpp sine at the stage-1 input)', 'Unit'],
         ['Member 1', 'Vpp at the output of stage 1, f = 1 kHz', 'mVpp'],
         ['Member 2', 'Vpp at the output of stage 2, f = 1 kHz', 'mVpp'],
         ['Member 3', 'Vpp at the output of stage 1, f = 5 kHz', 'mVpp'],

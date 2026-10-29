@@ -6,8 +6,9 @@
    resistors, Exercise 7 set up the instruments from the default state (as the exam starts), Exercise 8 design an RC
    low-pass filter with the parts on the table. Each has its answer slide (practice_slides.add / answer_slide).
 3. One final circuit instead of version 1 + version 2 (see one_final).
+4. Review fixes (see review): language, untaught words, HN numbers, the marked measurement (also on the cards).
 Run after practice_slides.py (`practice_slides.py 4` removes the practice slides), before subscripts.py. Safe to run again."""
-import copy, re
+import copy, hashlib, re, unicodedata
 import schemdraw, schemdraw.elements as elm
 from pptx.oxml.ns import qn
 from pptx import Presentation
@@ -86,14 +87,16 @@ def figures():
 # 3. One final circuit (lecturer, 29/10/2026): version 1 "dies out after about 1 minute" only with the HN home-made
 #    supply (12 V + 2 x 1 MOhm divider as 0 V); on the PB-503A it works. The marks use the version 2 values
 #    (4.7 kOhm, 1 nF), so version 1 goes and version 2 becomes "Final circuit". Slides are found by old or new text.
-V1 = ('Final circuit (version 1)', 'Final circuit version 1')
+V1 = ('Final circuit (version 1)', 'Final circuit version 1', 'Second, add 0.1 µF capacitors at the voltage supply pins')
+# lecturer, 29/10/2026: no 0.1 uF at the op-amp supply pins either; C4 and C5 painted out of the HN schematics (fix_divider.paint)
+NOC45 = {'36093e': 'hn_s3_solution_noc45.png', 'f8fba8': 'hn_s3_stage1_noc45.png', 'f73224': 'hn_s3_final2_noc45.png'}
 FINAL = {   # old first line -> new lines of the text box ("**x**" = bold)
     'So how do we solve the echo?': [
         '**Before you connect the microphone**',
         'Your voice gives tens to hundreds of mVpp (Exercise 4).',
         'With a gain of 291, the output would need tens of volts. It clips (Lab 3).',
         'The speaker is also very close to the microphone. A loud speaker gives an echo (acoustic feedback).',
-        'So we make three changes.'],
+        'So we make two changes.'],
     'The resulting circuit is this': [
         '**The final circuit is this**',
         'Disconnect the function generator.',
@@ -104,10 +107,11 @@ FINAL = {   # old first line -> new lines of the text box ("**x**" = bold)
         'You hear your voice in the speaker, with little echo.',
         'The output signal looks something like this'],
 }
+FINAL['Before you connect the microphone'] = FINAL['So how do we solve the echo?']     # running again
 FINAL_NOTES = {
     'Before you connect the microphone': 'Before you connect the microphone: your voice gives tens to hundreds of millivolts. '
         'With a gain of 291, the output would need tens of volts, so it clips, like in Lab 3. The speaker is also very '
-        'close to the microphone. A loud speaker gives an echo. So we make three changes.',
+        'close to the microphone. A loud speaker gives an echo. So we make two changes.',
     'The final circuit is this': 'This is the final circuit. Disconnect the function generator. Connect the microphone '
         'circuit to stage 1 through the 1 microfarad capacitor. Connect the final output to the speaker.',
     'Speak into the microphone through': 'Speak into the microphone through the rolled paper. You hear your voice in the '
@@ -145,14 +149,124 @@ def one_final(p):
             first = sh.text_frame.paragraphs[0].text
             if first in FINAL:
                 set_lines(sh, FINAL[first])
+            runs = sh.text_frame.paragraphs[0].runs
+            if first.startswith('Third,') and runs:
+                runs[0].text = runs[0].text.replace('Third,', 'Second,')
+        for pic in [x for x in s.shapes if x.shape_type == 13]:
+            part = s.part.related_part(pic._element.blip_rId)
+            if hashlib.md5(part.blob).hexdigest()[:6] in NOC45:
+                part._blob = open(ps.FIG + NOC45[hashlib.md5(part.blob).hexdigest()[:6]], 'rb').read()
         for key, say in FINAL_NOTES.items():
             if key in ps.text_of(s):
                 s.notes_slide.notes_text_frame.text = say
         nt = s.notes_slide.notes_text_frame if s.has_notes_slide else None
+        if nt is not None:
+            nt.text = nt.text.replace('Fix 3:', 'Fix 2:').replace('Look at the changes: 4.7 kΩ, 1 nF, 100 nF.',
+                                                                 'Look at the changes: 4.7 kΩ and 1 nF.')
         if nt is not None and nt.text in ('Final circuit, version 2.', 'This is version 2 of the schematic.'):
             nt.text = {'Final circuit, version 2.': 'The final circuit.',
                        'This is version 2 of the schematic.': 'This is the schematic of the final circuit.'}[nt.text]
     return gone
+
+
+# 4. Review before class (lecturer, 29/10/2026): language of the HN slides (simple, complete sentences, no "->" chains),
+#    words that were not taught, HN numbers that disagree with the exercise answers, and the marked measurement
+#    (speaker disconnected: the 8 Ohm speaker loads the LM358 output; generator High-Z: at 50 Ohm the input doubles).
+TEXT = {   # whole paragraph -> new paragraph (first run's format kept; "**x**" = bold)
+    'Decoupling capacitor': 'Voltage follower',                                    # Lab 3 words: decoupling not taught
+    'A capacitor from the supply to GND that removes noise': 'An op-amp circuit with gain 1: the output follows the input',
+    '470 µF and 100 nF': 'Pin 1 connected to pin 2',
+    'Sends noise on the supply to GND': 'How high or low a sound is',                 # Lab 4 words (hidden slide)
+    '470 µF on each rail': 'A higher frequency gives a higher pitch',
+    'When you only wants AC signal to go through': 'Use a coupling capacitor when you want only the AC signal to go through.',
+    'You connect a coupling capacitor': 'The DC is blocked.',
+    'DC signal is blocked': 'It is used in audio circuits and in other circuits that work with AC signals.',
+    'This is usually used in audio circuits, or any circuit that process AC signal': '',
+    'That means the speaker needs AC signal to generate suitable sound frequency for you':
+        'So the speaker needs an AC signal with a frequency that you can hear.',
+    'Bigger amplitude -> bigger sound': 'A bigger amplitude gives a louder sound.',
+    'Bigger frequency -> higher pitch': 'A higher frequency gives a higher pitch.',
+    'Sound creates vibration -> change capacitor value -> generate AC signal':
+        'Sound makes a thin plate vibrate. The capacitance changes. This makes a small AC signal.',
+    'But with electret or microphone in general': 'A microphone always needs a cover.',
+    'You don’t just talk straight to it': 'You do not talk straight into it.',
+    'There’s always some shield covering the mic': '',
+    'This is to prevent unwanted sound from winds and air movement in general': 'The cover blocks the noise of wind and moving air.',
+    'Not any other direction -> unwanted noises': 'Sound from other directions is unwanted noise.',
+    'But our electret doesn’t care': 'But our electret hears all directions.',
+    'Most microphones only generates mV signals': 'Most microphones give only a few mV.',
+    'We always need amplifier circuit for microphones': 'We always need an amplifier for a microphone.',
+    'Does that mean we can just connect to the speaker right?': 'Can we connect it directly to the speaker?',
+    'But you see how the speaker deteriorate your output?': 'But the speaker makes your output much smaller:',
+    'We need to filter it but not losing the gain': 'We filter it out, but keep the gain for the voice.',
+    'Solution: Just add a 1 nF capacitor || 30kΩ in the first amplifier':
+        '**Solution:** add a 1 nF capacitor in parallel with the 30 kΩ resistor in stage 1.',
+    '(or use 2 of 2.2 nF in series to create 1.1 nF)': '(Or use two 2.2 nF capacitors in series: 1.1 nF.)',
+    'Build the electret test circuit: bias resistor from +6 V, ground pin to GND.':
+        'Build the circuit of the slide before: R1 = 10 kΩ from +6 V, R2 = 10 kΩ to GND, microphone ground pin to GND.',
+    'Measurement (electret disconnected, function generator = 10 mVpp sine at the stage-1 input)':
+        'Measurement (microphone and speaker disconnected; function generator High-Z, 10 mVpp sine at the stage-1 input)',
+}
+NOTES = [('1. Build the electret test circuit: bias resistor from +6 V, ground pin to GND.',
+          '1. Build the circuit of the slide before: R1 = 10 kΩ from +6 V, R2 = 10 kΩ to GND, microphone ground pin to GND.'),
+         ('Disconnect the microphone. Put 10 mVpp from the function generator into stage 1.',
+          'Disconnect the microphone and the speaker. Set the function generator to High-Z and put 10 mVpp into stage 1.'),
+         ('Microphones usually have a cover to block wind noise.', 'A microphone always needs a cover. You do not talk straight into it. The cover blocks the noise of wind and moving air.')]
+# HN slides with the speaker high-pass for R = 8 Ohm (and 423 Hz instead of 42 Hz): Exercise 2 answers it with 58 Ohm
+HIDE_NOTES = ('With C = 0.1 µF and R = 8 Ω', 'Now with 470 µF, fc is about 40 Hz')
+KEYS = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/courses/SE009/keys.json'
+CARD = [('Function generator: 10 mVpp sine at the stage-1 input', 'Function generator: High-Z, 10 mVpp sine at the stage-1 input'),
+        ('Electret disconnected.', 'Microphone and speaker disconnected.'),
+        ('10 mVpp input, electret disconnected', '10 mVpp input (High-Z), microphone and speaker disconnected')]
+
+
+def set_para(para, new):
+    runs = para.runs
+    rpr = copy.deepcopy(runs[0]._r.find(qn('a:rPr'))) if runs else None
+    for r in runs: r._r.getparent().remove(r._r)
+    for part in re.split(r'(\*\*.*?\*\*)', new):
+        if part:
+            r = para.add_run(); r.text = part.strip('*')
+            if rpr is not None: r._r.insert(0, copy.deepcopy(rpr))         # keeps the bold of a table word
+            if part.startswith('**'): r.font.bold = True
+            elif rpr is not None and new.startswith('**'): r.font.bold = False
+
+
+def review(p):
+    n = 0
+    for s in p.slides:
+        frames = [sh.text_frame for sh in s.shapes if sh.has_text_frame]
+        frames += [c.text_frame for sh in s.shapes if sh.has_table for row in sh.table.rows for c in row.cells]
+        for tf in frames:
+            for para in list(tf.paragraphs):
+                if para.text == 'Voltage follower' and title(s) == 'Review – words from Lab 4':
+                    set_para(para, 'Pitch'); n += 1                 # the decoupling row of the Lab 4 words
+                key = unicodedata.normalize('NFKC', para.text)          # HN slides use the ohm sign U+2126
+                if key in TEXT:
+                    new = TEXT[key]
+                    if new: set_para(para, new)
+                    else:                                           # drop the line and the empty line before it
+                        prev = para._p.getprevious()
+                        if prev is not None and not ''.join(prev.itertext()).strip(): prev.getparent().remove(prev)
+                        para._p.getparent().remove(para._p)
+                    n += 1
+        if s.has_notes_slide:
+            nt = s.notes_slide.notes_text_frame; t = nt.text
+            for a, b in NOTES: t = t.replace(a, b)
+            if t != nt.text: nt.text = t; n += 1
+            if any(h in nt.text for h in HIDE_NOTES): s._element.set('show', '0')
+    # text boxes that run under the picture on their right (slide 6 "Coupling capacitor", the microphone cover)
+    for s in p.slides:
+        pics = [x for x in s.shapes if x.shape_type == 13 and x.width > 1.5e6]
+        for sh in s.shapes:
+            if sh.has_text_frame and sh.text_frame.text.startswith(('Use a coupling capacitor', 'A microphone always needs a cover')):
+                right = min((x.left for x in pics if x.left > sh.left), default=None)
+                if right and sh.left + sh.width > right:
+                    sh.width = right - sh.left - 91440
+    k = open(KEYS, encoding='utf-8').read(); k2 = k
+    for a, b in CARD: k2 = k2.replace(a, b)
+    if k2 != k: open(KEYS, 'w', encoding='utf-8').write(k2)
+    return n
 
 
 def title(s):
@@ -174,6 +288,7 @@ def run():
     drop(p, lambda s: s._element.cSld.get('name') == NAME)
     gone = drop(p, lambda s: any(d in ps.text_of(s) for d in DROP))
     v1 = one_final(p)
+    fixed = review(p)
     # recap: no decoupling line on the slide or in the notes
     rec = next(s for s in p.slides if title(s).startswith('Recap – the inverting amplifier'))
     for sh in rec.shapes:
@@ -204,7 +319,7 @@ def run():
     for k, sid in enumerate(sids): lst.insert(at + k, sid)
     p.save(DECK)
     left = [i + 1 for i, s in enumerate(p.slides) if 'ecoupl' in ps.text_of(s) and s._element.get('show') != '0']
-    print(f'Lab 4: {gone} decoupling slides removed | {v1} version-1 slides removed | exam practice at {at + 1}-{at + len(new)} | {len(p.slides)} slides |'
+    print(f'Lab 4: {gone} decoupling slides removed | {v1} version-1 slides removed | {fixed} texts reviewed | exam practice at {at + 1}-{at + len(new)} | {len(p.slides)} slides |'
           f' "decoupl" still on visible slides: {left}')
 
 

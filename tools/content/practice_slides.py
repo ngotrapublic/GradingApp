@@ -156,7 +156,7 @@ LAB = {
                  'Switch off, turn the microphone round, and check with the continuity test.']),
     dict(after='Then talk to the electret via a rolled', bar='Testing only electret', fig=('Electret test circuit on the PB-503A',),
          head='Exercise 4: See your voice on the oscilloscope (10 minutes)',
-         steps=['Build the electret test circuit: bias resistor from +6 V, ground pin to GND.',
+         steps=['Build the circuit of the slide before: R1 = 10 kΩ from +6 V, R2 = 10 kΩ to GND, microphone ground pin to GND.',
                 'Connect CH1 after the 1 µF coupling capacitor.',
                 'Set CH1 to 100 mV/div and the time base to 1 ms/div.',
                 'Talk or hum into the microphone through a rolled piece of paper.',

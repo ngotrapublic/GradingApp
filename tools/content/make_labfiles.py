@@ -53,7 +53,7 @@ TASK = ['Vpp at the output of stage 1, f = 1 kHz', 'Vpp at the output of stage 2
 Q4 = [('Variant number', 'Variant number (printed on your card)', '', 0, None),
       ('Measured Vpp', 'Measured Vpp – your individual measurement (see your card). Function generator 10 mVpp sine at the stage-1 input, electret disconnected. Unit: mVpp. Numbers only.', 'mVpp', 6, lambda d: d['vpp'])]
 card4 = lambda c, d: [(f'Electric Circuit Lab – LAB 4   |   Variant {c}', True), (f'Team {d["team"]} – Member {d["member"]}', True),
-                      ('Function generator: 10 mVpp sine at the stage-1 input', False), ('Electret disconnected.', False),
+                      ('Function generator: High-Z, 10 mVpp sine at the stage-1 input', False), ('Microphone and speaker disconnected.', False),
                       (f'Measure: {TASK[d["member"] - 1]}', True), ('Submit in mVpp + a photo of your circuit on the student page (QR).', False)]
 key4 = [('Cụm', lambda d: d['team']), ('Thành viên', lambda d: d['member']), ('Đo', lambda d: TASK[d['member'] - 1]), ('Vpp (mV)', lambda d: round(d['vpp'], 1))]
 build(4, 10, g['D4'], Q4, None, key4, [('Demo nhóm', 4)], f'{OUT}/Lab4',
