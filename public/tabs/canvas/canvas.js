@@ -64,8 +64,10 @@ function renderSum(m){
   h += `<h2>${T('Marks','Bảng điểm')} ${esc(C().name)}</h2><div class="card scroll"><table><tr><th>${T('Name','Họ tên')}</th><th>${T('Team','Nhóm')}</th>${labs().map(l=>`<th>Lab ${l}<br><small>/${K().labs[l].total}</small></th>`).join('')}<th>${T('Total','Tổng')}<br><small>/${labs().reduce((a,l)=>a+K().labs[l].total,0)}</small></th></tr>
    ${st.map(s=>{ const sc=labs().map(l=>score(s,l)); return `<tr><td>${esc(s.name)}<br><small class="muted">${esc(s.sid)}</small></td><td>${s.team||'–'}</td>${sc.map((x,i)=>{ const c=changedSince(labs()[i]).includes(s); return `<td class="num" ${c?'style="background:#fff7e0"':''}>${x}</td>`; }).join('')}<td class="num"><b>${sc.reduce((a,b)=>a+b,0)}</b></td></tr>`; }).join('')}
    </table></div><p class="muted">${T('Yellow cells: marks changed but not sent to Canvas yet.','Ô vàng: điểm đã đổi, chưa đưa lên Canvas.')}</p>
-   <div class="btns"><a class="btn" href="/api/export.xlsx?cls=${S.cls}" style="text-decoration:none">${T('Download Excel (this class)','Tải Excel (lớp này)')}</a><a class="btn" href="/api/export.xlsx" style="text-decoration:none">${T('Excel: all my classes','Excel: tất cả lớp của tôi')}</a></div>`;
+   <div class="btns"><a class="btn" href="/api/export.xlsx?cls=${S.cls}" style="text-decoration:none">${T('Download Excel (this class)','Tải Excel (lớp này)')}</a><a class="btn" href="/api/export.xlsx" style="text-decoration:none">${T('Excel: all my classes','Excel: tất cả lớp của tôi')}</a><button id="archive">${T('Excel with photos (archive, this class)','Excel kèm ảnh (lưu trữ, lớp này)')}</button></div>
+   <p class="muted">${T('Excel with photos: one sheet per lab, the marks and the photos of each student on the same row. It can take a minute.','Excel kèm ảnh: mỗi lab một sheet, điểm và ảnh mạch của từng SV trên cùng một dòng. Có thể mất khoảng 1 phút.')}</p>`;
   m.innerHTML=h; bindSeg(m);
+  $('#archive').onclick=e=>downloadArchive(e.currentTarget);
   $('#gb').onchange=async e=>{ const f=e.target.files[0]; if(!f) return; const rows=parseCSV((await f.text()).replace(/^﻿/,''));
     if(rows.length<2){ toast(T('Empty file','File trống')); return; } S.gbNew={rows, name:f.name, time:T('not saved yet','chưa lưu')}; renderSum(m); };
   if($('#gbdl')) $('#gbdl').onclick=async()=>{ const labs=[...document.querySelectorAll('[data-gl]:checked')].map(x=>x.dataset.gl);
