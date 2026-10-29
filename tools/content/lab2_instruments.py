@@ -81,6 +81,8 @@ def run():
             p.part.drop_rel(sid.rId); lst.remove(sid)
     p.part.rename_slide_parts([x.rId for x in lst])
     slides = list(src.slides)
+    if not any(FIRST in text(s) for s in slides):          # lab1_no_ac.py deleted them from Lab 1: keep the Lab 2 copies
+        print('Lab 2: Lab 1 has no AC instrument slides any more (lab1_no_ac.py) – the copies in Lab 2 are kept'); return
     a = next(i for i, s in enumerate(slides) if FIRST in text(s))
     b = next(i for i, s in enumerate(slides) if LAST in text(s))
     layout = next(l for l in p.slide_layouts if l.name == 'Blank')

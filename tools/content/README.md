@@ -61,6 +61,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 16. `lab2_instruments.py` – Lab 2: chép phần osci + máy phát (slide "Overview of AC lab instruments" … "Step 5. Rotate the
    Multipurpose knob") từ Lab 1 sang Lab 2, sau slide Devices; Exercise 8, 9, 10, 10 → A, B, C, D. Lab 1 giữ nguyên.
    Chạy lại thì thay bản chép cũ.
+16. `lab1_no_ac.py` – (29/10/2026) xóa 28 slide osci + máy phát khỏi Lab 1 (đã chép sang Lab 2), sửa bảng Course Summary
+   (Lab 2, Lab 3 mới) và slide Devices của Lab 1. Sau bước này `lab2_instruments.py` không chép lại nữa (giữ bản trong Lab 2).
 16. `lab2_demo.py` – Lab 2: Exercise 6–7 thành phần GV làm mẫu (SV chỉ tự đo một lần ở Task 2); đổi tiêu đề và các chỗ
    "Exercise 6/7" trên slide và lời giảng. Chạy sau `lab2_instruments.py`.
 16. `lab3_freq.py` – Lab 3, Exercise 4 (đáp tuyến tần số của mạch Exercise 2): bảng 9 tần số 20 Hz – 200 kHz + đồ thị
