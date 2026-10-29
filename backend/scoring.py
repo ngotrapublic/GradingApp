@@ -50,7 +50,7 @@ def score(C, lab, st, K=None):
     for m in L['manual']:
         if m[3] == 'student':
             total += float((rec.get('manual') or {}).get(m[0], 0) or 0)
-        elif st.get('team'):
+        elif st.get('team') and rec.get('tick'):     # a team mark counts only for a member the lecturer ticked (was there)
             total += float(C.get('team', {}).get(lab, {}).get(str(st['team']), {}).get(m[0], 0) or 0)
     return total
 

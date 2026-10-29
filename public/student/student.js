@@ -174,6 +174,15 @@ function render() {
     if (!j) return;
     toast(T('Unsubmitted – you can edit now', 'Đã hủy nộp – có thể sửa')); reload();
   });
+  app.querySelectorAll('[data-confirm],[data-unconfirm]').forEach(b => b.onclick = async () => {
+    const undo = 'unconfirm' in b.dataset, lab = undo ? b.dataset.unconfirm : b.dataset.confirm;
+    if (!undo && !confirm(T('Confirm only if you did this task with your team today. Confirm?', 'Chỉ xác nhận nếu hôm nay bạn có làm bài này cùng nhóm. Xác nhận?'))) return;
+    b.disabled = true;
+    const j = await post(undo ? '/api/public/unconfirm' : '/api/public/confirm', { cls: I.id, lab });
+    b.disabled = false;
+    if (!j) return;
+    toast(undo ? T('Confirmation removed', 'Đã hủy xác nhận') : T('Confirmed', 'Đã xác nhận')); reload();
+  });
   app.querySelectorAll('[data-photo]').forEach(inp => inp.onchange = async () => {
     const f = inp.files[0]; if (!f) return;
     cacheDrafts();
@@ -240,8 +249,32 @@ function partsBody(L, frozen) {
   return h;
 }
 
+// team lab: who submitted for the team and who confirmed
+function teamMembers(Tm) {
+  const lab = { submitted: T('submitted', 'đã nộp'), confirmed: T('confirmed', 'đã xác nhận'), waiting: T('not confirmed yet', 'chưa xác nhận') };
+  return `<p class="muted">${T('Your team', 'Nhóm bạn')}: ${Tm.members.map(m => `${esc(m.name)} – <b>${lab[m.state]}</b>`).join(' · ')}</p>`;
+}
+
+// team lab, a teammate has submitted: check the team's values and confirm them (only a member who was there should)
+function teamConfirm(L) {
+  const S_ = L.submit, Tm = L.team;
+  let h = `<div class="submit"><div class="howto"><b>${T('Team task – one member submits for the whole team', 'Bài nhóm – một bạn nộp cho cả nhóm')}</b>
+    ${T(`<strong>${esc(Tm.by)}</strong> submitted the values of your team. Check them. Tap <strong>Confirm</strong> only if you did this task with your team today: the lecturer checks who was in the lab.`,
+        `<strong>${esc(Tm.by)}</strong> đã nộp số của nhóm. Xem lại. Chỉ bấm <strong>Xác nhận</strong> nếu hôm nay bạn có làm bài này cùng nhóm: giảng viên kiểm tra ai có mặt.`)}</div>`;
+  if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
+  const view = { ...L, submit: { ...S_, values: Tm.values } };
+  h += view.parts && view.parts.length ? partsBody(view, true) : valueFields(view, true);
+  if (Tm.photos.length) h += `<div class="thumbs">${Tm.photos.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a></div>`).join('')}</div>`;
+  h += teamMembers(Tm);
+  if (S_.locked) { /* view only */ }
+  else if (Tm.me === 'confirmed') h += `<p class="ok">${T('✓ You confirmed. Now call the lecturer for the tick.', '✓ Bạn đã xác nhận. Gọi giảng viên tick.')}</p><button class="big" data-unconfirm="${L.lab}">${T('Undo confirmation', 'Hủy xác nhận')}</button>`;
+  else h += `<button class="big on" data-confirm="${L.lab}">${T('Confirm – I did this with my team', 'Xác nhận – tôi có làm cùng nhóm')}</button>`;
+  return h + `</div>`;
+}
+
 // values form: edit while drafting; after submit view-only until Unsubmit; after lecturer tick view-only forever
 function submitForm(L) {
+  if (L.team && L.team.by && L.team.me !== 'submitted') return teamConfirm(L);
   const S_ = L.submit, frozen = !!(S_.locked || S_.submitted || L.review);
   const split = !!(L.parts && L.parts.length);
   const ph = L.photo || {};
@@ -259,6 +292,7 @@ function submitForm(L) {
       <li>${T('<b>Call the lecturer or TA to your table.</b> Do not pack up or leave until they have ticked you. Submitting on the phone alone is not enough.', '<b>Gọi giảng viên hoặc TA xuống bàn của bạn.</b> Chưa được tháo mạch / về khi họ chưa tick. Chỉ nộp trên điện thoại là chưa đủ.')}</li>
       <li>${T(howto4[0], howto4[1])}</li>
     </ol></div>`;
+  if (L.team) h += `<p class="muted">${T('Team task: one member submits for the whole team (values + photo). The others open this page on their own phone and tap <b>Confirm</b>.', 'Bài nhóm: một bạn nộp cho cả nhóm (số + ảnh). Các bạn còn lại mở trang này trên điện thoại của mình và bấm <b>Xác nhận</b>.')}</p>`;
   if (!split) h += `<div class="subhead">${T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
   else if (S_.submitted) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
@@ -272,6 +306,7 @@ function submitForm(L) {
   else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
   else h += `<button class="big on" data-send="${L.lab}">${T('Submit', 'Nộp')}</button>`;
   if (S_.time) h += `<p class="muted">${T('Last submitted', 'Nộp lần cuối')}: ${esc(S_.time)}</p>`;
+  if (L.team && L.team.me === 'submitted') h += teamMembers(L.team);
   if (!frozen) h += `<p class="muted">${T('Use real measured values, in the unit shown.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh.')}</p>`;
   h += `</div>`;
   return h;

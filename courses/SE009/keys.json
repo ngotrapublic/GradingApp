@@ -3274,7 +3274,7 @@
       1,
       2
      ],
-     "student"
+     "team"
     ]
    ],
    "questions": [
@@ -5509,8 +5509,8 @@
      ],
      "files": true,
      "note": [
-      "The whole team builds the same band-pass filter (L, C, R on the card), measures the frequencies on the card, finds the peak f0 and the bandwidth BW (as in the lecturer's demo). Each student types the team values and uploads the graph.",
-      "Cả nhóm lắp cùng một mạch thông dải (L, C, R trên đề), đo các tần số trên đề, tìm đỉnh f0 và băng thông BW (như phần GV làm mẫu). Mỗi SV tự nhập số của nhóm và tải ảnh đồ thị."
+      "The whole team builds the same band-pass filter (L, C, R on the card), measures the frequencies on the card, finds the peak f0 and the bandwidth BW (as in the lecturer's demo). One member submits the team values and the graph, the others confirm.",
+      "Cả nhóm lắp cùng một mạch thông dải (L, C, R trên đề), đo các tần số trên đề, tìm đỉnh f0 và băng thông BW (như phần GV làm mẫu). Một bạn nộp số của nhóm và ảnh đồ thị, các bạn khác xác nhận."
      ]
     },
     {
@@ -5533,8 +5533,8 @@
       3
      ],
      "note": [
-      "The whole team has the same screen. Find R1 and R2, build one LM358 amplifier, set the function generator like CH2 on your card and measure. Each student types the team values. The lecturer checks your screen at the tick.",
-      "Cả nhóm chung một màn hình. Tìm R1, R2, lắp một mạch LM358, chỉnh máy phát giống CH2 trên đề rồi đo. Mỗi SV tự nhập số của nhóm. Giảng viên kiểm tra màn hình osci khi tick."
+      "The whole team has the same screen. Find R1 and R2, build one LM358 amplifier, set the function generator like CH2 on your card and measure. One member submits the team values, the others confirm. The lecturer checks your screen at the tick.",
+      "Cả nhóm chung một màn hình. Tìm R1, R2, lắp một mạch LM358, chỉnh máy phát giống CH2 trên đề rồi đo. Một bạn nộp số của nhóm, các bạn khác xác nhận. Giảng viên kiểm tra màn hình osci khi tick."
      ]
     }
    ],
@@ -5552,8 +5552,8 @@
      "Tải ảnh chụp đồ thị"
     ],
     "howto": [
-     "<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work: type your team's values, upload <b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo), then <span class=\"nowrap\">tap <b>Submit.</b></span>",
-     "<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm: nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC Bài 1</b> (không phải ảnh breadboard), rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span>"
+     "<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work. <b>One member</b> types the team's values, uploads <b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo) and <span class=\"nowrap\">taps <b>Submit.</b></span> The others tap <b>Confirm</b> on their own phone.",
+     "<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm. <b>Một bạn</b> nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC Bài 1</b> (không phải ảnh breadboard) rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span> Các bạn còn lại bấm <b>Xác nhận</b> trên điện thoại của mình."
     ],
     "check": [
      "They will check your team's Task 2 screen <span class=\"nowrap\">on the <b>oscilloscope</b></span> and your <b>RLC graph</b>, then confirm at your table.",
@@ -5564,7 +5564,8 @@
      "Hãy tải một ảnh đồ thị RLC Bài 1 trước (không phải ảnh mạch)."
     ],
     "capture": false
-   }
+   },
+   "team_submit": true
   },
   "4": {
    "title": "Lab 4 – Microphone to speaker",

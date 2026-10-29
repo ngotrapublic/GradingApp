@@ -22,7 +22,7 @@ function score(st, lab=S.lab){
   const Lb=K().labs[lab], v=variant(st), r=rec(st.sid, lab); let t=0;
   if(r.override!==undefined && r.override!==null) return +r.override;   // lecturer's manual score wins
   if(v && Lb.variants[v] && r.tick){ Lb.questions.forEach((q,i)=>{ if(!q[3]) return; const s=mark(qval(q, r.values, i), Lb.variants[v].keys[i], q[3], qrule(q)); if(s) t+=s; }); }
-  Lb.manual.forEach(m=>{ t += +(m[3]==='student'? (r.manual||{})[m[0]] : (st.team? teamRec(st.team, lab)[m[0]] : 0)) || 0; });
+  Lb.manual.forEach(m=>{ t += +(m[3]==='student'? (r.manual||{})[m[0]] : (st.team&&r.tick? teamRec(st.team, lab)[m[0]] : 0)) || 0; });   // team mark: ticked members only
   return t;
 }
 const sorted = () => [...C().students].sort((a,b)=>(a.team||99)-(b.team||99)||(a.member||9)-(b.member||9)||a.name.localeCompare(b.name,'vi'));

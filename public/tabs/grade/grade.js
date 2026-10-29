@@ -1,9 +1,12 @@
 // Tab "Grade": students by team, answer key, tick, manual marks.
 function hasData(sid, lab=S.lab){ const r=rec(sid,lab); return (r.values||[]).some(v=>v!==null&&v!==''&&v!==undefined); }
-function isSubmitted(sid, lab=S.lab){ return rec(sid,lab).src === 'web'; }
+function isSubmitted(sid, lab=S.lab){ return ['web','team'].includes(rec(sid,lab).src); }   // 'team' = confirmed the team's values
+// team lab: the member who submitted for this student's team
+function teamBy(s, lab=S.lab){ return s.team && C().students.find(x=>x.team===s.team && rec(x.sid,lab).src==='web'); }
 function statusChip(s){
   const r=rec(s.sid);
   if(r.tick) return `<span class="chip tick">${T('Ticked','Đã tick')}</span>`;
+  if(r.src==='team') return `<span class="chip sub">${T('Confirmed (team)','Đã xác nhận (nhóm)')}</span>`;
   if(isSubmitted(s.sid)) return `<span class="chip sub">${T('Submitted','Đã nộp')}</span>`;
   return `<span class="chip open">${T('Not submitted','Chưa nộp')}</span>`;
 }
@@ -29,6 +32,8 @@ function renderGrade(m){
     let head = `<div class="team"><span class="sp">${t==='–'?T('No team','Chưa có nhóm'):T('Team ','Nhóm ')+t}</span>`;
     Lb.manual.filter(x=>x[3]==='team').forEach(mn=>{ if(t==='–') return; const cur=teamRec(t)[mn[0]];
       head += `<span class="lbl">${esc(manLabel(mn))}</span>` + mn[2].map(v=>`<button class="btn ${+cur===v&&cur!==undefined?'pri':''}" data-team="${t}" data-f="${mn[0]}" data-val="${v}" style="padding:4px 9px">${v}</button>`).join(''); });
+    if(Lb.team_submit && t!=='–'){ const ready=arr.filter(s=>isSubmitted(s.sid)&&!rec(s.sid).tick);
+      if(ready.length) head += `<button class="btn pri" data-tickteam="${t}" style="padding:4px 9px">${T(`Tick ${ready.length} submitted / confirmed`,`Tick ${ready.length} SV đã nộp / xác nhận`)}</button>`; }
     head += `</div>`;
     html += `<div class="card">${head}` + vis.map(s=>{
       const v=variant(s), r=rec(s.sid), sc=score(s);
@@ -46,6 +51,10 @@ function renderGrade(m){
   m.querySelectorAll('[data-team]').forEach(b=>b.onclick=async ev=>{ev.stopPropagation(); const cur=teamRec(b.dataset.team)[b.dataset.f], off=cur!==undefined&&+cur===+b.dataset.val;   // tap the selected mark again = clear it
     S.data=await api('/api/team',{cls:S.cls,lab:S.lab,team:b.dataset.team,field:b.dataset.f,value:off?null:+b.dataset.val}); toast(off?T('Mark cleared','Đã bỏ chọn'):T('Saved','Đã lưu')); renderGrade(m);});
   bindPanel(m);
+  m.querySelectorAll('[data-tickteam]').forEach(b=>b.onclick=async ev=>{ ev.stopPropagation(); b.disabled=true;
+    for(const s of C().students.filter(x=>String(x.team)===b.dataset.tickteam && isSubmitted(x.sid) && !rec(x.sid).tick))
+      S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid:s.sid,tick:true});
+    toast(T('Ticked','Đã tick')); renderGrade(m); });
   m.querySelectorAll('[data-pub]').forEach(c=>c.onchange=async()=>{ S.data=await api('/api/publish',{cls:S.cls,lab:S.lab,[c.dataset.pub]:c.checked});
     toast(c.checked? T('Students can see it now','SV đã xem được') : T('Hidden from students','Đã ẩn với SV')); renderGrade(m); });
   $('#qrs').onclick=()=>showQR(true);
@@ -78,6 +87,11 @@ function panel(s){
   h += `</table></div>`;
   if(editKeys) h += `<p class="muted">${T(`Edit the keys above if they are wrong. Saving applies to <b>every student with variant ${v}</b> and updates automatic marks.`, `Sửa đáp án ở trên nếu sai. Lưu sẽ áp dụng cho <b>mọi SV mã đề ${v}</b> và cập nhật điểm tự tính.`)}${V.keys_edited?` <b>${T('(already edited)','(đã sửa)')}</b>`:''}</p>
     <div class="btns"><button class="on" data-savekeys="${v}">${T('Save answer keys','Lưu đáp án')}</button>${V.keys_edited?`<button data-resetkeys="${v}">${T('Back to original keys','Về đáp án gốc')}</button>`:''}</div>`;
+  if(Lb.team_submit){ const by=teamBy(s);
+    h += `<p class="muted">${by? T(`Team values submitted by <b>${esc(by.name)}</b>.`,`Số của nhóm do <b>${esc(by.name)}</b> nộp.`) : T('Nobody in this team has submitted yet.','Nhóm này chưa có ai nộp.')}</p>`;
+    if(by && by.sid!==s.sid && !r.tick) h += r.src==='team'
+      ? `<div class="btns"><button data-teamconf="${esc(s.sid)}" data-off="1">${T('Remove this confirmation','Bỏ xác nhận của SV này')}</button></div>`
+      : `<div class="btns"><button class="on" data-teamconf="${esc(s.sid)}">${T('Confirm for this student (copy the team values)','Xác nhận thay SV này (chép số của nhóm)')}</button></div>`; }
   h += `<button class="big ${r.tick?'on':''}" data-tick="${esc(s.sid)}">${r.tick?T('✓ Ticked – tap to undo','✓ Đã tick – bấm để bỏ'):T('Tick: I saw the reading on the instrument','Tick: đã xem số đo trên máy')}</button>`;
   if(canManage()){
     const allOn=!!(((C().publish||{})[S.lab]||{}).marks), on=allOn||!!r.show_marks;
@@ -97,12 +111,15 @@ function panel(s){
     <div class="edit"><div><label>${T('Score','Điểm')} (0–${Lb.total})</label><input inputmode="decimal" data-ov value="${ov?r.override:''}"></div>
     <div><label>${T('Reason','Lý do')}</label><input data-reason value="${esc(r.reason||'')}" placeholder="${T('e.g. make-up session','vd: làm bù')}"></div></div>
     <div class="btns"><button class="on" data-saveov="${esc(s.sid)}">${T('Save score','Lưu điểm')}</button>${ov?`<button data-clearov="${esc(s.sid)}">${T('Back to automatic score','Bỏ điều chỉnh')}</button>`:''}</div></details>`;
-  h += `<p class="muted">${T('Total','Tổng')} Lab ${S.lab}: <b>${score(s)}</b>${ov?T(' (set by hand',' (điểm tay')+(r.reason?': '+esc(r.reason):'')+')':''} / ${Lb.total}${(r.src==='manual'?T(' | entered by hand',' | số nhập tay'):(r.src==='web'?T(` | submitted on the web ${esc(r.updated||'')}`,` | SV nộp trên web lúc ${esc(r.updated||'')}`):''))}</p></div>`;
+  h += `<p class="muted">${T('Total','Tổng')} Lab ${S.lab}: <b>${score(s)}</b>${ov?T(' (set by hand',' (điểm tay')+(r.reason?': '+esc(r.reason):'')+')':''} / ${Lb.total}${(r.src==='manual'?T(' | entered by hand',' | số nhập tay'):(r.src==='web'?T(` | submitted on the web ${esc(r.updated||'')}`,` | SV nộp trên web lúc ${esc(r.updated||'')}`):(r.src==='team'?T(` | confirmed the team values ${esc(r.updated||'')}`,` | xác nhận số của nhóm lúc ${esc(r.updated||'')}`):'')))}</p></div>`;
   return h;
 }
 function bindPanel(m){
   m.querySelectorAll('.panel').forEach(p=>p.onclick=e=>e.stopPropagation());
   m.querySelectorAll('[data-tick]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.tick; S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,tick:!rec(sid).tick}); toast(rec(sid).tick?T('Ticked','Đã tick'):T('Tick removed','Đã bỏ tick')); renderGrade($('#main')); });
+  m.querySelectorAll('[data-teamconf]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.teamconf, s=C().students.find(x=>x.sid===sid), by=teamBy(s), off=!!b.dataset.off;
+    S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,values:off?null:rec(by.sid).values,src:off?'':'team'});
+    toast(off?T('Confirmation removed','Đã bỏ xác nhận'):T('Confirmed with the team values','Đã xác nhận bằng số của nhóm')); renderGrade($('#main')); });
   m.querySelectorAll('[data-showmarks]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.showmarks; const on=!rec(sid).show_marks;
     S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,show_marks:on}); toast(on?T('Marks released to this student','Đã công bố điểm cho SV này'):T('Marks hidden for this student','Đã ẩn điểm với SV này')); renderGrade($('#main')); });
   m.querySelectorAll('[data-man]').forEach(b=>b.onclick=async()=>{ const sid=S.open, man={...(rec(sid).manual||{})}, k=b.dataset.man, off=man[k]!==undefined&&+man[k]===+b.dataset.val;   // tap the selected mark again = clear it

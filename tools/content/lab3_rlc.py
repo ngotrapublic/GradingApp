@@ -245,15 +245,26 @@ def lab3(p):
     for para in box(t, 'Your card shows').text_frame.paragraphs:
         if para.text.startswith('Your card shows an oscilloscope screen') and 'same screen' not in para.text:
             set_para(para, para.text.replace('= output.', '= output. Everybody in the team has the same screen.'))
-        if para.text.startswith(('Submit your values', 'Each member submits')):
-            set_para(para, 'Each member submits the team values on the student page. Then show the lecturer your screen.')
+        if para.text.startswith(('Submit your values', 'Each member submits', 'One member submits')):
+            set_para(para, 'One member submits the team values on the student page, the others confirm. Then show the lecturer your screen.')
     t.notes_slide.notes_text_frame.text = (
         'Task 2 is also team work. Everybody in the team has the same oscilloscope screen on the card. Blue is the input, '
         'yellow is the output.\nRead the two Pk-Pk values in the Measurements box, on the right of the screen. Gain = V out / V in. '
         'Then choose R1 and R2 so that R2 / R1 = gain.\nThe numbers at the bottom, like 500 millivolts per div, are the size of one '
         'square of the grid. They are not the signal.\nBuild the amplifier with the plus and minus 6 volts of the PB-503A. Set the '
         'function generator like the blue signal, and make your screen look like the card. Measure V out and the phase shift.\n'
-        'Each member submits the team values on the student page. Then show me your screen.')
+        'One member submits the team values on the student page. The others tap Confirm on their own phone. Then show me your screen.')
+    m = p.slides[find(p, lambda s: title_of(s) == 'Task 1 (team) – measure and plot')]
+    for sh in m.shapes:
+        if sh.has_text_frame:
+            for para in sh.text_frame.paragraphs:
+                if para.text.startswith(('Each member: submit the team values', 'One member submits the team values')):
+                    set_para(para, 'One member submits the team values and one screenshot of the graph on the student page. '
+                                   'The others tap Confirm on their own phone. Then call the lecturer.')
+    nm = m.notes_slide.notes_text_frame
+    nm.text = re.sub(r'Each member submits the team values and one screenshot of the graph on the student page\..*',
+                     'One member submits the team values and one screenshot of the graph on the student page. Not a photo of the circuit. '
+                     'The others tap Confirm on their own phone. Then call me.', nm.text)
     w = p.slides[find(p, lambda s: title_of(s) == 'Lab 3 – What to submit')]
     tbl = next(sh.table for sh in w.shapes if sh.has_table)
     table_rows(tbl, [['Value to submit (student page)', 'Unit', 'Marks'],
@@ -267,8 +278,9 @@ def lab3(p):
                      ['Total', '', '16']])
     for row in tbl.rows: row.height = 365760                     # 0.4 in: the table ends above the text below it
     w.notes_slide.notes_text_frame.text = (
-        'Task 1 values are the same for the whole team. Use kilohertz for f 0 and BW. Add one screenshot of your team\'s RLC graph.\n'
-        'Task 2 values are also the same for the whole team: gain and R2 over R1 have no unit, V out in volts, the phase in degrees.\n'
+        'Both tasks are team work. One member submits the team values and one screenshot of the RLC graph. The others open the '
+        'student page on their own phone and tap Confirm: only if you were here and did the work. Use kilohertz for f 0 and BW.\n'
+        'Gain and R2 over R1 have no unit, V out in volts, the phase in degrees.\n'
         'Then call me for the tick. I check your team\'s Task 2 screen on the oscilloscope. After the tick: the LM358 back to the '
         'parts box, then tidy your table. The next slide shows how.')
 
@@ -402,6 +414,8 @@ def team_task2(K):
     whole team gets the amplifier variant of one member: member 1 for teams 1 and 4, member 2 for teams 2 and 5, member 3
     for teams 3 and 6, so neighbouring tables have different resistor pairs. Keys, info and screen image are copied."""
     L3 = K['labs']['3']; V = L3['variants']
+    L3['team_submit'] = True                  # one member submits for the team, the others confirm (lecturer, 29/10/2026)
+    L3['manual'] = [['graph', 'Task 1: RLC graph + conclusion', [0, 1, 2], 'team']]
     for s in sorted({int(v) // 100 for v in V}):
         for t in range(1, 7):
             src = V[str(s * 100 + 3 * (t - 1) + (t - 1) % 3 + 1)]
@@ -415,13 +429,18 @@ def team_task2(K):
     L3['parts'][1]['title'] = ['Task 2 – inverting amplifier from an oscilloscope screen (team – the same screen for all members)',
                                'Bài 2 – Mạch khuếch đại đảo từ màn hình osci (làm nhóm – cả nhóm chung một màn hình)']
     L3['parts'][1]['note'] = ['The whole team has the same screen. Find R1 and R2, build one LM358 amplifier, set the function generator '
-                              'like CH2 on your card and measure. Each student types the team values. The lecturer checks your screen at the tick.',
+                              'like CH2 on your card and measure. One member submits the team values, the others confirm. The lecturer checks your screen at the tick.',
                               'Cả nhóm chung một màn hình. Tìm R1, R2, lắp một mạch LM358, chỉnh máy phát giống CH2 trên đề rồi đo. '
-                              'Mỗi SV tự nhập số của nhóm. Giảng viên kiểm tra màn hình osci khi tick.']
-    L3['photo']['howto'] = ['<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work: type your team\'s values, upload '
-                            '<b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo), then <span class="nowrap">tap <b>Submit.</b></span>',
-                            '<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm: nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC '
-                            'Bài 1</b> (không phải ảnh breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>']
+                              'Một bạn nộp số của nhóm, các bạn khác xác nhận. Giảng viên kiểm tra màn hình osci khi tick.']
+    L3['parts'][0]['note'] = ['The whole team builds the same band-pass filter (L, C, R on the card), measures the frequencies on the card, '
+                              'finds the peak f0 and the bandwidth BW (as in the lecturer\'s demo). One member submits the team values and the graph, the others confirm.',
+                              'Cả nhóm lắp cùng một mạch thông dải (L, C, R trên đề), đo các tần số trên đề, tìm đỉnh f0 và băng thông BW '
+                              '(như phần GV làm mẫu). Một bạn nộp số của nhóm và ảnh đồ thị, các bạn khác xác nhận.']
+    L3['photo']['howto'] = ['<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work. <b>One member</b> types the team\'s values, uploads '
+                            '<b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo) and <span class="nowrap">taps <b>Submit.</b></span> '
+                            'The others tap <b>Confirm</b> on their own phone.',
+                            '<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm. <b>Một bạn</b> nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC '
+                            'Bài 1</b> (không phải ảnh breadboard) rồi <span class="nowrap">bấm <b>Nộp.</b></span> Các bạn còn lại bấm <b>Xác nhận</b> trên điện thoại của mình.']
     L3['photo']['check'] = ['They will check your team\'s Task 2 screen <span class="nowrap">on the <b>oscilloscope</b></span> and your '
                             '<b>RLC graph</b>, then confirm at your table.',
                             'Họ sẽ xem màn hình Bài 2 của nhóm <span class="nowrap">trên <b>osci</b></span> và <b>đồ thị RLC</b>, rồi xác nhận tại cụm máy.']

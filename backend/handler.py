@@ -461,8 +461,13 @@ class H(http.server.SimpleHTTPRequestHandler):
                 return self.send_json(student_view(C, st['sid'], keys_live(con, C['course'])))
             m = re.fullmatch(r'/api/public/photo/(\d+)\.jpg', path)
             if m:                               # only the student's own photos
-                r = con.execute('SELECT sid, data FROM photos WHERE id=?', (int(m.group(1)),)).fetchone()
-                if not r or r['data'] is None or r['sid'] != st['sid']:
+                r = con.execute('SELECT class_id, lab, sid, data FROM photos WHERE id=?', (int(m.group(1)),)).fetchone()
+                if r and r['sid'] != st['sid']:   # team lab: the photo of the teammate who submitted for the team
+                    c = self.enrolled(con, st, r['class_id'])
+                    if not (c and keys(c['course'])['labs'].get(r['lab'], {}).get('team_submit')
+                            and r['sid'] in team_sids(con, c['id'], st['sid'])):
+                        r = None
+                if not r or r['data'] is None:
                     return self.send_json({'error': 'not found'}, 404)
                 return self.send_bytes(bytes(r['data']), 'image/jpeg', 'no-store')
             m = re.fullmatch(r'/api/public/image/(\d+)/(\w+)\.png', path)
@@ -494,6 +499,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             return self.public_submit(con, st, c, body)
         if path == '/api/public/unsubmit':
             return self.public_unsubmit(con, st, c, body)
+        if path in ('/api/public/confirm', '/api/public/unconfirm'):
+            return self.public_confirm(con, st, c, body, undo=path.endswith('unconfirm'))
         if path in ('/api/public/photo', '/api/public/photo_delete'):
             return self.public_photo(con, st, c, body, delete=path.endswith('delete'))
         return self.send_json({'error': 'not found'}, 404)
@@ -556,6 +563,15 @@ class H(http.server.SimpleHTTPRequestHandler):
         vals += [None] * (n - len(vals))
         if all(v is None for v in vals):
             return self.send_json(err('Type at least one value.', 'Nhập ít nhất một số.'), 400)
+        if keys(c['course'])['labs'][lab].get('team_submit'):     # one member submits for the team, the others confirm
+            own = con.execute('SELECT src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
+            if own and own['src'] == 'team':
+                return self.send_json(err('You confirmed your team\'s values. Undo the confirmation first.',
+                                          'Bạn đã xác nhận số của nhóm. Bấm Hủy xác nhận trước.'), 409)
+            by = team_submitter(con, cid, lab, sid)
+            if by and by != sid:
+                return self.send_json(err('Your team has already submitted. Check the values and confirm them.',
+                                          'Nhóm bạn đã nộp rồi. Xem lại số và bấm Xác nhận.'), 409)
         if not con.execute('SELECT 1 FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone():
             need = (keys(c['course'])['labs'][lab].get('photo') or {}).get('need')
             if need:
@@ -577,7 +593,39 @@ class H(http.server.SimpleHTTPRequestHandler):
         if not rec or rec['src'] != 'web':
             return self.send_json(err('Nothing to unsubmit.', 'Chưa có bài để hủy nộp.'), 400)
         con.execute('UPDATE records SET src=NULL WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid))
+        if keys(c['course'])['labs'][lab].get('team_submit'):     # the values may change: teammates confirm again
+            for m in team_sids(con, cid, sid):
+                con.execute("UPDATE records SET src=NULL, vals=NULL WHERE class_id=? AND lab=? AND sid=? AND src='team' AND tick=0",
+                            (cid, lab, m))
         return self.send_json({'ok': True})
+
+    def public_confirm(self, con, st, c, body, undo=False):
+        """Team lab: a member confirms the values a teammate submitted for the team (their own copy of the values), so a
+        student who was not in the lab gets no marks unless they confirm (or the lecturer confirms for them)."""
+        lab = str(body.get('lab', ''))
+        if not self._open_lab(con, st, c, lab, for_unsubmit=True):
+            return
+        cid, sid = c['id'], st['sid']
+        if not keys(c['course'])['labs'][lab].get('team_submit'):
+            return self.send_json({'error': 'not a team lab'}, 400)
+        rec = con.execute('SELECT src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
+        if undo:
+            if not rec or rec['src'] != 'team':
+                return self.send_json(err('Nothing to undo.', 'Chưa xác nhận.'), 400)
+            con.execute('UPDATE records SET src=NULL, vals=NULL WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid))
+            return self.send_json({'ok': True})
+        if rec and rec['src'] == 'web':
+            return self.send_json(err('You submitted for the team yourself.', 'Bạn là người nộp cho nhóm.'), 400)
+        by = team_submitter(con, cid, lab, sid)
+        if not by:
+            return self.send_json(err('Nobody in your team has submitted yet.', 'Nhóm bạn chưa có ai nộp.'), 400)
+        vals = con.execute('SELECT vals FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, by)).fetchone()['vals']
+        t = now()
+        con.execute('INSERT INTO records (class_id, lab, sid, tick, manual) VALUES (?,?,?,0,?) ON CONFLICT DO NOTHING', (cid, lab, sid, '{}'))
+        con.execute("UPDATE records SET vals=?, src='team', updated=? WHERE class_id=? AND lab=? AND sid=?", (vals, t, cid, lab, sid))
+        con.execute('INSERT INTO submissions (class_id, lab, sid, vals, time, ip, agent) VALUES (?,?,?,?,?,?,?)',
+                    (cid, lab, sid, vals, t, self.ip(), ('confirm ' + (self.headers.get('User-Agent') or ''))[:200]))
+        return self.send_json({'ok': True, 'time': t})
 
     def public_photo(self, con, st, c, body, delete=False):
         lab = str(body.get('lab', ''))
@@ -602,6 +650,23 @@ class H(http.server.SimpleHTTPRequestHandler):
         return self.send_json({'ok': True, 'id': pid, 'time': t})
 
 
+def team_sids(con, cid, sid):
+    """Student IDs of the other members of this student's team in one class."""
+    e = con.execute('SELECT team FROM enrollments WHERE class_id=? AND sid=?', (cid, sid)).fetchone()
+    if not e or not e['team']:
+        return []
+    return [r['sid'] for r in con.execute('SELECT sid FROM enrollments WHERE class_id=? AND team=? AND sid<>?', (cid, e['team'], sid)).fetchall()]
+
+
+def team_submitter(con, cid, lab, sid):
+    """Team lab: the member of this student's team (maybe the student) who submitted for the team, or None."""
+    for m in [sid] + team_sids(con, cid, sid):
+        r = con.execute('SELECT src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, m)).fetchone()
+        if r and r['src'] == 'web':
+            return m
+    return None
+
+
 def student_view(C, sid, keypack=None):
     """Only this student's own information in one class. Answer keys only when marks are released."""
     K = keypack or keys(C['course'])
@@ -611,7 +676,7 @@ def student_view(C, sid, keypack=None):
     labs = []
     for lab, L in K['labs'].items():
         pub = C.get('publish', {}).get(lab, {})
-        item = {'lab': lab, 'title': L['title'], 'total': L['total'], 'card': None, 'figs': [], 'image': None, 'files': [], 'parts': L.get('parts') or [], 'photo': L.get('photo') or None, 'marks': None, 'review': None, 'submit': None}
+        item = {'lab': lab, 'title': L['title'], 'total': L['total'], 'card': None, 'figs': [], 'image': None, 'files': [], 'parts': L.get('parts') or [], 'photo': L.get('photo') or None, 'team': None, 'marks': None, 'review': None, 'submit': None}
         V = L['variants'].get(str(v)) if v else None
         if pub.get('card') and V:
             item['card'] = V.get('card')
@@ -658,6 +723,18 @@ def student_view(C, sid, keypack=None):
                     rows.append({'label': q[1], 'unit': q[2], 'yours': x, 'key': key, 'band': band, 'ok': band == 'ok', 'max': q[3],
                                  'tol': [rule['full'], rule['half']], 'calc': calc})
                 item['review'] = rows
+        if L.get('team_submit') and st.get('team'):
+            mates = [s for s in C['students'] if s.get('team') == st['team']]
+            recs = C['labs'].get(lab, {})
+            by = next((s for s in mates if recs.get(s['sid'], {}).get('src') == 'web'), None)
+            br = recs.get(by['sid'], {}) if by else {}
+            state = lambda s: ('submitted' if recs.get(s['sid'], {}).get('src') == 'web' else
+                               'confirmed' if recs.get(s['sid'], {}).get('src') == 'team' else 'waiting')
+            item['team'] = {'by': by and by['name'], 'bySid': by and by['sid'], 'me': state(st), 'values': br.get('values'),
+                            'time': br.get('updated'),
+                            'photos': [{'id': p['id'], 'url': f"/api/public/photo/{p['id']}.jpg"}
+                                       for p in C.get('photos', {}).get(lab, {}).get(by['sid'], [])] if by else [],
+                            'members': [{'name': s['name'], 'state': state(s)} for s in mates]}
         if pub.get('submit') and v:
             submitted = rec.get('src') == 'web'
             item['submit'] = {'questions': [[q[1], q[2]] for q in L['questions']],   # label + unit only

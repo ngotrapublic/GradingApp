@@ -63,14 +63,23 @@ for st in C['students']:
     view = s.call(f'/api/public/class/{cid}')[1]
     assert view['variant'] == int(v), (view['variant'], v)
     for lab in '1234':
+        if lab == '3':                     # team lab: the first member of the team submits, the others confirm
+            code, _ = s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)}, ok=False)
+            if code == 400:                # no photo yet: this member is the first of the team
+                s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
+                s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
+            else:
+                assert code == 409, code
+                s.call('/api/public/confirm', {'cls': cid, 'lab': lab})
+            continue
         s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
         s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
     for lab in '1234':
         gv.call('/api/record', {'cls': cid, 'lab': lab, 'sid': st['sid'], 'tick': True})
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'manual': {'fc_scope': 6}})
-    gv.call('/api/record', {'cls': cid, 'lab': '3', 'sid': st['sid'], 'manual': {'graph': 2}})
 for t in range(1, 7):
     gv.call('/api/team', {'cls': cid, 'lab': '4', 'team': t, 'field': 'demo', 'value': 4})
+    gv.call('/api/team', {'cls': cid, 'lab': '3', 'team': t, 'field': 'graph', 'value': 2})
 # marks seen by students
 tot = {}
 for st in C['students']:
@@ -106,6 +115,21 @@ for off, want in ((1.08, 9), (1.03, 12)):
     m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][1]
     assert m == want, (off, m, want)
 print('Lab 2 task (R, C -> fc) rule ok: +8 % half, +3 % full')
+# Lab 3 team lab: a member without confirmation gets only the team mark (2) when ticked; the lecturer confirms for them -> 16
+by = {}
+for x in C['students']:
+    if x['team'] == 2: by.setdefault('all', []).append(x)
+d = gv.call('/api/data')[1]['classes'][str(cid)]
+mates = [x for x in by['all'] if d['labs']['3'][x['sid']].get('src') == 'team']
+x = mates[0]; sub_ = next(y for y in by['all'] if d['labs']['3'][y['sid']].get('src') == 'web')
+gv.call('/api/record', {'cls': cid, 'lab': '3', 'sid': x['sid'], 'values': None, 'src': ''})
+s = Client(); s.call('/api/public/login', {'sid': x['sid'], 'password': 'pw-' + x['sid']})
+m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][2]
+assert m == 2, m
+gv.call('/api/record', {'cls': cid, 'lab': '3', 'sid': x['sid'], 'values': d['labs']['3'][sub_['sid']]['values'], 'src': 'team'})
+m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][2]
+assert m == 16, m
+print('Lab 3 team confirm ok: no confirmation -> 2 (team mark), lecturer confirms -> 16')
 import urllib.request as U
 r=gv.op.open(BASE+'/api/export.xlsx'); b=r.read(); open('/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/_build/e2e_export.xlsx','wb').write(b); print('excel bytes', len(b))
 open('/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/_build/e2e_cookie.txt', 'w').write('lecturer gv / lecturer-2')
