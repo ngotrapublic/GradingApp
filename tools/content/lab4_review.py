@@ -5,8 +5,11 @@
 2. Exam practice after "Skills checklist for the exam" (not marked, after the Lab 4 marks): Exercise 6 combine
    resistors, Exercise 7 set up the instruments from the default state (as the exam starts), Exercise 8 design an RC
    low-pass filter with the parts on the table. Each has its answer slide (practice_slides.add / answer_slide).
+3. One final circuit instead of version 1 + version 2 (see one_final).
 Run after practice_slides.py (`practice_slides.py 4` removes the practice slides), before subscripts.py. Safe to run again."""
+import copy, re
 import schemdraw, schemdraw.elements as elm
+from pptx.oxml.ns import qn
 from pptx import Presentation
 import practice_slides as ps
 
@@ -80,6 +83,78 @@ def figures():
         elm.Ground().at((0, 0))
 
 
+# 3. One final circuit (lecturer, 29/10/2026): version 1 "dies out after about 1 minute" only with the HN home-made
+#    supply (12 V + 2 x 1 MOhm divider as 0 V); on the PB-503A it works. The marks use the version 2 values
+#    (4.7 kOhm, 1 nF), so version 1 goes and version 2 becomes "Final circuit". Slides are found by old or new text.
+V1 = ('Final circuit (version 1)', 'Final circuit version 1')
+FINAL = {   # old first line -> new lines of the text box ("**x**" = bold)
+    'So how do we solve the echo?': [
+        '**Before you connect the microphone**',
+        'Your voice gives tens to hundreds of mVpp (Exercise 4).',
+        'With a gain of 291, the output would need tens of volts. It clips (Lab 3).',
+        'The speaker is also very close to the microphone. A loud speaker gives an echo (acoustic feedback).',
+        'So we make three changes.'],
+    'The resulting circuit is this': [
+        '**The final circuit is this**',
+        'Disconnect the function generator.',
+        'Connect the microphone circuit to stage 1 through the 1 µF capacitor.',
+        'Connect the final output to the speaker.'],
+    'You will see that the echo is much less': [
+        'Speak into the microphone through the rolled paper.',
+        'You hear your voice in the speaker, with little echo.',
+        'The output signal looks something like this'],
+}
+FINAL_NOTES = {
+    'Before you connect the microphone': 'Before you connect the microphone: your voice gives tens to hundreds of millivolts. '
+        'With a gain of 291, the output would need tens of volts, so it clips, like in Lab 3. The speaker is also very '
+        'close to the microphone. A loud speaker gives an echo. So we make three changes.',
+    'The final circuit is this': 'This is the final circuit. Disconnect the function generator. Connect the microphone '
+        'circuit to stage 1 through the 1 microfarad capacitor. Connect the final output to the speaker.',
+    'Speak into the microphone through': 'Speak into the microphone through the rolled paper. You hear your voice in the '
+        'speaker, with little echo. The output signal looks like this.',
+}
+
+
+def set_lines(sh, lines):
+    """Replace the text of an HN text box: one paragraph per line with an empty paragraph between (as in HN)."""
+    tf = sh.text_frame; paras = tf.paragraphs
+    tpl = copy.deepcopy(paras[0]._p)
+    for r in tpl.findall(qn('a:r')) + tpl.findall(qn('a:br')): tpl.remove(r)
+    body = paras[0]._p.getparent()
+    for para in paras: body.remove(para._p)
+    for k, line in enumerate(lines):
+        if k:
+            body.append(copy.deepcopy(tpl))
+        p_ = copy.deepcopy(tpl); body.append(p_)
+        from pptx.text.text import _Paragraph
+        para = _Paragraph(p_, tf)
+        for part in re.split(r'(\*\*.*?\*\*)', line):
+            if part:
+                r = para.add_run(); r.text = part.strip('*'); r.font.bold = part.startswith('**')
+
+
+def one_final(p):
+    gone = drop(p, lambda s: any(v in ps.text_of(s) for v in V1))
+    for s in p.slides:
+        for sh in s.shapes:
+            if not sh.has_text_frame:
+                continue
+            for r in (r for para in sh.text_frame.paragraphs for r in para.runs):
+                if r.text in ('Final circuit version 2', 'Final circuit (version 2)'):
+                    r.text = 'Final circuit'
+            first = sh.text_frame.paragraphs[0].text
+            if first in FINAL:
+                set_lines(sh, FINAL[first])
+        for key, say in FINAL_NOTES.items():
+            if key in ps.text_of(s):
+                s.notes_slide.notes_text_frame.text = say
+        nt = s.notes_slide.notes_text_frame if s.has_notes_slide else None
+        if nt is not None and nt.text in ('Final circuit, version 2.', 'This is version 2 of the schematic.'):
+            nt.text = {'Final circuit, version 2.': 'The final circuit.',
+                       'This is version 2 of the schematic.': 'This is the schematic of the final circuit.'}[nt.text]
+    return gone
+
+
 def title(s):
     return next((sh.text_frame.text.strip() for sh in s.shapes if sh.name == 'Title Bar'), '')
 
@@ -98,6 +173,7 @@ def run():
     p = Presentation(DECK); lst = p.slides._sldIdLst
     drop(p, lambda s: s._element.cSld.get('name') == NAME)
     gone = drop(p, lambda s: any(d in ps.text_of(s) for d in DROP))
+    v1 = one_final(p)
     # recap: no decoupling line on the slide or in the notes
     rec = next(s for s in p.slides if title(s).startswith('Recap – the inverting amplifier'))
     for sh in rec.shapes:
@@ -128,7 +204,7 @@ def run():
     for k, sid in enumerate(sids): lst.insert(at + k, sid)
     p.save(DECK)
     left = [i + 1 for i, s in enumerate(p.slides) if 'ecoupl' in ps.text_of(s) and s._element.get('show') != '0']
-    print(f'Lab 4: {gone} decoupling slides removed | exam practice at {at + 1}-{at + len(new)} | {len(p.slides)} slides |'
+    print(f'Lab 4: {gone} decoupling slides removed | {v1} version-1 slides removed | exam practice at {at + 1}-{at + len(new)} | {len(p.slides)} slides |'
           f' "decoupl" still on visible slides: {left}')
 
 

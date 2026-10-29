@@ -70,7 +70,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    "Decouple both supply rails" ở slide Recap) – đề thi không có; 2 tụ 0.1 µF ở chân nguồn trong "Final circuit version 2" vẫn
    giữ (có trong sơ đồ). Thêm phần ôn thi sau "Skills checklist": Exercise 6 ghép điện trở, Exercise 7 cài máy từ trạng
    thái mặc định (osci Default Setup, máy phát 50 Ω), Exercise 8 thiết kế lọc thông thấp 1 kHz bằng linh kiện trên bàn; mỗi bài
-   có slide đáp án. Chạy sau `practice_slides.py` (chạy `practice_slides.py 4` sẽ xóa phần ôn thi), trước `subscripts.py`.
+   có slide đáp án. Chỉ còn một mạch final (bỏ version 1: lỗi "tắt sau 1 phút" là do nguồn ±6 V tự chế của HN; điểm chấm
+   dùng giá trị version 2). Chạy sau `practice_slides.py` (chạy `practice_slides.py 4` sẽ xóa phần ôn thi), trước `subscripts.py`.
 16. `review_reveal.py` – Lab 2–4: slide "Review – words from Lab N" hiện đáp án từng dòng khi bấm (khung chữ đặt lên từng ô,
    hiệu ứng Appear); bỏ slide "(answers)". Chạy lại không làm gì nữa.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
