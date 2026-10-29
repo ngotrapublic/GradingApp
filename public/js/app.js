@@ -9,6 +9,7 @@ function render(){
   const hasCls=!!S.cls, me=ME(), staffOnly=me.role==='ta';
   const tabs=[];
   if(hasCls) tabs.push(['grade',T('Grade','Chấm')]);
+  if(hasCls && K().exam) tabs.push(['exam',T('Exam','Thi')]);
   if(hasCls && canManage()) tabs.push(['sum',T('Canvas','Gửi Canvas')],['roster',T('Students','SV & nhóm')]);
   if(!staffOnly) tabs.push(['classes',T('Classes','Lớp')]);
   if(me.role==='admin') tabs.push(['users',T('Accounts','Tài khoản')]);
@@ -26,7 +27,7 @@ function render(){
   app.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;S.preview=null;render();});
   $('#qr').onclick=showQR; $('#acct').onclick=showAccount; bindLangToggle(app);
   if(hasCls && !labs().includes(S.lab)) S.lab=labs()[0];
-  const view={grade:renderGrade, roster:renderRoster, sum:renderSum, classes:renderClasses, users:renderUsers}[S.view];
+  const view={grade:renderGrade, exam:renderExam, roster:renderRoster, sum:renderSum, classes:renderClasses, users:renderUsers}[S.view];
   if(view) view($('#main'));
   else $('#main').innerHTML=`<p class="muted">${T('You are not in any class yet. Ask the lecturer to add you as a TA.','Bạn chưa được thêm vào lớp nào. Nhờ giảng viên thêm bạn làm TA.')}</p>`;
 }

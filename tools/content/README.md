@@ -68,6 +68,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
 16. `lab3_freq.py` – Lab 3, Exercise 4 (đáp tuyến tần số của mạch Exercise 2): bảng 9 tần số 20 Hz – 200 kHz + đồ thị
    trống, rồi "What do you notice?" với đường lý thuyết – cả 3 slide đang ẨN (HIDE = True), chỉ bật cho lớp nhanh (f_L ≈ 72 Hz do R1, C1; f_H ≈ 68 kHz do LM358); sửa slide "Use low
    (audio) frequencies" thành lời giải thích. Chạy sau `lab3_fixes.py`. `practice_slides.py 3` chỉ chạy lại Lab 3.
+16. `exam_rubric.py` – rubric thi cuối kỳ (theo đề HN: 35 nhóm + 15 cá nhân, trừ vi phạm tối đa 10) ghi vào `keys.json` ("exam")
+   cho tab **Thi** của app. Chạy lại sau `gen_keys.py`.
 16. `lab4_review.py` – Lab 4 (bài chấm điểm Lab 4 làm nhóm: đo đủ 4 số, mỗi số 1,5 điểm, một bạn nộp, các bạn khác xác nhận –
    sửa cả `keys.json`; chạy lại sau `gen_keys.py`): bỏ phần lý thuyết decoupling (slide "Capacitors", 3 slide "Decoupling capacitor", dòng
    "Decouple both supply rails" ở slide Recap) – đề thi không có; 2 tụ 0.1 µF ở chân nguồn trong "Final circuit version 2" vẫn

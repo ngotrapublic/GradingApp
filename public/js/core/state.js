@@ -25,6 +25,18 @@ function score(st, lab=S.lab){
   Lb.manual.forEach(m=>{ t += +(m[3]==='student'? (r.manual||{})[m[0]] : (st.team&&r.tick? teamRec(st.team, lab)[m[0]] : 0)) || 0; });   // team mark: ticked members only
   return t;
 }
+// final exam (keys "exam"): group items marked once per exam group (team_marks, lab "exam"), individual items and the
+// penalty in the student's record (lab "exam", manual). Contribution 0 = did nothing = fails the exam (0). Absent = 0.
+function examParts(st, cls=C()){
+  const E=K(cls).exam; if(!E) return null;
+  const m=(((cls.labs||{}).exam||{})[st.sid]||{}).manual||{}, g=m.group, G=g? (((cls.team||{}).exam||{})[g]||{}) : {};
+  const items=E.group.filter(x=>x[3]), grp=items.reduce((a,x)=>a+(+G[x[0]]||0),0), done=items.filter(x=>G[x[0]]!==undefined).length;
+  const ind=E.individual.reduce((a,x)=>a+(+m[x[0]]||0),0), pen=Math.min(+m.penalty||0, E.penalty[3]);
+  const fail=!!m.absent || m.contrib===0;
+  return {group:g||null, grp, ind, pen, fail, absent:!!m.absent, done, items:items.length,
+          total: fail? 0 : Math.max(0, grp+ind-pen), graded: done===items.length && E.individual.every(x=>m[x[0]]!==undefined)};
+}
+function examScore(st, cls=C()){ const p=examParts(st, cls); return p? p.total : 0; }
 const sorted = () => [...C().students].sort((a,b)=>(a.team||99)-(b.team||99)||(a.member||9)-(b.member||9)||a.name.localeCompare(b.name,'vi'));
 const manLabel = mn => ({graph:T('Graph + conclusion','Đồ thị + kết luận'), demo:T('Team demo','Demo nhóm')})[mn[0]] || mn[1];
 const classLabel = c => `${c.name} – ${c.course} – ${c.term}`;

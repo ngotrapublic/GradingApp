@@ -47,6 +47,15 @@ Dữ liệu (cả ảnh mạch của SV) lưu trong `data/grading.db`. Muốn sa
   Lab 2: chọn điểm đồ thị 0 / 1.5 / 3. Lab 4: chọn điểm demo nhóm 0 / 2 / 4 ở dòng tên nhóm. Bấm lại vào nút đang chọn để bỏ chọn.
 - **Gửi Canvas**: kiểm tra lab, tạo file điểm để import vào Canvas, xem bảng điểm, tải Excel (lớp này hoặc tất cả lớp của mình).
 
+## Thi cuối kỳ (tab **Thi**)
+SV vẫn làm bài trên giấy thi và ghi kết quả vào giấy. Giám khảo chấm trên app theo rubric của đề thi (35 điểm nhóm + 15 cá nhân):
+1. Ngày thi: bấm tên các SV **vắng**, rồi bấm **Bốc nhóm thi** – ngẫu nhiên trong lớp, mỗi nhóm 3 SV (vài nhóm 2 nếu lẻ).
+   Đọc số nhóm cho SV. Cần đổi thì chọn nhóm khác ở ô bên cạnh tên SV. Bốc lại sẽ xóa điểm nhóm đã chấm.
+2. Bấm vào một nhóm: chấm 16 mục của phần A, B (mỗi mục một hàng nút) – chấm một lần cho cả nhóm.
+3. Từng SV: đóng góp 0–5 (**0 = không làm gì = rớt bài thi**), kỹ năng cá nhân 0–10, trừ điểm vi phạm (0–10), ghi chú.
+4. Tab **Gửi Canvas**: tạo trên Canvas một assignment tên **Final exam**, Export lại sổ điểm, chọn cột "Final exam" rồi tải file
+   import (điểm /50 tự quy đổi theo điểm tối đa của assignment). SV vắng được 0.
+
 ## Điểm chính thức nằm trên Canvas
 Web chỉ là công cụ hỗ trợ chấm. Điểm chính thức và mọi thông báo vẫn ở Canvas. Trên Canvas **chỉ có thông báo và các cột điểm** – không quiz, không file đề (SV xem đề, nộp bài, tải file mẫu trên trang SV).
 

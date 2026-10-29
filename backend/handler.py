@@ -284,7 +284,7 @@ class H(http.server.SimpleHTTPRequestHandler):
                 con.execute('DELETE FROM hits WHERE k=?', (f'stu-fail:{sid}',))
             elif path == '/api/record':         # one student's record for one lab
                 lab = str(body['lab']); sid = str(body['sid'])
-                if lab not in K['labs']: return self.send_json({'error': 'bad lab'}, 400)
+                if lab not in K['labs'] and not (lab == 'exam' and K.get('exam')): return self.send_json({'error': 'bad lab'}, 400)
                 if 'override' in body and not manage: return self.send_json(NO_RIGHT, 403)
                 con.execute('INSERT INTO records (class_id, lab, sid, tick, manual) VALUES (?,?,?,0,?) ON CONFLICT DO NOTHING', (cid, lab, sid, '{}'))
                 if 'tick' in body: con.execute('UPDATE records SET tick=? WHERE class_id=? AND lab=? AND sid=?', (1 if body['tick'] else 0, cid, lab, sid))
@@ -321,6 +321,20 @@ class H(http.server.SimpleHTTPRequestHandler):
                     con.execute('DELETE FROM team_marks WHERE class_id=? AND lab=? AND team=? AND field=?', (cid, str(body['lab']), str(body['team']), body['field']))
                 else:
                     set_team_mark(con, cid, body['lab'], body['team'], body['field'], body['value'])
+            elif path == '/api/exam_groups':    # final exam: the drawn groups {sid: group or None}; clear = also delete the group marks
+                if not manage: return self.send_json(NO_RIGHT, 403)
+                if not K.get('exam'): return self.send_json({'error': 'no exam'}, 400)
+                inclass = {r['sid'] for r in con.execute('SELECT sid FROM enrollments WHERE class_id=?', (cid,)).fetchall()}
+                if body.get('clear'):
+                    con.execute("DELETE FROM team_marks WHERE class_id=? AND lab='exam'", (cid,))
+                for sid, g in (body.get('groups') or {}).items():
+                    if sid not in inclass: continue
+                    con.execute("INSERT INTO records (class_id, lab, sid, tick, manual) VALUES (?,'exam',?,0,?) ON CONFLICT DO NOTHING", (cid, sid, '{}'))
+                    r = con.execute("SELECT manual FROM records WHERE class_id=? AND lab='exam' AND sid=?", (cid, sid)).fetchone()
+                    man = json.loads(r['manual'] or '{}')
+                    if g is None: man.pop('group', None)
+                    else: man['group'] = int(g)
+                    con.execute("UPDATE records SET manual=?, updated=? WHERE class_id=? AND lab='exam' AND sid=?", (json.dumps(man), now(), cid, sid))
             elif path == '/api/key_override':   # fix a wrong answer key for one variant (all students with that variant)
                 if not manage:
                     return self.send_json(NO_RIGHT, 403)
