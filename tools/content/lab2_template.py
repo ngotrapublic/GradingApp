@@ -1,13 +1,13 @@
-"""Excel template for Lab 2 Task 2 (band-pass, the team's own C and R): the student types the 9 frequencies of the card
+"""Excel template for Lab 3 Task 1 (band-pass; moved from Lab 2 Task 2 on 29/10/2026, the team's own C and R): the student types the 9 frequencies of the card
 (rows 6-14) and up to 11 extra points; Vout/Vin and the graph (log scale, 2-250 kHz) fill in by themselves."""
 import shutil
 from openpyxl import Workbook
 from openpyxl.chart import ScatterChart, Reference, Series
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-wb=Workbook(); ws=wb.active; ws.title='Lab 2 data'
-ws['A1']='Lab 2 – RLC frequency response'; ws['A1'].font=Font(bold=True,size=14)
+wb=Workbook(); ws=wb.active; ws.title='Lab 3 data'
+ws['A1']='Lab 3 – RLC frequency response'; ws['A1'].font=Font(bold=True,size=14)
 ws['A2']='Variant:'; ws['B2'].fill=PatternFill('solid',fgColor='FFF2CC')
-ws['A3']='C and R (Task 2):'; ws['B3'].fill=PatternFill('solid',fgColor='FFF2CC')
+ws['A3']='C and R (Task 1):'; ws['B3'].fill=PatternFill('solid',fgColor='FFF2CC')
 hdr=['f (kHz)','Vin p-p (V) – CH1','Vout p-p (V) – CH2','Vout / Vin']
 for i,h in enumerate(hdr,1):
     c=ws.cell(5,i,h); c.font=Font(bold=True,color='FFFFFF'); c.fill=PatternFill('solid',fgColor='1F4E78'); c.alignment=Alignment(wrap_text=True,horizontal='center')
@@ -28,6 +28,6 @@ s=Series(Reference(ws,min_col=4,min_row=6,max_row=25),Reference(ws,min_col=1,min
 s.marker.symbol='circle'; s.marker.size=7; s.graphicalProperties.line.noFill=True
 ch.series.append(s); ch.legend=None; ch.width=18; ch.height=10
 ws.add_chart(ch,'F5')
-out = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/Lab2/Lab2_RLC_data_template.xlsx'
+out = '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/Lab3/Lab3_RLC_data_template.xlsx'
 wb.save(out)
-shutil.copy(out, '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/public/courses/SE009/files/Lab2_RLC_data_template.xlsx'); print('ok')
+shutil.copy(out, '/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/public/courses/SE009/files/Lab3_RLC_data_template.xlsx'); print('ok')

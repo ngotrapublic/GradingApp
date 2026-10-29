@@ -75,12 +75,19 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    thẻ đề `lab4_circuit.png`). Rà lại trước buổi học: sửa câu chữ HN, từ chưa dạy trong bảng từ vựng, ẩn 2 slide HN tính f_c
    với 8 Ω (sai so với đáp án Exercise 2), bài chấm điểm ghi rõ tháo micro và loa, máy phát High-Z (cả thẻ đề trong
    `keys.json`). Chạy sau `practice_slides.py` (chạy `practice_slides.py 4` sẽ xóa phần ôn thi), trước `subscripts.py`.
+16. `lab3_rlc.py` – (29/10/2026) chuyển phần cuộn cảm + RLC nối tiếp (bài giảng, demo) và bài chấm RLC từ Lab 2 sang đầu
+   Lab 3. Điểm: Lab 1 12, Lab 2 12 (bài RC cá nhân: R, C → f_c 6 + GV xem f_c trên osci 6), Lab 3 16 (Task 1 RLC nhóm: f_0 3,
+   BW 3, đồ thị 2; Task 2 khuếch đại từ màn hình osci: 4 × 2 – cả nhóm lắp chung 1 mạch LM358, từng bạn thay R1, R2 của mình,
+   vì trainer chỉ cho 2 người làm cùng lúc), Lab 4 10. `lab3_rlc.py decks` sửa 3 bộ slide (Lab 4: bảng từ của Lab 3 có từ RLC),
+   `lab3_rlc.py keys` sửa `keys.json`. File Excel mẫu: `Lab3_RLC_data_template.xlsx` (`lab2_template.py`). Chạy sau các script
+   Lab 2–4 khác, trước `notes_cleanup.py` và `subscripts.py`. **Sau khi chạy lại `gen_keys.py`/`lab2_team.py` hoặc các script
+   RLC của Lab 2 (`rlc_slides`, `rlc_table`, `instrument_slides`, `lab2_task2`, `lab2_demo`) phải chạy lại script này.**
 16. `review_reveal.py` – Lab 2–4: slide "Review – words from Lab N" hiện đáp án từng dòng khi bấm (khung chữ đặt lên từng ô,
    hiệu ứng Appear); bỏ slide "(answers)". Chạy lại không làm gì nữa.
 16. `notes_cleanup.py` – xóa các dòng "New word…" trong lời giảng Lab 1–4 (từ mới đã có trên slide).
 17. `subscripts.py` – viết đúng chỉ số dưới cho biến (f_c, f_0, V_in, V_out, X_C, R_L, V_cc…) trên slide Lab 2–4. Chạy **cuối cùng**.
 
-Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `instrument_slides.py` → `lab2_task2.py` → `lab2_instruments.py` → `lab2_demo.py` → (Lab 3: `lab3_fixes.py` → `lab3_freq.py`) → (Lab 4: `lab4_review.py`) → `notes_cleanup.py` → `subscripts.py`.
+Thứ tự khi chạy lại Lab 2–4: `align_web.py` → `rlc_slides.py` → `table_words.py` → `practice_slides.py` → `rc_section.py` → `rlc_table.py` → `instrument_slides.py` → `lab2_task2.py` → `lab2_instruments.py` → `lab2_demo.py` → (Lab 3: `lab3_fixes.py` → `lab3_freq.py`) → (Lab 4: `lab4_review.py`) → `lab3_rlc.py` → `notes_cleanup.py` → `subscripts.py`.
 
 > **Lab 1 đã sửa tay từ 24/10/2026** (thêm bài tập Exercise 1–10, đổi thứ tự slide). `align_web.py` giờ chỉ sửa Lab 2–4;
 > `bench_map_slide.py`, `parts_slide.py`, `welcome_notice.py` không chạy nữa trừ khi thêm `--force` (sẽ ghi đè bản sửa tay).

@@ -131,7 +131,7 @@ function render() {
     h += `<details class="card lab"${open ? ' open' : ''}><summary>Lab ${esc(String(L.lab))}${markBit}</summary>`;
     if (L.parts && L.parts.length) {
       if (L.card && L.card[0]) h += `<div class="lines"><div>${sub(L.card[0])}</div></div>`;
-      if (L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
+      if (L.image && !L.parts.some(p => p.image)) h += `<img src="${L.image}" alt="Oscilloscope screen">`;
       if (L.marks !== null) { sum += L.marks; total += L.total;
         h += `<div class="marks">${T('Marks', 'Điểm')}: <b>${L.marks}</b> / ${L.total}</div>`; }
       if (L.submit) h += submitForm(L);
@@ -230,6 +230,7 @@ function partsBody(L, frozen) {
     h += `<div class="part"><div class="subhead">${esc(T(title[0], title[1]))}</div>`;
     h += partCardLines(L, p);
     (p.figs || []).forEach(fi => { const f = (L.figs || [])[fi]; if (f) h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
+    if (p.image && L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;   // Lab 3 Task 2: the screen on the card
     if (p.files) (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
     if (p.note) h += `<p class="muted">${T(p.note[0], p.note[1])}</p>`;
     h += valueFields(L, frozen, p.questions || []);

@@ -67,7 +67,8 @@ for st in C['students']:
         s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
     for lab in '1234':
         gv.call('/api/record', {'cls': cid, 'lab': lab, 'sid': st['sid'], 'tick': True})
-    gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'manual': {'graph': 3}})
+    gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'manual': {'fc_scope': 6}})
+    gv.call('/api/record', {'cls': cid, 'lab': '3', 'sid': st['sid'], 'manual': {'graph': 2}})
 for t in range(1, 7):
     gv.call('/api/team', {'cls': cid, 'lab': '4', 'team': t, 'field': 'demo', 'value': 4})
 # marks seen by students
@@ -76,7 +77,7 @@ for st in C['students']:
     s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
     view = s.call(f'/api/public/class/{cid}')[1]
     tot[st['sid']] = [L['marks'] for L in view['labs']]
-bad = {k: v for k, v in tot.items() if v != [12, 14, 14, 10]}
+bad = {k: v for k, v in tot.items() if v != [12, 12, 16, 10]}
 print('students with full marks:', len(tot) - len(bad), '/', len(tot), '| not full:', bad)
 # tolerance rule on one student, Lab 1: +9% full, +15% half, +25% zero (per value)
 st = C['students'][0]; v = str(var(st)); k = KEYS['1']['variants'][v]['keys']
@@ -87,16 +88,16 @@ s.call('/api/public/submit', {'cls': cid, 'lab': '1', 'values': [k[0] * 1.09, k[
 gv.call('/api/record', {'cls': cid, 'lab': '1', 'sid': st['sid'], 'tick': True})
 m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][0]
 print('tolerance test Lab 1 (expect 3+1.5+0+3 = 7.5):', m)
-# Lab 2: same Task 2 keys inside each team, different Task 1
+# Lab 3 Task 1 (RLC): same keys inside each team; Lab 2 task (RC): different for every member
 for t in range(1, 7):
     mem = [str(var(x)) for x in C['students'] if x['team'] == t]
-    k2 = {tuple(KEYS['2']['variants'][x]['keys'][1:]) for x in mem}; k1 = {KEYS['2']['variants'][x]['keys'][0] for x in mem}
+    k2 = {tuple(KEYS['3']['variants'][x]['keys'][4:]) for x in mem}; k1 = {KEYS['2']['variants'][x]['keys'][0] for x in mem}
     assert len(k2) == 1 and len(k1) == len(mem), (t, mem)
-print('Lab 2 team check ok')
-# Lab 2 Task 1 design rule: R, C giving fc 8 % above the target -> half marks (1 of 2), 3 % -> full
+print('Lab 3 RLC team check ok')
+# Lab 2 task design rule: R, C giving fc 8 % above the target -> half marks (3 of 6, + 6 on the scope), 3 % -> full
 st = C['students'][0]; v = str(var(st)); vals = answers('2', v); tgt = KEYS['2']['variants'][v]['keys'][0]
 s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
-for off, want in ((1.08, 13), (1.03, 14)):
+for off, want in ((1.08, 9), (1.03, 12)):
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': False}); s.call('/api/public/unsubmit', {'cls': cid, 'lab': '2'})
     ri = KEYS['2']['questions'][0][4]['from']                                      # index of R (Task 1)
     vals[0] = 1 / (2 * math.pi * vals[ri] * tgt * off * 1e3) * 1e9              # C (nF) for fc = target × off with the same R
@@ -104,7 +105,7 @@ for off, want in ((1.08, 13), (1.03, 14)):
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': True})
     m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][1]
     assert m == want, (off, m, want)
-print('Lab 2 Task 1 (R, C -> fc) rule ok: +8 % half, +3 % full')
+print('Lab 2 task (R, C -> fc) rule ok: +8 % half, +3 % full')
 import urllib.request as U
 r=gv.op.open(BASE+'/api/export.xlsx'); b=r.read(); open('/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/_build/e2e_export.xlsx','wb').write(b); print('excel bytes', len(b))
 open('/Users/mac/Tra/SE9_ElecCircuitLab/HCM/GradingApp/tools/content/_build/e2e_cookie.txt', 'w').write('lecturer gv / lecturer-2')
