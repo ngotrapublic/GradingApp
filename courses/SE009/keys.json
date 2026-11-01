@@ -1983,7 +1983,7 @@
    "manual": [
     [
      "fc_scope",
-     "fc on the oscilloscope (Vout = 0.707 × Vin)",
+     "Circuit with 2 R + 2 C, fc on the oscilloscope (Vout = 0.707 × Vin)",
      [
       0,
       3,
@@ -1995,7 +1995,7 @@
    "questions": [
     [
      "Task C",
-     "C you chose",
+     "C_eq of your 2 capacitors",
      "nF",
      6,
      {
@@ -2007,7 +2007,7 @@
     ],
     [
      "Task R",
-     "R you chose",
+     "R_eq of your 2 resistors",
      "Ω",
      0
     ]
@@ -2019,11 +2019,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: Low-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 101   |   Team 1 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2036,11 +2036,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: High-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 102   |   Team 1 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2053,11 +2053,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: Low-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 103   |   Team 1 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2070,11 +2070,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: High-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 104   |   Team 2 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2087,11 +2087,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: Low-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 105   |   Team 2 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2104,11 +2104,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: High-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 106   |   Team 2 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2121,11 +2121,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: Low-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 107   |   Team 3 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2138,11 +2138,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: High-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 108   |   Team 3 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2155,11 +2155,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: Low-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 109   |   Team 3 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2172,11 +2172,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: High-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 110   |   Team 4 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2189,11 +2189,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: Low-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 111   |   Team 4 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2206,11 +2206,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: High-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 112   |   Team 4 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2223,11 +2223,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: Low-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 113   |   Team 5 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2240,11 +2240,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: High-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 114   |   Team 5 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2257,11 +2257,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: Low-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 115   |   Team 5 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2274,11 +2274,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: High-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 116   |   Team 6 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2291,11 +2291,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: Low-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 117   |   Team 6 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2308,11 +2308,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: High-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 118   |   Team 6 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2325,11 +2325,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: High-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 119   |   Team 1 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2342,11 +2342,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: Low-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 120   |   Team 2 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2359,11 +2359,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: High-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 121   |   Team 3 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2376,11 +2376,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: Low-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 122   |   Team 4 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2393,11 +2393,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: High-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 123   |   Team 5 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2410,11 +2410,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: Low-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 124   |   Team 6 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2427,11 +2427,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: Low-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 201   |   Team 1 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2444,11 +2444,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: High-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 202   |   Team 1 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2461,11 +2461,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: Low-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 203   |   Team 1 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2478,11 +2478,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: High-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 204   |   Team 2 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2495,11 +2495,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: Low-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 205   |   Team 2 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2512,11 +2512,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: High-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 206   |   Team 2 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2529,11 +2529,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: Low-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 207   |   Team 3 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2546,11 +2546,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: High-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 208   |   Team 3 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2563,11 +2563,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: Low-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 209   |   Team 3 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2580,11 +2580,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: High-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 210   |   Team 4 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2597,11 +2597,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: Low-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 211   |   Team 4 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2614,11 +2614,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: High-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 212   |   Team 4 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2631,11 +2631,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: Low-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 213   |   Team 5 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2648,11 +2648,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: High-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 214   |   Team 5 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2665,11 +2665,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: Low-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 215   |   Team 5 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2682,11 +2682,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: High-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 216   |   Team 6 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2699,11 +2699,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: Low-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 217   |   Team 6 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2716,11 +2716,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: High-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 218   |   Team 6 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2733,11 +2733,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: High-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 219   |   Team 1 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2750,11 +2750,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: Low-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 220   |   Team 2 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2767,11 +2767,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: High-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 221   |   Team 3 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2784,11 +2784,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: Low-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 222   |   Team 4 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2801,11 +2801,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: High-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 223   |   Team 5 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2818,11 +2818,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: Low-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 224   |   Team 6 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2835,11 +2835,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: Low-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 301   |   Team 1 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2852,11 +2852,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: High-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 302   |   Team 1 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2869,11 +2869,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: Low-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 303   |   Team 1 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2886,11 +2886,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: High-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 304   |   Team 2 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2903,11 +2903,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: Low-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 305   |   Team 2 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2920,11 +2920,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: High-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 306   |   Team 2 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2937,11 +2937,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: Low-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 307   |   Team 3 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2954,11 +2954,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: High-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 308   |   Team 3 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2971,11 +2971,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: Low-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 309   |   Team 3 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -2988,11 +2988,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 7.5 kHz (closest: 1 kΩ + 22 nF = 7.23 kHz)"
+      "RC: High-pass, target fc = 7.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 22 nF + 22 nF in series = 11 nF: 7.46 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 310   |   Team 4 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 7.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3005,11 +3005,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: Low-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 311   |   Team 4 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3022,11 +3022,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 15 kHz (closest: 220 Ω + 47 nF = 15.4 kHz)"
+      "RC: High-pass, target fc = 15 kHz (e.g. R = 1.5 kΩ ∥ 10 kΩ = 1304 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 14.8 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 312   |   Team 4 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 15 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3039,11 +3039,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.5 kHz (closest: 6.8 kΩ + 47 nF = 0.498 kHz)"
+      "RC: Low-pass, target fc = 0.5 kHz (e.g. R = 6.8 kΩ + 6.8 kΩ in series = 13600 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.498 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 313   |   Team 5 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3056,11 +3056,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: High-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 314   |   Team 5 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3073,11 +3073,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 1 kHz (closest: 3.3 kΩ + 47 nF = 1.03 kHz)"
+      "RC: Low-pass, target fc = 1 kHz (e.g. R = 330 Ω + 3.3 kΩ in series = 3630 Ω, C = 22 nF ∥ 22 nF = 44 nF: 0.996 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 315   |   Team 5 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 1 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3090,11 +3090,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 1.5 kHz (closest: 2.2 kΩ + 47 nF = 1.54 kHz)"
+      "RC: High-pass, target fc = 1.5 kHz (e.g. R = 470 Ω + 15 kΩ in series = 15470 Ω, C = 10 nF + 22 nF in series = 6.88 nF: 1.5 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 316   |   Team 6 – Member 1",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 1.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3107,11 +3107,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: Low-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 317   |   Team 6 – Member 2",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3124,11 +3124,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 5 kHz (closest: 680 Ω + 47 nF = 4.98 kHz)"
+      "RC: High-pass, target fc = 5 kHz (e.g. R = 4.7 kΩ ∥ 22 kΩ = 3873 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 4.98 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 318   |   Team 6 – Member 3",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3141,11 +3141,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: High-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 319   |   Team 1 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3158,11 +3158,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: Low-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 320   |   Team 2 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3175,11 +3175,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: High-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 321   |   Team 3 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3192,11 +3192,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 0.75 kHz (closest: 22 kΩ + 10 nF = 0.723 kHz)"
+      "RC: Low-pass, target fc = 0.75 kHz (e.g. R = 2.2 kΩ + 6.8 kΩ in series = 9000 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 0.753 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 322   |   Team 4 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 0.75 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3209,11 +3209,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): High-pass, target fc = 3.5 kHz (closest: 1 kΩ + 47 nF = 3.39 kHz)"
+      "RC: High-pass, target fc = 3.5 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 47 nF + 47 nF in series = 23.5 nF: 3.49 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 323   |   Team 5 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a high-pass filter with fc = 3.5 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3226,11 +3226,11 @@
       0
      ],
      "info": [
-      "RC (Task 1): Low-pass, target fc = 10 kHz (closest: 330 Ω + 47 nF = 10.3 kHz)"
+      "RC: Low-pass, target fc = 10 kHz (e.g. R = 3.3 kΩ ∥ 4.7 kΩ = 1939 Ω, C = 10 nF + 47 nF in series = 8.25 nF: 9.96 kHz)"
      ],
      "card": [
       "Electric Circuit Lab – LAB 2   |   Variant 324   |   Team 6 – Member 4",
-      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. Choose R (220 Ω … 22 kΩ) and C (10, 22 or 47 nF). Submit the R and C you chose.",
+      "Lab 2 task – RC cut-off frequency (individual): design a low-pass filter with fc = 10 kHz. R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. R_eq at least 1 kΩ. Submit R_eq and C_eq.",
       "Submit + one photo of your circuit on the student page (QR)."
      ],
      "figs": [
@@ -3256,8 +3256,8 @@
       0
      ],
      "note": [
-      "Design: choose R and C for the target fc on your card. Submit the R and C you chose (the printed values). Marks: 6 when fc = 1/(2πRC) is within ±5 % of the target (half: ±12 %), 6 when you show the lecturer Vout = 0.707 × Vin at your fc on the oscilloscope.",
-      "Thiết kế: chọn R và C cho f_c mục tiêu trên đề. Nộp R và C đã chọn (giá trị in trên linh kiện). Điểm: 6 khi f_c = 1/(2πRC) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem Vout = 0,707 × Vin tại f_c của bạn trên osci."
+      "Design: R = two resistors, C = two capacitors (each pair in series or in parallel) for the target fc on your card. Submit R_eq and C_eq, calculated from the printed values. Marks: 6 when fc = 1/(2π R_eq C_eq) is within ±5 % of the target (half: ±12 %), 6 when you show the lecturer your circuit and Vout = 0.707 × Vin at your fc.",
+      "Thiết kế: R = hai điện trở, C = hai tụ (mỗi cặp nối tiếp hoặc song song) cho f_c mục tiêu trên đề. Nộp R_eq và C_eq tính từ giá trị in trên linh kiện. Điểm: 6 khi f_c = 1/(2π R_eq C_eq) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn."
      ]
     }
    ]
