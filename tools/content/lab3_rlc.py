@@ -156,17 +156,17 @@ def lab2(p):
     for sh, lines in zip(boxes, [['', '**Instruments**', 'Oscilloscope', 'Function generator', 'Exercises A–D'],
                                  ['', '**RC filters**', '1st-order low-pass and high-pass', 'Cut-off frequency fc', 'Exercises 1–3'],
                                  ['', '**Capacitors**', 'Combining capacitors', 'Measuring capacitance', 'Exercise 4'],
-                                 ['', '**Lab 2 task (end of the lab)**', 'Design an RC filter with 2 R and 2 C (individual)', 'Build it and show fc on the oscilloscope']]):
+                                 ['', '**Lab 2 task (end of the lab)**', 'Your R, choose C = 2 capacitors (individual)', 'Build it and show fc on the oscilloscope']]):
         set_box(sh, lines)
     ov.notes_slide.notes_text_frame.text = ('Today has 4 parts: the oscilloscope and the function generator with Exercises A to D, '
         'RC filters with Exercises 1 to 3, capacitors with Exercise 4, and at the end of the lab the Lab 2 task: you design '
-        'an RC filter with two resistors and two capacitors for a target f c, build it and show f c on the oscilloscope.\n' + ov.notes_slide.notes_text_frame.text.split('\n')[-1])
+        'an RC filter for a target f c: your card gives R, you choose two capacitors. Then build it and show f c on the oscilloscope.\n' + ov.notes_slide.notes_text_frame.text.split('\n')[-1])
     dev = p.slides[find(p, lambda s: title_of(s) == 'Devices and components for this session')]
     set_box(box(dev, 'For each team'), ['For each team:', 'Oscilloscope, function generator, 1X BNC cable, two 10X probes',
                                         'Digital multimeter, PB-503A trainer (breadboard), jumper wires', 'For each student (Lab 2 task):',
-                                        '2 resistors + 2 capacitors that you choose (parts box)'])
+                                        'The 2 resistors on your card + 2 capacitors that you choose (parts box)'])
     dev.notes_slide.notes_text_frame.text = ('Each team uses the oscilloscope, function generator, multimeter and PB-503A.\n'
-        'The Lab 2 task is individual: each student takes two resistors and two capacitors from the parts box.')
+        'The Lab 2 task is individual: each student takes the two resistors on the card and two capacitors from the parts box.')
     # the divider of the old Task 2 becomes the divider of the Lab 2 task, before it
     task = find(p, lambda s: title_of(s).startswith(('Task 1 (individual) – RC', 'Lab 2 task (individual) – RC')))
     div = [i for i, s in enumerate(p.slides) if any(t.startswith(('Lab 2 exercise', 'Lab 2 task\n')) for t in texts(s))]
@@ -180,25 +180,26 @@ def lab2(p):
     t = p.slides[find(p, lambda s: title_of(s).startswith(('Task 1 (individual) – RC', 'Lab 2 task (individual)')))]
     replace_in(t, [('Task 1 (individual) – RC cut-off frequency', 'Lab 2 task (individual) – RC cut-off frequency')], notes=False)
     set_box(box(t, 'Your card gives'), [
-        'Your card gives the filter type (low-pass or high-pass) and a target cut-off frequency fc.',
-        'R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF). Each pair in series or in parallel. Req at least 1 kΩ.',
-        'Calculate Req and Ceq (resistors add in series, capacitors add in parallel). fc = 1 / (2π × Req × Ceq) must be close to the target.',
-        'Build the filter. Measure Req and Ceq with the multimeter. Generator: sine, 2 Vpp, High-Z. CH1 = Vin, CH2 = Vout.',
+        'Your card gives the filter type, a target cut-off frequency fc and your R: two resistors. Build R and measure Req.',
+        'Calculate the C you need: C = 1 / (2π × Req × fc). Make it from two capacitors (10, 22 or 47 nF), in series or in parallel.',
+        'Remember: capacitors add in parallel. In series, Ceq = C1 × C2 / (C1 + C2).',
+        'Build the filter. Measure Ceq with the multimeter. Generator: sine, 2 Vpp, High-Z. CH1 = Vin, CH2 = Vout.',
         'Change the frequency until Vout = 0.707 × Vin. This frequency is your measured fc.',
         'Work in turns: two members build, the third calculates. One student uses the oscilloscope at a time.',
         'Submit Req and Ceq (from the printed values). Show the lecturer your circuit and fc on the oscilloscope.'])
     t.notes_slide.notes_text_frame.text = (
         'The Lab 2 task is individual: 12 points. Your card gives the filter type and a target cut-off frequency.\n'
-        'R is two resistors and C is two capacitors. Each pair in series or in parallel. R eq must be at least 1 kilohm: the generator has 50 ohms inside.\n'
-        'Calculate R eq and C eq. Remember: resistors add in series, capacitors add in parallel. 1 over 2 pi R eq C eq must be close to the target.\n'
-        'Build the filter. Measure R eq and C eq with the multimeter. Function generator: sine, 2 volts peak to peak, High-Z. CH1 is V in, CH2 is V out.\n'
+        'Your card also gives your R: two resistors. Build R and measure R eq.\n'
+        'Calculate the C you need: C = 1 over 2 pi R eq f c. Make it from two capacitors, in series or in parallel.\n'
+        'Remember: capacitors add in parallel. In series, C eq = C1 times C2 over C1 plus C2.\n'
+        'Build the filter. Measure C eq with the multimeter. Function generator: sine, 2 volts peak to peak, High-Z. CH1 is V in, CH2 is V out.\n'
         'Change the frequency until V out is 0.707 times V in. That is your measured f c.\n'
         'Work in turns: two members build, the third calculates. One student uses the oscilloscope at a time.\n'
         'Submit R eq and C eq, calculated from the printed values. Then show me your circuit and f c on the oscilloscope.')
     w = p.slides[find(p, lambda s: title_of(s) == 'Lab 2 – What to submit')]
     tbl = next(sh.table for sh in w.shapes if sh.has_table)
     table_rows(tbl, [['Value to submit (student page)', 'Unit', 'Marks'],
-                     ['Req of your 2 resistors (Ω) and Ceq of your 2 capacitors (nF). Marks: fc = 1/(2π × Req × Ceq) within ±5 % of the target (half: ±12 %)', 'Ω, nF', '6'],
+                     ['Req of your 2 resistors (Ω, from your card) and Ceq of your 2 capacitors (nF). Marks: fc = 1/(2π × Req × Ceq) within ±5 % of the target (half: ±12 %)', 'Ω, nF', '6'],
                      ['Your circuit (2 R + 2 C) and fc on the oscilloscope: Vout = 0.707 × Vin (at your table, at the tick)', '–', '6'],
                      ['Total', '', '12']])
     w.notes_slide.notes_text_frame.text = ('Type R eq and C eq on the student page, under your card, and add one photo of your circuit.\n'
@@ -341,7 +342,7 @@ def decks():
 def keys():
     K = json.load(open(KEYS, encoding='utf-8')); L2, L3 = K['labs']['2'], K['labs']['3']
     if not any(q[0] == 'f0' for q in L2['questions']):
-        print('keys: already moved'); lab2_combine(K); team_task2(K); return
+        print('keys: already moved'); lab2_fixed_r(K); team_task2(K); return
     for v, V2 in L2['variants'].items():
         V3 = L3['variants'][v]
         fc, f0, bw = V2['keys'][0], V2['keys'][1], V2['keys'][2]
@@ -403,43 +404,63 @@ def keys():
                                'Điểm: 6 khi f_c = 1/(2πRC) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem '
                                'Vout = 0,707 × Vin tại f_c của bạn trên osci.']}])
     for k in ('files', 'photo'): L2.pop(k, None)
-    lab2_combine(K); team_task2(K)
+    lab2_fixed_r(K); team_task2(K)
     print('keys: Lab 2 =', L2['total'], '| Lab 3 =', L3['total'], '| total', sum(L['total'] for L in K['labs'].values()))
 
 
-LAB2_R = [220, 330, 470, 680, 1000, 1500, 2200, 3300, 4700, 6800, 10000, 15000, 22000]
-LAB2_C = [10, 22, 47]                                       # nF
+LAB2_RPAIRS = [(2200, 1000, 's'), (4700, 2200, 's'), (10000, 2200, 's'), (4700, 4700, 's'), (10000, 10000, 'p'), (4700, 1000, 's'),
+               (2200, 2200, 'p'), (10000, 4700, 's'), (1500, 1000, 's'), (3300, 1000, 's'), (6800, 2200, 's'), (3300, 3300, 's'),
+               (1500, 2200, 's'), (10000, 10000, 's'), (15000, 3300, 's'), (22000, 10000, 'p'), (6800, 6800, 'p'), (10000, 4700, 'p')]
+LAB2_CPAIRS = [(10, 10, 's'), (10, 22, 's'), (10, 47, 's'), (22, 47, 's'), (10, 22, 'p'), (10, 47, 'p'), (22, 47, 'p'), (47, 47, 'p')]
 
 
-def lab2_combine(K):
-    """Lecturer, 1/11/2026: the Lab 2 task uses what Lab 1 and Lab 2 teach – R is two resistors (any of the 13 values, in
-    series or in parallel), C is two capacitors (10, 22, 47 nF, in series or in parallel); never more than two. The
-    student submits Req and Ceq (Req >= 1 kOhm: the generator has 50 Ohm inside); marks from fc = 1/(2 pi Req Ceq) vs the target (same rule, keys unchanged). The lecturer
-    info shows one good design for each target."""
+def lab2_fixed_r(K):
+    """Lecturer, 1/11/2026: choosing both R and C needs too many tries. The card gives R (two resistors, a different R for
+    each student, >= 1 kOhm because the generator has 50 Ohm inside); the student chooses C = two capacitors (10, 22,
+    47 nF, series or parallel). Each target fc comes from one capacitor pair that is never close to a single capacitor:
+    with the card's R, that pair is within 3 % of the target, every other pair or single capacitor is more than 12 % away.
+    The student submits Req and Ceq; marks from fc = 1/(2 pi Req Ceq) (rule unchanged)."""
     import itertools, math
     om = lambda r: f'{r / 1000:g} kΩ' if r >= 1000 else f'{r} Ω'
-    Rs = [(a + b, f'{om(a)} + {om(b)} in series') for a, b in itertools.combinations_with_replacement(LAB2_R, 2)] + \
-         [(a * b / (a + b), f'{om(a)} ∥ {om(b)}') for a, b in itertools.combinations_with_replacement(LAB2_R, 2)]
-    Cs = [(a + b, f'{a} nF ∥ {b} nF') for a, b in itertools.combinations_with_replacement(LAB2_C, 2)] + \
-         [(a * b / (a + b), f'{a} nF + {b} nF in series') for a, b in itertools.combinations_with_replacement(LAB2_C, 2)]
-    L2 = K['labs']['2']
-    for v, X in L2['variants'].items():
-        target = X['keys'][0]; kind = 'low' if X['figs'][0].endswith('rc_lp.png') else 'high'
-        f, (r, rd), (c, cd) = min(((1 / (2 * math.pi * r[0] * c[0] * 1e-9) / 1e3, r, c) for r in Rs if r[0] >= 1000 for c in Cs),
-                                  key=lambda x: abs(x[0] / target - 1))
+    req = lambda a, b, k: a + b if k == 's' else a * b / (a + b)
+    ceq = lambda a, b, k: a + b if k == 'p' else a * b / (a + b)
+    rdesc = lambda a, b, k: f'{om(a)} + {om(b)} in series' if k == 's' else f'{om(a)} ∥ {om(b)} (parallel)'
+    cdesc = lambda a, b, k: f'{a} nF ∥ {b} nF (parallel)' if k == 'p' else f'{a} nF + {b} nF in series'
+    allc = [ceq(a, b, k) for a, b in itertools.combinations_with_replacement([10, 22, 47], 2) for k in 'sp'] + [10, 22, 47]
+    two = lambda x: float(f'{x:.2g}')
+    L2 = K['labs']['2']; used = {}                          # targets already given in a team: every member gets another one
+    for v, X in sorted(L2['variants'].items()):
+        s, n = int(v) // 100, int(v) % 100
+        t, m = ((n - 1) // 3 + 1, (n - 1) % 3 + 1) if n <= 18 else (n - 18, 4)
+        ri = (s * 7 + (t - 1) * 3 + (m - 1 if m < 4 else 3)) % len(LAB2_RPAIRS)
+        R = req(*LAB2_RPAIRS[ri]); kind = ('low', 'high')[(t + m) % 2]
+        for j in range(len(LAB2_CPAIRS)):
+            cp = LAB2_CPAIRS[(s + 2 * t + 3 * m + j) % len(LAB2_CPAIRS)]; c = ceq(*cp)
+            target = two(1 / (2 * math.pi * R * c * 1e-9) / 1e3)
+            err = lambda cc: abs(1 / (2 * math.pi * R * cc * 1e-9) / 1e3 / target - 1)
+            if (0.3 <= target <= 15 and err(c) <= 0.03 and all(err(o) > 0.12 for o in allc if abs(o - c) > 1e-9)
+                    and target not in used.get((s, t), ())):
+                used.setdefault((s, t), set()).add(target)
+                break
+        else:
+            raise SystemExit(f'no target for variant {v}')
+        X['keys'][0] = target
+        X['figs'][0] = X['figs'][0].rsplit('/', 1)[0] + ('/rc_lp.png' if kind == 'low' else '/rc_hp.png')
         X['card'][1] = (f'Lab 2 task – RC cut-off frequency (individual): design a {kind}-pass filter with fc = {target:g} kHz. '
-                        'R = two resistors (220 Ω … 22 kΩ), C = two capacitors (10, 22 or 47 nF), each pair in series or in parallel. '
-                        'R_eq at least 1 kΩ. Submit R_eq and C_eq.')
-        X['info'] = [f'RC: {kind.capitalize()}-pass, target fc = {target:g} kHz (e.g. R = {rd} = {r:.0f} Ω, C = {cd} = {c:.3g} nF: {f:.3g} kHz)']
+                        f'Your R: {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. Choose C = two capacitors (10, 22 or 47 nF), in series or in parallel. '
+                        'Submit R_eq and C_eq.')
+        X['info'] = [f'RC: {kind.capitalize()}-pass, target fc = {target:g} kHz. R = {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. '
+                     f'Answer: C = {cdesc(*cp)} = {c:.3g} nF ({1 / (2 * math.pi * R * c * 1e-9) / 1e3:.3g} kHz)']
     L2['questions'] = [['Task C', 'C_eq of your 2 capacitors', 'nF', 6, {'full': 0.05, 'half': 0.12, 'calc': 'rc_fc', 'from': 1}],
-                       ['Task R', 'R_eq of your 2 resistors', 'Ω', 0]]
+                       ['Task R', 'R_eq of your 2 resistors (from your card)', 'Ω', 0]]
     L2['manual'] = [['fc_scope', 'Circuit with 2 R + 2 C, fc on the oscilloscope (Vout = 0.707 × Vin)', [0, 3, 6], 'student']]
-    L2['parts'][0]['note'] = ['Design: R = two resistors, C = two capacitors (each pair in series or in parallel) for the target fc on your card. '
-                              'Submit R_eq and C_eq, calculated from the printed values. Marks: 6 when fc = 1/(2π R_eq C_eq) is within ±5 % '
-                              'of the target (half: ±12 %), 6 when you show the lecturer your circuit and Vout = 0.707 × Vin at your fc.',
-                              'Thiết kế: R = hai điện trở, C = hai tụ (mỗi cặp nối tiếp hoặc song song) cho f_c mục tiêu trên đề. '
-                              'Nộp R_eq và C_eq tính từ giá trị in trên linh kiện. Điểm: 6 khi f_c = 1/(2π R_eq C_eq) lệch ≤ ±5 % so với mục '
-                              'tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn.']
+    L2['parts'][0]['note'] = ['Your card gives R (two resistors). Choose C = two capacitors (series or parallel) for the target fc: '
+                              'the C you need is 1/(2π R_eq fc). Submit R_eq and C_eq (from the printed values). Marks: 6 when '
+                              'fc = 1/(2π R_eq C_eq) is within ±5 % of the target (half: ±12 %), 6 when you show the lecturer your '
+                              'circuit and Vout = 0.707 × Vin at your fc.',
+                              'Đề cho sẵn R (hai điện trở). Chọn C = hai tụ (nối tiếp hoặc song song) cho f_c mục tiêu: C cần = '
+                              '1/(2π R_eq f_c). Nộp R_eq và C_eq (tính từ giá trị in). Điểm: 6 khi f_c = 1/(2π R_eq C_eq) lệch ≤ ±5 % '
+                              'so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn.']
     json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 

@@ -84,6 +84,8 @@ Các script đã dùng để tạo nội dung HCM của SE009 Electric Circuit L
    Lab 3. Điểm: Lab 1 12, Lab 2 12 (bài RC cá nhân: R, C → f_c 6 + GV xem f_c trên osci 6), Lab 3 16 (Task 1 RLC nhóm: f_0 3,
    BW 3, đồ thị 2; Task 2 khuếch đại từ màn hình osci, cũng làm nhóm: 4 × 2 – cả nhóm chung một màn hình (nhóm 1, 4 cặp R thứ nhất; 2, 5 cặp thứ hai; 3, 6 cặp thứ ba),
    vì trainer chỉ cho 2 người làm cùng lúc), Lab 4 10. `lab3_rlc.py decks` sửa 3 bộ slide (Lab 4: bảng từ của Lab 3 có từ RLC),
+   Bài Lab 2 (1/11/2026): đề cho sẵn R (2 điện trở, mỗi SV một R khác), SV chọn C = 2 tụ (10/22/47 nF) – mục tiêu f_c chọn sao cho
+   chỉ một cặp tụ đạt ±3 %, mọi cặp / tụ đơn khác lệch > 12 % (`lab2_fixed_r`).
    `lab3_rlc.py keys` sửa `keys.json` (Lab 3 có `team_submit`: một bạn nộp cho cả nhóm, các bạn khác bấm Xác nhận). File Excel mẫu: `Lab3_RLC_data_template.xlsx` (`lab2_template.py`). Chạy sau các script
    Lab 2–4 khác, trước `notes_cleanup.py` và `subscripts.py`. **Sau khi chạy lại `gen_keys.py`/`lab2_team.py` hoặc các script
    RLC của Lab 2 (`rlc_slides`, `rlc_table`, `instrument_slides`, `lab2_task2`, `lab2_demo`) phải chạy lại script này.**

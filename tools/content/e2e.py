@@ -21,7 +21,7 @@ class Client:
         return code, j
 
 
-import math
+import math, re
 
 
 def answers(lab, v):
@@ -30,8 +30,10 @@ def answers(lab, v):
     for i, q in enumerate(KEYS[lab]['questions']):
         r = q[4] if len(q) > 4 and isinstance(q[4], dict) else {}
         if r.get('calc') == 'rc_fc':
-            R, C_ = min(((R, C_) for R in (220, 330, 470, 680, 1000, 1500, 2200, 3300, 4700, 6800, 10000, 15000, 22000) for C_ in (10, 22, 47)),
-                        key=lambda p: abs(1 / (2 * math.pi * p[0] * p[1] * 1e-9) / 1e3 / vals[i] - 1))
+            card = KEYS[lab]['variants'][v]['card'][1]                       # the R on the card (kOhm), two capacitors chosen
+            R = float(re.search(r'Your R: .*? = ([\d.]+) kΩ', card).group(1)) * 1000
+            pairs = [c for a in (10, 22, 47) for b in (10, 22, 47) for c in (a + b, a * b / (a + b))]
+            C_ = min(pairs, key=lambda c: abs(1 / (2 * math.pi * R * c * 1e-9) / 1e3 / vals[i] - 1))
             vals[r['from']], vals[i] = R, C_
     return vals
 
