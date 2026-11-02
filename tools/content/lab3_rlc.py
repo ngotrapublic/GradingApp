@@ -199,7 +199,7 @@ def lab2(p):
     w = p.slides[find(p, lambda s: title_of(s) == 'Lab 2 – What to submit')]
     tbl = next(sh.table for sh in w.shapes if sh.has_table)
     table_rows(tbl, [['Value to submit (student page)', 'Unit', 'Marks'],
-                     ['Req of your 2 resistors (Ω, from your card) and Ceq of your 2 capacitors (nF). Marks: fc = 1/(2π × Req × Ceq) within ±5 % of the target (half: ±12 %)', 'Ω, nF', '6'],
+                     ['Req of your 2 resistors (Ω, from your card) and Ceq of your 2 capacitors (nF). Marks: Ceq is the right pair of capacitors (within ±5 %; half: ±12 %)', 'Ω, nF', '6'],
                      ['Your circuit (2 R + 2 C) and fc on the oscilloscope: Vout = 0.707 × Vin (at your table, at the tick)', '–', '6'],
                      ['Total', '', '12']])
     w.notes_slide.notes_text_frame.text = ('Type R eq and C eq on the student page, under your card, and add one photo of your circuit.\n'
@@ -444,23 +444,23 @@ def lab2_fixed_r(K):
                 break
         else:
             raise SystemExit(f'no target for variant {v}')
-        X['keys'][0] = target
+        X['keys'] = [c, R]                                  # marked on C_eq itself (R is on the card); R shown to the lecturer
+        X['target'] = target
         X['figs'][0] = X['figs'][0].rsplit('/', 1)[0] + ('/rc_lp.png' if kind == 'low' else '/rc_hp.png')
         X['card'][1] = (f'Lab 2 task – RC cut-off frequency (individual): design a {kind}-pass filter with fc = {target:g} kHz. '
                         f'Your R: {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. Choose C = two capacitors (10, 22 or 47 nF), in series or in parallel. '
                         'Submit R_eq and C_eq.')
         X['info'] = [f'RC: {kind.capitalize()}-pass, target fc = {target:g} kHz. R = {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. '
                      f'Answer: C = {cdesc(*cp)} = {c:.3g} nF ({1 / (2 * math.pi * R * c * 1e-9) / 1e3:.3g} kHz)']
-    L2['questions'] = [['Task C', 'C_eq of your 2 capacitors', 'nF', 6, {'full': 0.05, 'half': 0.12, 'calc': 'rc_fc', 'from': 1}],
+    L2['questions'] = [['Task C', 'C_eq of your 2 capacitors', 'nF', 6, {'full': 0.05, 'half': 0.12}],
                        ['Task R', 'R_eq of your 2 resistors (from your card)', 'Ω', 0]]
     L2['manual'] = [['fc_scope', 'Circuit with 2 R + 2 C, fc on the oscilloscope (Vout = 0.707 × Vin)', [0, 3, 6], 'student']]
     L2['parts'][0]['note'] = ['Your card gives R (two resistors). Choose C = two capacitors (series or parallel) for the target fc: '
-                              'the C you need is 1/(2π R_eq fc). Submit R_eq and C_eq (from the printed values). Marks: 6 when '
-                              'fc = 1/(2π R_eq C_eq) is within ±5 % of the target (half: ±12 %), 6 when you show the lecturer your '
-                              'circuit and Vout = 0.707 × Vin at your fc.',
+                              'the C you need is 1/(2π R_eq fc). Submit R_eq and C_eq (from the printed values). Marks: 6 when your C_eq '
+                              'is the right pair (within ±5 %; half: ±12 %), 6 when you show the lecturer your circuit and Vout = 0.707 × Vin at your fc.',
                               'Đề cho sẵn R (hai điện trở). Chọn C = hai tụ (nối tiếp hoặc song song) cho f_c mục tiêu: C cần = '
-                              '1/(2π R_eq f_c). Nộp R_eq và C_eq (tính từ giá trị in). Điểm: 6 khi f_c = 1/(2π R_eq C_eq) lệch ≤ ±5 % '
-                              'so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn.']
+                              '1/(2π R_eq f_c). Nộp R_eq và C_eq (tính từ giá trị in). Điểm: 6 khi C_eq đúng cặp tụ (lệch ≤ ±5 %; nửa điểm: '
+                              '±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn.']
     json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 

@@ -2000,9 +2000,7 @@
      6,
      {
       "full": 0.05,
-      "half": 0.12,
-      "calc": "rc_fc",
-      "from": 1
+      "half": 0.12
      }
     ],
     [
@@ -2015,8 +2013,8 @@
    "variants": {
     "101": {
      "keys": [
-      2.2,
-      0
+      5.0,
+      14700
      ],
      "info": [
       "RC: Low-pass, target fc = 2.2 kHz. R = 10 kΩ + 4.7 kΩ in series = 14.7 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (2.17 kHz)"
@@ -2028,12 +2026,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 2.2
     },
     "102": {
      "keys": [
-      9.3,
-      0
+      6.875,
+      2500
      ],
      "info": [
       "RC: High-pass, target fc = 9.3 kHz. R = 1.5 kΩ + 1 kΩ in series = 2.5 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (9.26 kHz)"
@@ -2045,12 +2044,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 9.3
     },
     "103": {
      "keys": [
-      0.65,
-      0
+      57,
+      4300
      ],
      "info": [
       "RC: Low-pass, target fc = 0.65 kHz. R = 3.3 kΩ + 1 kΩ in series = 4.3 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.649 kHz)"
@@ -2062,12 +2062,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.65
     },
     "104": {
      "keys": [
-      3.5,
-      0
+      5.0,
+      9000
      ],
      "info": [
       "RC: High-pass, target fc = 3.5 kHz. R = 6.8 kΩ + 2.2 kΩ in series = 9 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (3.54 kHz)"
@@ -2079,12 +2080,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.5
     },
     "105": {
      "keys": [
-      1.6,
-      0
+      14.985507246376812,
+      6600
      ],
      "info": [
       "RC: Low-pass, target fc = 1.6 kHz. R = 3.3 kΩ + 3.3 kΩ in series = 6.6 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (1.61 kHz)"
@@ -2096,12 +2098,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 1.6
     },
     "106": {
      "keys": [
-      0.62,
-      0
+      69,
+      3700
      ],
      "info": [
       "RC: High-pass, target fc = 0.62 kHz. R = 1.5 kΩ + 2.2 kΩ in series = 3.7 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (0.623 kHz)"
@@ -2113,12 +2116,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.62
     },
     "107": {
      "keys": [
-      0.97,
-      0
+      8.24561403508772,
+      20000
      ],
      "info": [
       "RC: Low-pass, target fc = 0.97 kHz. R = 10 kΩ + 10 kΩ in series = 20 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (0.965 kHz)"
@@ -2130,12 +2134,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.97
     },
     "108": {
      "keys": [
-      1.7,
-      0
+      5.0,
+      18300
      ],
      "info": [
       "RC: High-pass, target fc = 1.7 kHz. R = 15 kΩ + 3.3 kΩ in series = 18.3 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (1.74 kHz)"
@@ -2147,12 +2152,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 1.7
     },
     "109": {
      "keys": [
-      4.6,
-      0
+      5.0,
+      6875.0
      ],
      "info": [
       "RC: Low-pass, target fc = 4.6 kHz. R = 22 kΩ ∥ 10 kΩ (parallel) = 6.88 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (4.63 kHz)"
@@ -2164,12 +2170,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 4.6
     },
     "110": {
      "keys": [
-      1.5,
-      0
+      32,
+      3400.0
      ],
      "info": [
       "RC: High-pass, target fc = 1.5 kHz. R = 6.8 kΩ ∥ 6.8 kΩ (parallel) = 3.4 kΩ. Answer: C = 10 nF ∥ 22 nF (parallel) = 32 nF (1.46 kHz)"
@@ -2181,12 +2188,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 1.5
     },
     "111": {
      "keys": [
-      0.53,
-      0
+      94,
+      3197.278911564626
      ],
      "info": [
       "RC: Low-pass, target fc = 0.53 kHz. R = 10 kΩ ∥ 4.7 kΩ (parallel) = 3.2 kΩ. Answer: C = 47 nF ∥ 47 nF (parallel) = 94 nF (0.53 kHz)"
@@ -2198,12 +2206,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.53
     },
     "112": {
      "keys": [
-      6.0,
-      0
+      8.24561403508772,
+      3200
      ],
      "info": [
       "RC: High-pass, target fc = 6 kHz. R = 2.2 kΩ + 1 kΩ in series = 3.2 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (6.03 kHz)"
@@ -2215,12 +2224,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 6.0
     },
     "113": {
      "keys": [
-      0.33,
-      0
+      69,
+      6900
      ],
      "info": [
       "RC: Low-pass, target fc = 0.33 kHz. R = 4.7 kΩ + 2.2 kΩ in series = 6.9 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (0.334 kHz)"
@@ -2232,12 +2242,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.33
     },
     "114": {
      "keys": [
-      1.9,
-      0
+      6.875,
+      12200
      ],
      "info": [
       "RC: High-pass, target fc = 1.9 kHz. R = 10 kΩ + 2.2 kΩ in series = 12.2 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (1.9 kHz)"
@@ -2249,12 +2260,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 1.9
     },
     "115": {
      "keys": [
-      0.53,
-      0
+      32,
+      9400
      ],
      "info": [
       "RC: Low-pass, target fc = 0.53 kHz. R = 4.7 kΩ + 4.7 kΩ in series = 9.4 kΩ. Answer: C = 10 nF ∥ 22 nF (parallel) = 32 nF (0.529 kHz)"
@@ -2266,12 +2278,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.53
     },
     "116": {
      "keys": [
-      6.4,
-      0
+      5.0,
+      5000.0
      ],
      "info": [
       "RC: High-pass, target fc = 6.4 kHz. R = 10 kΩ ∥ 10 kΩ (parallel) = 5 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (6.37 kHz)"
@@ -2283,12 +2296,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 6.4
     },
     "117": {
      "keys": [
-      1.9,
-      0
+      14.985507246376812,
+      5700
      ],
      "info": [
       "RC: Low-pass, target fc = 1.9 kHz. R = 4.7 kΩ + 1 kΩ in series = 5.7 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (1.86 kHz)"
@@ -2300,12 +2314,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 1.9
     },
     "118": {
      "keys": [
-      2.1,
-      0
+      69,
+      1100.0
      ],
      "info": [
       "RC: High-pass, target fc = 2.1 kHz. R = 2.2 kΩ ∥ 2.2 kΩ (parallel) = 1.1 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (2.1 kHz)"
@@ -2317,12 +2332,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 2.1
     },
     "119": {
      "keys": [
-      3.5,
-      0
+      5.0,
+      9000
      ],
      "info": [
       "RC: High-pass, target fc = 3.5 kHz. R = 6.8 kΩ + 2.2 kΩ in series = 9 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (3.54 kHz)"
@@ -2334,12 +2350,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.5
     },
     "120": {
      "keys": [
-      0.97,
-      0
+      8.24561403508772,
+      20000
      ],
      "info": [
       "RC: Low-pass, target fc = 0.97 kHz. R = 10 kΩ + 10 kΩ in series = 20 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (0.965 kHz)"
@@ -2351,12 +2368,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.97
     },
     "121": {
      "keys": [
-      3.1,
-      0
+      14.985507246376812,
+      3400.0
      ],
      "info": [
       "RC: High-pass, target fc = 3.1 kHz. R = 6.8 kΩ ∥ 6.8 kΩ (parallel) = 3.4 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (3.12 kHz)"
@@ -2368,12 +2386,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.1
     },
     "122": {
      "keys": [
-      0.4,
-      0
+      57,
+      6900
      ],
      "info": [
       "RC: Low-pass, target fc = 0.4 kHz. R = 4.7 kΩ + 2.2 kΩ in series = 6.9 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.405 kHz)"
@@ -2385,12 +2404,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.4
     },
     "123": {
      "keys": [
-      0.34,
-      0
+      94,
+      5000.0
      ],
      "info": [
       "RC: High-pass, target fc = 0.34 kHz. R = 10 kΩ ∥ 10 kΩ (parallel) = 5 kΩ. Answer: C = 47 nF ∥ 47 nF (parallel) = 94 nF (0.339 kHz)"
@@ -2402,12 +2422,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.34
     },
     "124": {
      "keys": [
-      1.6,
-      0
+      6.875,
+      14700
      ],
      "info": [
       "RC: Low-pass, target fc = 1.6 kHz. R = 10 kΩ + 4.7 kΩ in series = 14.7 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (1.57 kHz)"
@@ -2419,12 +2440,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 1.6
     },
     "201": {
      "keys": [
-      1.7,
-      0
+      5.0,
+      18300
      ],
      "info": [
       "RC: Low-pass, target fc = 1.7 kHz. R = 15 kΩ + 3.3 kΩ in series = 18.3 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (1.74 kHz)"
@@ -2436,12 +2458,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 1.7
     },
     "202": {
      "keys": [
-      2.8,
-      0
+      8.24561403508772,
+      6875.0
      ],
      "info": [
       "RC: High-pass, target fc = 2.8 kHz. R = 22 kΩ ∥ 10 kΩ (parallel) = 6.88 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (2.81 kHz)"
@@ -2453,12 +2476,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 2.8
     },
     "203": {
      "keys": [
-      0.82,
-      0
+      57,
+      3400.0
      ],
      "info": [
       "RC: Low-pass, target fc = 0.82 kHz. R = 6.8 kΩ ∥ 6.8 kΩ (parallel) = 3.4 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.821 kHz)"
@@ -2470,12 +2494,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.82
     },
     "204": {
      "keys": [
-      7.2,
-      0
+      6.875,
+      3197.278911564626
      ],
      "info": [
       "RC: High-pass, target fc = 7.2 kHz. R = 10 kΩ ∥ 4.7 kΩ (parallel) = 3.2 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (7.24 kHz)"
@@ -2487,12 +2512,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 7.2
     },
     "205": {
      "keys": [
-      1.6,
-      0
+      32,
+      3200
      ],
      "info": [
       "RC: Low-pass, target fc = 1.6 kHz. R = 2.2 kΩ + 1 kΩ in series = 3.2 kΩ. Answer: C = 10 nF ∥ 22 nF (parallel) = 32 nF (1.55 kHz)"
@@ -2504,12 +2530,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 1.6
     },
     "206": {
      "keys": [
-      4.6,
-      0
+      5.0,
+      6900
      ],
      "info": [
       "RC: High-pass, target fc = 4.6 kHz. R = 4.7 kΩ + 2.2 kΩ in series = 6.9 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (4.61 kHz)"
@@ -2521,12 +2548,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 4.6
     },
     "207": {
      "keys": [
-      0.87,
-      0
+      14.985507246376812,
+      12200
      ],
      "info": [
       "RC: Low-pass, target fc = 0.87 kHz. R = 10 kΩ + 2.2 kΩ in series = 12.2 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (0.871 kHz)"
@@ -2538,12 +2566,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.87
     },
     "208": {
      "keys": [
-      3.4,
-      0
+      5.0,
+      9400
      ],
      "info": [
       "RC: High-pass, target fc = 3.4 kHz. R = 4.7 kΩ + 4.7 kΩ in series = 9.4 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (3.39 kHz)"
@@ -2555,12 +2584,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.4
     },
     "209": {
      "keys": [
-      4.6,
-      0
+      6.875,
+      5000.0
      ],
      "info": [
       "RC: Low-pass, target fc = 4.6 kHz. R = 10 kΩ ∥ 10 kΩ (parallel) = 5 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (4.63 kHz)"
@@ -2572,12 +2602,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 4.6
     },
     "210": {
      "keys": [
-      0.49,
-      0
+      57,
+      5700
      ],
      "info": [
       "RC: High-pass, target fc = 0.49 kHz. R = 4.7 kΩ + 1 kΩ in series = 5.7 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.49 kHz)"
@@ -2589,12 +2620,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.49
     },
     "211": {
      "keys": [
-      9.7,
-      0
+      14.985507246376812,
+      1100.0
      ],
      "info": [
       "RC: Low-pass, target fc = 9.7 kHz. R = 2.2 kΩ ∥ 2.2 kΩ (parallel) = 1.1 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (9.66 kHz)"
@@ -2606,12 +2638,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 9.7
     },
     "212": {
      "keys": [
-      0.72,
-      0
+      14.985507246376812,
+      14700
      ],
      "info": [
       "RC: High-pass, target fc = 0.72 kHz. R = 10 kΩ + 4.7 kΩ in series = 14.7 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (0.722 kHz)"
@@ -2623,12 +2656,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.72
     },
     "213": {
      "keys": [
-      0.68,
-      0
+      94,
+      2500
      ],
      "info": [
       "RC: Low-pass, target fc = 0.68 kHz. R = 1.5 kΩ + 1 kΩ in series = 2.5 kΩ. Answer: C = 47 nF ∥ 47 nF (parallel) = 94 nF (0.677 kHz)"
@@ -2640,12 +2674,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.68
     },
     "214": {
      "keys": [
-      4.5,
-      0
+      8.24561403508772,
+      4300
      ],
      "info": [
       "RC: High-pass, target fc = 4.5 kHz. R = 3.3 kΩ + 1 kΩ in series = 4.3 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (4.49 kHz)"
@@ -2657,12 +2692,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 4.5
     },
     "215": {
      "keys": [
-      0.31,
-      0
+      57,
+      9000
      ],
      "info": [
       "RC: Low-pass, target fc = 0.31 kHz. R = 6.8 kΩ + 2.2 kΩ in series = 9 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.31 kHz)"
@@ -2674,12 +2710,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.31
     },
     "216": {
      "keys": [
-      3.5,
-      0
+      6.875,
+      6600
      ],
      "info": [
       "RC: High-pass, target fc = 3.5 kHz. R = 3.3 kΩ + 3.3 kΩ in series = 6.6 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (3.51 kHz)"
@@ -2691,12 +2728,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.5
     },
     "217": {
      "keys": [
-      0.75,
-      0
+      57,
+      3700
      ],
      "info": [
       "RC: Low-pass, target fc = 0.75 kHz. R = 1.5 kΩ + 2.2 kΩ in series = 3.7 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.755 kHz)"
@@ -2708,12 +2746,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.75
     },
     "218": {
      "keys": [
-      1.6,
-      0
+      5.0,
+      20000
      ],
      "info": [
       "RC: High-pass, target fc = 1.6 kHz. R = 10 kΩ + 10 kΩ in series = 20 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (1.59 kHz)"
@@ -2725,12 +2764,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 1.6
     },
     "219": {
      "keys": [
-      10.0,
-      0
+      5.0,
+      3197.278911564626
      ],
      "info": [
       "RC: High-pass, target fc = 10 kHz. R = 10 kΩ ∥ 4.7 kΩ (parallel) = 3.2 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (9.96 kHz)"
@@ -2742,12 +2782,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 10.0
     },
     "220": {
      "keys": [
-      0.87,
-      0
+      14.985507246376812,
+      12200
      ],
      "info": [
       "RC: Low-pass, target fc = 0.87 kHz. R = 10 kΩ + 2.2 kΩ in series = 12.2 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (0.871 kHz)"
@@ -2759,12 +2800,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.87
     },
     "221": {
      "keys": [
-      0.49,
-      0
+      57,
+      5700
      ],
      "info": [
       "RC: High-pass, target fc = 0.49 kHz. R = 4.7 kΩ + 1 kΩ in series = 5.7 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.49 kHz)"
@@ -2776,12 +2818,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.49
     },
     "222": {
      "keys": [
-      0.92,
-      0
+      69,
+      2500
      ],
      "info": [
       "RC: Low-pass, target fc = 0.92 kHz. R = 1.5 kΩ + 1 kΩ in series = 2.5 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (0.923 kHz)"
@@ -2793,12 +2836,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.92
     },
     "223": {
      "keys": [
-      4.8,
-      0
+      5.0,
+      6600
      ],
      "info": [
       "RC: High-pass, target fc = 4.8 kHz. R = 3.3 kΩ + 3.3 kΩ in series = 6.6 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (4.82 kHz)"
@@ -2810,12 +2854,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 4.8
     },
     "224": {
      "keys": [
-      0.58,
-      0
+      14.985507246376812,
+      18300
      ],
      "info": [
       "RC: Low-pass, target fc = 0.58 kHz. R = 15 kΩ + 3.3 kΩ in series = 18.3 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (0.58 kHz)"
@@ -2827,12 +2872,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.58
     },
     "301": {
      "keys": [
-      3.4,
-      0
+      5.0,
+      9400
      ],
      "info": [
       "RC: Low-pass, target fc = 3.4 kHz. R = 4.7 kΩ + 4.7 kΩ in series = 9.4 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (3.39 kHz)"
@@ -2844,12 +2890,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 3.4
     },
     "302": {
      "keys": [
-      2.1,
-      0
+      14.985507246376812,
+      5000.0
      ],
      "info": [
       "RC: High-pass, target fc = 2.1 kHz. R = 10 kΩ ∥ 10 kΩ (parallel) = 5 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (2.12 kHz)"
@@ -2861,12 +2908,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 2.1
     },
     "303": {
      "keys": [
-      0.4,
-      0
+      69,
+      5700
      ],
      "info": [
       "RC: Low-pass, target fc = 0.4 kHz. R = 4.7 kΩ + 1 kΩ in series = 5.7 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (0.405 kHz)"
@@ -2878,12 +2926,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.4
     },
     "304": {
      "keys": [
-      9.7,
-      0
+      14.985507246376812,
+      1100.0
      ],
      "info": [
       "RC: High-pass, target fc = 9.7 kHz. R = 2.2 kΩ ∥ 2.2 kΩ (parallel) = 1.1 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (9.66 kHz)"
@@ -2895,12 +2944,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 9.7
     },
     "305": {
      "keys": [
-      2.2,
-      0
+      5.0,
+      14700
      ],
      "info": [
       "RC: Low-pass, target fc = 2.2 kHz. R = 10 kΩ + 4.7 kΩ in series = 14.7 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (2.17 kHz)"
@@ -2912,12 +2962,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 2.2
     },
     "306": {
      "keys": [
-      13.0,
-      0
+      5.0,
+      2500
      ],
      "info": [
       "RC: High-pass, target fc = 13 kHz. R = 1.5 kΩ + 1 kΩ in series = 2.5 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (12.7 kHz)"
@@ -2929,12 +2980,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 13.0
     },
     "307": {
      "keys": [
-      0.65,
-      0
+      57,
+      4300
      ],
      "info": [
       "RC: Low-pass, target fc = 0.65 kHz. R = 3.3 kΩ + 1 kΩ in series = 4.3 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.649 kHz)"
@@ -2946,12 +2998,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.65
     },
     "308": {
      "keys": [
-      3.5,
-      0
+      5.0,
+      9000
      ],
      "info": [
       "RC: High-pass, target fc = 3.5 kHz. R = 6.8 kΩ + 2.2 kΩ in series = 9 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (3.54 kHz)"
@@ -2963,12 +3016,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.5
     },
     "309": {
      "keys": [
-      2.9,
-      0
+      8.24561403508772,
+      6600
      ],
      "info": [
       "RC: Low-pass, target fc = 2.9 kHz. R = 3.3 kΩ + 3.3 kΩ in series = 6.6 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (2.92 kHz)"
@@ -2980,12 +3034,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 2.9
     },
     "310": {
      "keys": [
-      0.62,
-      0
+      69,
+      3700
      ],
      "info": [
       "RC: High-pass, target fc = 0.62 kHz. R = 1.5 kΩ + 2.2 kΩ in series = 3.7 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (0.623 kHz)"
@@ -2997,12 +3052,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.62
     },
     "311": {
      "keys": [
-      0.97,
-      0
+      8.24561403508772,
+      20000
      ],
      "info": [
       "RC: Low-pass, target fc = 0.97 kHz. R = 10 kΩ + 10 kΩ in series = 20 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (0.965 kHz)"
@@ -3014,12 +3070,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.97
     },
     "312": {
      "keys": [
-      1.7,
-      0
+      5.0,
+      18300
      ],
      "info": [
       "RC: High-pass, target fc = 1.7 kHz. R = 15 kΩ + 3.3 kΩ in series = 18.3 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (1.74 kHz)"
@@ -3031,12 +3088,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 1.7
     },
     "313": {
      "keys": [
-      4.6,
-      0
+      5.0,
+      6875.0
      ],
      "info": [
       "RC: Low-pass, target fc = 4.6 kHz. R = 22 kΩ ∥ 10 kΩ (parallel) = 6.88 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (4.63 kHz)"
@@ -3048,12 +3106,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 4.6
     },
     "314": {
      "keys": [
-      3.1,
-      0
+      14.985507246376812,
+      3400.0
      ],
      "info": [
       "RC: High-pass, target fc = 3.1 kHz. R = 6.8 kΩ ∥ 6.8 kΩ (parallel) = 3.4 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (3.12 kHz)"
@@ -3065,12 +3124,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 3.1
     },
     "315": {
      "keys": [
-      0.72,
-      0
+      69,
+      3197.278911564626
      ],
      "info": [
       "RC: Low-pass, target fc = 0.72 kHz. R = 10 kΩ ∥ 4.7 kΩ (parallel) = 3.2 kΩ. Answer: C = 22 nF ∥ 47 nF (parallel) = 69 nF (0.721 kHz)"
@@ -3082,12 +3142,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.72
     },
     "316": {
      "keys": [
-      6.0,
-      0
+      8.24561403508772,
+      3200
      ],
      "info": [
       "RC: High-pass, target fc = 6 kHz. R = 2.2 kΩ + 1 kΩ in series = 3.2 kΩ. Answer: C = 10 nF + 47 nF in series = 8.25 nF (6.03 kHz)"
@@ -3099,12 +3160,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 6.0
     },
     "317": {
      "keys": [
-      0.4,
-      0
+      57,
+      6900
      ],
      "info": [
       "RC: Low-pass, target fc = 0.4 kHz. R = 4.7 kΩ + 2.2 kΩ in series = 6.9 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.405 kHz)"
@@ -3116,12 +3178,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 0.4
     },
     "318": {
      "keys": [
-      2.6,
-      0
+      5.0,
+      12200
      ],
      "info": [
       "RC: High-pass, target fc = 2.6 kHz. R = 10 kΩ + 2.2 kΩ in series = 12.2 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (2.61 kHz)"
@@ -3133,12 +3196,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 2.6
     },
     "319": {
      "keys": [
-      9.7,
-      0
+      14.985507246376812,
+      1100.0
      ],
      "info": [
       "RC: High-pass, target fc = 9.7 kHz. R = 2.2 kΩ ∥ 2.2 kΩ (parallel) = 1.1 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (9.66 kHz)"
@@ -3150,12 +3214,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 9.7
     },
     "320": {
      "keys": [
-      2.5,
-      0
+      14.985507246376812,
+      4300
      ],
      "info": [
       "RC: Low-pass, target fc = 2.5 kHz. R = 3.3 kΩ + 1 kΩ in series = 4.3 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (2.47 kHz)"
@@ -3167,12 +3232,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 2.5
     },
     "321": {
      "keys": [
-      0.75,
-      0
+      57,
+      3700
      ],
      "info": [
       "RC: High-pass, target fc = 0.75 kHz. R = 1.5 kΩ + 2.2 kΩ in series = 3.7 kΩ. Answer: C = 10 nF ∥ 47 nF (parallel) = 57 nF (0.755 kHz)"
@@ -3184,12 +3250,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 0.75
     },
     "322": {
      "keys": [
-      4.6,
-      0
+      5.0,
+      6875.0
      ],
      "info": [
       "RC: Low-pass, target fc = 4.6 kHz. R = 22 kΩ ∥ 10 kΩ (parallel) = 6.88 kΩ. Answer: C = 10 nF + 10 nF in series = 5 nF (4.63 kHz)"
@@ -3201,12 +3268,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 4.6
     },
     "323": {
      "keys": [
-      7.2,
-      0
+      6.875,
+      3200
      ],
      "info": [
       "RC: High-pass, target fc = 7.2 kHz. R = 2.2 kΩ + 1 kΩ in series = 3.2 kΩ. Answer: C = 10 nF + 22 nF in series = 6.88 nF (7.23 kHz)"
@@ -3218,12 +3286,13 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_hp.png"
-     ]
+     ],
+     "target": 7.2
     },
     "324": {
      "keys": [
-      1.1,
-      0
+      14.985507246376812,
+      9400
      ],
      "info": [
       "RC: Low-pass, target fc = 1.1 kHz. R = 4.7 kΩ + 4.7 kΩ in series = 9.4 kΩ. Answer: C = 22 nF + 47 nF in series = 15 nF (1.13 kHz)"
@@ -3235,7 +3304,8 @@
      ],
      "figs": [
       "/courses/SE009/img/rc_lp.png"
-     ]
+     ],
+     "target": 1.1
     }
    },
    "parts": [
@@ -3256,8 +3326,8 @@
       0
      ],
      "note": [
-      "Your card gives R (two resistors). Choose C = two capacitors (series or parallel) for the target fc: the C you need is 1/(2π R_eq fc). Submit R_eq and C_eq (from the printed values). Marks: 6 when fc = 1/(2π R_eq C_eq) is within ±5 % of the target (half: ±12 %), 6 when you show the lecturer your circuit and Vout = 0.707 × Vin at your fc.",
-      "Đề cho sẵn R (hai điện trở). Chọn C = hai tụ (nối tiếp hoặc song song) cho f_c mục tiêu: C cần = 1/(2π R_eq f_c). Nộp R_eq và C_eq (tính từ giá trị in). Điểm: 6 khi f_c = 1/(2π R_eq C_eq) lệch ≤ ±5 % so với mục tiêu (nửa điểm: ±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn."
+      "Your card gives R (two resistors). Choose C = two capacitors (series or parallel) for the target fc: the C you need is 1/(2π R_eq fc). Submit R_eq and C_eq (from the printed values). Marks: 6 when your C_eq is the right pair (within ±5 %; half: ±12 %), 6 when you show the lecturer your circuit and Vout = 0.707 × Vin at your fc.",
+      "Đề cho sẵn R (hai điện trở). Chọn C = hai tụ (nối tiếp hoặc song song) cho f_c mục tiêu: C cần = 1/(2π R_eq f_c). Nộp R_eq và C_eq (tính từ giá trị in). Điểm: 6 khi C_eq đúng cặp tụ (lệch ≤ ±5 %; nửa điểm: ±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn."
      ]
     }
    ]

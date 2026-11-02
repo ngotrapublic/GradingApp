@@ -76,7 +76,7 @@ function panel(s){
     (figs.length?`<details class="figs"><summary class="muted">${T('Circuit / task figure','Hình đề bài')}</summary>${figs.map(f=>`<a href="${f}" target="_blank"><img src="${f}" alt=""></a>`).join('')}</details>`:'') + `<div class="scroll"><table><tr><th>${T('Quantity','Đại lượng')}</th><th>${T('Key','Đáp án')}</th><th>${T('Full marks','Đủ điểm')}</th><th>${T('Submitted','SV nộp')}</th><th>${T('Marks','Điểm')}</th></tr>`;
   const editKeys=canManage();
   Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(r.values||[])[i], tol=qrule(q).full, calc=(qrule(q).calc==='rc_fc');
-    if(!q[3]){ h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}</small></td><td class="num">–</td><td class="num">–</td><td class="num">${fmt(x)}</td><td>–</td></tr>`; return; }
+    if(!q[3]){ h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])} – ${T('no marks','không tính điểm')}</small></td><td class="num">${k?`<b>${fmt(k)}</b>`:'–'}</td><td class="num">–</td><td class="num">${fmt(x)}</td><td>–</td></tr>`; return; }
     const y=qval(q, r.values, i), mk=mark(y,k,q[3],qrule(q));
     const cl = mk===null?'':(mk===q[3]?'full':(mk>0?'half':'zero'));
     const keyCell=editKeys
@@ -133,7 +133,8 @@ function bindPanel(m){
   m.querySelectorAll('[data-clearov]').forEach(b=>b.onclick=async()=>{ const sid=b.dataset.clearov;
     S.data=await api('/api/record',{cls:S.cls,lab:S.lab,sid,override:null,reason:''}); toast(T('Automatic score restored','Đã về điểm tự tính')); renderGrade($('#main')); });
   m.querySelectorAll('[data-savekeys]').forEach(b=>b.onclick=async()=>{
-    const panel=b.closest('.panel'), keys=[...panel.querySelectorAll('[data-keyi]')].sort((a,c)=>+a.dataset.keyi-+c.dataset.keyi).map(i=>i.value.trim());
+    const panel=b.closest('.panel'), V=L().variants[b.dataset.savekeys];   // input-only questions (no field) keep their key
+    const keys=L().questions.map((q,i)=>{ const el=panel.querySelector(`[data-keyi="${i}"]`); return el? el.value.trim() : String(V.keys[i]??0); });
     if(keys.some(v=>v===''||isNaN(+v.replace(',','.')))) return toast(T('Every key must be a number.','Mọi đáp án phải là số.'));
     const j=await api('/api/key_override',{cls:S.cls,lab:S.lab,variant:b.dataset.savekeys,keys:keys.map(v=>+v.replace(',','.'))});
     S.data=j.data; S.keys=j.keys; toast(T('Answer keys saved','Đã lưu đáp án')); renderGrade($('#main'));
