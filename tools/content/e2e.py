@@ -104,17 +104,17 @@ for t in range(1, 7):
     k2 = {tuple(KEYS['3']['variants'][x]['keys']) for x in mem}; k1 = {KEYS['2']['variants'][x]['target'] for x in mem}
     assert len(k2) == 1 and len(k1) == len(mem), (t, mem)
 print('Lab 3 team check ok (RLC and amplifier)')
-# Lab 2 task: C_eq 8 % away from the right pair -> half marks (3 of 6, + 6 for fc), 3 % -> full
+# Lab 2 task: C_eq 13 % away from the right pair -> half marks (3 of 6, + 6 for fc), 8 % -> full
 st = C['students'][0]; v = str(var(st)); vals = answers('2', v); key = KEYS['2']['variants'][v]['keys'][0]
 s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
-for off, want in ((1.08, 9), (1.03, 12)):
+for off, want in ((1.13, 9), (1.08, 12)):
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': False}); s.call('/api/public/unsubmit', {'cls': cid, 'lab': '2'})
     vals[0] = key * off
     s.call('/api/public/submit', {'cls': cid, 'lab': '2', 'values': vals})
     gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'tick': True})
     m = [L['marks'] for L in s.call(f'/api/public/class/{cid}')[1]['labs']][1]
     assert m == want, (off, m, want)
-print('Lab 2 task (C_eq) rule ok: +8 % half, +3 % full')
+print('Lab 2 task (C_eq) rule ok: +13 % half, +8 % full')
 # Lab 3 team lab: a member without confirmation gets only the team mark (2) when ticked; the lecturer confirms for them -> 16
 by = {}
 for x in C['students']:

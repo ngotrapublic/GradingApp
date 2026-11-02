@@ -199,7 +199,7 @@ def lab2(p):
     w = p.slides[find(p, lambda s: title_of(s) == 'Lab 2 – What to submit')]
     tbl = next(sh.table for sh in w.shapes if sh.has_table)
     table_rows(tbl, [['Value to submit (student page)', 'Unit', 'Marks'],
-                     ['Ceq of your 2 capacitors: the right pair (full ±5 %, half ±12 %)', 'nF', '6'],
+                     ['Ceq of your 2 capacitors: the right pair (full ±10 %, half ±15 %)', 'nF', '6'],
                      ['fc measured on the oscilloscope, where Vout = 0.707 × Vin (full ±10 %, half ±20 %)', 'kHz', '6'],
                      ['Total', '', '12']])
     w.notes_slide.notes_text_frame.text = ('Type C eq and the f c you measured on the student page, under your card, and add one photo of your circuit.\n'
@@ -452,17 +452,17 @@ def lab2_fixed_r(K):
                         'Submit C_eq and the f_c you measure on the oscilloscope.')
         X['info'] = [f'RC: {kind.capitalize()}-pass, target fc = {target:g} kHz. R = {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. '
                      f'Answer: C = {cdesc(*cp)} = {c:.3g} nF ({1 / (2 * math.pi * R * c * 1e-9) / 1e3:.3g} kHz)']
-    L2['questions'] = [['Task C', 'C_eq of your 2 capacitors', 'nF', 6, {'full': 0.05, 'half': 0.12}],
+    L2['questions'] = [['Task C', 'C_eq of your 2 capacitors', 'nF', 6, {'full': 0.1, 'half': 0.15}],   # capacitors are ±10 %; a wrong pair is >= 16.7 % away
                        ['fc', 'f_c measured on the oscilloscope', 'kHz', 6, {'full': 0.1, 'half': 0.2}]]
     L2['manual'] = []                                       # lecturer, 2/11/2026: both marks are numbers, the tick checks the oscilloscope
     L2['parts'][0]['questions'] = [0, 1]
     L2['parts'][0]['note'] = ['Your card gives R (two resistors). Choose C = two capacitors (series or parallel) for the target fc: '
                               'the C you need is 1/(2π R_eq fc). Build the filter and find fc on the oscilloscope (Vout = 0.707 × Vin). '
-                              'Submit C_eq (from the printed values) and the fc you measured. Marks: C_eq the right pair 6 (within ±5 %; '
-                              'half ±12 %), measured fc 6 (within ±10 %; half ±20 %). The lecturer checks fc on your oscilloscope at the tick.',
+                              'Submit C_eq (from the printed values) and the fc you measured. Marks: C_eq the right pair 6 (within ±10 %; '
+                              'half ±15 %), measured fc 6 (within ±10 %; half ±20 %). The lecturer checks fc on your oscilloscope at the tick.',
                               'Đề cho sẵn R (hai điện trở). Chọn C = hai tụ (nối tiếp hoặc song song) cho f_c mục tiêu: C cần = '
                               '1/(2π R_eq f_c). Lắp mạch, tìm f_c trên osci (Vout = 0,707 × Vin). Nộp C_eq (tính từ giá trị in) và f_c đo được. '
-                              'Điểm: C_eq đúng cặp tụ 6 (lệch ≤ ±5 %; nửa điểm ±12 %), f_c đo được 6 (lệch ≤ ±10 %; nửa điểm ±20 %). '
+                              'Điểm: C_eq đúng cặp tụ 6 (lệch ≤ ±10 %; nửa điểm ±15 %), f_c đo được 6 (lệch ≤ ±10 %; nửa điểm ±20 %). '
                               'Giảng viên kiểm tra f_c trên osci khi tick.']
     json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
