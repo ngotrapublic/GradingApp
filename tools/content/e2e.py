@@ -78,7 +78,6 @@ for st in C['students']:
         s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
     for lab in '1234':
         gv.call('/api/record', {'cls': cid, 'lab': lab, 'sid': st['sid'], 'tick': True})
-    gv.call('/api/record', {'cls': cid, 'lab': '2', 'sid': st['sid'], 'manual': {'fc_scope': 6}})
 for t in range(1, 7):
     gv.call('/api/team', {'cls': cid, 'lab': '4', 'team': t, 'field': 'demo', 'value': 4})
     gv.call('/api/team', {'cls': cid, 'lab': '3', 'team': t, 'field': 'graph', 'value': 2})
@@ -105,7 +104,7 @@ for t in range(1, 7):
     k2 = {tuple(KEYS['3']['variants'][x]['keys']) for x in mem}; k1 = {KEYS['2']['variants'][x]['target'] for x in mem}
     assert len(k2) == 1 and len(k1) == len(mem), (t, mem)
 print('Lab 3 team check ok (RLC and amplifier)')
-# Lab 2 task: C_eq 8 % away from the right pair -> half marks (3 of 6, + 6 on the scope), 3 % -> full
+# Lab 2 task: C_eq 8 % away from the right pair -> half marks (3 of 6, + 6 for fc), 3 % -> full
 st = C['students'][0]; v = str(var(st)); vals = answers('2', v); key = KEYS['2']['variants'][v]['keys'][0]
 s = Client(); s.call('/api/public/login', {'sid': st['sid'], 'password': 'pw-' + st['sid']})
 for off, want in ((1.08, 9), (1.03, 12)):

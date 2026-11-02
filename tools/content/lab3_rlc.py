@@ -186,7 +186,7 @@ def lab2(p):
         'Build the filter. Measure Ceq with the multimeter. Generator: sine, 2 Vpp, High-Z. CH1 = Vin, CH2 = Vout.',
         'Change the frequency until Vout = 0.707 × Vin. This frequency is your measured fc.',
         'Work in turns: two members build, the third calculates. One student uses the oscilloscope at a time.',
-        'Submit Req and Ceq (from the printed values). Show the lecturer your circuit and fc on the oscilloscope.'])
+        'Submit Ceq (from the printed values) and the fc you measured. Show the lecturer fc on the oscilloscope.'])
     t.notes_slide.notes_text_frame.text = (
         'The Lab 2 task is individual: 12 points. Your card gives the filter type and a target cut-off frequency.\n'
         'Your card also gives your R: two resistors. Build R and measure R eq.\n'
@@ -195,15 +195,15 @@ def lab2(p):
         'Build the filter. Measure C eq with the multimeter. Function generator: sine, 2 volts peak to peak, High-Z. CH1 is V in, CH2 is V out.\n'
         'Change the frequency until V out is 0.707 times V in. That is your measured f c.\n'
         'Work in turns: two members build, the third calculates. One student uses the oscilloscope at a time.\n'
-        'Submit R eq and C eq, calculated from the printed values. Then show me your circuit and f c on the oscilloscope.')
+        'Submit C eq, calculated from the printed values, and the f c you measured. Then show me f c on the oscilloscope.')
     w = p.slides[find(p, lambda s: title_of(s) == 'Lab 2 – What to submit')]
     tbl = next(sh.table for sh in w.shapes if sh.has_table)
     table_rows(tbl, [['Value to submit (student page)', 'Unit', 'Marks'],
-                     ['Req of your 2 resistors (Ω, from your card) and Ceq of your 2 capacitors (nF). Marks: Ceq is the right pair of capacitors (within ±5 %; half: ±12 %)', 'Ω, nF', '6'],
-                     ['Your circuit (2 R + 2 C) and fc on the oscilloscope: Vout = 0.707 × Vin (at your table, at the tick)', '–', '6'],
+                     ['Ceq of your 2 capacitors: the right pair (full ±5 %, half ±12 %)', 'nF', '6'],
+                     ['fc measured on the oscilloscope, where Vout = 0.707 × Vin (full ±10 %, half ±20 %)', 'kHz', '6'],
                      ['Total', '', '12']])
-    w.notes_slide.notes_text_frame.text = ('Type R eq and C eq on the student page, under your card, and add one photo of your circuit.\n'
-        'Then call me for the tick: show me your two resistors, your two capacitors, and V out = 0.707 × V in at your f c on the oscilloscope. After the tick, tidy your table. '
+    w.notes_slide.notes_text_frame.text = ('Type C eq and the f c you measured on the student page, under your card, and add one photo of your circuit.\n'
+        'Then call me for the tick: show me V out = 0.707 × V in at your f c on the oscilloscope. After the tick, tidy your table. '
         'The next slide shows how.')
 
 
@@ -444,23 +444,26 @@ def lab2_fixed_r(K):
                 break
         else:
             raise SystemExit(f'no target for variant {v}')
-        X['keys'] = [c, R]                                  # marked on C_eq itself (R is on the card); R shown to the lecturer
+        X['keys'] = [c, 1 / (2 * math.pi * R * c * 1e-9) / 1e3]   # C_eq (the right pair) and fc of that circuit (kHz)
         X['target'] = target
         X['figs'][0] = X['figs'][0].rsplit('/', 1)[0] + ('/rc_lp.png' if kind == 'low' else '/rc_hp.png')
         X['card'][1] = (f'Lab 2 task – RC cut-off frequency (individual): design a {kind}-pass filter with fc = {target:g} kHz. '
                         f'Your R: {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. Choose C = two capacitors (10, 22 or 47 nF), in series or in parallel. '
-                        'Submit R_eq and C_eq.')
+                        'Submit C_eq and the f_c you measure on the oscilloscope.')
         X['info'] = [f'RC: {kind.capitalize()}-pass, target fc = {target:g} kHz. R = {rdesc(*LAB2_RPAIRS[ri])} = {R / 1000:.3g} kΩ. '
                      f'Answer: C = {cdesc(*cp)} = {c:.3g} nF ({1 / (2 * math.pi * R * c * 1e-9) / 1e3:.3g} kHz)']
     L2['questions'] = [['Task C', 'C_eq of your 2 capacitors', 'nF', 6, {'full': 0.05, 'half': 0.12}],
-                       ['Task R', 'R_eq of your 2 resistors (from your card)', 'Ω', 0]]
-    L2['manual'] = [['fc_scope', 'Circuit with 2 R + 2 C, fc on the oscilloscope (Vout = 0.707 × Vin)', [0, 3, 6], 'student']]
+                       ['fc', 'f_c measured on the oscilloscope', 'kHz', 6, {'full': 0.1, 'half': 0.2}]]
+    L2['manual'] = []                                       # lecturer, 2/11/2026: both marks are numbers, the tick checks the oscilloscope
+    L2['parts'][0]['questions'] = [0, 1]
     L2['parts'][0]['note'] = ['Your card gives R (two resistors). Choose C = two capacitors (series or parallel) for the target fc: '
-                              'the C you need is 1/(2π R_eq fc). Submit R_eq and C_eq (from the printed values). Marks: 6 when your C_eq '
-                              'is the right pair (within ±5 %; half: ±12 %), 6 when you show the lecturer your circuit and Vout = 0.707 × Vin at your fc.',
+                              'the C you need is 1/(2π R_eq fc). Build the filter and find fc on the oscilloscope (Vout = 0.707 × Vin). '
+                              'Submit C_eq (from the printed values) and the fc you measured. Marks: C_eq the right pair 6 (within ±5 %; '
+                              'half ±12 %), measured fc 6 (within ±10 %; half ±20 %). The lecturer checks fc on your oscilloscope at the tick.',
                               'Đề cho sẵn R (hai điện trở). Chọn C = hai tụ (nối tiếp hoặc song song) cho f_c mục tiêu: C cần = '
-                              '1/(2π R_eq f_c). Nộp R_eq và C_eq (tính từ giá trị in). Điểm: 6 khi C_eq đúng cặp tụ (lệch ≤ ±5 %; nửa điểm: '
-                              '±12 %), 6 khi cho giảng viên xem mạch và Vout = 0,707 × Vin tại f_c của bạn.']
+                              '1/(2π R_eq f_c). Lắp mạch, tìm f_c trên osci (Vout = 0,707 × Vin). Nộp C_eq (tính từ giá trị in) và f_c đo được. '
+                              'Điểm: C_eq đúng cặp tụ 6 (lệch ≤ ±5 %; nửa điểm ±12 %), f_c đo được 6 (lệch ≤ ±10 %; nửa điểm ±20 %). '
+                              'Giảng viên kiểm tra f_c trên osci khi tick.']
     json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 
