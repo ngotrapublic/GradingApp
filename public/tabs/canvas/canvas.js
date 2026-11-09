@@ -8,7 +8,12 @@ function labChecks(lab){
   add(T('Ticked but no data (not submitted yet?)','Đã tick nhưng chưa có số liệu (SV chưa nộp bài?)'), st.filter(s=>rec(s.sid,lab).tick&&!hasVals(s)));
 
   add(T('Score set by hand (check it is intended)','Điểm sửa tay (kiểm tra lại cho chắc)'), st.filter(s=>rec(s.sid,lab).override!=null));
-  add(T('No photo of the circuit','Chưa có ảnh mạch'), st.filter(s=>(hasVals(s)||rec(s.sid,lab).tick) && !((((C().photos||{})[lab])||{})[s.sid]||[]).length));
+  add(T('No photo of the circuit','Chưa có ảnh mạch'), st.filter(s=>{
+    if(!(hasVals(s)||rec(s.sid,lab).tick)) return false;
+    const by=Lb.team_submit && s.team? C().students.find(x=>x.team===s.team && rec(x.sid,lab).src==='web') : null;
+    const psid=by? by.sid : s.sid;
+    return !((((C().photos||{})[lab])||{})[psid]||[]).length;
+  }));
   Lb.manual.forEach(mn=>{
     if(mn[3]==='student') add(T(`“${manLabel(mn)}” not marked`,`Chưa chấm “${manLabel(mn)}”`), st.filter(s=>rec(s.sid,lab).tick && (rec(s.sid,lab).manual||{})[mn[0]]===undefined));
     else { const teams=[...new Set(st.map(s=>s.team).filter(Boolean))].filter(t=>teamRec(t,lab)[mn[0]]===undefined);

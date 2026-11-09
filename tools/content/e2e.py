@@ -66,15 +66,31 @@ for st in C['students']:
     assert view['variant'] == int(v), (view['variant'], v)
     for lab in '1234':
         if KEYS[lab].get('team_submit'):   # team lab: the first member of the team submits, the others confirm
-            code, _ = s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)}, ok=False)
-            if code == 400:                # no photo yet: this member is the first of the team
+            vals = answers(lab, v)
+            if KEYS[lab].get('part_submit') and KEYS[lab].get('parts'):
+                code, _ = s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': vals, 'part': 0}, ok=False)
+                if code == 400:            # no photo yet: this member is the first of the team
+                    s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
+                    s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': vals, 'part': 0})
+                    for pi in range(1, len(KEYS[lab]['parts'])):
+                        s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': vals, 'part': pi})
+                elif code == 409:
+                    s.call('/api/public/confirm', {'cls': cid, 'lab': lab})
+                else:
+                    raise SystemExit(f'lab {lab} part0 -> {code}')
+                continue
+            code, _ = s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': vals}, ok=False)
+            if code == 200:
+                pass                       # this member submitted for the team (no photo required)
+            elif code == 400:              # no photo yet: this member is the first of the team
                 s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
-                s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
+                s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': vals})
             else:
                 assert code == 409, code
                 s.call('/api/public/confirm', {'cls': cid, 'lab': lab})
             continue
-        s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
+        if KEYS[lab].get('photo'):
+            s.call('/api/public/photo', {'cls': cid, 'lab': lab, 'data': JPG})
         s.call('/api/public/submit', {'cls': cid, 'lab': lab, 'values': answers(lab, v)})
     for lab in '1234':
         gv.call('/api/record', {'cls': cid, 'lab': lab, 'sid': st['sid'], 'tick': True})

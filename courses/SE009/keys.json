@@ -5602,6 +5602,7 @@
     }
    ],
    "photo": {
+    "part": 0,
     "head": [
      "Task 1 – screenshot of your team's RLC graph (required, one only). Not a photo of the circuit.",
      "Bài 1 – ảnh đồ thị RLC của nhóm (bắt buộc, đúng 1 tấm). Không chụp ảnh mạch."
@@ -5615,8 +5616,8 @@
      "Tải ảnh chụp đồ thị"
     ],
     "howto": [
-     "<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work. <b>One member</b> types the team's values, uploads <b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo) and <span class=\"nowrap\">taps <b>Submit.</b></span> The others tap <b>Confirm</b> on their own phone.",
-     "<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm. <b>Một bạn</b> nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC Bài 1</b> (không phải ảnh breadboard) rồi <span class=\"nowrap\">bấm <b>Nộp.</b></span> Các bạn còn lại bấm <b>Xác nhận</b> trên điện thoại của mình."
+     "<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work and may be submitted separately. <b>One member</b> types each task's values; Task 1 also needs <b>one screenshot of the RLC graph</b> (not a breadboard photo). The others tap <b>Confirm</b> on their own phone.",
+     "<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm và có thể nộp riêng. <b>Một bạn</b> nhập số từng bài; Bài 1 cần thêm <b>một ảnh đồ thị RLC</b> (không phải ảnh breadboard). Các bạn còn lại bấm <b>Xác nhận</b> trên điện thoại của mình."
     ],
     "check": [
      "They will check your team's Task 2 screen <span class=\"nowrap\">on the <b>oscilloscope</b></span> and your <b>RLC graph</b>, then confirm at your table.",
@@ -5628,7 +5629,8 @@
     ],
     "capture": false
    },
-   "team_submit": true
+   "team_submit": true,
+   "part_submit": true
   },
   "4": {
    "title": "Lab 4 – Microphone to speaker",

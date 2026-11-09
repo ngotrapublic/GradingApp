@@ -52,7 +52,8 @@ async function downloadArchive(btn){
         const row=ws.addRow([s.sid, s.name, s.team||'', s.member||'', variant(s)||'', ...qs.map((_,i)=>v[i]===null||v[i]===undefined||v[i]===''? '' : (isNaN(+v[i])? v[i] : +v[i])),
                              ...man, r.tick? '✓' : '', score(s,l)]);
         row.alignment={vertical:'middle'};
-        const ph=((((cls.photos||{})[l])||{})[s.sid]||[]);
+        const by=Lb.team_submit && s.team? cls.students.find(x=>x.team===s.team && rec(x.sid,l).src==='web') : null;
+        const ph=((((cls.photos||{})[l])||{})[by? by.sid : s.sid]||[]);
         if(ph.length) row.height=PHOTO_H*0.75+6;
         ph.forEach((p,i)=>{ const im=got[p.id]; if(!im) return;
           const id=wb.addImage({buffer:im.buf, extension:'jpeg'});

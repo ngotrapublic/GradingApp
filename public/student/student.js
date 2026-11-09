@@ -4,15 +4,25 @@ const ST = { me: null, info: null, step: 'sid', check: null, cls: '', draft: {} 
 try { ST.cls = localStorage.getItem('student_cls') || ''; } catch (e) {}
 
 function cacheDrafts() {
-  document.querySelectorAll('.submit [data-send]').forEach(b => {
-    const box = b.closest('.submit');
-    ST.draft[b.dataset.send] = [...box.querySelectorAll('input[inputmode="decimal"]')].map(i => i.value);
+  document.querySelectorAll('.submit[data-lab]').forEach(box => {
+    const lab = box.dataset.lab, d = { ...(ST.draft[lab] || {}) };
+    box.querySelectorAll('input[inputmode="decimal"][data-qi]').forEach(i => { d[i.dataset.qi] = i.value; });
+    ST.draft[lab] = d;
   });
 }
-function formValues(lab, saved, frozen) {
-  if (frozen) return (saved || []).map(v => v == null ? '' : String(v));
-  const d = ST.draft[lab];
-  return (d && d.length ? d : (saved || [])).map(v => v == null ? '' : String(v));
+function formValues(lab, saved, frozen, n) {
+  const out = [];
+  const d = (!frozen && ST.draft[lab]) || {};
+  for (let i = 0; i < n; i++) {
+    if (!frozen && d[i] !== undefined) out.push(d[i] == null ? '' : String(d[i]));
+    else out.push(saved && saved[i] != null && saved[i] !== '' ? String(saved[i]) : '');
+  }
+  return out;
+}
+function collectValues(box, n) {
+  const vals = Array(n).fill('');
+  box.querySelectorAll('input[inputmode="decimal"][data-qi]').forEach(i => { vals[+i.dataset.qi] = i.value.trim(); });
+  return vals;
 }
 function clearDraft(lab) { delete ST.draft[lab]; }
 
@@ -157,11 +167,13 @@ function render() {
   const out = $('#out'); if (out) out.onclick = signOut;
   app.querySelectorAll('.submit input[inputmode="decimal"]').forEach(i => i.oninput = () => cacheDrafts());
   app.querySelectorAll('[data-send]').forEach(b => b.onclick = async () => {
-    const lab = b.dataset.send, box = b.closest('.submit');
-    const values = [...box.querySelectorAll('input[inputmode="decimal"]')].map(i => i.value.trim());
+    const lab = b.dataset.send, box = b.closest('.submit'), n = +(box.dataset.nq || 0);
+    const part = b.dataset.part !== undefined && b.dataset.part !== '' ? +b.dataset.part : null;
+    const values = collectValues(box, n);
     if (values.some(v => v !== '' && isNaN(+v.replace(',', '.')))) { toast(T('Numbers only, please.', 'Chỉ nhập số.')); return; }
     b.disabled = true;
-    const j = await post('/api/public/submit', { cls: I.id, lab, values });
+    const body = { cls: I.id, lab, values }; if (part !== null) body.part = part;
+    const j = await post('/api/public/submit', body);
     b.disabled = false;
     if (!j) return;
     clearDraft(lab); toast(T('Submitted', 'Đã nộp')); reload();
@@ -169,7 +181,9 @@ function render() {
   app.querySelectorAll('[data-unsubmit]').forEach(b => b.onclick = async () => {
     if (!confirm(T('Unsubmit so you can edit? Call the lecturer again after you resubmit.', 'Hủy nộp để sửa? Sau khi nộp lại phải gọi giảng viên xác nhận lại.'))) return;
     b.disabled = true;
-    const j = await post('/api/public/unsubmit', { cls: I.id, lab: b.dataset.unsubmit });
+    const body = { cls: I.id, lab: b.dataset.unsubmit };
+    if (b.dataset.part !== undefined && b.dataset.part !== '') body.part = +b.dataset.part;
+    const j = await post('/api/public/unsubmit', body);
     b.disabled = false;
     if (!j) return;
     toast(T('Unsubmitted – you can edit now', 'Đã hủy nộp – có thể sửa')); reload();
@@ -206,12 +220,13 @@ reload();
 // one measured-value field (index i); when marks are released, color and show the key
 function valueField(L, i, frozen) {
   const S_ = L.submit, rev = L.review || [];
-  const vals = S_ ? formValues(L.lab, S_.values, frozen) : rev.map(r => r.yours == null ? '' : String(r.yours));
+  const n = S_ ? S_.questions.length : rev.length;
+  const vals = S_ ? formValues(L.lab, S_.values, frozen, n) : rev.map(r => r.yours == null ? '' : String(r.yours));
   const qs = S_ ? S_.questions : rev.map(r => [r.label, r.unit]);
   const q = qs[i]; if (!q) return '';
   const r = rev[i], cls = r ? (r.band || (r.ok ? 'ok' : 'bad')) : '';
   return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
-    <input inputmode="decimal" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
+    <input inputmode="decimal" data-qi="${i}" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
     ${r && r.band === 'none' ? '' : r && r.calc !== undefined && r.calc !== null ? `<span class="keyline">${T('Target', 'Mục tiêu')} f<sub>c</sub> = <b>${fmt(r.key)}</b> kHz · ${T('your R, C give', 'R, C của bạn cho')} f<sub>c</sub> = <b>${fmt(r.calc)}</b> kHz</span>` : r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b>${r.tol && r.tol[0] !== 0.1 ? ` <small>(${T(`full marks within ±${Math.round(r.tol[0] * 100)}%, half within ±${Math.round(r.tol[1] * 100)}%`, `đủ điểm trong ±${Math.round(r.tol[0] * 100)}%, nửa điểm trong ±${Math.round(r.tol[1] * 100)}%`)})</small>` : ''}</span>` : ''}</label>`;
 }
 
@@ -232,17 +247,40 @@ function partCardLines(L, part) {
   return lines.length ? `<div class="lines">${lines.map(l => `<div>${sub(l)}</div>`).join('')}</div>` : '';
 }
 
-function partsBody(L, frozen) {
+function photoBlock(L, frozen) {
+  const S_ = L.submit || {}, ph = L.photo || {};
+  const head = ph.head || ['Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)'];
+  const empty = ph.empty || ['No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.'];
+  const btn = ph.btn || ['Take / choose a photo', 'Chụp / chọn ảnh'];
+  const cap = ph.capture === false ? '' : ' capture="environment"';
+  const P = S_.photos || [];
+  let h = `<div class="subhead">${T(head[0], head[1])}</div>`;
+  if (!P.length) h += `<p class="zero">${T(empty[0], empty[1])}</p>`;
+  h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${frozen ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
+  if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T(btn[0], btn[1])}<input type="file" accept="image/*"${cap} data-photo="${L.lab}" hidden></label>`;
+  return h;
+}
+
+function partsBody(L, frozen, opts) {
+  const o = opts || {}, S_ = L.submit || {}, done = S_.parts_done || [];
+  const photoPart = L.photo ? (L.photo.part == null ? 0 : L.photo.part) : null;
   let h = '';
-  (L.parts || []).forEach(p => {
+  (L.parts || []).forEach((p, pi) => {
     const title = p.title || ['', ''];
-    h += `<div class="part"><div class="subhead">${esc(T(title[0], title[1]))}</div>`;
+    const partFrozen = typeof frozen === 'function' ? frozen(pi) : !!frozen;
+    const partDone = o.partSubmit && done.includes(pi);
+    h += `<div class="part"><div class="subhead">${esc(T(title[0], title[1]))}${partDone ? ` · <span class="ok">${T('submitted', 'đã nộp')}</span>` : ''}</div>`;
     h += partCardLines(L, p);
     (p.figs || []).forEach(fi => { const f = (L.figs || [])[fi]; if (f) h += `<img src="${f}" alt="${T('Circuit', 'Sơ đồ mạch')}" class="fig">`; });
     if (p.image && L.image) h += `<img src="${L.image}" alt="Oscilloscope screen">`;   // Lab 3 Task 2: the screen on the card
     if (p.files) (L.files || []).forEach(f => { h += `<p><a class="dl" href="${f.url}" download>⬇ ${esc(T(f.label[0], f.label[1]))}</a></p>`; });
     if (p.note) h += `<p class="muted">${T(p.note[0], p.note[1])}</p>`;
-    h += valueFields(L, frozen, p.questions || []);
+    h += valueFields(L, partFrozen, p.questions || []);
+    if ((o.partSubmit || o.embedPhoto) && photoPart === pi) h += photoBlock(L, partFrozen || !!o.embedPhoto);
+    if (o.partSubmit && !o.embedPhoto && !S_.locked && !L.review) {
+      if (partDone) h += `<button class="big" data-unsubmit="${L.lab}" data-part="${pi}">${L.team ? T('Unsubmit this task (team confirms again)', 'Hủy nộp bài này (nhóm xác nhận lại)') : T('Unsubmit this task', 'Hủy nộp bài này')}</button>`;
+      else h += `<button class="big on" data-send="${L.lab}" data-part="${pi}">${L.team ? T('Submit this task for the team', 'Nộp bài này cho cả nhóm') : T('Submit this task', 'Nộp bài này')}</button>`;
+    }
     h += `</div>`;
   });
   if (L.review && L.review.length) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
@@ -258,13 +296,14 @@ function teamMembers(Tm) {
 // team lab, a teammate has submitted: check the team's values and confirm them (only a member who was there should)
 function teamConfirm(L) {
   const S_ = L.submit, Tm = L.team;
-  let h = `<div class="submit"><div class="howto"><b>${T('Team task – one member submits for the whole team', 'Bài nhóm – một bạn nộp cho cả nhóm')}</b>
+  let h = `<div class="submit" data-lab="${L.lab}" data-nq="${(S_.questions || []).length}"><div class="howto"><b>${T('Team task – one member submits for the whole team', 'Bài nhóm – một bạn nộp cho cả nhóm')}</b>
     ${T(`<strong>${esc(Tm.by)}</strong> submitted the values of your team. Check them. Tap <strong>Confirm</strong> only if you did this task with your team today: the lecturer checks who was in the lab.`,
         `<strong>${esc(Tm.by)}</strong> đã nộp số của nhóm. Xem lại. Chỉ bấm <strong>Xác nhận</strong> nếu hôm nay bạn có làm bài này cùng nhóm: giảng viên kiểm tra ai có mặt.`)}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
-  const view = { ...L, submit: { ...S_, values: Tm.values } };
-  h += view.parts && view.parts.length ? partsBody(view, true) : valueFields(view, true);
-  if (Tm.photos.length) h += `<div class="thumbs">${Tm.photos.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a></div>`).join('')}</div>`;
+  const view = { ...L, submit: { ...S_, values: Tm.values, parts_done: Tm.parts_done || S_.parts_done, photos: Tm.photos || S_.photos } };
+  if (view.parts && view.parts.length) h += partsBody(view, true, { embedPhoto: !!L.part_submit });
+  else h += valueFields(view, true);
+  if (!L.part_submit && Tm.photos.length) h += `<div class="thumbs">${Tm.photos.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a></div>`).join('')}</div>`;
   h += teamMembers(Tm);
   if (S_.locked) { /* view only */ }
   else if (Tm.me === 'confirmed') h += `<p class="ok">${T('✓ You confirmed. Now call the lecturer for the tick.', '✓ Bạn đã xác nhận. Gọi giảng viên tick.')}</p><button class="big" data-unconfirm="${L.lab}">${T('Undo confirmation', 'Hủy xác nhận')}</button>`;
@@ -275,17 +314,23 @@ function teamConfirm(L) {
 // values form: edit while drafting; after submit view-only until Unsubmit; after lecturer tick view-only forever
 function submitForm(L) {
   if (L.team && L.team.by && L.team.me !== 'submitted') return teamConfirm(L);
-  const S_ = L.submit, frozen = !!(S_.locked || S_.submitted || L.review);
+  const S_ = L.submit, partSubmit = !!(L.part_submit && L.parts && L.parts.length);
+  const done = S_.parts_done || [];
+  const allDone = partSubmit ? done.length >= L.parts.length : !!S_.submitted;
+  const frozen = !!(S_.locked || (!partSubmit && S_.submitted) || L.review);
   const split = !!(L.parts && L.parts.length);
   const ph = L.photo || {};
   const howto1 = ph.howto || ['Measure at your table, type the values below, take <b>one photo of your circuit</b> (breadboard), then <span class="nowrap">tap <b>Submit.</b></span>', 'Đo tại bàn của bạn, nhập số vào các ô bên dưới, chụp <b>đúng một ảnh mạch</b> (breadboard), rồi <span class="nowrap">bấm <b>Nộp.</b></span>'];
   const howto4 = ph.check || ['They will check the number <span class="nowrap">on the <b>instrument</b></span> (must match what you submitted), your circuit and photo, then confirm at your table. Only after that confirmation do your measured values count for marks.', 'Họ sẽ kiểm tra số <span class="nowrap">trên <b>máy đo</b></span> (khớp với số bạn nộp), mạch và ảnh của bạn, rồi xác nhận tại bàn của bạn. Chỉ sau khi được xác nhận thì số đo mới tính điểm.'];
-  const head = ph.head || ['Photo of your circuit (required, one only)', 'Ảnh mạch thật (bắt buộc, đúng 1 tấm)'];
-  const empty = ph.empty || ['No photo yet. Take one photo of your breadboard.', 'Chưa có ảnh. Chụp đúng một tấm breadboard.'];
-  const btn = ph.btn || ['Take / choose a photo', 'Chụp / chọn ảnh'];
-  const cap = ph.capture === false ? '' : ' capture="environment"';
-  let h = `<div class="submit">`;
-  if (!S_.locked && !L.review && L.team) h += `<div class="howto"><b>${T('Team task – how to finish', 'Bài nhóm – cách kết thúc')}</b>
+  let h = `<div class="submit" data-lab="${L.lab}" data-nq="${(S_.questions || []).length}">`;
+  if (!S_.locked && !L.review && L.team && partSubmit) h += `<div class="howto"><b>${T('Team task – how to finish', 'Bài nhóm – cách kết thúc')}</b>
+    <ol>
+      <li>${T('You may submit <b>Task 1</b> and <b>Task 2</b> separately. <b>One member</b> types each task\'s values (Task 1 also needs the graph screenshot) and taps <b>Submit this task.</b>', 'Có thể nộp <b>Bài 1</b> và <b>Bài 2</b> riêng. <b>Một bạn</b> nhập số từng bài (Bài 1 cần thêm ảnh đồ thị) rồi bấm <b>Nộp bài này.</b>')}</li>
+      <li>${T('The other members open the student page on <b>their own phone</b> and tap <b>Confirm</b> after values are submitted. Confirm only if you were here.', 'Các bạn còn lại mở trang SV trên <b>điện thoại của mình</b> và bấm <b>Xác nhận</b> sau khi đã có số nộp. Chỉ xác nhận nếu có mặt.')}</li>
+      <li>${T('To change one task: Unsubmit that task, edit, submit again. The others confirm again.', 'Muốn sửa một bài: Hủy nộp bài đó, sửa, nộp lại. Các bạn khác xác nhận lại.')}</li>
+      <li>${T('<b>Call the lecturer or TA to your table.</b> They check the instrument / graph and tick every member who confirmed.', '<b>Gọi giảng viên hoặc TA xuống bàn.</b> Họ kiểm tra máy đo / đồ thị và tick các bạn đã xác nhận.')}</li>
+    </ol></div>`;
+  else if (!S_.locked && !L.review && L.team) h += `<div class="howto"><b>${T('Team task – how to finish', 'Bài nhóm – cách kết thúc')}</b>
     <ol>
       <li>${T('Measure together. <b>One member</b> types the team\'s values below, adds the photo, then taps <b>Submit for the team.</b>', 'Cả nhóm cùng đo. <b>Một bạn</b> nhập số của nhóm vào các ô bên dưới, thêm ảnh, rồi bấm <b>Nộp cho cả nhóm.</b>')}</li>
       <li>${T('The other members open the student page on <b>their own phone</b> and tap <b>Confirm</b>. Confirm only if you were here: a member who does not confirm gets no marks for the values.', 'Các bạn còn lại mở trang SV trên <b>điện thoại của mình</b> và bấm <b>Xác nhận</b>. Chỉ xác nhận nếu có mặt: bạn nào không xác nhận thì không có điểm phần số đo.')}</li>
@@ -301,20 +346,21 @@ function submitForm(L) {
     </ol></div>`;
   if (!split) h += `<div class="subhead">${L.team ? T('Your team\'s values', 'Số liệu đo của nhóm') : T('Your measured values', 'Số liệu đo của bạn')}</div>`;
   if (S_.locked) h += `<p class="ok">${T('Checked by the lecturer – locked. You may pack up.', 'Giảng viên đã xác nhận (đã tick) – đã khóa. Bạn có thể tháo mạch.')}</p>`;
-  else if (S_.submitted && L.team) h += `<p class="ok">${T('Submitted for the team. Your teammates now tap Confirm on their own phone.', 'Đã nộp cho cả nhóm. Các bạn cùng nhóm giờ bấm Xác nhận trên điện thoại của mình.')}</p>`;
-  else if (S_.submitted) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
-  h += split ? partsBody(L, frozen) : valueFields(L, frozen);
-  const P = S_.photos || [];
-  h += `<div class="subhead">${T(head[0], head[1])}</div>`;
-  if (!P.length) h += `<p class="zero">${T(empty[0], empty[1])}</p>`;
-  h += `<div class="thumbs">${P.map(p => `<div class="th"><a href="${p.url}" target="_blank"><img src="${p.url}" alt="photo"></a>${frozen ? '' : `<button data-delph="${p.id}" data-lab="${L.lab}" title="${T('Delete', 'Xóa')}">×</button>`}</div>`).join('')}</div>`;
-  if (!frozen && P.length < 1) h += `<label class="btn pri photo-btn">${T(btn[0], btn[1])}<input type="file" accept="image/*"${cap} data-photo="${L.lab}" hidden></label>`;
-  if (S_.locked || L.review) { /* view only */ }
-  else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${L.team ? T('Unsubmit to edit (the team confirms again)', 'Hủy nộp để sửa (cả nhóm xác nhận lại)') : T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
-  else h += `<button class="big on" data-send="${L.lab}">${L.team ? T('Submit for the team', 'Nộp cho cả nhóm') : T('Submit', 'Nộp')}</button>`;
+  else if (partSubmit && done.length && !allDone) h += `<p class="ok">${T(`Submitted ${done.length}/${L.parts.length} task(s). Submit the rest when ready.`, `Đã nộp ${done.length}/${L.parts.length} bài. Nộp nốt các bài còn lại khi xong.`)}</p>`;
+  else if (allDone && L.team) h += `<p class="ok">${T('All tasks submitted for the team. Your teammates now tap Confirm on their own phone.', 'Đã nộp đủ các bài cho cả nhóm. Các bạn cùng nhóm giờ bấm Xác nhận trên điện thoại của mình.')}</p>`;
+  else if (allDone) h += `<p class="ok">${T('Submitted. Unsubmit if you need to edit.', 'Đã nộp. Muốn sửa thì bấm Hủy nộp.')}</p>`;
+  if (partSubmit) {
+    h += partsBody(L, pi => !!(S_.locked || L.review || done.includes(pi)), { partSubmit: true });
+  } else {
+    h += split ? partsBody(L, frozen) : valueFields(L, frozen);
+    if (L.photo) h += photoBlock(L, frozen);
+    if (S_.locked || L.review) { /* view only */ }
+    else if (S_.submitted) h += `<button class="big" data-unsubmit="${L.lab}">${L.team ? T('Unsubmit to edit (the team confirms again)', 'Hủy nộp để sửa (cả nhóm xác nhận lại)') : T('Unsubmit to edit', 'Hủy nộp để sửa')}</button>`;
+    else h += `<button class="big on" data-send="${L.lab}">${L.team ? T('Submit for the team', 'Nộp cho cả nhóm') : T('Submit', 'Nộp')}</button>`;
+  }
   if (S_.time) h += `<p class="muted">${T('Last submitted', 'Nộp lần cuối')}: ${esc(S_.time)}</p>`;
   if (L.team && L.team.me === 'submitted') h += teamMembers(L.team);
-  if (!frozen) h += `<p class="muted">${T('Use real measured values, in the unit shown.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh.')}</p>`;
+  if (!(frozen || (partSubmit && allDone && !S_.locked))) h += `<p class="muted">${T('Use real measured values, in the unit shown.', 'Dùng số đo thật, đúng đơn vị ghi bên cạnh.')}</p>`;
   h += `</div>`;
   return h;
 }

@@ -478,6 +478,13 @@ def team_task2(K):
     L3 = K['labs']['3']; V = L3['variants']
     L3['team_submit'] = True                  # one member submits for the team, the others confirm (lecturer, 29/10/2026)
     L3['manual'] = [['graph', 'Task 1: RLC graph + conclusion', [0, 1, 2], 'team']]
+    L3['part_submit'] = True
+    L3['photo']['part'] = 0
+    L3['photo']['howto'] = [
+        '<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work and may be submitted separately. <b>One member</b> types each task\'s values; '
+        'Task 1 also needs <b>one screenshot of the RLC graph</b> (not a breadboard photo). The others tap <b>Confirm</b> on their own phone.',
+        '<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm và có thể nộp riêng. <b>Một bạn</b> nhập số từng bài; Bài 1 cần thêm '
+        '<b>một ảnh đồ thị RLC</b> (không phải ảnh breadboard). Các bạn còn lại bấm <b>Xác nhận</b> trên điện thoại của mình.']
     for s in sorted({int(v) // 100 for v in V}):
         for t in range(1, 7):
             src = V[str(s * 100 + 3 * (t - 1) + (t - 1) % 3 + 1)]
@@ -498,11 +505,6 @@ def team_task2(K):
                               'finds the peak f0 and the bandwidth BW (as in the lecturer\'s demo). One member submits the team values and the graph, the others confirm.',
                               'Cả nhóm lắp cùng một mạch thông dải (L, C, R trên đề), đo các tần số trên đề, tìm đỉnh f0 và băng thông BW '
                               '(như phần GV làm mẫu). Một bạn nộp số của nhóm và ảnh đồ thị, các bạn khác xác nhận.']
-    L3['photo']['howto'] = ['<b>Task 1</b> (RLC) and <b>Task 2</b> (amplifier) are team work. <b>One member</b> types the team\'s values, uploads '
-                            '<b>one screenshot of the Task 1 RLC graph</b> (not a breadboard photo) and <span class="nowrap">taps <b>Submit.</b></span> '
-                            'The others tap <b>Confirm</b> on their own phone.',
-                            '<b>Bài 1</b> (RLC) và <b>Bài 2</b> (khuếch đại) đều làm nhóm. <b>Một bạn</b> nhập số của nhóm, tải <b>đúng một ảnh đồ thị RLC '
-                            'Bài 1</b> (không phải ảnh breadboard) rồi <span class="nowrap">bấm <b>Nộp.</b></span> Các bạn còn lại bấm <b>Xác nhận</b> trên điện thoại của mình.']
     L3['photo']['check'] = ['They will check your team\'s Task 2 screen <span class="nowrap">on the <b>oscilloscope</b></span> and your '
                             '<b>RLC graph</b>, then confirm at your table.',
                             'Họ sẽ xem màn hình Bài 2 của nhóm <span class="nowrap">trên <b>osci</b></span> và <b>đồ thị RLC</b>, rồi xác nhận tại cụm máy.']

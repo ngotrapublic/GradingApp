@@ -71,13 +71,16 @@ function pubBox(){
 function panel(s){
   const Lb=L(), v=variant(s), V=v&&Lb.variants[v], r=rec(s.sid);
   if(!V) return `<div class="panel"><p class="muted">${T('This student has no team / member yet, so no variant. Go to the <b>Students</b> tab.','SV chưa có nhóm / thành viên nên chưa có mã đề. Vào tab <b>SV &amp; nhóm</b>.')}</p></div>`;
+  const by=Lb.team_submit? teamBy(s) : null;
+  const teamVals=by? (rec(by.sid).values||[]) : null;   // what the team actually submitted (same as student page)
+  const ownVals=r.values||[];
   const figs=[...(V.figs||[]), ...(V.image?[`/api/asset/${C().course}/${V.image}`]:[])];
   let h = `<div class="panel"><p class="info">${V.info.map(sub).join('<br>')}</p>` +
     (figs.length?`<details class="figs"><summary class="muted">${T('Circuit / task figure','Hình đề bài')}</summary>${figs.map(f=>`<a href="${f}" target="_blank"><img src="${f}" alt=""></a>`).join('')}</details>`:'') + `<div class="scroll"><table><tr><th>${T('Quantity','Đại lượng')}</th><th>${T('Key','Đáp án')}</th><th>${T('Full marks','Đủ điểm')}</th><th>${T('Submitted','SV nộp')}</th><th>${T('Marks','Điểm')}</th></tr>`;
   const editKeys=canManage();
-  Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(r.values||[])[i], tol=qrule(q).full, calc=(qrule(q).calc==='rc_fc');
+  Lb.questions.forEach((q,i)=>{ const k=V.keys[i], x=(teamVals||ownVals)[i], tol=qrule(q).full, calc=(qrule(q).calc==='rc_fc');
     if(!q[3]){ h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])} – ${T('no marks','không tính điểm')}</small></td><td class="num">${k?`<b>${fmt(k)}</b>`:'–'}</td><td class="num">–</td><td class="num">${fmt(x)}</td><td>–</td></tr>`; return; }
-    const y=qval(q, r.values, i), mk=mark(y,k,q[3],qrule(q));
+    const y=qval(q, ownVals, i), mk=mark(y,k,q[3],qrule(q));
     const cl = mk===null?'':(mk===q[3]?'full':(mk>0?'half':'zero'));
     const keyCell=editKeys
       ? `<input class="keyin" inputmode="decimal" data-keyi="${i}" value="${k??''}">`
@@ -85,9 +88,10 @@ function panel(s){
     h += `<tr><td>${sub(q[1])}<br><small class="muted">${esc(q[2])}${calc?T(' – marked on f<sub>c</sub> = 1/(2πRC), key = target f<sub>c</sub> (kHz)',' – chấm theo f<sub>c</sub> = 1/(2πRC), đáp án = f<sub>c</sub> mục tiêu (kHz)'):''}</small></td><td class="num">${keyCell}</td><td class="num">${fmt(k*(1-tol))} – ${fmt(k*(1+tol))}${tol!==K().rule.full?`<br><small class="muted">±${Math.round(tol*100)}%</small>`:''}</td>
       <td class="num">${fmt(x)}${calc&&y!==null?`<br><small class="muted">f<sub>c</sub> = ${fmt(y)} kHz</small>`:''}</td><td class="${cl}">${mk===null?'–':(r.tick?mk:'('+mk+')')}/${q[3]}</td></tr>`; });
   h += `</table></div>`;
+  if(by && r.src!=='web' && r.src!=='team' && teamVals) h += `<p class="muted">${T('Showing the team\'s submitted values (this student has not confirmed yet).','Đang hiện số nhóm đã nộp (SV này chưa xác nhận).')}</p>`;
   if(editKeys) h += `<p class="muted">${T(`Edit the keys above if they are wrong. Saving applies to <b>every student with variant ${v}</b> and updates automatic marks.`, `Sửa đáp án ở trên nếu sai. Lưu sẽ áp dụng cho <b>mọi SV mã đề ${v}</b> và cập nhật điểm tự tính.`)}${V.keys_edited?` <b>${T('(already edited)','(đã sửa)')}</b>`:''}</p>
     <div class="btns"><button class="on" data-savekeys="${v}">${T('Save answer keys','Lưu đáp án')}</button>${V.keys_edited?`<button data-resetkeys="${v}">${T('Back to original keys','Về đáp án gốc')}</button>`:''}</div>`;
-  if(Lb.team_submit){ const by=teamBy(s);
+  if(Lb.team_submit){
     h += `<p class="muted">${by? T(`Team values submitted by <b>${esc(by.name)}</b>.`,`Số của nhóm do <b>${esc(by.name)}</b> nộp.`) : T('Nobody in this team has submitted yet.','Nhóm này chưa có ai nộp.')}</p>`;
     if(by && by.sid!==s.sid && !r.tick) h += r.src==='team'
       ? `<div class="btns"><button data-teamconf="${esc(s.sid)}" data-off="1">${T('Remove this confirmation','Bỏ xác nhận của SV này')}</button></div>`
@@ -100,8 +104,11 @@ function panel(s){
   }
   Lb.manual.filter(x=>x[3]==='student').forEach(mn=>{ const cur=(r.manual||{})[mn[0]];
     h += `<div class="btns"><span class="lbl">${esc(manLabel(mn))}:</span>` + mn[2].map(val=>`<button data-man="${mn[0]}" data-val="${val}" class="${cur!==undefined&&+cur===val?'on':''}">${val}</button>`).join('') + `</div>`; });
-  const ph=((C().photos||{})[S.lab]||{})[s.sid]||[];
-  h += `<div class="lbl">${T('Photos','Ảnh mạch')} (${ph.length})</div>` + (ph.length? `<div class="thumbs">${ph.map(p=>`<a href="/api/photo/${p.id}.jpg" target="_blank"><img src="/api/photo/${p.id}.jpg" alt="photo"></a>`).join('')}</div>` : `<p class="muted">${T('No photo yet.','Chưa có ảnh.')}</p>`);
+  const photoSid=by? by.sid : s.sid;
+  const ph=((C().photos||{})[S.lab]||{})[photoSid]||[];
+  const phHead=(Lb.photo&&Lb.photo.head)? T(Lb.photo.head[0], Lb.photo.head[1]) : T('Photos','Ảnh mạch');
+  h += `<div class="lbl">${esc(phHead)} (${ph.length})${by&&by.sid!==s.sid?` · ${T('from','từ')} ${esc(by.name)}`:''}</div>` +
+    (ph.length? `<div class="thumbs">${ph.map(p=>`<a href="/api/photo/${p.id}.jpg" target="_blank"><img src="/api/photo/${p.id}.jpg" alt="photo"></a>`).join('')}</div>` : `<p class="muted">${T('No photo yet.','Chưa có ảnh.')}</p>`);
   h += `<details><summary class="muted">${T('Enter / edit values by hand (if the student could not submit)','Nhập / sửa số tay (khi SV không nộp được)')}</summary><div class="edit">` +
     Lb.questions.map((q,i)=>`<div><label>${sub(q[1])} (${esc(q[2])})</label><input inputmode="decimal" data-i="${i}" value="${(r.values||[])[i]??''}"></div>`).join('') +
     `</div><div class="btns"><button class="on" data-savevals="${esc(s.sid)}">${T('Save values','Lưu số')}</button></div></details>`;

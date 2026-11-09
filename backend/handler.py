@@ -549,8 +549,9 @@ class H(http.server.SimpleHTTPRequestHandler):
         tok = new_session(con, 'stu_sessions', row['sid'])
         return self.send_json({'ok': True}, cookie=self.set_cookie('stu', tok, 15552000, 'Lax'))
 
-    def _open_lab(self, con, st, c, lab, *, for_unsubmit=False):
-        """Checks before a student changes one lab. Returns True or sends the error."""
+    def _open_lab(self, con, st, c, lab, *, for_unsubmit=False, allow_partial=False):
+        """Checks before a student changes one lab. Returns True or sends the error.
+        allow_partial: part_submit labs may keep src=web while another task is still open."""
         if lab not in keys(c['course'])['labs']:
             self.send_json({'error': 'bad lab'}, 400); return False
         pub = con.execute('SELECT submit FROM publish WHERE class_id=? AND lab=?', (c['id'], lab)).fetchone()
@@ -559,25 +560,32 @@ class H(http.server.SimpleHTTPRequestHandler):
         rec = con.execute('SELECT tick, src FROM records WHERE class_id=? AND lab=? AND sid=?', (c['id'], lab, st['sid'])).fetchone()
         if rec and rec['tick']:
             self.send_json(err('Already checked by the lecturer – locked.', 'Giảng viên đã xác nhận – đã khóa.'), 409); return False
-        if not for_unsubmit and rec and rec['src'] == 'web':
+        if not for_unsubmit and not allow_partial and rec and rec['src'] == 'web':
             self.send_json(err('Already submitted. Unsubmit first to edit.', 'Đã nộp. Bấm Hủy nộp trước rồi mới sửa.'), 409); return False
         return True
 
     def public_submit(self, con, st, c, body):
         lab = str(body.get('lab', ''))
-        if not self._open_lab(con, st, c, lab):
+        L = keys(c['course'])['labs'].get(lab)
+        if not L:
+            return self.send_json({'error': 'bad lab'}, 400)
+        part_submit = bool(L.get('part_submit') and L.get('parts'))
+        part = body.get('part', None)
+        if part_submit:
+            if part is None or as_int(part) is None or not (0 <= as_int(part) < len(L['parts'])):
+                return self.send_json(err('Choose which task to submit.', 'Chọn bài (Task) cần nộp.'), 400)
+            part = as_int(part)
+        if not self._open_lab(con, st, c, lab, allow_partial=part_submit):
             return
         cid, sid = c['id'], st['sid']
-        n = len(keys(c['course'])['labs'][lab]['questions']); vals = []
+        n = len(L['questions']); vals = []
         for x in (body.get('values') or [])[:n]:
             try:
                 vals.append(None if x in (None, '') else float(str(x).replace(',', '.')))
             except ValueError:
                 return self.send_json(err('Numbers only, please.', 'Chỉ nhập số.'), 400)
         vals += [None] * (n - len(vals))
-        if all(v is None for v in vals):
-            return self.send_json(err('Type at least one value.', 'Nhập ít nhất một số.'), 400)
-        if keys(c['course'])['labs'][lab].get('team_submit'):     # one member submits for the team, the others confirm
+        if L.get('team_submit'):     # one member submits for the team, the others confirm
             own = con.execute('SELECT src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
             if own and own['src'] == 'team':
                 return self.send_json(err('You confirmed your team\'s values. Undo the confirmation first.',
@@ -586,31 +594,92 @@ class H(http.server.SimpleHTTPRequestHandler):
             if by and by != sid:
                 return self.send_json(err('Your team has already submitted. Check the values and confirm them.',
                                           'Nhóm bạn đã nộp rồi. Xem lại số và bấm Xác nhận.'), 409)
-        if not con.execute('SELECT 1 FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone():
-            need = (keys(c['course'])['labs'][lab].get('photo') or {}).get('need')
-            if need:
-                return self.send_json(err(need[0], need[1]), 400)
-            return self.send_json(err('Take one photo of your circuit first.', 'Chụp một ảnh mạch trước đã.'), 400)
-        t = now()
         con.execute('INSERT INTO records (class_id, lab, sid, tick, manual) VALUES (?,?,?,0,?) ON CONFLICT DO NOTHING', (cid, lab, sid, '{}'))
-        con.execute("UPDATE records SET vals=?, src='web', updated=? WHERE class_id=? AND lab=? AND sid=?", (json.dumps(vals), t, cid, lab, sid))
+        row = con.execute('SELECT vals, manual, src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
+        man = json.loads(row['manual'] or '{}')
+        done = list(man.get('_parts') or [])
+        if part_submit:
+            if part in done:
+                return self.send_json(err('This task is already submitted. Unsubmit it first to edit.',
+                                          'Bài này đã nộp. Bấm Hủy nộp trước rồi mới sửa.'), 409)
+            idxs = list(L['parts'][part].get('questions') or [])
+            if not idxs or all(vals[i] is None for i in idxs if i < n):
+                return self.send_json(err('Type at least one value for this task.', 'Nhập ít nhất một số cho bài này.'), 400)
+            merged = json.loads(row['vals']) if row['vals'] else [None] * n
+            merged += [None] * (n - len(merged))
+            for i in idxs:
+                if i < n:
+                    merged[i] = vals[i]
+            vals = merged[:n]
+            photo_part = (L.get('photo') or {}).get('part', 0) if L.get('photo') else None
+            if photo_part is not None and part == photo_part:
+                if not con.execute('SELECT 1 FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone():
+                    need = (L.get('photo') or {}).get('need')
+                    if need:
+                        return self.send_json(err(need[0], need[1]), 400)
+                    return self.send_json(err('Take one photo of your circuit first.', 'Chụp một ảnh mạch trước đã.'), 400)
+            done = sorted(set(done) | {part})
+            man['_parts'] = done
+        else:
+            if all(v is None for v in vals):
+                return self.send_json(err('Type at least one value.', 'Nhập ít nhất một số.'), 400)
+            if L.get('photo') and not con.execute('SELECT 1 FROM photos WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone():
+                need = (L.get('photo') or {}).get('need')
+                if need:
+                    return self.send_json(err(need[0], need[1]), 400)
+                return self.send_json(err('Take one photo of your circuit first.', 'Chụp một ảnh mạch trước đã.'), 400)
+            man.pop('_parts', None)
+        t = now()
+        con.execute("UPDATE records SET vals=?, manual=?, src='web', updated=? WHERE class_id=? AND lab=? AND sid=?",
+                    (json.dumps(vals), json.dumps(man), t, cid, lab, sid))
         con.execute('INSERT INTO submissions (class_id, lab, sid, vals, time, ip, agent) VALUES (?,?,?,?,?,?,?)',
                     (cid, lab, sid, json.dumps(vals), t, self.ip(), (self.headers.get('User-Agent') or '')[:200]))
-        return self.send_json({'ok': True, 'time': t})
+        if L.get('team_submit'):     # values changed: teammates must confirm again
+            clear_team_confirms(con, cid, lab, sid)
+        return self.send_json({'ok': True, 'time': t, 'parts': done if part_submit else None})
 
     def public_unsubmit(self, con, st, c, body):
         lab = str(body.get('lab', ''))
+        L = keys(c['course'])['labs'].get(lab)
+        if not L:
+            return self.send_json({'error': 'bad lab'}, 400)
         if not self._open_lab(con, st, c, lab, for_unsubmit=True):
             return
         cid, sid = c['id'], st['sid']
-        rec = con.execute('SELECT src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
+        rec = con.execute('SELECT src, vals, manual FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
         if not rec or rec['src'] != 'web':
             return self.send_json(err('Nothing to unsubmit.', 'Chưa có bài để hủy nộp.'), 400)
-        con.execute('UPDATE records SET src=NULL WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid))
-        if keys(c['course'])['labs'][lab].get('team_submit'):     # the values may change: teammates confirm again
-            for m in team_sids(con, cid, sid):
-                con.execute("UPDATE records SET src=NULL, vals=NULL WHERE class_id=? AND lab=? AND sid=? AND src='team' AND tick=0",
-                            (cid, lab, m))
+        part_submit = bool(L.get('part_submit') and L.get('parts'))
+        part = body.get('part', None)
+        if part_submit and part is not None:
+            part = as_int(part)
+            if part is None or not (0 <= part < len(L['parts'])):
+                return self.send_json(err('Choose which task to unsubmit.', 'Chọn bài (Task) cần hủy nộp.'), 400)
+            man = json.loads(rec['manual'] or '{}')
+            done = list(man.get('_parts') or [])
+            if part not in done:
+                return self.send_json(err('This task is not submitted.', 'Bài này chưa nộp.'), 400)
+            n = len(L['questions'])
+            vals = json.loads(rec['vals']) if rec['vals'] else [None] * n
+            vals += [None] * (n - len(vals))
+            for i in (L['parts'][part].get('questions') or []):
+                if i < n:
+                    vals[i] = None
+            done = [p for p in done if p != part]
+            if done:
+                man['_parts'] = done
+                con.execute('UPDATE records SET vals=?, manual=?, updated=? WHERE class_id=? AND lab=? AND sid=?',
+                            (json.dumps(vals[:n]), json.dumps(man), now(), cid, lab, sid))
+            else:
+                man.pop('_parts', None)
+                con.execute('UPDATE records SET vals=?, manual=?, src=NULL WHERE class_id=? AND lab=? AND sid=?',
+                            (json.dumps(vals[:n]), json.dumps(man), cid, lab, sid))
+        else:
+            man = json.loads(rec['manual'] or '{}')
+            man.pop('_parts', None)
+            con.execute('UPDATE records SET src=NULL, manual=? WHERE class_id=? AND lab=? AND sid=?', (json.dumps(man), cid, lab, sid))
+        if L.get('team_submit'):     # the values may change: teammates confirm again
+            clear_team_confirms(con, cid, lab, sid)
         return self.send_json({'ok': True})
 
     def public_confirm(self, con, st, c, body, undo=False):
@@ -643,9 +712,28 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     def public_photo(self, con, st, c, body, delete=False):
         lab = str(body.get('lab', ''))
-        if not self._open_lab(con, st, c, lab):
+        L = keys(c['course'])['labs'].get(lab)
+        if not L:
+            return self.send_json({'error': 'bad lab'}, 400)
+        part_submit = bool(L.get('part_submit') and L.get('parts') and L.get('photo'))
+        # part_submit: photo belongs to one task – allow upload while other tasks are already submitted
+        if not self._open_lab(con, st, c, lab, allow_partial=part_submit):
             return
         cid, sid = c['id'], st['sid']
+        if part_submit:
+            photo_part = (L.get('photo') or {}).get('part', 0)
+            row = con.execute('SELECT manual, src FROM records WHERE class_id=? AND lab=? AND sid=?', (cid, lab, sid)).fetchone()
+            done = list(json.loads((row['manual'] if row else None) or '{}').get('_parts') or [])
+            if photo_part in done:
+                return self.send_json(err('Task with the photo is already submitted. Unsubmit it first.',
+                                          'Bài kèm ảnh đã nộp. Bấm Hủy nộp trước.'), 409)
+            if row and row['src'] == 'team':
+                return self.send_json(err('You confirmed your team\'s values. Undo the confirmation first.',
+                                          'Bạn đã xác nhận số của nhóm. Bấm Hủy xác nhận trước.'), 409)
+            by = team_submitter(con, cid, lab, sid) if L.get('team_submit') else None
+            if by and by != sid:
+                return self.send_json(err('Your team has already submitted. Check the values and confirm them.',
+                                          'Nhóm bạn đã nộp rồi. Xem lại số và bấm Xác nhận.'), 409)
         if delete:
             con.execute('DELETE FROM photos WHERE id=? AND class_id=? AND lab=? AND sid=?', (as_int(body.get('id')) or 0, cid, lab, sid))
             return self.send_json({'ok': True})
@@ -681,6 +769,13 @@ def team_submitter(con, cid, lab, sid):
     return None
 
 
+def clear_team_confirms(con, cid, lab, sid):
+    """After the submitter changes values: teammates who confirmed must confirm again."""
+    for m in team_sids(con, cid, sid):
+        con.execute("UPDATE records SET src=NULL, vals=NULL WHERE class_id=? AND lab=? AND sid=? AND src='team' AND tick=0",
+                    (cid, lab, m))
+
+
 def student_view(C, sid, keypack=None):
     """Only this student's own information in one class. Answer keys only when marks are released."""
     K = keypack or keys(C['course'])
@@ -690,7 +785,9 @@ def student_view(C, sid, keypack=None):
     labs = []
     for lab, L in K['labs'].items():
         pub = C.get('publish', {}).get(lab, {})
-        item = {'lab': lab, 'title': L['title'], 'total': L['total'], 'card': None, 'figs': [], 'image': None, 'files': [], 'parts': L.get('parts') or [], 'photo': L.get('photo') or None, 'team': None, 'marks': None, 'review': None, 'submit': None}
+        item = {'lab': lab, 'title': L['title'], 'total': L['total'], 'card': None, 'figs': [], 'image': None, 'files': [],
+                'parts': L.get('parts') or [], 'photo': L.get('photo') or None, 'part_submit': bool(L.get('part_submit')),
+                'team': None, 'marks': None, 'review': None, 'submit': None}
         V = L['variants'].get(str(v)) if v else None
         if pub.get('card') and V:
             item['card'] = V.get('card')
@@ -744,17 +841,25 @@ def student_view(C, sid, keypack=None):
             br = recs.get(by['sid'], {}) if by else {}
             state = lambda s: ('submitted' if recs.get(s['sid'], {}).get('src') == 'web' else
                                'confirmed' if recs.get(s['sid'], {}).get('src') == 'team' else 'waiting')
+            parts_done = list((br.get('manual') or {}).get('_parts') or []) if by else []
+            if L.get('part_submit') and by and br.get('src') == 'web' and not parts_done and L.get('parts'):
+                parts_done = list(range(len(L['parts'])))
             item['team'] = {'by': by and by['name'], 'bySid': by and by['sid'], 'me': state(st), 'values': br.get('values'),
-                            'time': br.get('updated'),
+                            'time': br.get('updated'), 'parts_done': parts_done,
                             'photos': [{'id': p['id'], 'url': f"/api/public/photo/{p['id']}.jpg"}
                                        for p in C.get('photos', {}).get(lab, {}).get(by['sid'], [])] if by else [],
                             'members': [{'name': s['name'], 'state': state(s)} for s in mates]}
         if pub.get('submit') and v:
             submitted = rec.get('src') == 'web'
+            parts_done = list((rec.get('manual') or {}).get('_parts') or []) if L.get('part_submit') else []
+            # legacy whole-lab submit (no _parts yet): treat every part as done once src=web
+            if L.get('part_submit') and submitted and not parts_done and L.get('parts'):
+                parts_done = list(range(len(L['parts'])))
             item['submit'] = {'questions': [[q[1], q[2]] for q in L['questions']],   # label + unit only
                               'values': rec.get('values'),
                               'time': rec.get('updated') if submitted else None,
                               'submitted': submitted,
+                              'parts_done': parts_done,
                               'locked': bool(rec.get('tick')),
                               'photos': [{'id': p['id'], 'url': f"/api/public/photo/{p['id']}.jpg", 'time': p['time']}
                                          for p in C.get('photos', {}).get(lab, {}).get(sid, [])]}
