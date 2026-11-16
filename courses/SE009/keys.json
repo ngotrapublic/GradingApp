@@ -5652,25 +5652,41 @@
      "S1 1k",
      "Stage 1 output, 1 kHz",
      "mVpp",
-     1.5
+     1.5,
+     {
+      "full": 0.2,
+      "half": 0.2
+     }
     ],
     [
      "S2 1k",
      "Stage 2 output, 1 kHz",
      "mVpp",
-     1.5
+     1.5,
+     {
+      "full": 0.2,
+      "half": 0.2
+     }
     ],
     [
      "S1 5k",
      "Stage 1 output, 5 kHz",
      "mVpp",
-     1.5
+     1.5,
+     {
+      "full": 0.2,
+      "half": 0.2
+     }
     ],
     [
      "S2 5k",
      "Stage 2 output, 5 kHz",
      "mVpp",
-     1.5
+     1.5,
+     {
+      "full": 0.2,
+      "half": 0.2
+     }
     ]
    ],
    "variants": {

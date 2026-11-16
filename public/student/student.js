@@ -217,6 +217,15 @@ function render() {
 
 reload();
 
+function bandNote(rev) {
+  // Colour key for one lab. Lab 4 is ±20% for full marks; the other labs stay ±10% full and ±20% half.
+  const tols = (rev || []).filter(r => r && r.tol && r.band !== 'none').map(r => r.tol);
+  const same = tols.length && tols.every(t => t[0] === tols[0][0] && t[1] === tols[0][1]);
+  if (same && tols[0][0] === 0.2 && !(tols[0][1] > tols[0][0]))
+    return T('Green = within ±20% (full marks). Red = outside that.', 'Xanh = trong ±20% (đủ điểm). Đỏ = ngoài khoảng đó.');
+  return T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.');
+}
+
 // one measured-value field (index i); when marks are released, color and show the key
 function valueField(L, i, frozen) {
   const S_ = L.submit, rev = L.review || [];
@@ -227,7 +236,7 @@ function valueField(L, i, frozen) {
   const r = rev[i], cls = r ? (r.band || (r.ok ? 'ok' : 'bad')) : '';
   return `<label class="val ${cls}">${sub(q[0])} <small>(${esc(q[1])})</small>
     <input inputmode="decimal" data-qi="${i}" ${frozen ? 'disabled' : ''} value="${esc(vals[i] ?? '')}" placeholder="${T('number', 'số')}">
-    ${r && r.band === 'none' ? '' : r && r.calc !== undefined && r.calc !== null ? `<span class="keyline">${T('Target', 'Mục tiêu')} f<sub>c</sub> = <b>${fmt(r.key)}</b> kHz · ${T('your R, C give', 'R, C của bạn cho')} f<sub>c</sub> = <b>${fmt(r.calc)}</b> kHz</span>` : r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b>${r.tol && r.tol[0] !== 0.1 ? ` <small>(${T(`full marks within ±${Math.round(r.tol[0] * 100)}%, half within ±${Math.round(r.tol[1] * 100)}%`, `đủ điểm trong ±${Math.round(r.tol[0] * 100)}%, nửa điểm trong ±${Math.round(r.tol[1] * 100)}%`)})</small>` : ''}</span>` : ''}</label>`;
+    ${r && r.band === 'none' ? '' : r && r.calc !== undefined && r.calc !== null ? `<span class="keyline">${T('Target', 'Mục tiêu')} f<sub>c</sub> = <b>${fmt(r.key)}</b> kHz · ${T('your R, C give', 'R, C của bạn cho')} f<sub>c</sub> = <b>${fmt(r.calc)}</b> kHz</span>` : r ? `<span class="keyline">${T('Key', 'Đáp án')}: <b>${fmt(r.key)}</b>${r.tol && r.tol[0] !== 0.1 ? ` <small>(${r.tol[1] > r.tol[0] ? T(`full marks within ±${Math.round(r.tol[0] * 100)}%, half within ±${Math.round(r.tol[1] * 100)}%`, `đủ điểm trong ±${Math.round(r.tol[0] * 100)}%, nửa điểm trong ±${Math.round(r.tol[1] * 100)}%`) : T(`full marks within ±${Math.round(r.tol[0] * 100)}%`, `đủ điểm trong ±${Math.round(r.tol[0] * 100)}%`)})</small>` : ''}</span>` : ''}</label>`;
 }
 
 function valueFields(L, frozen, indices) {
@@ -235,7 +244,7 @@ function valueFields(L, frozen, indices) {
   const n = S_ ? S_.questions.length : rev.length;
   const idxs = indices || [...Array(n).keys()];
   let h = idxs.map(i => valueField(L, i, frozen)).join('');
-  if (rev.length && !indices) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
+  if (rev.length && !indices) h += `<p class="muted">${bandNote(rev)}</p>`;
   return h;
 }
 
@@ -283,7 +292,7 @@ function partsBody(L, frozen, opts) {
     }
     h += `</div>`;
   });
-  if (L.review && L.review.length) h += `<p class="muted">${T('Green = within ±10% (full marks). Orange = within ±20% (half). Red = outside that.', 'Xanh = trong ±10% (đủ điểm). Cam = trong ±20% (nửa điểm). Đỏ = ngoài khoảng đó.')}</p>`;
+  if (L.review && L.review.length) h += `<p class="muted">${bandNote(L.review)}</p>`;
   return h;
 }
 

@@ -323,8 +323,10 @@ def lab4_keys():
                          'Function generator: High-Z, 10 mVpp sine at the stage-1 input', 'Microphone and speaker disconnected.',
                          'Measure Vpp at the output of stage 1 and of stage 2, at 1 kHz and at 5 kHz (four values).',
                          'One member submits the four values (mVpp) + one photo of your circuit on the student page (QR); the others confirm.']
-        L['questions'] = [['S1 1k', 'Stage 1 output, 1 kHz', 'mVpp', 1.5], ['S2 1k', 'Stage 2 output, 1 kHz', 'mVpp', 1.5],
-                          ['S1 5k', 'Stage 1 output, 5 kHz', 'mVpp', 1.5], ['S2 5k', 'Stage 2 output, 5 kHz', 'mVpp', 1.5]]
+        L['questions'] = [['S1 1k', 'Stage 1 output, 1 kHz', 'mVpp', 1.5, {'full': 0.2, 'half': 0.2}],
+                          ['S2 1k', 'Stage 2 output, 1 kHz', 'mVpp', 1.5, {'full': 0.2, 'half': 0.2}],
+                          ['S1 5k', 'Stage 1 output, 5 kHz', 'mVpp', 1.5, {'full': 0.2, 'half': 0.2}],
+                          ['S2 5k', 'Stage 2 output, 5 kHz', 'mVpp', 1.5, {'full': 0.2, 'half': 0.2}]]
     L['team_submit'] = True
     json.dump(K, open(KEYS, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
