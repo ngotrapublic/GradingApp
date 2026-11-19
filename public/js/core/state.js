@@ -4,7 +4,7 @@ const S = {data:null, keys:null, cls:localStorage.getItem('cls')||'', lab:localS
 function C(){ return S.data.classes[S.cls]; }
 function K(cls=C()){ return S.keys[cls.course]; }                 // answer keys of the course of a class
 function L(){ return K().labs[S.lab]; }
-function labs(){ return Object.keys(K().labs); }
+function labs(){ return Object.keys((K().labs) || {}); }
 const ME = () => S.data.me;
 const canManage = (cls=C()) => cls && ['admin','owner'].includes(cls.role);   // lecturer of the class or admin; a TA only grades
 function variant(st, cls=C()){ if(!(st.team&&st.member&&cls.vset)) return null; const t=+st.team, m=+st.member; return cls.vset*100 + (m<=3? 3*(t-1)+m : 18+t); }

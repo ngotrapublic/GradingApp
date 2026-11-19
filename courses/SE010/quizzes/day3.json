@@ -1,0 +1,301 @@
+{
+  "slug": "day3",
+  "title": "Day 3 – MOS, MOSFET, BJT, CMOS",
+  "n_pick": 15,
+  "pass_score": 11,
+  "questions": [
+    {
+      "id": "d3q01",
+      "type": "mcq",
+      "stem": "For a p-type MOS capacitor, a negative gate voltage produces",
+      "choices": [
+        "inversion",
+        "depletion",
+        "accumulation",
+        "avalanche"
+      ],
+      "answer": 2,
+      "explain": "Negative VG pulls holes to the surface: accumulation.",
+      "hint": "Negative VG pulls holes to the surface: accumulation."
+    },
+    {
+      "id": "d3q02",
+      "type": "mcq",
+      "stem": "An enhancement NMOS is normally",
+      "choices": [
+        "on at V_GS = 0",
+        "off at V_GS = 0",
+        "a two-terminal device",
+        "a pnp transistor"
+      ],
+      "answer": 1,
+      "explain": "Enhancement NMOS needs V_GS > V_T to turn on.",
+      "hint": "Enhancement NMOS needs V_GS > V_T to turn on."
+    },
+    {
+      "id": "d3q03",
+      "type": "mcq",
+      "stem": "MOSFET cutoff frequency increases when",
+      "choices": [
+        "g_m decreases",
+        "gate capacitance increases",
+        "g_m increases for fixed capacitance",
+        "channel length increases greatly"
+      ],
+      "answer": 2,
+      "explain": "f_T rises when g_m is larger or C is smaller.",
+      "hint": "f_T rises when g_m is larger or C is smaller."
+    },
+    {
+      "id": "d3q04",
+      "type": "mcq",
+      "stem": "A BJT in forward-active mode has",
+      "choices": [
+        "both junctions forward biased",
+        "EB forward and CB reverse biased",
+        "both junctions reverse biased",
+        "EB reverse and CB forward biased"
+      ],
+      "answer": 1,
+      "explain": "Forward-active: emitter-base forward, collector-base reverse.",
+      "hint": "Forward-active: emitter-base forward, collector-base reverse."
+    },
+    {
+      "id": "d3q05",
+      "type": "mcq",
+      "stem": "Base transit time approximately varies as",
+      "choices": [
+        "WB",
+        "WB²",
+        "1/WB²",
+        "exp(WB)"
+      ],
+      "answer": 1,
+      "explain": "Transit time grows like the square of base width.",
+      "hint": "Transit time grows like the square of base width."
+    },
+    {
+      "id": "d3q06",
+      "type": "numeric",
+      "stem": "k = μ C_ox W/L = 1 mA/V^2 and V_OV = 2 V. Calculate I_D,sat = (k/2) * V_OV^2 in mA.",
+      "answer": 2,
+      "unit": "mA",
+      "tol_rel": 0.03,
+      "explain": "I_D,sat = 0.5 * 4 = 2 mA.",
+      "power10": 0,
+      "hint": "I_D,sat = (k/2) * V_OV^2 with k = 1 mA/V^2 and V_OV = 2 V. Compute V_OV^2, multiply by k/2. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d3q07",
+      "type": "numeric",
+      "stem": "VA = 50 V and I_C = 2.5 mA. Calculate Early resistance r_o = VA/I_C in kΩ.",
+      "answer": 20,
+      "unit": "kOhm",
+      "tol_rel": 0.03,
+      "explain": "r_o = 50 / 0.0025 = 20000 Ω = 20 kΩ.",
+      "power10": 0,
+      "hint": "r_o = VA / I_C with VA = 50 V and I_C = 2.5 mA = 0.0025 A. Divide, then convert Ω → kΩ for the unit shown. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d3q08",
+      "type": "mcq",
+      "stem": "MOSFET pinch-off begins when",
+      "choices": [
+        "I_D = 0",
+        "V_DS = 0",
+        "V_DS = V_GS − V_T",
+        "V_GS = 0 always"
+      ],
+      "answer": 2,
+      "explain": "Saturation starts near V_DS = overdrive voltage.",
+      "hint": "Saturation starts near V_DS = overdrive voltage."
+    },
+    {
+      "id": "d3q09",
+      "type": "mcq",
+      "stem": "In a CMOS inverter with low input,",
+      "choices": [
+        "output is ground",
+        "NMOS on, PMOS off",
+        "PMOS on, NMOS off",
+        "both permanently off"
+      ],
+      "answer": 2,
+      "explain": "Low input turns PMOS on and NMOS off, so output goes high.",
+      "hint": "Low input turns PMOS on and NMOS off, so output goes high."
+    },
+    {
+      "id": "d3q10",
+      "type": "numeric",
+      "stem": "A BJT has α = 0.99. Calculate β = α/(1−α).",
+      "answer": 99,
+      "unit": "",
+      "tol_rel": 0.03,
+      "explain": "β = 0.99/0.01 = 99.",
+      "power10": 0,
+      "hint": "β = α / (1 - α) with α = 0.99. Compute (1 - 0.99) first, then divide 0.99 by that result. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d3q11",
+      "type": "mcq",
+      "stem": "Ideal CMOS static power is low because",
+      "choices": [
+        "capacitance is infinite",
+        "the output is always floating",
+        "both devices are on continuously",
+        "there is ideally no DC path from VDD to ground in steady states"
+      ],
+      "answer": 3,
+      "explain": "In each logic state, one FET is off, so almost no DC path.",
+      "hint": "In each logic state, one FET is off, so almost no DC path."
+    },
+    {
+      "id": "d3q12",
+      "type": "numeric",
+      "stem": "I_D = 2 mA and V_OV = 1 V in saturation. Calculate g_m = 2 I_D / V_OV in mS.",
+      "answer": 4,
+      "unit": "mS",
+      "tol_rel": 0.03,
+      "explain": "g_m = 2 * 2 / 1 = 4 mS.",
+      "power10": 0,
+      "hint": "g_m = 2 * I_D / V_OV with I_D = 2 mA and V_OV = 1 V. Compute 2 * 2 / 1 on the calculator (result in mS). Enter the integer for * 10^0."
+    },
+    {
+      "id": "d3q13",
+      "type": "mcq",
+      "stem": "Strong inversion in a p-type MOS capacitor is near",
+      "choices": [
+        "4φF",
+        "φF/2",
+        "φF",
+        "2φF"
+      ],
+      "answer": 3,
+      "explain": "A common rule of thumb is ψs ≈ 2φF for strong inversion.",
+      "hint": "A common rule of thumb is ψs ≈ 2φF for strong inversion."
+    },
+    {
+      "id": "d3q14",
+      "type": "mcq",
+      "stem": "Reducing oxide thickness causes C_ox to",
+      "choices": [
+        "become zero",
+        "be independent of εox",
+        "decrease",
+        "increase"
+      ],
+      "answer": 3,
+      "explain": "Thinner oxide means larger oxide capacitance per area.",
+      "hint": "Thinner oxide means larger oxide capacitance per area."
+    },
+    {
+      "id": "d3q15",
+      "type": "mcq",
+      "stem": "The relation between α and β is",
+      "choices": [
+        "β = 1/α",
+        "β = α²",
+        "β = 1 − α",
+        "β = α/(1 − α)"
+      ],
+      "answer": 3,
+      "explain": "Remember β = α / (1 − α).",
+      "hint": "Remember β = α / (1 − α)."
+    },
+    {
+      "id": "d3q16",
+      "type": "mcq",
+      "stem": "A depletion-mode MOSFET differs from enhancement mode because it",
+      "choices": [
+        "is always pnp",
+        "cannot conduct",
+        "has a channel at zero gate bias",
+        "has no gate"
+      ],
+      "answer": 2,
+      "explain": "Depletion-mode devices already have a channel at V_GS = 0.",
+      "hint": "Depletion-mode devices already have a channel at V_GS = 0."
+    },
+    {
+      "id": "d3q17",
+      "type": "mcq",
+      "stem": "Saturation current in the long-channel square-law model varies with overdrive as",
+      "choices": [
+        "1/V_OV",
+        "exp(−V_OV)",
+        "V_OV",
+        "V_OV²"
+      ],
+      "answer": 3,
+      "explain": "I_D,sat is proportional to V_OV squared.",
+      "hint": "I_D,sat is proportional to V_OV squared."
+    },
+    {
+      "id": "d3q18",
+      "type": "mcq",
+      "stem": "Body effect usually makes threshold voltage",
+      "choices": [
+        "increase in magnitude with reverse body bias",
+        "always zero",
+        "independent of doping",
+        "equal to VDD"
+      ],
+      "answer": 0,
+      "explain": "Reverse body bias raises |V_T| (body effect).",
+      "hint": "Reverse body bias raises |V_T| (body effect)."
+    },
+    {
+      "id": "d3q19",
+      "type": "mcq",
+      "stem": "Early effect means BJT collector current rises with",
+      "choices": [
+        "V_CE because of base-width modulation",
+        "gate oxide only",
+        "photon energy",
+        "cleanroom class"
+      ],
+      "answer": 0,
+      "explain": "Larger V_CE shrinks the neutral base a bit, so I_C rises.",
+      "hint": "Larger V_CE shrinks the neutral base a bit, so I_C rises."
+    },
+    {
+      "id": "d3q20",
+      "type": "numeric",
+      "stem": "g_m = 8 mS and C = 0.4 pF. Estimate f_T = g_m/(2 * π * C) in GHz.",
+      "answer": 3.18,
+      "unit": "GHz",
+      "tol_rel": 0.08,
+      "explain": "f_T = 0.008 / (2 * π * 0.4e-12) ≈ 3.18e9 Hz ≈ 3.18 GHz.",
+      "power10": -2,
+      "hint": "f_T = g_m / (2 * π * C) with g_m = 8 mS = 0.008 S and C = 0.4 pF = 0.4e-12 F. Compute the denominator 2*π*C, then divide g_m by it, then convert Hz → GHz. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d3q21",
+      "type": "mcq",
+      "stem": "Complementary MOS means using",
+      "choices": [
+        "NMOS and PMOS together",
+        "only resistors",
+        "only BJTs",
+        "only diodes"
+      ],
+      "answer": 0,
+      "explain": "CMOS pairs n-channel and p-channel MOSFETs.",
+      "hint": "CMOS pairs n-channel and p-channel MOSFETs."
+    },
+    {
+      "id": "d3q22",
+      "type": "mcq",
+      "stem": "Subthreshold conduction means",
+      "choices": [
+        "a small current still flows for V_GS below V_T",
+        "I_D is exactly zero always",
+        "avalanche only",
+        "Hall effect only"
+      ],
+      "answer": 0,
+      "explain": "Below V_T there is still a weak exponential current.",
+      "hint": "Below V_T there is still a weak exponential current."
+    }
+  ]
+}

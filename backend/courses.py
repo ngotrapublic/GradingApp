@@ -15,8 +15,11 @@ def _load():
         if not os.path.isfile(os.path.join(d, 'course.json')):
             continue
         meta = json.load(open(os.path.join(d, 'course.json'), encoding='utf8'))
-        meta['keys'] = json.load(open(os.path.join(d, 'keys.json'), encoding='utf8'))
+        keys_path = os.path.join(d, 'keys.json')
+        meta['keys'] = json.load(open(keys_path, encoding='utf8')) if os.path.isfile(keys_path) else {'rule': {'full': 0.1, 'half': 0.2}, 'labs': {}}
         meta['dir'] = d
+        qdir = os.path.join(d, 'quizzes')
+        meta['has_quizzes'] = os.path.isdir(qdir) and any(n.endswith('.json') for n in os.listdir(qdir))
         out[meta['code']] = meta
     return out
 

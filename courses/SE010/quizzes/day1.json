@@ -1,0 +1,298 @@
+{
+  "slug": "day1",
+  "title": "Day 1 – Equilibrium & transport",
+  "n_pick": 15,
+  "pass_score": 11,
+  "questions": [
+    {
+      "id": "d1q01",
+      "type": "mcq",
+      "stem": "In thermal equilibrium, which quantity must be spatially constant throughout a connected semiconductor?",
+      "choices": [
+        "Hole concentration",
+        "Fermi level",
+        "Mobility",
+        "Electron concentration"
+      ],
+      "answer": 1,
+      "explain": "The Fermi level is flat in equilibrium. Carrier numbers can still change with doping.",
+      "hint": "The Fermi level is flat in equilibrium. Carrier numbers can still change with doping."
+    },
+    {
+      "id": "d1q02",
+      "type": "mcq",
+      "stem": "For an intrinsic semiconductor at equilibrium, which relation holds?",
+      "choices": [
+        "n_0 = p_0 = n_i",
+        "n_0 p_0 = 0",
+        "n_0 > p_0 always",
+        "n_0 < p_0 always"
+      ],
+      "answer": 0,
+      "explain": "Intrinsic means electrons and holes are equal, both equal to n_i.",
+      "hint": "Intrinsic means electrons and holes are equal, both equal to n_i."
+    },
+    {
+      "id": "d1q03",
+      "type": "mcq",
+      "stem": "Acceptor-doped silicon (complete ionization, N_A >> n_i) is normally",
+      "choices": [
+        "degenerate n-type",
+        "n-type with holes as minority carriers",
+        "p-type with holes as majority carriers",
+        "intrinsic"
+      ],
+      "answer": 2,
+      "explain": "Acceptors make holes the majority carriers, so the sample is p-type.",
+      "hint": "Acceptors make holes the majority carriers, so the sample is p-type."
+    },
+    {
+      "id": "d1q04",
+      "type": "mcq",
+      "stem": "Electron drift velocity is directed",
+      "choices": [
+        "perpendicular to the field",
+        "independent of the field",
+        "along the electric field",
+        "opposite the electric field"
+      ],
+      "answer": 3,
+      "explain": "Electrons are negative, so they drift opposite the electric field E.",
+      "hint": "Electrons are negative, so they drift opposite the electric field E."
+    },
+    {
+      "id": "d1q05",
+      "type": "mcq",
+      "stem": "The Einstein relation connects",
+      "choices": [
+        "bandgap and lifetime",
+        "capacitance and resistance",
+        "gain and cutoff frequency",
+        "mobility and diffusion coefficient"
+      ],
+      "answer": 3,
+      "explain": "Einstein link: D = μ * V_T. Mobility and diffusivity stay tied together.",
+      "hint": "Einstein link: D = μ * V_T. Mobility and diffusivity stay tied together."
+    },
+    {
+      "id": "d1q06",
+      "type": "numeric",
+      "stem": "At 300 K, n-type Si has n = 2e16 cm^-3 and μ_n = 1000 cm^2/Vs. Calculate conductivity σ = q * n * μ (q=1.6e-19 C).",
+      "answer": 3.2,
+      "unit": "S/cm",
+      "tol_rel": 0.03,
+      "explain": "σ = q * n * μ = 1.6e-19 * 2e16 * 1000 = 3.2 S/cm.",
+      "power10": -1,
+      "hint": "Use σ = q * n * μ with q = 1.6e-19, n = 2e16, μ = 1000. Compute 1.6e-19 * 2e16 first, then multiply by 1000. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d1q07",
+      "type": "numeric",
+      "stem": "Two mobility limits are 800 and 400 cm^2/Vs. Using Matthiessen (1/μ = 1/μ_1 + 1/μ_2), calculate μ.",
+      "answer": 266.67,
+      "unit": "cm^2/Vs",
+      "tol_rel": 0.05,
+      "explain": "1/μ = 1/800 + 1/400 = 0.00375, so μ ≈ 267 cm^2/Vs.",
+      "power10": 0,
+      "hint": "Matthiessen: 1/μ = 1/800 + 1/400. Add those two terms on the calculator, then take the reciprocal 1/(...). Enter the integer for * 10^0."
+    },
+    {
+      "id": "d1q08",
+      "type": "mcq",
+      "stem": "The mass-action law in a nondegenerate semiconductor at equilibrium is",
+      "choices": [
+        "n_0 p_0 = n_i²",
+        "n_0 / p_0 = n_i²",
+        "n_0 + p_0 = n_i",
+        "n_0 − p_0 = n_i"
+      ],
+      "answer": 0,
+      "explain": "In equilibrium, the product n p equals n_i squared.",
+      "hint": "In equilibrium, the product n p equals n_i squared."
+    },
+    {
+      "id": "d1q09",
+      "type": "numeric",
+      "stem": "For μ_n = 1000 cm^2/Vs at 300 K, calculate D_n = μ_n * V_T with V_T=0.0259 V.",
+      "answer": 25.9,
+      "unit": "cm^2/s",
+      "tol_rel": 0.03,
+      "explain": "D_n = 1000 * 0.0259 = 25.9 cm^2/s.",
+      "power10": -1,
+      "hint": "Use D_n = μ_n * V_T with μ_n = 1000 and V_T = 0.0259. Multiply those two numbers. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d1q10",
+      "type": "mcq",
+      "stem": "N_c (effective density of states) varies approximately as",
+      "choices": [
+        "exp(T)",
+        "T",
+        "T²",
+        "T^(3/2)"
+      ],
+      "answer": 3,
+      "explain": "N_c grows like T to the power 3/2.",
+      "hint": "N_c grows like T to the power 3/2."
+    },
+    {
+      "id": "d1q11",
+      "type": "numeric",
+      "stem": "N_D = 6e15 cm^-3, N_A = 1e15 cm^-3, n_i negligible. Calculate majority electron concentration n_0 ≈ N_D − N_A.",
+      "answer": 5000000000000000.0,
+      "unit": "cm^-3",
+      "tol_rel": 0.02,
+      "explain": "n_0 ≈ N_D − N_A = 5e15 cm^-3.",
+      "power10": 15,
+      "hint": "Majority electrons: n_0 ≈ N_D - N_A with N_D = 6e15 and N_A = 1e15. Subtract, then match the given * 10 power."
+    },
+    {
+      "id": "d1q12",
+      "type": "mcq",
+      "stem": "The Hall voltage sign is mainly useful for identifying",
+      "choices": [
+        "junction area",
+        "bandgap only",
+        "carrier type",
+        "oxide thickness"
+      ],
+      "answer": 2,
+      "explain": "Hall polarity tells you if majority carriers are electrons or holes.",
+      "hint": "Hall polarity tells you if majority carriers are electrons or holes."
+    },
+    {
+      "id": "d1q13",
+      "type": "mcq",
+      "stem": "A donor atom in silicon becomes, after ionization,",
+      "choices": [
+        "a mobile positive ion",
+        "a fixed positive ion plus a mobile electron",
+        "a fixed negative ion plus a hole",
+        "electrically neutral with a mobile hole"
+      ],
+      "answer": 1,
+      "explain": "The donor ion stays fixed; one electron is free to move.",
+      "hint": "The donor ion stays fixed; one electron is free to move."
+    },
+    {
+      "id": "d1q14",
+      "type": "mcq",
+      "stem": "Matthiessen’s rule combines scattering mechanisms by adding",
+      "choices": [
+        "mobilities",
+        "conductivities",
+        "reciprocal mobilities",
+        "carrier concentrations"
+      ],
+      "answer": 2,
+      "explain": "You add 1/μ terms, not the mobilities themselves.",
+      "hint": "You add 1/μ terms, not the mobilities themselves."
+    },
+    {
+      "id": "d1q15",
+      "type": "mcq",
+      "stem": "The intrinsic carrier concentration decreases most strongly when",
+      "choices": [
+        "bandgap increases",
+        "dielectric constant increases",
+        "sample area increases",
+        "mobility increases"
+      ],
+      "answer": 0,
+      "explain": "Larger E_g makes n_i drop very fast through the exp(−E_g/2kT) factor.",
+      "hint": "Larger E_g makes n_i drop very fast through the exp(−E_g/2kT) factor."
+    },
+    {
+      "id": "d1q16",
+      "type": "numeric",
+      "stem": "E = 100 V/cm and μ_n = 800 cm^2/Vs. Calculate electron drift speed magnitude v = μ * E.",
+      "answer": 80000.0,
+      "unit": "cm/s",
+      "tol_rel": 0.03,
+      "explain": "v = μ * E = 800 * 100 = 8e4 cm/s.",
+      "power10": 4,
+      "hint": "Use v = μ * E with μ = 800 and E = 100. Multiply, then write the result in the given * 10^p form and enter only the integer coefficient."
+    },
+    {
+      "id": "d1q17",
+      "type": "mcq",
+      "stem": "In a graded n-type semiconductor at equilibrium, the built-in field primarily balances",
+      "choices": [
+        "avalanche current",
+        "electron diffusion",
+        "hole recombination",
+        "optical generation"
+      ],
+      "answer": 1,
+      "explain": "Diffusion and drift currents cancel in equilibrium.",
+      "hint": "Diffusion and drift currents cancel in equilibrium."
+    },
+    {
+      "id": "d1q18",
+      "type": "mcq",
+      "stem": "Resistivity ρ relates to conductivity σ by",
+      "choices": [
+        "ρ = σ",
+        "ρ = 1/σ",
+        "ρ = σ²",
+        "ρ = q/σ"
+      ],
+      "answer": 1,
+      "explain": "Resistivity is simply the inverse of conductivity.",
+      "hint": "Resistivity is simply the inverse of conductivity."
+    },
+    {
+      "id": "d1q19",
+      "type": "numeric",
+      "stem": "At 300 K, calculate V_T = k * T / q (use 0.0259 V as the standard value to enter).",
+      "answer": 0.0259,
+      "unit": "V",
+      "tol_rel": 0.05,
+      "explain": "At room temperature, V_T is about 0.0259 V.",
+      "power10": -4,
+      "hint": "V_T = k * T / q at 300 K. Use the standard room-temperature value from the lecture (enter it with the given * 10 power)."
+    },
+    {
+      "id": "d1q20",
+      "type": "mcq",
+      "stem": "Majority carriers in strongly n-type material are",
+      "choices": [
+        "holes",
+        "electrons",
+        "ions only",
+        "photons"
+      ],
+      "answer": 1,
+      "explain": "n-type means electrons are the majority carriers.",
+      "hint": "n-type means electrons are the majority carriers."
+    },
+    {
+      "id": "d1q21",
+      "type": "mcq",
+      "stem": "Complete ionization means dopant atoms have",
+      "choices": [
+        "all released their free carriers",
+        "zero charge",
+        "no effect on Fermi level",
+        "become intrinsic"
+      ],
+      "answer": 0,
+      "explain": "Each dopant has given (or taken) its carrier, so N_D^+ ≈ N_D.",
+      "hint": "Each dopant has given (or taken) its carrier, so N_D^+ ≈ N_D."
+    },
+    {
+      "id": "d1q22",
+      "type": "mcq",
+      "stem": "Hole drift current points",
+      "choices": [
+        "opposite hole velocity",
+        "along the hole velocity / along E",
+        "only in metals",
+        "always to ground"
+      ],
+      "answer": 1,
+      "explain": "Holes are positive, so their drift current follows E.",
+      "hint": "Holes are positive, so their drift current follows E."
+    }
+  ]
+}

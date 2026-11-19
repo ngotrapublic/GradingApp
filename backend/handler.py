@@ -2,13 +2,15 @@
 
 Staff (admin / lecturer / TA) sign in with username + password; students with student ID + password.
 Per class: the owner (lecturer) and the admin may do everything ('manage'); a TA may grade and open cards / submissions ('grade')."""
-import base64, http.server, io, json, os, re, socketserver, urllib.parse
+import base64, http.server, io, json, os, re, secrets, socketserver, urllib.parse
 
 from .config import LOCK, PORT, STATIC
 from .courses import COURSES, asset, keys, keys_live
 from .db import (ROLES, add_hit, allow, as_int, assign_random, check_pw, class_role, connect, count_hits, delete_class, hash_pw,
                  load, new_session, now, set_gradebook, set_sync, set_team_mark, upsert_student, user_from_token, visible_class_ids)
 from .network import lan_ips, qr_svg
+from .quiz import (build_paper, course_has_quizzes, grade_paper, is_phone_or_tablet_ua, list_banks, load_bank,
+                   should_unlock_hints)
 from .scoring import export_xlsx, score, variant, rule_of, qvalue
 
 PUBLIC_URL = os.environ.get('PUBLIC_URL', '').rstrip('/')
@@ -21,6 +23,9 @@ USERNAME = re.compile(r'[a-z0-9._-]{3,30}')
 
 def err(en, vi):
     return {'error': en, 'error_vi': vi}
+
+
+QUIZ_DEVICE = err('Use a phone or tablet only. Computers are blocked.', 'Chỉ dùng điện thoại hoặc máy tính bảng. Máy tính bị chặn.')
 
 
 class H(http.server.SimpleHTTPRequestHandler):
@@ -77,6 +82,13 @@ class H(http.server.SimpleHTTPRequestHandler):
         r = tok and con.execute('SELECT s.sid, s.name FROM stu_sessions x JOIN students s ON s.sid=x.sid WHERE x.token=?', (tok,)).fetchone()
         return dict(r) if r else None
 
+    def quiz_user(self, con):
+        """Open quiz identity (free name + student ID, no password)."""
+        tok = self.cookie('qtok')
+        r = tok and con.execute(
+            'SELECT token, sid, name, class_id FROM quiz_sessions WHERE token=?', (tok,)).fetchone()
+        return dict(r) if r else None
+
     def set_cookie(self, name, value, age, same='Strict'):
         return f'{name}={value}; Path=/; Max-Age={age}; SameSite={same}; HttpOnly' + ('; Secure' if self.https() else '')
 
@@ -109,7 +121,14 @@ class H(http.server.SimpleHTTPRequestHandler):
         if path.startswith('/api/public/'):     # student page – the student's own information only
             return self.public_get(path)
         if path == '/api/qr.svg':               # QR code of the page address (no secret inside)
-            target = '/student/' if 'student' in query or (query.get('target') or [''])[0] == 'student' else ''
+            tgt = (query.get('target') or [''])[0]
+            if 'student' in query or tgt == 'student':
+                target = '/student/'
+            elif 'quiz' in query or tgt == 'quiz':
+                cid = (query.get('cls') or [''])[0]
+                target = '/quiz/?cls=' + cid if cid else '/quiz/'
+            else:
+                target = ''
             base = self.base_url()
             if not base:
                 return self.send_json(err('No Wi-Fi address found on this computer', 'Không tìm thấy địa chỉ wifi của máy'), 404)
@@ -131,6 +150,8 @@ class H(http.server.SimpleHTTPRequestHandler):
                 return self.send_json({'me': me})
             if not me:
                 return self.send_json({'error': 'auth'}, 401)
+            if path == '/api/quiz':
+                return self.staff_quiz_get(con, me, query)
             if path == '/api/keys':
                 return self.send_json({c: keys_live(con, c) for c in COURSES})
             if path == '/api/data':
@@ -335,6 +356,8 @@ class H(http.server.SimpleHTTPRequestHandler):
                     if g is None: man.pop('group', None)
                     else: man['group'] = int(g)
                     con.execute("UPDATE records SET manual=?, updated=? WHERE class_id=? AND lab='exam' AND sid=?", (json.dumps(man), now(), cid, sid))
+            elif path == '/api/quiz':
+                return self.staff_quiz_post(con, me, body)
             elif path == '/api/key_override':   # fix a wrong answer key for one variant (all students with that variant)
                 if not manage:
                     return self.send_json(NO_RIGHT, 403)
@@ -457,9 +480,17 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     def public_get(self, path):
         with connect() as con:
-            st = self.student(con)
             if not allow(con, 'get:' + self.ip(), 3000):     # generous: every phone on the school Wi-Fi has the same public IP
                 return self.send_json(TOO_MANY, 429)
+            if path == '/api/public/quiz/class':
+                if not is_phone_or_tablet_ua(self.headers.get('User-Agent'), self.headers.get('X-Quiz-Client')):
+                    return self.send_json(QUIZ_DEVICE, 403)
+                return self.public_quiz_class_info(con)
+            if path == '/api/public/quiz/me':
+                if not is_phone_or_tablet_ua(self.headers.get('User-Agent'), self.headers.get('X-Quiz-Client')):
+                    return self.send_json(QUIZ_DEVICE, 403)
+                return self.public_quiz_me(con)
+            st = self.student(con)
             if not st:
                 return self.send_json({'error': 'signin'}, 401)
             if path == '/api/public/me':        # my classes (all courses, all terms)
@@ -501,6 +532,30 @@ class H(http.server.SimpleHTTPRequestHandler):
         if path == '/api/public/logout':
             con.execute('DELETE FROM stu_sessions WHERE token=?', (self.cookie('stu'),))
             return self.send_json({'ok': True}, cookie=self.set_cookie('stu', '', 0, 'Lax'))
+        if path == '/api/public/quiz/identify':
+            if not is_phone_or_tablet_ua(self.headers.get('User-Agent'), self.headers.get('X-Quiz-Client')):
+                return self.send_json(QUIZ_DEVICE, 403)
+            return self.public_quiz_identify(con, body)
+        if path == '/api/public/quiz/logout':
+            tok = self.cookie('qtok')
+            if tok:
+                con.execute('DELETE FROM quiz_sessions WHERE token=?', (tok,))
+            return self.send_json({'ok': True}, cookie=self.set_cookie('qtok', '', 0, 'Lax'))
+        if path in ('/api/public/quiz/start', '/api/public/quiz/submit', '/api/public/quiz/review', '/api/public/quiz/finish_explain'):
+            if not is_phone_or_tablet_ua(self.headers.get('User-Agent'), self.headers.get('X-Quiz-Client')):
+                return self.send_json(QUIZ_DEVICE, 403)
+            qu = self.quiz_user(con)
+            if not qu:
+                return self.send_json(err('Please enter your name and student ID again.', 'Nhập lại họ tên và MSSV.'), 401)
+            if not allow(con, 'quiz:' + qu['sid'], 60):
+                return self.send_json(TOO_MANY, 429)
+            if path == '/api/public/quiz/start':
+                return self.public_quiz_start(con, qu, body)
+            if path == '/api/public/quiz/submit':
+                return self.public_quiz_submit(con, qu, body)
+            if path == '/api/public/quiz/review':
+                return self.public_quiz_review(con, qu, body)
+            return self.public_quiz_finish_explain(con, qu, body)
         st = self.student(con)
         if not st:
             return self.send_json(err('Please sign in again.', 'Đăng nhập lại.'), 401)
@@ -866,6 +921,403 @@ def student_view(C, sid, keypack=None):
         labs.append(item)
     return {'id': C['id'], 'name': st['name'], 'sid': sid, 'className': C['name'], 'courseName': C['courseName'], 'term': C['term'],
             'team': st.get('team'), 'member': st.get('member'), 'variant': v, 'teammates': mates, 'labs': labs}
+
+
+def _quiz_settings(con, class_id, course, slug):
+    """Merge bank defaults with per-class publish row."""
+    banks = {b['slug']: b for b in list_banks(course)}
+    bank = banks.get(slug) or load_bank(course, slug)
+    if not bank and slug not in banks:
+        return None
+    meta = banks.get(slug) or {
+        'slug': slug,
+        'title': (bank or {}).get('title') or slug,
+        'n': len((bank or {}).get('questions') or []),
+        'n_pick': int((bank or {}).get('n_pick') or 10),
+        'pass_score': int((bank or {}).get('pass_score') or 7),
+    }
+    row = con.execute('SELECT open, n_pick, pass_score FROM quiz_publish WHERE class_id=? AND slug=?',
+                      (class_id, slug)).fetchone()
+    return {
+        'slug': meta['slug'],
+        'title': meta['title'],
+        'n': meta['n'],
+        'n_pick': int(row['n_pick']) if row else int(meta['n_pick']),
+        'pass_score': int(row['pass_score']) if row else int(meta['pass_score']),
+        'open': bool(row and row['open']),
+    }
+
+
+def staff_quiz_get(self, con, me, query):
+    """Staff: quiz banks + open flags + pass list for one class."""
+    cid = as_int((query.get('cls') or [None])[0])
+    if not cid or not class_role(con, me, cid):
+        return self.send_json(NO_RIGHT, 403)
+    row = con.execute('SELECT id, course, name FROM classes WHERE id=?', (cid,)).fetchone()
+    if not row:
+        return self.send_json({'error': 'not found'}, 404)
+    banks = list_banks(row['course'])
+    sets = []
+    for b in banks:
+        s = _quiz_settings(con, cid, row['course'], b['slug'])
+        passed = con.execute(
+            'SELECT COUNT(*) AS n FROM quiz_reveal WHERE class_id=? AND slug=? AND seen=1',
+            (cid, b['slug'])).fetchone()['n']
+        attempts = con.execute(
+            'SELECT COUNT(DISTINCT sid) AS n FROM quiz_attempts WHERE class_id=? AND slug=?',
+            (cid, b['slug'])).fetchone()['n']
+        sets.append({**s, 'passed': passed, 'attempted': attempts})
+    roster = []
+    slug = (query.get('slug') or [None])[0]
+    if slug:
+        rows = con.execute(
+            'SELECT DISTINCT sid FROM quiz_attempts WHERE class_id=? AND slug=?', (cid, slug)).fetchall()
+        for r0 in rows:
+            sid = r0['sid']
+            name_row = con.execute('SELECT name FROM students WHERE sid=?', (sid,)).fetchone()
+            best = con.execute(
+                'SELECT MAX(score) AS score, MAX(passed) AS passed, COUNT(*) AS tries FROM quiz_attempts '
+                'WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid)).fetchone()
+            rev = con.execute('SELECT seen, first_pass FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+                              (cid, slug, sid)).fetchone()
+            roster.append({
+                'sid': sid, 'name': name_row['name'] if name_row else sid,
+                'best': best['score'], 'tries': best['tries'] or 0,
+                'passed': bool(best['passed']), 'solutions_seen': bool(rev and rev['seen']),
+                'first_pass': rev['first_pass'] if rev else None,
+            })
+        roster.sort(key=lambda r: (not r['passed'], (r['name'] or '').lower()))
+    return self.send_json({
+        'class_id': cid, 'course': row['course'], 'className': row['name'],
+        'has_quizzes': course_has_quizzes(row['course']),
+        'sets': sets, 'roster': roster, 'slug': slug,
+        'quiz_url': f'/quiz/?cls={cid}',
+    })
+
+
+def staff_quiz_post(self, con, me, body):
+    """Staff: open/close a quiz set, or reset one student so they may retry."""
+    cid = as_int(body.get('cls'))
+    if not cid or class_role(con, me, cid) not in GRADE:
+        return self.send_json(NO_RIGHT, 403)
+    row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
+    slug = str(body.get('slug') or '').strip()
+    if not row or not slug or not load_bank(row['course'], slug):
+        return self.send_json(err('Quiz set not found.', 'Không tìm thấy bộ quiz.'), 404)
+    if body.get('action') == 'reset':
+        sid = str(body.get('sid') or '').strip().upper()
+        if not sid:
+            return self.send_json(err('Missing student ID.', 'Thiếu MSSV.'), 400)
+        con.execute('DELETE FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
+        con.execute('DELETE FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
+        con.execute('DELETE FROM quiz_sessions WHERE class_id=? AND sid=?', (cid, sid))
+        return self.send_json({'ok': True, 'reset': True, 'sid': sid, 'slug': slug})
+    bank = load_bank(row['course'], slug)
+    n_pick = as_int(body.get('n_pick'))
+    if n_pick is None:
+        n_pick = int(bank.get('n_pick') or 20)
+    pass_score = as_int(body.get('pass_score'))
+    if pass_score is None:
+        pass_score = int(bank.get('pass_score') or 14)
+    open_flag = 1 if body.get('open') else 0
+    con.execute(
+        'INSERT INTO quiz_publish (class_id, slug, open, n_pick, pass_score) VALUES (?,?,?,?,?) '
+        'ON CONFLICT(class_id, slug) DO UPDATE SET open=excluded.open, n_pick=excluded.n_pick, pass_score=excluded.pass_score',
+        (cid, slug, open_flag, n_pick, pass_score))
+    return self.send_json({'ok': True, 'open': bool(open_flag), 'n_pick': n_pick, 'pass_score': pass_score})
+
+
+def public_quiz_class_info(self, con):
+    """Public class label for the quiz landing page (?cls=)."""
+    qs = self.route_query()
+    cid = as_int((qs.get('cls') or [None])[0])
+    row = cid and con.execute('SELECT id, course, name, term FROM classes WHERE id=?', (cid,)).fetchone()
+    if not row or not course_has_quizzes(row['course']):
+        return self.send_json(err('Quiz class not found.', 'Không tìm thấy lớp quiz.'), 404)
+    open_n = con.execute('SELECT COUNT(*) AS n FROM quiz_publish WHERE class_id=? AND open=1', (cid,)).fetchone()['n']
+    return self.send_json({
+        'id': row['id'],
+        'name': row['name'],
+        'term': row['term'],
+        'courseName': COURSES.get(row['course'], {}).get('name', row['course']),
+        'open_sets': open_n,
+    })
+
+
+def public_quiz_me(self, con):
+    """Current free quiz session + open sets."""
+    qu = self.quiz_user(con)
+    if not qu:
+        return self.send_json({'error': 'signin'}, 401)
+    row = con.execute('SELECT id, course, name, term FROM classes WHERE id=?', (qu['class_id'],)).fetchone()
+    if not row:
+        return self.send_json(err('Class missing.', 'Lớp không còn.'), 404)
+    sets = []
+    for b in list_banks(row['course']):
+        s = _quiz_settings(con, row['id'], row['course'], b['slug'])
+        if not s['open']:
+            continue
+        best = con.execute(
+            'SELECT MAX(score) AS score, MAX(passed) AS passed, COUNT(*) AS tries FROM quiz_attempts '
+            'WHERE class_id=? AND slug=? AND sid=?', (row['id'], b['slug'], qu['sid'])).fetchone()
+        rev = con.execute('SELECT seen FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+                          (row['id'], b['slug'], qu['sid'])).fetchone()
+        passed = bool(best['passed'])
+        attended = bool(rev and rev['seen'])
+        sets.append({
+            **s,
+            'best': best['score'],
+            'tries': best['tries'] or 0,
+            'passed': passed,
+            'solutions_seen': attended,
+            'needs_explanations': passed and not attended,
+            'attendance_done': attended,
+        })
+    return self.send_json({
+        'sid': qu['sid'],
+        'name': qu['name'],
+        'cls': row['id'],
+        'className': row['name'],
+        'term': row['term'],
+        'courseName': COURSES.get(row['course'], {}).get('name', row['course']),
+        'sets': sets,
+    })
+
+
+def public_quiz_identify(self, con, body):
+    """Free name + student ID. Returning students may re-enter with name OR MSSV only."""
+    if not allow(con, 'quiz-id:' + self.ip(), 80, 600):
+        return self.send_json(TOO_MANY, 429)
+    cid = as_int(body.get('cls'))
+    sid = str(body.get('sid') or '').strip().upper()
+    name = str(body.get('name') or '').strip()
+    if not cid:
+        return self.send_json(err('Missing class.', 'Thiếu lớp.'), 400)
+    if len(name) > 80 or len(sid) > 40:
+        return self.send_json(err('Name or student ID is too long.', 'Họ tên hoặc MSSV quá dài.'), 400)
+    row = con.execute('SELECT id, course, name, term FROM classes WHERE id=?', (cid,)).fetchone()
+    if not row or not course_has_quizzes(row['course']):
+        return self.send_json(err('Quiz class not found.', 'Không tìm thấy lớp quiz.'), 404)
+
+    prior = None
+    if sid and len(sid) >= 3:
+        prior = con.execute(
+            'SELECT sid, name FROM quiz_sessions WHERE class_id=? AND sid=? ORDER BY created DESC LIMIT 1',
+            (cid, sid)).fetchone()
+        if not prior:
+            prior = con.execute(
+                'SELECT a.sid AS sid, COALESCE('
+                '(SELECT s.name FROM quiz_sessions s WHERE s.class_id=a.class_id AND s.sid=a.sid ORDER BY s.created DESC LIMIT 1), '
+                '(SELECT st.name FROM students st WHERE st.sid=a.sid)'
+                ') AS name FROM quiz_attempts a WHERE a.class_id=? AND a.sid=? ORDER BY a.id DESC LIMIT 1',
+                (cid, sid)).fetchone()
+    if not prior and name and len(name) >= 2:
+        hits = con.execute(
+            'SELECT DISTINCT sid, name FROM quiz_sessions WHERE class_id=? AND lower(name)=lower(?)',
+            (cid, name)).fetchall()
+        if len(hits) > 1:
+            return self.send_json(err(
+                'Several students share this name — enter your student ID.',
+                'Trùng tên — hãy nhập MSSV.'), 400)
+        if len(hits) == 1:
+            prior = hits[0]
+        else:
+            hits = con.execute(
+                'SELECT DISTINCT a.sid AS sid, COALESCE('
+                '(SELECT s.name FROM quiz_sessions s WHERE s.class_id=a.class_id AND s.sid=a.sid ORDER BY s.created DESC LIMIT 1), '
+                '(SELECT st.name FROM students st WHERE st.sid=a.sid)'
+                ') AS name FROM quiz_attempts a WHERE a.class_id=? AND lower(COALESCE('
+                '(SELECT s2.name FROM quiz_sessions s2 WHERE s2.class_id=a.class_id AND s2.sid=a.sid ORDER BY s2.created DESC LIMIT 1), '
+                '(SELECT st2.name FROM students st2 WHERE st2.sid=a.sid)'
+                '))=lower(?)',
+                (cid, name)).fetchall()
+            if len(hits) > 1:
+                return self.send_json(err(
+                    'Several students share this name — enter your student ID.',
+                    'Trùng tên — hãy nhập MSSV.'), 400)
+            if len(hits) == 1:
+                prior = hits[0]
+
+    if prior:
+        sid = str(prior['sid']).strip().upper()
+        name = str(prior['name'] or name or sid).strip()
+    else:
+        if not sid or len(sid) < 3 or not name or len(name) < 2:
+            return self.send_json(err(
+                'First time: enter both name and student ID. Returning: either one is enough.',
+                'Lần đầu: nhập cả họ tên và MSSV. Vào lại: chỉ cần đúng một trong hai.'), 400)
+
+    con.execute(
+        'INSERT INTO students (sid, name) VALUES (?, ?) ON CONFLICT (sid) DO UPDATE SET name=excluded.name',
+        (sid, name))
+    tok = secrets.token_hex(24)
+    con.execute('DELETE FROM quiz_sessions WHERE sid=? AND class_id=?', (sid, cid))
+    con.execute('INSERT INTO quiz_sessions (token, sid, name, class_id, created) VALUES (?,?,?,?,?)',
+                (tok, sid, name, cid, now()))
+    return self.send_json({
+        'ok': True,
+        'sid': sid,
+        'name': name,
+        'cls': cid,
+        'className': row['name'],
+        'courseName': COURSES.get(row['course'], {}).get('name', row['course']),
+    }, cookie=self.set_cookie('qtok', tok, 86400, 'Lax'))
+
+
+def public_quiz_start(self, con, qu, body):
+    """Student: start a shuffled attempt of an open quiz."""
+    cid = qu['class_id']
+    row = con.execute('SELECT id, course FROM classes WHERE id=?', (cid,)).fetchone()
+    if not row:
+        return self.send_json(err('Class missing.', 'Lớp không còn.'), 404)
+    slug = str(body.get('slug') or '').strip()
+    s = _quiz_settings(con, cid, row['course'], slug) if slug else None
+    if not s or not s['open']:
+        return self.send_json(err('This quiz is closed.', 'Quiz này đang đóng.'), 403)
+    done = con.execute(
+        'SELECT 1 FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND passed=1 LIMIT 1',
+        (cid, slug, qu['sid'])).fetchone()
+    if done:
+        return self.send_json(err('Already passed — no more retries.', 'Đã đạt rồi — không được làm lại.'), 403)
+    bank = load_bank(row['course'], slug)
+    import random as _random
+    rng = _random.Random(f"{qu['sid']}|{cid}|{slug}|{secrets.token_hex(8)}")
+    paper, client = build_paper(bank, n_pick=s['n_pick'], rng=rng)
+    if not paper:
+        return self.send_json(err('Empty quiz bank.', 'Ngân hàng câu hỏi trống.'), 400)
+    prior = con.execute(
+        'SELECT score, total FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND answers IS NOT NULL '
+        'ORDER BY id', (cid, slug, qu['sid'])).fetchall()
+    prior_scores = [r['score'] for r in prior]
+    total_ref = int(s['n_pick'] or len(client) or 20)
+    hints_ready = should_unlock_hints(prior_scores, total=total_ref)
+    att = con.execute(
+        'INSERT INTO quiz_attempts (class_id, slug, sid, score, total, passed, paper, answers, created) '
+        'VALUES (?,?,?,?,?,?,?,?,?) RETURNING id',
+        (cid, slug, qu['sid'], None, len(paper), 0, json.dumps(paper), None, now())).fetchone()
+    return self.send_json({
+        'attempt_id': att['id'],
+        'slug': slug,
+        'title': s['title'],
+        'pass_score': s['pass_score'],
+        'total': len(client),
+        'questions': client,
+        'hints_ready': hints_ready,
+        'hint_after_sec': 20 * 60,
+        'prior_tries': len(prior),
+    })
+
+
+def _review_from_pass(con, cid, sid, slug):
+    """Build review rows from the latest passing attempt."""
+    att = con.execute(
+        'SELECT * FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND passed=1 AND answers IS NOT NULL '
+        'ORDER BY id DESC LIMIT 1', (cid, slug, sid)).fetchone()
+    if not att:
+        return None, None
+    paper = json.loads(att['paper'])
+    answers = json.loads(att['answers'] or '{}')
+    score, total, review = grade_paper(paper, answers)
+    return att, {'score': score, 'total': total, 'review': review, 'attempt_id': att['id'], 'slug': slug}
+
+
+def public_quiz_submit(self, con, qu, body):
+    """Fail → score only. Pass → return review for forced English explanations (attendance later)."""
+    cid = qu['class_id']
+    aid = as_int(body.get('attempt_id'))
+    att = aid and con.execute(
+        'SELECT * FROM quiz_attempts WHERE id=? AND class_id=? AND sid=?',
+        (aid, cid, qu['sid'])).fetchone()
+    if not att:
+        return self.send_json(err('Attempt not found.', 'Không tìm thấy lần làm.'), 404)
+    if att['answers'] is not None:
+        return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
+    row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
+    paper = json.loads(att['paper'])
+    answers = body.get('answers') or {}
+    score, total, review = grade_paper(paper, answers)
+    s = _quiz_settings(con, cid, row['course'], att['slug']) if row else None
+    pass_score = s['pass_score'] if s else 14
+    passed = 1 if score >= pass_score else 0
+    con.execute(
+        'UPDATE quiz_attempts SET score=?, total=?, passed=?, answers=? WHERE id=?',
+        (score, total, passed, json.dumps(answers), aid))
+    out = {
+        'attempt_id': aid,
+        'slug': att['slug'],
+        'score': score,
+        'total': total,
+        'pass_score': pass_score,
+        'passed': bool(passed),
+    }
+    if not passed:
+        return self.send_json(out)
+    rev = con.execute(
+        'SELECT seen FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+        (cid, att['slug'], qu['sid'])).fetchone()
+    if rev and rev['seen']:
+        out['attendance_done'] = True
+        return self.send_json(out)
+    out['needs_explanations'] = True
+    out['review'] = review
+    return self.send_json(out)
+
+
+def public_quiz_review(self, con, qu, body):
+    """Resume explanation walkthrough after a pass, before attendance."""
+    cid = qu['class_id']
+    slug = str(body.get('slug') or '').strip()
+    rev = con.execute(
+        'SELECT seen FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, qu['sid'])).fetchone()
+    if rev and rev['seen']:
+        return self.send_json({'attendance_done': True, 'slug': slug})
+    att, payload = _review_from_pass(con, cid, qu['sid'], slug)
+    if not att:
+        return self.send_json(err('No passing attempt to review.', 'Chưa có bài đạt để xem giải thích.'), 404)
+    row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
+    s = _quiz_settings(con, cid, row['course'], slug) if row else None
+    return self.send_json({
+        'needs_explanations': True,
+        'passed': True,
+        'slug': slug,
+        'score': payload['score'],
+        'total': payload['total'],
+        'pass_score': s['pass_score'] if s else payload['score'],
+        'attempt_id': payload['attempt_id'],
+        'review': payload['review'],
+    })
+
+
+def public_quiz_finish_explain(self, con, qu, body):
+    """Mark attendance after the student finishes all forced explanations."""
+    cid = qu['class_id']
+    slug = str(body.get('slug') or '').strip()
+    att, _ = _review_from_pass(con, cid, qu['sid'], slug)
+    if not att:
+        return self.send_json(err('No passing attempt.', 'Chưa có bài đạt.'), 404)
+    con.execute(
+        'INSERT INTO quiz_reveal (class_id, slug, sid, seen, first_pass) VALUES (?,?,?,1,?) '
+        'ON CONFLICT(class_id, slug, sid) DO UPDATE SET seen=1, first_pass=COALESCE(quiz_reveal.first_pass, excluded.first_pass)',
+        (cid, slug, qu['sid'], now()))
+    return self.send_json({
+        'ok': True,
+        'attendance_done': True,
+        'slug': slug,
+        'message': 'Attendance recorded. You may leave.',
+        'message_vi': 'Đã điểm danh. Bạn có thể ra về.',
+    })
+
+
+H.staff_quiz_get = staff_quiz_get
+H.staff_quiz_post = staff_quiz_post
+H.public_quiz_class_info = public_quiz_class_info
+H.public_quiz_me = public_quiz_me
+H.public_quiz_identify = public_quiz_identify
+H.public_quiz_start = public_quiz_start
+H.public_quiz_submit = public_quiz_submit
+H.public_quiz_review = public_quiz_review
+H.public_quiz_finish_explain = public_quiz_finish_explain
 
 
 class Server(socketserver.ThreadingMixIn, http.server.HTTPServer):

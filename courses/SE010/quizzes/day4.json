@@ -1,0 +1,298 @@
+{
+  "slug": "day4",
+  "title": "Day 4 – Power, optical, fabrication",
+  "n_pick": 15,
+  "pass_score": 11,
+  "questions": [
+    {
+      "id": "d4q01",
+      "type": "mcq",
+      "stem": "The Gunn effect is based on",
+      "choices": [
+        "intervalley transfer and negative differential mobility",
+        "MOS inversion",
+        "radiative recombination",
+        "pn-junction avalanche"
+      ],
+      "answer": 0,
+      "explain": "Electrons jump to a slower valley and NDR appears.",
+      "hint": "Electrons jump to a slower valley and NDR appears."
+    },
+    {
+      "id": "d4q02",
+      "type": "mcq",
+      "stem": "Compared with a Gunn device, an IMPATT typically has",
+      "choices": [
+        "no reverse bias",
+        "zero power output",
+        "lower noise due to no avalanche",
+        "higher avalanche noise"
+      ],
+      "answer": 3,
+      "explain": "IMPATT uses avalanche, so it is usually noisier.",
+      "hint": "IMPATT uses avalanche, so it is usually noisier."
+    },
+    {
+      "id": "d4q03",
+      "type": "numeric",
+      "stem": "P=20 W, R_θJA=4 °C/W, T_A=25 °C. Calculate T_j = T_A + P * R_θ.",
+      "answer": 105,
+      "unit": "C",
+      "tol_rel": 0.03,
+      "explain": "T_j = 25 + 20 * 4 = 105 °C.",
+      "power10": 0,
+      "hint": "T_j = T_A + P * R_θJA with T_A = 25, P = 20, R_θJA = 4. Compute P * R_θJA, then add T_A. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d4q04",
+      "type": "mcq",
+      "stem": "A photon can cause direct interband absorption when",
+      "choices": [
+        "mobility is zero",
+        "hν < E_g",
+        "hν ≥ E_g",
+        "hν = 0 only"
+      ],
+      "answer": 2,
+      "explain": "The photon energy must be at least the bandgap.",
+      "hint": "The photon energy must be at least the bandgap."
+    },
+    {
+      "id": "d4q05",
+      "type": "mcq",
+      "stem": "Solar-cell open-circuit voltage increases with illumination mainly",
+      "choices": [
+        "linearly",
+        "logarithmically",
+        "quadratically",
+        "not at all"
+      ],
+      "answer": 1,
+      "explain": "V_oc grows like the log of light-generated current.",
+      "hint": "V_oc grows like the log of light-generated current."
+    },
+    {
+      "id": "d4q06",
+      "type": "mcq",
+      "stem": "A PIN photodiode is fast because much of the light is collected in",
+      "choices": [
+        "a wide depleted intrinsic region",
+        "a neutral metal region",
+        "a forward-biased base",
+        "an oxide only"
+      ],
+      "answer": 0,
+      "explain": "Carriers drift quickly across the wide i-region.",
+      "hint": "Carriers drift quickly across the wide i-region."
+    },
+    {
+      "id": "d4q07",
+      "type": "mcq",
+      "stem": "Direct-bandgap materials are preferred for LEDs because",
+      "choices": [
+        "radiative transitions are efficient",
+        "they have no electrons",
+        "they eliminate all reflection",
+        "their bandgap is zero"
+      ],
+      "answer": 0,
+      "explain": "Direct gap makes light-emitting recombination efficient.",
+      "hint": "Direct gap makes light-emitting recombination efficient."
+    },
+    {
+      "id": "d4q08",
+      "type": "numeric",
+      "stem": "I_sc=40 mA, V_oc=0.50 V, P_max=14 mW. Calculate fill factor FF = P_max/(I_sc * V_oc).",
+      "answer": 0.7,
+      "unit": "",
+      "tol_rel": 0.03,
+      "explain": "FF = 14e-3 / (0.04 * 0.50) = 0.70.",
+      "power10": -1,
+      "hint": "FF = P_max / (I_sc * V_oc). Convert P_max = 14 mW → W and I_sc = 40 mA → A, then compute the denominator I_sc * V_oc and divide. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d4q09",
+      "type": "numeric",
+      "stem": "Y_W=0.98, Y_D=0.85, Y_C=0.95. Calculate total yield Y = Y_W * Y_D * Y_C.",
+      "answer": 0.79135,
+      "unit": "",
+      "tol_rel": 0.03,
+      "explain": "0.98 * 0.85 * 0.95 ≈ 0.791.",
+      "power10": -3,
+      "hint": "Y = Y_W * Y_D * Y_C with 0.98, 0.85, 0.95. Multiply step by step on the calculator. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d4q10",
+      "type": "numeric",
+      "stem": "R=50 ohm drives C=40 fF. Calculate RC time constant in ps.",
+      "answer": 2,
+      "unit": "ps",
+      "tol_rel": 0.03,
+      "explain": "τ = 50 * 40e-15 = 2e-12 s = 2 ps.",
+      "power10": 0,
+      "hint": "τ = R * C with R = 50 and C = 40 fF = 40e-15 F. Multiply, then convert seconds → ps. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d4q11",
+      "type": "mcq",
+      "stem": "CMP combines",
+      "choices": [
+        "chemical reaction and mechanical abrasion",
+        "only optical absorption",
+        "only thermal diffusion",
+        "Hall measurement and packaging"
+      ],
+      "answer": 0,
+      "explain": "CMP is chemical-mechanical polishing.",
+      "hint": "CMP is chemical-mechanical polishing."
+    },
+    {
+      "id": "d4q12",
+      "type": "numeric",
+      "stem": "For 90% absorption and α=1000 cm^-1, calculate thickness d = -ln(0.1)/α in μm.",
+      "answer": 23.03,
+      "unit": "um",
+      "tol_rel": 0.05,
+      "explain": "d = 2.3026/1000 cm = 0.002303 cm = 23.03 μm.",
+      "power10": -1,
+      "hint": "For 90% absorption, remaining = 0.1 so d = -ln(0.1) / α with α = 1000 cm^-1. Compute -ln(0.1), divide by α (cm), then convert cm → μm. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d4q13",
+      "type": "mcq",
+      "stem": "Laser threshold occurs when",
+      "choices": [
+        "round-trip gain equals total loss",
+        "current is zero",
+        "reflectivity is zero and gain negative",
+        "all photons are absorbed"
+      ],
+      "answer": 0,
+      "explain": "At threshold, gain per round trip balances the losses.",
+      "hint": "At threshold, gain per round trip balances the losses."
+    },
+    {
+      "id": "d4q14",
+      "type": "mcq",
+      "stem": "The main purpose of a cleanroom is to control",
+      "choices": [
+        "particles and contamination",
+        "only device voltage",
+        "laser wavelength",
+        "BJT gain only"
+      ],
+      "answer": 0,
+      "explain": "Cleanrooms keep particles and contamination low.",
+      "hint": "Cleanrooms keep particles and contamination low."
+    },
+    {
+      "id": "d4q15",
+      "type": "mcq",
+      "stem": "Photolithography primarily",
+      "choices": [
+        "creates laser population inversion",
+        "transfers a reticle pattern to photoresist",
+        "removes all metal mechanically",
+        "measures Hall voltage"
+      ],
+      "answer": 1,
+      "explain": "It copies the mask pattern into resist.",
+      "hint": "It copies the mask pattern into resist."
+    },
+    {
+      "id": "d4q16",
+      "type": "mcq",
+      "stem": "Low-k dielectric is used in interconnects to reduce",
+      "choices": [
+        "bandgap",
+        "capacitance",
+        "carrier lifetime",
+        "wafer diameter"
+      ],
+      "answer": 1,
+      "explain": "Lower k means lower wiring capacitance.",
+      "hint": "Lower k means lower wiring capacitance."
+    },
+    {
+      "id": "d4q17",
+      "type": "mcq",
+      "stem": "A larger absorption coefficient means",
+      "choices": [
+        "zero generation",
+        "larger bandgap in every case",
+        "deeper penetration",
+        "absorption closer to the surface"
+      ],
+      "answer": 3,
+      "explain": "Large α means light is absorbed near the surface.",
+      "hint": "Large α means light is absorbed near the surface."
+    },
+    {
+      "id": "d4q18",
+      "type": "mcq",
+      "stem": "Fill factor of a solar cell is",
+      "choices": [
+        "P_max / (I_sc * V_oc)",
+        "I_sc / V_oc",
+        "only series resistance",
+        "always exactly 1"
+      ],
+      "answer": 0,
+      "explain": "FF compares real max power to the I_sc–V_oc rectangle.",
+      "hint": "FF compares real max power to the I_sc–V_oc rectangle."
+    },
+    {
+      "id": "d4q19",
+      "type": "mcq",
+      "stem": "Through-silicon vias support",
+      "choices": [
+        "optical absorption only",
+        "Schottky barrier lowering",
+        "vertical 3D interconnection",
+        "only planar diffusion"
+      ],
+      "answer": 2,
+      "explain": "TSVs connect chips/wafers in the vertical direction.",
+      "hint": "TSVs connect chips/wafers in the vertical direction."
+    },
+    {
+      "id": "d4q20",
+      "type": "numeric",
+      "stem": "Package thermal resistance 20 °C/W, dissipates 2 W, ambient 30 °C. Calculate T_j.",
+      "answer": 70,
+      "unit": "C",
+      "tol_rel": 0.03,
+      "explain": "T_j = 30 + 2 * 20 = 70 °C.",
+      "power10": 0,
+      "hint": "T_j = T_A + P * R_θ with T_A = 30, P = 2 W, R_θ = 20 °C/W. Compute P * R_θ, then add T_A. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d4q21",
+      "type": "mcq",
+      "stem": "External LED efficiency is lower than internal efficiency mainly because of",
+      "choices": [
+        "zero injection",
+        "no bandgap",
+        "light extraction losses",
+        "lack of any recombination"
+      ],
+      "answer": 2,
+      "explain": "Much light is trapped or reflected inside and never leaves.",
+      "hint": "Much light is trapped or reflected inside and never leaves."
+    },
+    {
+      "id": "d4q22",
+      "type": "mcq",
+      "stem": "Junction temperature rises when",
+      "choices": [
+        "power dissipation or thermal resistance rises",
+        "only when V_oc is measured",
+        "bandgap becomes infinite",
+        "cleanroom class improves"
+      ],
+      "answer": 0,
+      "explain": "Higher P or higher Rθ both push T_j up.",
+      "hint": "Higher P or higher Rθ both push T_j up."
+    }
+  ]
+}

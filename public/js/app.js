@@ -7,14 +7,16 @@ function render(){
   const ids=Object.keys(S.data.classes);
   if(!S.data.classes[S.cls]) S.cls=ids[0]||'';
   const hasCls=!!S.cls, me=ME(), staffOnly=me.role==='ta';
+  const hasLabs=hasCls && labs().length;
+  const hasQuiz=hasCls && !!C().has_quizzes;
   const tabs=[];
-  if(hasCls) tabs.push(['grade',T('Grade','Chấm')]);
+  if(hasLabs) tabs.push(['grade',T('Grade','Chấm')]);
+  if(hasCls && hasQuiz) tabs.push(['quiz',T('Quiz','Quiz')]);
   if(hasCls && K().exam) tabs.push(['exam',T('Exam','Thi')]);
   if(hasCls && canManage()) tabs.push(['sum',T('Canvas','Gửi Canvas')],['roster',T('Students','SV & nhóm')]);
   if(!staffOnly) tabs.push(['classes',T('Classes','Lớp')]);
   if(me.role==='admin') tabs.push(['users',T('Accounts','Tài khoản')]);
   if(!tabs.some(t=>t[0]===S.view)) S.view=tabs.length? tabs[0][0] : 'none';
-  // class picker, grouped by term (newest first)
   const terms=[...new Set(ids.map(i=>S.data.classes[i].term))].sort(termOrder);
   const opts=terms.map(t=>`<optgroup label="${esc(t)}">${ids.filter(i=>S.data.classes[i].term===t).map(i=>{ const c=S.data.classes[i];
     return `<option value="${i}" ${i===S.cls?'selected':''}>${esc(c.name)} · ${esc(c.course)} · ${esc(c.term)}${c.role==='ta'?' (TA)':''}</option>`; }).join('')}</optgroup>`).join('');
@@ -23,11 +25,11 @@ function render(){
     ${hasCls?`<div class="row" style="margin-top:8px"><select id="cls" style="flex:1;max-width:none">${opts}</select></div>`:''}
     <nav>${tabs.map(([k,t])=>`<button data-v="${k}" class="${S.view===k?'on':''}">${t}</button>`).join('')}</nav></header><main id="main"></main>`;
   if(hasCls) $('#cls').onchange=e=>{S.cls=e.target.value;localStorage.setItem('cls',S.cls);S.open=null;S.bench=null;S.preview=null;S.draft=null;S.gbNew=null;
-    if(!labs().includes(S.lab)) S.lab=labs()[0]; render();};
+    if(labs().length && !labs().includes(S.lab)) S.lab=labs()[0]; render();};
   app.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{S.view=b.dataset.v;S.preview=null;render();});
   $('#qr').onclick=showQR; $('#acct').onclick=showAccount; bindLangToggle(app);
-  if(hasCls && !labs().includes(S.lab)) S.lab=labs()[0];
-  const view={grade:renderGrade, exam:renderExam, roster:renderRoster, sum:renderSum, classes:renderClasses, users:renderUsers}[S.view];
+  if(hasCls && labs().length && !labs().includes(S.lab)) S.lab=labs()[0];
+  const view={grade:renderGrade, quiz:renderQuiz, exam:renderExam, roster:renderRoster, sum:renderSum, classes:renderClasses, users:renderUsers}[S.view];
   if(view) view($('#main'));
   else $('#main').innerHTML=`<p class="muted">${T('You are not in any class yet. Ask the lecturer to add you as a TA.','Bạn chưa được thêm vào lớp nào. Nhờ giảng viên thêm bạn làm TA.')}</p>`;
 }

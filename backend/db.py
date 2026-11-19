@@ -31,6 +31,14 @@ CREATE TABLE IF NOT EXISTS key_overrides (course TEXT, lab TEXT, variant TEXT, k
                                           PRIMARY KEY (course, lab, variant));
 CREATE TABLE IF NOT EXISTS hits     (k TEXT, t REAL);
 CREATE INDEX IF NOT EXISTS hits_k ON hits (k, t);
+CREATE TABLE IF NOT EXISTS quiz_publish (class_id INTEGER, slug TEXT, open INTEGER DEFAULT 0, n_pick INTEGER DEFAULT 10,
+                                         pass_score INTEGER DEFAULT 7, PRIMARY KEY (class_id, slug));
+CREATE TABLE IF NOT EXISTS quiz_attempts (id {ID}, class_id INTEGER, slug TEXT, sid TEXT, score INTEGER, total INTEGER,
+                                          passed INTEGER, paper TEXT, answers TEXT, created TEXT);
+CREATE TABLE IF NOT EXISTS quiz_reveal (class_id INTEGER, slug TEXT, sid TEXT, seen INTEGER DEFAULT 0, first_pass TEXT,
+                                        PRIMARY KEY (class_id, slug, sid));
+CREATE TABLE IF NOT EXISTS quiz_sessions (token TEXT PRIMARY KEY, sid TEXT, name TEXT, class_id INTEGER, created TEXT);
+CREATE INDEX IF NOT EXISTS quiz_attempts_lookup ON quiz_attempts (class_id, slug, sid);
 """
 SCHEMA = TABLES.format(ID='SERIAL PRIMARY KEY', BLOB='BYTEA') if PG else TABLES.format(ID='INTEGER PRIMARY KEY AUTOINCREMENT', BLOB='BLOB')
 ROLES = ('admin', 'lecturer', 'ta')
@@ -213,7 +221,8 @@ def load(con, user, ids=None):
     With `ids` (student page): exactly these classes, no user."""
     if ids is None:
         ids = visible_class_ids(con, user)
-    d = {'me': user, 'courses': [{'code': c['code'], 'name': c['name'], 'sets': c.get('sets', 1)} for c in COURSES.values()], 'classes': {}}
+    d = {'me': user, 'courses': [{'code': c['code'], 'name': c['name'], 'sets': c.get('sets', 1),
+                                  'has_quizzes': bool(c.get('has_quizzes'))} for c in COURSES.values()], 'classes': {}}
     if not ids:
         return d
     q = ','.join('?' * len(ids))
@@ -221,6 +230,7 @@ def load(con, user, ids=None):
     for r in con.execute(f'SELECT * FROM classes WHERE id IN ({q}) ORDER BY term, course, name', ids).fetchall():
         own = users.get(r['owner'])
         d['classes'][str(r['id'])] = {'id': r['id'], 'course': r['course'], 'courseName': COURSES.get(r['course'], {}).get('name', r['course']),
+                                      'has_quizzes': bool(COURSES.get(r['course'], {}).get('has_quizzes')),
                                       'term': r['term'], 'name': r['name'], 'vset': r['vset'], 'owner': own and own['username'],
                                       'ownerName': own and own['name'], 'role': class_role(con, user, r['id']), 'staff': [],
                                       'students': [], 'labs': {}, 'team': {}, 'sync': {}, 'publish': {}, 'photos': {}}

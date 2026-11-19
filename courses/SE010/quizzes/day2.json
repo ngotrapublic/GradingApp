@@ -1,0 +1,304 @@
+{
+  "slug": "day2",
+  "title": "Day 2 – PN junction & diodes",
+  "n_pick": 15,
+  "pass_score": 11,
+  "questions": [
+    {
+      "id": "d2q01",
+      "type": "mcq",
+      "stem": "The depletion region extends farther into the side that is",
+      "choices": [
+        "made of metal",
+        "more heavily doped",
+        "more lightly doped",
+        "forward biased only"
+      ],
+      "answer": 2,
+      "explain": "The lighter-doped side must be thicker to keep charge balance.",
+      "hint": "The lighter-doped side must be thicker to keep charge balance."
+    },
+    {
+      "id": "d2q02",
+      "type": "mcq",
+      "stem": "Reverse bias generally causes the depletion width to",
+      "choices": [
+        "decrease",
+        "remain fixed",
+        "increase",
+        "become zero"
+      ],
+      "answer": 2,
+      "explain": "More reverse voltage widens the depletion region.",
+      "hint": "More reverse voltage widens the depletion region."
+    },
+    {
+      "id": "d2q03",
+      "type": "mcq",
+      "stem": "An ideality factor near 2 usually indicates dominance of",
+      "choices": [
+        "optical reflection",
+        "neutral-region diffusion",
+        "depletion-region recombination",
+        "metal conduction"
+      ],
+      "answer": 2,
+      "explain": "Recombination in the depletion region gives n ≈ 2.",
+      "hint": "Recombination in the depletion region gives n ≈ 2."
+    },
+    {
+      "id": "d2q04",
+      "type": "mcq",
+      "stem": "Zener breakdown is primarily",
+      "choices": [
+        "surface reflection",
+        "impact ionization in a wide depletion region",
+        "field-induced tunnelling in a narrow depletion region",
+        "thermal diffusion only"
+      ],
+      "answer": 2,
+      "explain": "Zener means tunnelling in a thin, high-field region.",
+      "hint": "Zener means tunnelling in a thin, high-field region."
+    },
+    {
+      "id": "d2q05",
+      "type": "mcq",
+      "stem": "Compared with a pn diode, a Schottky diode typically has",
+      "choices": [
+        "more minority storage",
+        "slower switching",
+        "lower forward drop and faster switching",
+        "lower reverse leakage in all cases"
+      ],
+      "answer": 2,
+      "explain": "Schottky is a majority-carrier diode: lower V_F and fast switching.",
+      "hint": "Schottky is a majority-carrier diode: lower V_F and fast switching."
+    },
+    {
+      "id": "d2q06",
+      "type": "numeric",
+      "stem": "A diode has n=1 and I_D=5 mA at 300 K. Calculate small-signal r_d = n * V_T / I_D with V_T=0.0259 V.",
+      "answer": 5.18,
+      "unit": "ohm",
+      "tol_rel": 0.05,
+      "explain": "r_d = 0.0259 / 0.005 ≈ 5.18 Ω.",
+      "power10": -2,
+      "hint": "r_d = n * V_T / I_D with n = 1, V_T = 0.0259, I_D = 5 mA = 0.005 A. Compute (1 * 0.0259) / 0.005 on the calculator. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d2q07",
+      "type": "mcq",
+      "stem": "In an abrupt junction, charge neutrality requires",
+      "choices": [
+        "N_A/x_p = N_D/x_n",
+        "x_p = x_n always",
+        "N_A + x_p = N_D + x_n",
+        "N_A x_p = N_D x_n"
+      ],
+      "answer": 3,
+      "explain": "Equal uncovered charge: N_A x_p = N_D x_n.",
+      "hint": "Equal uncovered charge: N_A x_p = N_D x_n."
+    },
+    {
+      "id": "d2q08",
+      "type": "mcq",
+      "stem": "For an abrupt junction, a plot of 1/C_j² versus reverse voltage is ideally",
+      "choices": [
+        "constant",
+        "linear",
+        "exponential",
+        "sinusoidal"
+      ],
+      "answer": 1,
+      "explain": "For abrupt doping, 1/C² rises linearly with reverse voltage.",
+      "hint": "For abrupt doping, 1/C² rises linearly with reverse voltage."
+    },
+    {
+      "id": "d2q09",
+      "type": "mcq",
+      "stem": "Avalanche breakdown is caused by",
+      "choices": [
+        "MOS inversion",
+        "radiative recombination",
+        "impact ionization",
+        "Fresnel reflection"
+      ],
+      "answer": 2,
+      "explain": "Carriers smash into atoms and make more carriers (impact ionization).",
+      "hint": "Carriers smash into atoms and make more carriers (impact ionization)."
+    },
+    {
+      "id": "d2q10",
+      "type": "numeric",
+      "stem": "At 300 K with n=1, by what factor does diode current increase when V rises by 60 mV? Use exp(ΔV/V_T), V_T=0.0259 V.",
+      "answer": 10.1,
+      "unit": "",
+      "tol_rel": 0.08,
+      "explain": "exp(0.060/0.0259) ≈ 10. Enter about 10.",
+      "power10": 0,
+      "hint": "Growth factor = exp(ΔV / V_T) with ΔV = 0.060 V and V_T = 0.0259 V. First divide 0.060/0.0259, then press exp(...) on the calculator. Enter the integer for * 10^0."
+    },
+    {
+      "id": "d2q11",
+      "type": "mcq",
+      "stem": "A varactor is normally operated under",
+      "choices": [
+        "zero field only",
+        "avalanche at all times",
+        "strong forward bias",
+        "reverse bias"
+      ],
+      "answer": 3,
+      "explain": "Varactors use reverse bias to tune capacitance.",
+      "hint": "Varactors use reverse bias to tune capacitance."
+    },
+    {
+      "id": "d2q12",
+      "type": "mcq",
+      "stem": "Diffusion capacitance is most important under",
+      "choices": [
+        "deep reverse bias only",
+        "zero temperature",
+        "flat-band MOS conditions",
+        "substantial forward bias"
+      ],
+      "answer": 3,
+      "explain": "Forward bias stores minority charge, which looks like C_d.",
+      "hint": "Forward bias stores minority charge, which looks like C_d."
+    },
+    {
+      "id": "d2q13",
+      "type": "mcq",
+      "stem": "Forward bias on a pn junction generally",
+      "choices": [
+        "lowers the barrier and narrows depletion",
+        "widens depletion",
+        "eliminates minority injection",
+        "raises the barrier"
+      ],
+      "answer": 0,
+      "explain": "Forward bias reduces the barrier and shrinks depletion width.",
+      "hint": "Forward bias reduces the barrier and shrinks depletion width."
+    },
+    {
+      "id": "d2q14",
+      "type": "mcq",
+      "stem": "Punch-through occurs when",
+      "choices": [
+        "the oxide capacitance is maximum",
+        "laser gain equals loss",
+        "mobility becomes zero",
+        "depletion reaches another region before avalanche"
+      ],
+      "answer": 3,
+      "explain": "Depletion from one junction reaches another region first.",
+      "hint": "Depletion from one junction reaches another region first."
+    },
+    {
+      "id": "d2q15",
+      "type": "numeric",
+      "stem": "τ=1 μs and I_F=I_R. Calculate storage time t_s = τ * ln(1+I_F/I_R) in μs.",
+      "answer": 0.693,
+      "unit": "us",
+      "tol_rel": 0.05,
+      "explain": "ln(2)≈0.693, so t_s≈0.693 μs.",
+      "power10": -3,
+      "hint": "t_s = τ * ln(1 + I_F/I_R) with τ = 1 μs and I_F = I_R. Then 1 + I_F/I_R = 2. Compute ln(2) on the calculator (and * τ if needed). Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d2q16",
+      "type": "mcq",
+      "stem": "Built-in voltage V_bi increases when",
+      "choices": [
+        "N_A and N_D both increase",
+        "n_i increases a lot",
+        "temperature is irrelevant",
+        "area increases"
+      ],
+      "answer": 0,
+      "explain": "V_bi = V_T ln(N_A * N_D / n_i²), so higher doping raises V_bi.",
+      "hint": "V_bi = V_T ln(N_A * N_D / n_i²), so higher doping raises V_bi."
+    },
+    {
+      "id": "d2q17",
+      "type": "mcq",
+      "stem": "Ideal diode equation current depends exponentially on",
+      "choices": [
+        "V / (n * V_T)",
+        "only area",
+        "only mobility",
+        "oxide thickness"
+      ],
+      "answer": 0,
+      "explain": "I ≈ I_S * exp(V/(n * V_T)) in forward bias (with the usual approximations).",
+      "hint": "I ≈ I_S * exp(V/(n * V_T)) in forward bias (with the usual approximations)."
+    },
+    {
+      "id": "d2q18",
+      "type": "mcq",
+      "stem": "Junction capacitance mainly comes from",
+      "choices": [
+        "depletion charge change with voltage",
+        "metal resistance",
+        "blackbody radiation",
+        "Hall voltage"
+      ],
+      "answer": 0,
+      "explain": "C_j is the small-signal capacitance of the depletion charge.",
+      "hint": "C_j is the small-signal capacitance of the depletion charge."
+    },
+    {
+      "id": "d2q19",
+      "type": "mcq",
+      "stem": "Compared with avalanche, Zener usually needs",
+      "choices": [
+        "lower breakdown voltage / heavier doping",
+        "zero field",
+        "a solar cell",
+        "an LED cavity"
+      ],
+      "answer": 0,
+      "explain": "Zener is typical of heavily doped, lower-voltage junctions.",
+      "hint": "Zener is typical of heavily doped, lower-voltage junctions."
+    },
+    {
+      "id": "d2q20",
+      "type": "mcq",
+      "stem": "Series resistance in a real diode makes the I–V curve",
+      "choices": [
+        "bend away from pure exponential at high current",
+        "perfectly ideal forever",
+        "have negative resistance only",
+        "ignore temperature"
+      ],
+      "answer": 0,
+      "explain": "At high current, I_R drop makes the curve less steep.",
+      "hint": "At high current, I_R drop makes the curve less steep."
+    },
+    {
+      "id": "d2q21",
+      "type": "numeric",
+      "stem": "A diode has I_S=1e-12 A, n=1, T=300 K, V=0.65 V. Calculate current I = I_S * exp(V/V_T) with V_T=0.0259 V. Enter in A.",
+      "answer": 0.08,
+      "unit": "A",
+      "tol_rel": 0.15,
+      "explain": "exp(0.65/0.0259)≈7.96e10, times 1e-12 ≈ 0.08 A.",
+      "power10": -2,
+      "hint": "I = I_S * exp(V / V_T) with I_S = 1e-12, V = 0.65, V_T = 0.0259. Compute V/V_T, then exp(...), then multiply by 1e-12. Enter the integer for the given * 10 power."
+    },
+    {
+      "id": "d2q22",
+      "type": "mcq",
+      "stem": "A one-sided abrupt junction has depletion mostly in",
+      "choices": [
+        "the lighter doped side",
+        "the metal contact",
+        "the package",
+        "the intrinsic Fermi level only"
+      ],
+      "answer": 0,
+      "explain": "Almost all of W sits in the lightly doped side.",
+      "hint": "Almost all of W sits in the lightly doped side."
+    }
+  ]
+}
