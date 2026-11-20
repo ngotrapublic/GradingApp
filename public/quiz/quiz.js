@@ -451,7 +451,7 @@ function renderExplain(app) {
   h += `<div class="explain">${quizMath(q.explain || 'This is the correct idea for this item.')}</div>
     </div>
     <p class="muted" id="explainWait"></p>
-    <button class="big on" id="next" disabled>${E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp')}</button>
+    <button class="big on" id="next">${E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp')}</button>
     </main>`;
   app.innerHTML = h;
   bindLangToggle(app);
@@ -469,18 +469,23 @@ function renderExplain(app) {
       clearInterval(E._timer);
       E._timer = null;
       waitEl.textContent = '';
-      next.disabled = false;
+      next.classList.remove('wait');
       next.textContent = doneLabel;
       return;
     }
-    next.disabled = true;
-    waitEl.textContent = T(`Next unlocks in ${sec}s — keep reading.`, `Còn ${sec}s mới bấm tiếp — hãy đọc tiếp.`);
+    next.classList.add('wait');
+    waitEl.textContent = T(`Next unlocks in ${sec}s — keep reading. Tapping adds +10s.`, `Còn ${sec}s mới bấm tiếp — hãy đọc. Bấm sớm bị +10s.`);
     next.textContent = T(`Wait ${sec}s`, `Chờ ${sec}s`);
   };
   E._timer = setInterval(tick, 200);
   tick();
   next.onclick = () => {
-    if (Date.now() < E.unlockAt || next.disabled) return;
+    if (Date.now() < E.unlockAt) {
+      E.unlockAt += 10000;
+      if (!E._timer) E._timer = setInterval(tick, 200);
+      tick();
+      return;
+    }
     if (E._timer) clearInterval(E._timer);
     if (E.i + 1 >= n) return finishExplain();
     E.i += 1;

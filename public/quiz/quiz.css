@@ -49,6 +49,7 @@
 .review .explain{font-size:14px;color:var(--mut);margin-top:6px}
 .big{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--g);background:#fff;color:var(--g2);font-weight:700;margin:8px 0}
 .big.on{background:var(--g);color:#fff;border-color:var(--g)}
+.big.wait{opacity:.55;background:#c5cebf;border-color:#c5cebf;color:#3a4634}
 .who{padding:12px 14px}
 .who .nm{font-weight:700;font-size:18px}
 .who .sub{color:var(--mut);font-size:14px;margin-top:2px}
