@@ -491,10 +491,11 @@ function renderExplain(app) {
       h += `<div class="muted">${String.fromCharCode(65 + ci)}. ${quizMath(c)}${tag ? `<b>${tag}</b>` : ''}</div>`;
     });
   }
+  const last = E.i + 1 >= n;
   h += `<div class="explain"><b>${T('Explanation', 'Giải thích')}</b>: ${quizMath(q.explain || 'This is the correct idea for this item.')}</div>
     </div>
     <p class="muted" id="explainWait"></p>
-    <button class="big on" id="next">${E.i + 1 >= n ? T('See final result', 'Xem kết quả cuối') : T('Next', 'Tiếp')}</button>
+    <button class="big on" id="next">${last ? T('Continue to attendance', 'Tiếp tới điểm danh') : T('Next', 'Tiếp')}</button>
     </main>`;
   app.innerHTML = h;
   bindLangToggle(app);
@@ -502,7 +503,7 @@ function renderExplain(app) {
   const out = $('#out'); if (out) out.onclick = signOut;
   const next = $('#next');
   const waitEl = $('#explainWait');
-  const doneLabel = E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp');
+  const doneLabel = last ? T('Continue to attendance', 'Tiếp tới điểm danh') : T('Next', 'Tiếp');
   if (E._timer) clearInterval(E._timer);
   const tick = () => {
     if (!Q.explain || Q.explain !== E) { clearInterval(E._timer); return; }
@@ -530,18 +531,44 @@ function renderExplain(app) {
       return;
     }
     if (E._timer) clearInterval(E._timer);
-    if (E.i + 1 >= n) return finishExplain();
+    if (last) return showAttendanceAsk();
     E.i += 1;
     E.unlockAt = Date.now() + 10000;
     render();
   };
 }
 
+function showAttendanceAsk() {
+  const E = Q.explain;
+  if (!E) return;
+  if (E._timer) clearInterval(E._timer);
+  const app = $('#app');
+  const askLabel = T("I'm done — please mark my attendance", 'Em xong rồi — thầy điểm danh giúp em');
+  app.innerHTML = headBar() + `<main>
+    <div class="card" style="padding:16px">
+      <h2 style="margin-top:0">${T('Ready for attendance', 'Sẵn sàng điểm danh')}</h2>
+      <p class="muted">${T('You finished every explanation. Tap the button below to join the attendance list. Then wait for the lecturer to check you (or you may leave if told to).', 'Bạn đã xem hết giải thích. Bấm nút bên dưới để vào danh sách điểm danh. Sau đó chờ thầy check (hoặc ra về nếu thầy cho phép).')}</p>
+    </div>
+    <button class="big on" id="askAtt">${askLabel}</button>
+  </main>`;
+  bindLangToggle(app);
+  const out = $('#out'); if (out) out.onclick = signOut;
+  $('#askAtt').onclick = async () => {
+    const btn = $('#askAtt');
+    btn.disabled = true;
+    await finishExplain();
+  };
+}
+
 async function finishExplain() {
   const E = Q.explain;
+  if (!E) return;
   const slug = E.slug;
   const j = await post('/api/public/quiz/finish_explain', { slug });
-  if (!j) return;
+  if (!j) {
+    render();
+    return;
+  }
   const score = j.score != null ? j.score : E.score;
   const total = j.total != null ? j.total : E.total;
   const passScore = j.pass_score != null ? j.pass_score : E.pass_score;
@@ -552,9 +579,9 @@ async function finishExplain() {
     <div>${T('Passed', 'Đạt')}</div>
     <div class="score">${esc(String(score))} / ${esc(String(total))}</div>
     <div class="muted">${T('Pass mark', 'Mốc đạt')}: ${esc(String(passScore))}/${esc(String(total))}</div>
-    <p class="muted"><b>${T('Attendance recorded. You may leave now.', 'Đã điểm danh. Bạn có thể ra về.')}</b></p>
+    <p class="muted"><b>${T('You are on the attendance list. The lecturer can mark you now — you may leave.', 'Bạn đã có trong danh sách điểm danh. Thầy có thể điểm danh — bạn có thể ra về.')}</b></p>
   </div>
-  <button class="big on" id="done">${T('OK', 'OK')}</button></main>`;
+  <button class="big on" id="done">${T('OK — I understand', 'OK — Em hiểu rồi')}</button></main>`;
   bindLangToggle(app);
   const out = $('#out'); if (out) out.onclick = signOut;
   $('#done').onclick = () => reload();
