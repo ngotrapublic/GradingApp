@@ -197,8 +197,9 @@ function renderHome(app) {
       badge = `<span class="badge ok">${T('Attendance done', 'Đã điểm danh')} ${s.best}/${s.n_pick}</span>`;
       btn = `<p class="muted">${T('You may leave.', 'Bạn có thể ra về.')}</p>`;
     } else if (s.needs_explanations) {
-      badge = `<span class="badge warn">${T('Passed — read explanations', 'Đạt — đọc giải thích')} ${s.best}/${s.n_pick}</span>`;
-      btn = `<button class="big on" data-explain="${esc(s.slug)}">${T('Continue explanations', 'Tiếp tục đọc giải thích')}</button>`;
+      badge = `<span class="badge warn">${T('Finish answer review', 'Cần xem lại đáp án')}</span>`;
+      btn = `<p class="muted">${T('Read every question’s answer before attendance is recorded. Result is shown only at the end.', 'Phải xem hết đáp án từng câu mới điểm danh. Kết quả chỉ hiện ở cuối.')}</p>
+        <button class="big on" data-explain="${esc(s.slug)}">${T('Continue answer review', 'Tiếp tục xem đáp án')}</button>`;
     } else if (s.passed) {
       badge = `<span class="badge ok">${T('Passed', 'Đạt')} ${s.best}/${s.n_pick}</span>`;
       btn = `<p class="muted">${T('Done.', 'Đã xong.')}</p>`;
@@ -309,6 +310,7 @@ function beginExplain(payload) {
     slug: payload.slug,
     score: payload.score,
     total: payload.total,
+    pass_score: payload.pass_score,
     review: payload.review || [],
     i: 0,
     unlockAt: Date.now() + 10000,
@@ -418,7 +420,7 @@ function renderPaper(app) {
     }
     closeHintPopup();
     Q.paper = null;
-    if (j.passed && j.needs_explanations && j.review) beginExplain(j);
+    if (j.needs_explanations && j.review) beginExplain(j);
     else { Q.result = j; render(); }
   };
 }
@@ -468,27 +470,31 @@ function renderExplain(app) {
     return;
   }
   let h = headBar() + `<main class="no-copy">
-    <p class="muted">${T('Explanation', 'Giải thích')} ${E.i + 1} / ${n}. ${T('Read carefully (English).', 'Đọc kỹ (tiếng Anh).')}</p>
+    <p class="muted"><b>${T('Answer review', 'Xem đáp án')}</b> ${E.i + 1} / ${n}. ${T('Your choice, the correct answer, and the English explanation. Final score only at the end.', 'Đáp án bạn chọn, đáp án đúng, và giải thích tiếng Anh. Điểm tổng chỉ hiện ở cuối.')}</p>
     <div class="card qcard ${q.ok ? 'ok' : 'bad'}">
-      <div class="stem">${E.i + 1}. ${quizMath(q.stem)}</div>`;
+      <div class="stem">${E.i + 1}. ${quizMath(q.stem)}</div>
+      <p class="muted"><b>${q.ok ? T('You got this right', 'Bạn đúng câu này') : T('You got this wrong', 'Bạn sai câu này')}</b></p>`;
   if ((q.type || 'mcq') === 'numeric') {
     const unit = q.unit ? ' ' + q.unit : '';
     const exp = Number.isFinite(+q.exp) ? +q.exp : (Number.isFinite(+q.power10) ? +q.power10 : 0);
     const yours = (q.mantissa == null || q.mantissa === '')
       ? '–'
       : `${esc(String(q.mantissa))} * 10<sup>${exp}</sup>${quizMath(unit)}`;
-    h += `<div class="muted">${T('Your answer', 'Bạn nhập')}: ${yours}</div>
-      <div class="muted">${T('Correct', 'Đáp án đúng')}: ${esc(String(q.correct))}${quizMath(unit)}</div>`;
+    h += `<div class="muted"><b>${T('Your answer', 'Bạn chọn')}</b>: ${yours}</div>
+      <div class="muted"><b>${T('Correct answer', 'Đáp án đúng')}</b>: ${esc(String(q.correct))}${quizMath(unit)}</div>`;
   } else {
     (q.choices || []).forEach((c, ci) => {
-      const mark = ci === q.correct ? ' ✓' : (ci === q.chosen ? ' ✗' : '');
-      h += `<div class="muted">${String.fromCharCode(65 + ci)}. ${quizMath(c)}${mark}</div>`;
+      let tag = '';
+      if (ci === q.correct && ci === q.chosen) tag = ` ← ${T('your choice = correct', 'bạn chọn = đúng')}`;
+      else if (ci === q.correct) tag = ` ← ${T('correct', 'đáp án đúng')}`;
+      else if (ci === q.chosen) tag = ` ← ${T('your choice', 'bạn chọn')}`;
+      h += `<div class="muted">${String.fromCharCode(65 + ci)}. ${quizMath(c)}${tag ? `<b>${tag}</b>` : ''}</div>`;
     });
   }
-  h += `<div class="explain">${quizMath(q.explain || 'This is the correct idea for this item.')}</div>
+  h += `<div class="explain"><b>${T('Explanation', 'Giải thích')}</b>: ${quizMath(q.explain || 'This is the correct idea for this item.')}</div>
     </div>
     <p class="muted" id="explainWait"></p>
-    <button class="big on" id="next">${E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp')}</button>
+    <button class="big on" id="next">${E.i + 1 >= n ? T('See final result', 'Xem kết quả cuối') : T('Next', 'Tiếp')}</button>
     </main>`;
   app.innerHTML = h;
   bindLangToggle(app);
@@ -532,29 +538,26 @@ function renderExplain(app) {
 }
 
 async function finishExplain() {
-  const slug = Q.explain.slug;
+  const E = Q.explain;
+  const slug = E.slug;
   const j = await post('/api/public/quiz/finish_explain', { slug });
   if (!j) return;
+  const score = j.score != null ? j.score : E.score;
+  const total = j.total != null ? j.total : E.total;
+  const passScore = j.pass_score != null ? j.pass_score : E.pass_score;
   Q.explain = null;
-  Q.result = {
-    passed: true,
-    attendance_done: true,
-    score: '—',
-    total: '—',
-    pass_score: '—',
-    slug,
-    doneMsg: true,
-  };
+  Q.result = null;
   const app = $('#app');
   app.innerHTML = headBar() + `<main><div class="card result pass">
-    <div>${T('Attendance recorded', 'Đã điểm danh')}</div>
-    <div class="score">✓</div>
-    <p class="muted">${T('You have completed the quiz and all explanations. You may leave now.', 'Bạn đã hoàn thành quiz và toàn bộ giải thích. Bạn có thể ra về.')}</p>
+    <div>${T('Passed', 'Đạt')}</div>
+    <div class="score">${esc(String(score))} / ${esc(String(total))}</div>
+    <div class="muted">${T('Pass mark', 'Mốc đạt')}: ${esc(String(passScore))}/${esc(String(total))}</div>
+    <p class="muted"><b>${T('Attendance recorded. You may leave now.', 'Đã điểm danh. Bạn có thể ra về.')}</b></p>
   </div>
   <button class="big on" id="done">${T('OK', 'OK')}</button></main>`;
   bindLangToggle(app);
   const out = $('#out'); if (out) out.onclick = signOut;
-  $('#done').onclick = () => { Q.result = null; reload(); };
+  $('#done').onclick = () => reload();
 }
 
 function render() {

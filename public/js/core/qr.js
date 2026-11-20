@@ -15,7 +15,8 @@ During the quiz
 • If you get stuck, a hint bulb may unlock later (not the final answer)
 
 After you finish
-• Pass → read every English explanation → attendance is recorded
+• After submit: review each question (your answer + correct + English explanation)
+• Final score / pass / attendance only appear after that review
 • Fail → you may retry
 • Goal: review and understand, not attendance only`;
 
@@ -43,7 +44,8 @@ const QUIZ_STUDENT_NOTICE_HTML = `
       </ul>
       <div class="quiz-notice-h">After you finish</div>
       <ul>
-        <li>Pass → read every English explanation → attendance is recorded</li>
+        <li>After submit: review each question (your answer + correct + English explanation)</li>
+        <li>Final score / pass / attendance only appear after that review</li>
         <li>Fail → you may retry</li>
         <li>Goal: review and understand, not attendance only</li>
       </ul>

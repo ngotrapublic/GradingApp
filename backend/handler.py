@@ -1381,9 +1381,17 @@ def public_quiz_submit(self, con, qu, body):
     if rev and rev['seen']:
         out['attendance_done'] = True
         return self.send_json(out)
-    out['needs_explanations'] = True
-    out['review'] = review
-    return self.send_json(out)
+    # Do not reveal pass/score on the wire until the student finishes the review walkthrough.
+    return self.send_json({
+        'attempt_id': aid,
+        'slug': att['slug'],
+        'needs_explanations': True,
+        'review': review,
+        'total': total,
+        'score': score,
+        'pass_score': pass_score,
+        'hide_outcome': True,
+    })
 
 
 def public_quiz_review(self, con, qu, body):
@@ -1402,7 +1410,7 @@ def public_quiz_review(self, con, qu, body):
     s = _quiz_settings(con, cid, row['course'], slug) if row else None
     return self.send_json({
         'needs_explanations': True,
-        'passed': True,
+        'hide_outcome': True,
         'slug': slug,
         'score': payload['score'],
         'total': payload['total'],
@@ -1416,9 +1424,11 @@ def public_quiz_finish_explain(self, con, qu, body):
     """Mark attendance after the student finishes all forced explanations."""
     cid = qu['class_id']
     slug = str(body.get('slug') or '').strip()
-    att, _ = _review_from_pass(con, cid, qu['sid'], slug)
+    att, payload = _review_from_pass(con, cid, qu['sid'], slug)
     if not att:
         return self.send_json(err('No passing attempt.', 'Chưa có bài đạt.'), 404)
+    row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
+    s = _quiz_settings(con, cid, row['course'], slug) if row else None
     con.execute(
         'INSERT INTO quiz_reveal (class_id, slug, sid, seen, first_pass) VALUES (?,?,?,1,?) '
         'ON CONFLICT(class_id, slug, sid) DO UPDATE SET seen=1, first_pass=COALESCE(quiz_reveal.first_pass, excluded.first_pass)',
@@ -1426,9 +1436,13 @@ def public_quiz_finish_explain(self, con, qu, body):
     return self.send_json({
         'ok': True,
         'attendance_done': True,
+        'passed': True,
         'slug': slug,
-        'message': 'Attendance recorded. You may leave.',
-        'message_vi': 'Đã điểm danh. Bạn có thể ra về.',
+        'score': payload['score'],
+        'total': payload['total'],
+        'pass_score': s['pass_score'] if s else payload['score'],
+        'message': 'Passed. Attendance recorded. You may leave.',
+        'message_vi': 'Đạt. Đã điểm danh. Bạn có thể ra về.',
     })
 
 
