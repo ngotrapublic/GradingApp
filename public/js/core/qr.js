@@ -1,34 +1,21 @@
-const QUIZ_STUDENT_NOTICE_EN = `SE010 – Weekly Review Quiz
+const QUIZ_STUDENT_NOTICE_EN = `Weekly review quiz (not the final exam)
+• Phone/tablet only — scan QR, enter name + student ID
+• Laptop OK for Canvas notes; stay in this quiz app on your phone
+• 15 questions · pass 11/15 · calculator OK
+• Leaving/switching apps may end your attempt
+• Pass → read all English explanations → attendance
+• Fail → retry`;
 
-Please read before you start.
-
-Purpose
-This is a weekly review quiz to help you prepare for the final exam. It is not the final exam itself. Question numbers and wording may differ from the real test.
-
-What to bring / how to work
-• Do the quiz on your phone or tablet only (computers cannot open the quiz).
-• You may use your laptop to read the weekly review PDFs on Canvas while answering on your phone.
-• Bring a non-programmable calculator for numerical questions.
-
-How the quiz works
-• You will get 15 questions (shuffled; each student may see a different set).
-• Pass mark: 11 / 15.
-• For number questions, enter an integer only; the ×10 power is already shown.
-• Stay in the quiz app. If you switch to another app, lock the phone, or leave the page, your attempt may end immediately.
-• If you get disconnected, open the link again and enter either your full name or student ID (whichever matches what you used before) to continue.
-
-After you pass
-• You must read all English explanations on screen.
-• Attendance is recorded only after you finish the explanations.
-• If you do not pass, you may retry. If you already passed, you cannot retake unless the lecturer resets you.
-
-Hints
-• Hints (lightbulb) unlock after 20 minutes, or after several failed attempts.
-• Theory hints explain the idea; calculation hints show how to plug in numbers — you still finish the calculator steps yourself.
-
-Please try to understand the material. The goal is review and learning, not only attendance.
-
-Use the class quiz link / QR code provided by your lecturer for this week’s topic.`;
+const QUIZ_STUDENT_NOTICE_HTML = `
+  <div class="quiz-notice-title">Weekly review quiz <span>(not the final exam)</span></div>
+  <ul class="quiz-notice-cols">
+    <li>Phone/tablet only — scan QR, enter name + student ID</li>
+    <li>Laptop OK for Canvas notes; stay in this quiz app on your phone</li>
+    <li>15 questions · pass 11/15 · calculator OK</li>
+    <li>Leaving/switching apps may end your attempt</li>
+    <li>Pass → read all English explanations → attendance</li>
+    <li>Fail → retry</li>
+  </ul>`;
 
 async function showQR(forStudents, clsId) {
   let target = '';
@@ -67,8 +54,8 @@ async function showQR(forStudents, clsId) {
             <p><b>${esc(url)}</b></p>
           </div>
           <div class="quiz-qr-notice">
-            <h3>${T('Student notice (English) — share with the class', 'Thông báo cho SV (tiếng Anh) — gửi kèm lớp')}</h3>
-            <div class="quiz-notice-body" id="quizNoticeBody">${esc(QUIZ_STUDENT_NOTICE_EN)}</div>
+            <h3>${T('For students (English)', 'Cho SV (tiếng Anh)')}</h3>
+            <div class="quiz-notice-body" id="quizNoticeBody">${QUIZ_STUDENT_NOTICE_HTML}</div>
             <div class="quiz-qr-actions">
               <button type="button" class="btn pri" id="quizNoticeCopy">${T('Copy notice', 'Copy thông báo')}</button>
               <button type="button" class="btn pri" data-close="1">${T('Close', 'Đóng')}</button>
