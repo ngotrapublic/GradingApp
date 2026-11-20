@@ -8,7 +8,7 @@ Before you start
 
 During the quiz
 • 15 shuffled questions · pass mark 11/15
-• Number answers: type the integer only (*10 power is already shown)
+• Number answers: type integer coefficient and the power of 10 (e.g. 259 and −4)
 • Stay in this quiz app — switching apps / locking the phone may end your attempt
 • If disconnected: reopen the link and enter name or student ID to continue
 • If you get stuck, a hint bulb may unlock later (not the final answer)
@@ -34,7 +34,7 @@ const QUIZ_STUDENT_NOTICE_HTML = `
       <div class="quiz-notice-h">During the quiz</div>
       <ul>
         <li>15 shuffled questions · pass mark <b>11/15</b></li>
-        <li>Number answers: type the integer only (*10 power is already shown)</li>
+        <li>Number answers: type integer coefficient and the power of 10 (e.g. 259 and −4)</li>
         <li>Stay in this quiz app — switching apps / locking the phone may end your attempt</li>
         <li>If disconnected: reopen the link and enter name or student ID to continue</li>
         <li>If you get stuck, a hint bulb may unlock later (not the final answer)</li>

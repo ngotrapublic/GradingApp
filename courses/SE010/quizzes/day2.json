@@ -83,7 +83,7 @@
       "tol_rel": 0.05,
       "explain": "r_d = 0.0259 / 0.005 ≈ 5.18 Ω.",
       "power10": -2,
-      "hint": "r_d = n * V_T / I_D with n = 1, V_T = 0.0259, I_D = 5 mA = 0.005 A. Compute (1 * 0.0259) / 0.005 on the calculator. Enter the integer for the given * 10 power."
+      "hint": "r_d = n * V_T / I_D with n = 1, V_T = 0.0259, I_D = 5 mA = 0.005 A. Compute (1 * 0.0259) / 0.005 on the calculator. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d2q07",
@@ -136,7 +136,7 @@
       "tol_rel": 0.08,
       "explain": "exp(0.060/0.0259) ≈ 10. Enter about 10.",
       "power10": 0,
-      "hint": "Growth factor = exp(ΔV / V_T) with ΔV = 0.060 V and V_T = 0.0259 V. First divide 0.060/0.0259, then press exp(...) on the calculator. Enter the integer for * 10^0."
+      "hint": "Growth factor = exp(ΔV / V_T) with ΔV = 0.060 V and V_T = 0.0259 V. First divide 0.060/0.0259, then press exp(...) on the calculator. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d2q11",
@@ -203,7 +203,7 @@
       "tol_rel": 0.05,
       "explain": "ln(2)≈0.693, so t_s≈0.693 μs.",
       "power10": -3,
-      "hint": "t_s = τ * ln(1 + I_F/I_R) with τ = 1 μs and I_F = I_R. Then 1 + I_F/I_R = 2. Compute ln(2) on the calculator (and * τ if needed). Enter the integer for the given * 10 power."
+      "hint": "t_s = τ * ln(1 + I_F/I_R) with τ = 1 μs and I_F = I_R. Then 1 + I_F/I_R = 2. Compute ln(2) on the calculator (and * τ if needed). Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d2q16",
@@ -284,7 +284,7 @@
       "tol_rel": 0.15,
       "explain": "exp(0.65/0.0259)≈7.96e10, times 1e-12 ≈ 0.08 A.",
       "power10": -2,
-      "hint": "I = I_S * exp(V / V_T) with I_S = 1e-12, V = 0.65, V_T = 0.0259. Compute V/V_T, then exp(...), then multiply by 1e-12. Enter the integer for the given * 10 power."
+      "hint": "I = I_S * exp(V / V_T) with I_S = 1e-12, V = 0.65, V_T = 0.0259. Compute V/V_T, then exp(...), then multiply by 1e-12. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d2q22",

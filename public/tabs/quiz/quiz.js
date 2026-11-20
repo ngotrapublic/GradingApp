@@ -60,25 +60,50 @@ async function loadQuizRoster(slug) {
     left: T('Left app / empty', 'Thoát app / trống'),
     open: T('Started (no submit)', 'Mở đề (chưa nộp)'),
   };
+  const logBySid = {};
+  (j.log || []).forEach(a => {
+    (logBySid[a.sid] || (logBySid[a.sid] = [])).push(a);
+  });
   let h = `<div class="card" style="padding:12px"><h2>${esc(slug)} – ${T('Roster', 'Danh sách')}</h2>
+    <p class="muted">${T('Tap Log on a student to see only that student’s attempts.', 'Bấm Log ở từng SV để xem các lần làm của bạn đó.')}</p>
     <table><thead><tr><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Best', 'Cao nhất')}</th><th>${T('Tries', 'Lần')}</th><th>${T('Pass', 'Đạt')}</th><th>${T('Solutions', 'Đáp án')}</th><th></th></tr></thead><tbody>`;
   j.roster.forEach(r => {
-    h += `<tr><td>${esc(r.name)}</td><td>${esc(r.sid)}</td><td>${r.best == null ? '–' : r.best}</td><td>${r.tries}</td>
+    h += `<tr data-sid="${esc(r.sid)}"><td>${esc(r.name)}</td><td>${esc(r.sid)}</td><td>${r.best == null ? '–' : r.best}</td><td>${r.tries}</td>
       <td>${r.passed ? '✓' : '–'}</td><td>${r.solutions_seen ? '✓' : '–'}</td>
-      <td><button class="btn warn" data-reset="${esc(r.sid)}" data-slug="${esc(slug)}">${T('Reset', 'Reset')}</button></td></tr>`;
+      <td style="white-space:nowrap">
+        <button class="btn" data-log="${esc(r.sid)}">${T('Log', 'Log')}</button>
+        <button class="btn warn" data-reset="${esc(r.sid)}" data-slug="${esc(slug)}">${T('Reset', 'Reset')}</button>
+      </td></tr>
+      <tr class="quiz-log-row" data-logfor="${esc(r.sid)}" hidden><td colspan="7" id="qlog-${esc(r.sid)}"></td></tr>`;
   });
-  h += `</tbody></table>
-    <h2 style="margin-top:16px">${T('Attempt log', 'Log các lần làm')}</h2>
-    <p class="muted">${T('Every start/submit for this quiz set (newest first).', 'Mọi lần mở đề / nộp của bộ quiz này (mới nhất trước).')}</p>
-    <table><thead><tr><th>${T('Time', 'Thời gian')}</th><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Score', 'Điểm')}</th><th>${T('Result', 'Kết quả')}</th></tr></thead><tbody>`;
-  (j.log || []).forEach(a => {
-    const sc = a.score == null ? '–' : `${a.score}/${a.total == null ? '–' : a.total}`;
-    h += `<tr><td>${esc(a.created || '–')}</td><td>${esc(a.name)}</td><td>${esc(a.sid)}</td><td>${sc}</td>
-      <td>${esc(stLabel[a.status] || a.status)}</td></tr>`;
-  });
-  if (!(j.log || []).length) h += `<tr><td colspan="5" class="muted">${T('No attempts yet.', 'Chưa có lần làm nào.')}</td></tr>`;
   h += `</tbody></table></div>`;
   box.innerHTML = h;
+  const renderOneLog = (sid) => {
+    const cell = box.querySelector('#qlog-' + CSS.escape(sid));
+    const row = box.querySelector(`[data-logfor="${CSS.escape(sid)}"]`);
+    if (!cell || !row) return;
+    const rows = logBySid[sid] || [];
+    if (!rows.length) {
+      cell.innerHTML = `<p class="muted" style="margin:6px 0">${T('No attempts yet.', 'Chưa có lần làm nào.')}</p>`;
+    } else {
+      let t = `<table style="margin:6px 0"><thead><tr><th>${T('Time', 'Thời gian')}</th><th>${T('Score', 'Điểm')}</th><th>${T('Result', 'Kết quả')}</th></tr></thead><tbody>`;
+      rows.forEach(a => {
+        const sc = a.score == null ? '–' : `${a.score}/${a.total == null ? '–' : a.total}`;
+        t += `<tr><td>${esc(a.created || '–')}</td><td>${sc}</td><td>${esc(stLabel[a.status] || a.status)}</td></tr>`;
+      });
+      t += `</tbody></table>`;
+      cell.innerHTML = t;
+    }
+    row.hidden = false;
+  };
+  box.querySelectorAll('[data-log]').forEach(b => b.onclick = () => {
+    const sid = b.dataset.log;
+    const row = box.querySelector(`[data-logfor="${CSS.escape(sid)}"]`);
+    if (!row) return;
+    if (!row.hidden) { row.hidden = true; return; }
+    box.querySelectorAll('.quiz-log-row').forEach(r => { r.hidden = true; });
+    renderOneLog(sid);
+  });
   box.querySelectorAll('[data-reset]').forEach(b => b.onclick = async () => {
     const sid = b.dataset.reset;
     if (!confirm(T(`Reset ${sid}? They can take the quiz again.`, `Reset ${sid}? Sinh viên sẽ làm lại được.`))) return;

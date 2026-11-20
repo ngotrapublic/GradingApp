@@ -83,7 +83,7 @@
       "tol_rel": 0.03,
       "explain": "I_D,sat = 0.5 * 4 = 2 mA.",
       "power10": 0,
-      "hint": "I_D,sat = (k/2) * V_OV^2 with k = 1 mA/V^2 and V_OV = 2 V. Compute V_OV^2, multiply by k/2. Enter the integer for * 10^0."
+      "hint": "I_D,sat = (k/2) * V_OV^2 with k = 1 mA/V^2 and V_OV = 2 V. Compute V_OV^2, multiply by k/2. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d3q07",
@@ -94,7 +94,7 @@
       "tol_rel": 0.03,
       "explain": "r_o = 50 / 0.0025 = 20000 Ω = 20 kΩ.",
       "power10": 0,
-      "hint": "r_o = VA / I_C with VA = 50 V and I_C = 2.5 mA = 0.0025 A. Divide, then convert Ω → kΩ for the unit shown. Enter the integer for * 10^0."
+      "hint": "r_o = VA / I_C with VA = 50 V and I_C = 2.5 mA = 0.0025 A. Divide, then convert Ω → kΩ for the unit shown. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d3q08",
@@ -133,7 +133,7 @@
       "tol_rel": 0.03,
       "explain": "β = 0.99/0.01 = 99.",
       "power10": 0,
-      "hint": "β = α / (1 - α) with α = 0.99. Compute (1 - 0.99) first, then divide 0.99 by that result. Enter the integer for * 10^0."
+      "hint": "β = α / (1 - α) with α = 0.99. Compute (1 - 0.99) first, then divide 0.99 by that result. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d3q11",
@@ -158,7 +158,7 @@
       "tol_rel": 0.03,
       "explain": "g_m = 2 * 2 / 1 = 4 mS.",
       "power10": 0,
-      "hint": "g_m = 2 * I_D / V_OV with I_D = 2 mA and V_OV = 1 V. Compute 2 * 2 / 1 on the calculator (result in mS). Enter the integer for * 10^0."
+      "hint": "g_m = 2 * I_D / V_OV with I_D = 2 mA and V_OV = 1 V. Compute 2 * 2 / 1 on the calculator (result in mS). Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d3q13",
@@ -267,7 +267,7 @@
       "tol_rel": 0.08,
       "explain": "f_T = 0.008 / (2 * π * 0.4e-12) ≈ 3.18e9 Hz ≈ 3.18 GHz.",
       "power10": -2,
-      "hint": "f_T = g_m / (2 * π * C) with g_m = 8 mS = 0.008 S and C = 0.4 pF = 0.4e-12 F. Compute the denominator 2*π*C, then divide g_m by it, then convert Hz → GHz. Enter the integer for the given * 10 power."
+      "hint": "f_T = g_m / (2 * π * C) with g_m = 8 mS = 0.008 S and C = 0.4 pF = 0.4e-12 F. Compute the denominator 2*π*C, then divide g_m by it, then convert Hz → GHz. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d3q21",

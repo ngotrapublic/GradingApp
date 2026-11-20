@@ -83,7 +83,7 @@
       "tol_rel": 0.03,
       "explain": "σ = q * n * μ = 1.6e-19 * 2e16 * 1000 = 3.2 S/cm.",
       "power10": -1,
-      "hint": "Use σ = q * n * μ with q = 1.6e-19, n = 2e16, μ = 1000. Compute 1.6e-19 * 2e16 first, then multiply by 1000. Enter the integer for the given * 10 power."
+      "hint": "Use σ = q * n * μ with q = 1.6e-19, n = 2e16, μ = 1000. Compute 1.6e-19 * 2e16 first, then multiply by 1000. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d1q07",
@@ -94,7 +94,7 @@
       "tol_rel": 0.05,
       "explain": "1/μ = 1/800 + 1/400 = 0.00375, so μ ≈ 267 cm^2/Vs.",
       "power10": 0,
-      "hint": "Matthiessen: 1/μ = 1/800 + 1/400. Add those two terms on the calculator, then take the reciprocal 1/(...). Enter the integer for * 10^0."
+      "hint": "Matthiessen: 1/μ = 1/800 + 1/400. Add those two terms on the calculator, then take the reciprocal 1/(...). Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d1q08",
@@ -119,7 +119,7 @@
       "tol_rel": 0.03,
       "explain": "D_n = 1000 * 0.0259 = 25.9 cm^2/s.",
       "power10": -1,
-      "hint": "Use D_n = μ_n * V_T with μ_n = 1000 and V_T = 0.0259. Multiply those two numbers. Enter the integer for the given * 10 power."
+      "hint": "Use D_n = μ_n * V_T with μ_n = 1000 and V_T = 0.0259. Multiply those two numbers. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d1q10",
@@ -144,7 +144,7 @@
       "tol_rel": 0.02,
       "explain": "n_0 ≈ N_D − N_A = 5e15 cm^-3.",
       "power10": 15,
-      "hint": "Majority electrons: n_0 ≈ N_D - N_A with N_D = 6e15 and N_A = 1e15. Subtract, then match the given * 10 power."
+      "hint": "Majority electrons: n_0 ≈ N_D - N_A with N_D = 6e15 and N_A = 1e15. Subtract, then enter coefficient and power of 10."
     },
     {
       "id": "d1q12",
@@ -244,7 +244,7 @@
     {
       "id": "d1q19",
       "type": "numeric",
-      "stem": "At 300 K, calculate V_T = k * T / q (use 0.0259 V as the standard value to enter).",
+      "stem": "At 300 K, calculate V_T = k * T / q (standard room-temperature value ≈ 0.0259 V).",
       "answer": 0.0259,
       "unit": "V",
       "tol_rel": 0.05,

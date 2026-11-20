@@ -94,6 +94,42 @@ def parse_number(raw):
         return None
 
 
+def parse_mantissa_exp(raw, legacy_power10=0):
+    """Student enters coefficient + power of 10. Returns (value, mantissa, exp) or (None, None, None).
+
+    New answers: {'m': '259', 'e': '-4'} or '259e-4'.
+    Legacy: plain coefficient with fixed bank power10.
+    """
+    if raw is None or raw == '':
+        return None, None, None
+    if isinstance(raw, dict):
+        m = parse_number(raw.get('m', raw.get('mantissa')))
+        e_raw = raw.get('e', raw.get('exp', raw.get('power10')))
+        e = parse_number(e_raw)
+        if m is None:
+            return None, None, None
+        e = 0 if e is None else int(e)
+        return m * (10 ** e), m, e
+    s = str(raw).strip().replace(',', '.').replace(' ', '')
+    if not s:
+        return None, None, None
+    if re.search(r'[eE]', s):
+        v = parse_number(s)
+        if v is None:
+            return None, None, None
+        parts = re.split(r'[eE]', s, maxsplit=1)
+        m = parse_number(parts[0])
+        e = int(parse_number(parts[1]) or 0) if len(parts) > 1 else 0
+        if m is None:
+            m, e = v, 0
+        return v, m, e
+    m = parse_number(s)
+    if m is None:
+        return None, None, None
+    e = int(legacy_power10 or 0)
+    return m * (10 ** e), m, e
+
+
 def numeric_ok(chosen, correct, tol_rel=0.03, tol_abs=None):
     """Accept within relative or absolute tolerance."""
     if chosen is None or correct is None:
@@ -165,7 +201,6 @@ def build_paper(bank, n_pick=None, rng=None):
                 'type': 'numeric',
                 'stem': q['stem'],
                 'unit': item['unit'],
-                'power10': power10,
                 'hint': hint,
             })
             continue
@@ -203,9 +238,7 @@ def grade_paper(paper, answers):
         raw = ans.get(q['id'], ans.get(str(q['id'])))
         qtype = q.get('type') or 'mcq'
         if qtype == 'numeric':
-            mantissa = parse_number(raw)
-            power10 = int(q.get('power10') or 0)
-            chosen = None if mantissa is None else mantissa * (10 ** power10)
+            chosen, mantissa, exp = parse_mantissa_exp(raw, legacy_power10=int(q.get('power10') or 0))
             ok = numeric_ok(chosen, q['answer'], tol_rel=q.get('tol_rel') or 0.03, tol_abs=q.get('tol_abs'))
             if ok:
                 score += 1
@@ -214,10 +247,11 @@ def grade_paper(paper, answers):
                 'type': 'numeric',
                 'stem': q['stem'],
                 'unit': q.get('unit') or '',
-                'power10': power10,
+                'power10': exp if exp is not None else int(q.get('power10') or 0),
                 'correct': q['answer'],
                 'chosen': chosen,
                 'mantissa': mantissa,
+                'exp': exp,
                 'ok': ok,
                 'explain': q.get('explain') or '',
             })

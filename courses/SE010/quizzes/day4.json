@@ -41,7 +41,7 @@
       "tol_rel": 0.03,
       "explain": "T_j = 25 + 20 * 4 = 105 °C.",
       "power10": 0,
-      "hint": "T_j = T_A + P * R_θJA with T_A = 25, P = 20, R_θJA = 4. Compute P * R_θJA, then add T_A. Enter the integer for * 10^0."
+      "hint": "T_j = T_A + P * R_θJA with T_A = 25, P = 20, R_θJA = 4. Compute P * R_θJA, then add T_A. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d4q04",
@@ -108,7 +108,7 @@
       "tol_rel": 0.03,
       "explain": "FF = 14e-3 / (0.04 * 0.50) = 0.70.",
       "power10": -1,
-      "hint": "FF = P_max / (I_sc * V_oc). Convert P_max = 14 mW → W and I_sc = 40 mA → A, then compute the denominator I_sc * V_oc and divide. Enter the integer for the given * 10 power."
+      "hint": "FF = P_max / (I_sc * V_oc). Convert P_max = 14 mW → W and I_sc = 40 mA → A, then compute the denominator I_sc * V_oc and divide. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d4q09",
@@ -119,7 +119,7 @@
       "tol_rel": 0.03,
       "explain": "0.98 * 0.85 * 0.95 ≈ 0.791.",
       "power10": -3,
-      "hint": "Y = Y_W * Y_D * Y_C with 0.98, 0.85, 0.95. Multiply step by step on the calculator. Enter the integer for the given * 10 power."
+      "hint": "Y = Y_W * Y_D * Y_C with 0.98, 0.85, 0.95. Multiply step by step on the calculator. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d4q10",
@@ -130,7 +130,7 @@
       "tol_rel": 0.03,
       "explain": "τ = 50 * 40e-15 = 2e-12 s = 2 ps.",
       "power10": 0,
-      "hint": "τ = R * C with R = 50 and C = 40 fF = 40e-15 F. Multiply, then convert seconds → ps. Enter the integer for * 10^0."
+      "hint": "τ = R * C with R = 50 and C = 40 fF = 40e-15 F. Multiply, then convert seconds → ps. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d4q11",
@@ -155,7 +155,7 @@
       "tol_rel": 0.05,
       "explain": "d = 2.3026/1000 cm = 0.002303 cm = 23.03 μm.",
       "power10": -1,
-      "hint": "For 90% absorption, remaining = 0.1 so d = -ln(0.1) / α with α = 1000 cm^-1. Compute -ln(0.1), divide by α (cm), then convert cm → μm. Enter the integer for the given * 10 power."
+      "hint": "For 90% absorption, remaining = 0.1 so d = -ln(0.1) / α with α = 1000 cm^-1. Compute -ln(0.1), divide by α (cm), then convert cm → μm. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
     },
     {
       "id": "d4q13",
@@ -264,7 +264,7 @@
       "tol_rel": 0.03,
       "explain": "T_j = 30 + 2 * 20 = 70 °C.",
       "power10": 0,
-      "hint": "T_j = T_A + P * R_θ with T_A = 30, P = 2 W, R_θ = 20 °C/W. Compute P * R_θ, then add T_A. Enter the integer for * 10^0."
+      "hint": "T_j = T_A + P * R_θ with T_A = 30, P = 2 W, R_θ = 20 °C/W. Compute P * R_θ, then add T_A. Enter an integer coefficient and power of 10 (usually 0 here)."
     },
     {
       "id": "d4q21",

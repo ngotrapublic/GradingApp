@@ -308,12 +308,14 @@ function renderPaper(app) {
     h += `<div class="card qcard" data-qid="${esc(q.id)}" data-type="${esc(q.type || 'mcq')}">
       <div class="stemrow"><div class="stem">${qi + 1}. ${quizMath(q.stem)}</div>${bulb}</div>`;
     if ((q.type || 'mcq') === 'numeric') {
-      const p10 = Number.isFinite(+q.power10) ? +q.power10 : 0;
       h += `<label class="fl numans">${T('Your answer', 'Nhập đáp án')}
-        <span class="numrow"><input inputmode="numeric" autocomplete="off" name="q_${esc(q.id)}" placeholder="${T('integer', 'số nguyên')}">
-        <span class="scale">* 10<sup>${p10}</sup></span>
-        ${q.unit ? `<span class="unit">${quizMath(q.unit)}</span>` : ''}</span></label>
-        <p class="muted">${T('Enter the integer coefficient only; *10 power is fixed.', 'Chỉ nhập hệ số nguyên; mũ 10 đã cho sẵn.')}</p>`;
+        <span class="numrow">
+          <input inputmode="numeric" autocomplete="off" name="qm_${esc(q.id)}" placeholder="${T('coeff.', 'hệ số')}">
+          <span class="scale">* 10</span>
+          <input class="exp" inputmode="numeric" autocomplete="off" name="qe_${esc(q.id)}" placeholder="${T('power', 'mũ')}">
+          ${q.unit ? `<span class="unit">${quizMath(q.unit)}</span>` : ''}
+        </span></label>
+        <p class="muted">${T('Enter integer coefficient and power of 10 (example: 259 and −4 for 0.0259).', 'Nhập hệ số nguyên và mũ 10 (vd: 259 và −4 cho 0.0259).')}</p>`;
     } else {
       (q.choices || []).forEach((c, ci) => {
         h += `<label><input type="radio" name="q_${esc(q.id)}" value="${ci}"> ${quizMath(c)}</label>`;
@@ -363,10 +365,12 @@ function renderPaper(app) {
     let missing = 0;
     P.questions.forEach(q => {
       if ((q.type || 'mcq') === 'numeric') {
-        const inp = app.querySelector(`input[name="q_${q.id}"]`);
-        const v = inp ? inp.value.trim() : '';
-        if (!v) missing += 1;
-        answers[q.id] = v;
+        const mInp = app.querySelector(`input[name="qm_${q.id}"]`);
+        const eInp = app.querySelector(`input[name="qe_${q.id}"]`);
+        const m = mInp ? mInp.value.trim() : '';
+        const e = eInp ? eInp.value.trim() : '';
+        if (!m || e === '') missing += 1;
+        answers[q.id] = { m, e: e === '' ? '0' : e };
       } else {
         const sel = app.querySelector(`input[name="q_${q.id}"]:checked`);
         if (!sel) missing += 1;
@@ -436,10 +440,10 @@ function renderExplain(app) {
       <div class="stem">${E.i + 1}. ${quizMath(q.stem)}</div>`;
   if ((q.type || 'mcq') === 'numeric') {
     const unit = q.unit ? ' ' + q.unit : '';
-    const p10 = Number.isFinite(+q.power10) ? +q.power10 : 0;
+    const exp = Number.isFinite(+q.exp) ? +q.exp : (Number.isFinite(+q.power10) ? +q.power10 : 0);
     const yours = (q.mantissa == null || q.mantissa === '')
       ? '–'
-      : `${esc(String(q.mantissa))} * 10<sup>${p10}</sup>${quizMath(unit)}`;
+      : `${esc(String(q.mantissa))} * 10<sup>${exp}</sup>${quizMath(unit)}`;
     h += `<div class="muted">${T('Your answer', 'Bạn nhập')}: ${yours}</div>
       <div class="muted">${T('Correct', 'Đáp án đúng')}: ${esc(String(q.correct))}${quizMath(unit)}</div>`;
   } else {
