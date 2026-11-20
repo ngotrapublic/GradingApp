@@ -1,21 +1,50 @@
 const QUIZ_STUDENT_NOTICE_EN = `Weekly review quiz (not the final exam)
-• Phone/tablet only — scan QR, enter name + student ID
-• Laptop OK for Canvas notes; stay in this quiz app on your phone
-• 15 questions · pass 11/15 · calculator OK
-• Leaving/switching apps may end your attempt
-• Pass → read all English explanations → attendance
-• Fail → retry`;
+
+Before you start
+• Phone or tablet only — computers cannot open the quiz
+• Scan the QR, then enter your full name and student ID
+• Laptop is OK for Canvas review PDFs; keep the quiz open on your phone
+• Bring a calculator for number questions
+
+During the quiz
+• 15 shuffled questions · pass mark 11/15
+• Number answers: type the integer only (*10 power is already shown)
+• Stay in this quiz app — switching apps / locking the phone may end your attempt
+• If disconnected: reopen the link and enter name or student ID to continue
+
+After you finish
+• Pass → read every English explanation → attendance is recorded
+• Fail → you may retry
+• Goal: review and understand, not attendance only`;
 
 const QUIZ_STUDENT_NOTICE_HTML = `
   <div class="quiz-notice-title">Weekly review quiz <span>(not the final exam)</span></div>
-  <ul class="quiz-notice-cols">
-    <li>Phone/tablet only — scan QR, enter name + student ID</li>
-    <li>Laptop OK for Canvas notes; stay in this quiz app on your phone</li>
-    <li>15 questions · pass 11/15 · calculator OK</li>
-    <li>Leaving/switching apps may end your attempt</li>
-    <li>Pass → read all English explanations → attendance</li>
-    <li>Fail → retry</li>
-  </ul>`;
+  <div class="quiz-notice-cols">
+    <div>
+      <div class="quiz-notice-h">Before you start</div>
+      <ul>
+        <li>Phone or tablet only — computers cannot open the quiz</li>
+        <li>Scan the QR, then enter your full name and student ID</li>
+        <li>Laptop is OK for Canvas review PDFs; keep the quiz open on your phone</li>
+        <li>Bring a calculator for number questions</li>
+      </ul>
+    </div>
+    <div>
+      <div class="quiz-notice-h">During the quiz</div>
+      <ul>
+        <li>15 shuffled questions · pass mark <b>11/15</b></li>
+        <li>Number answers: type the integer only (*10 power is already shown)</li>
+        <li>Stay in this quiz app — switching apps / locking the phone may end your attempt</li>
+        <li>If disconnected: reopen the link and enter name or student ID to continue</li>
+      </ul>
+      <div class="quiz-notice-h">After you finish</div>
+      <ul>
+        <li>Pass → read every English explanation → attendance is recorded</li>
+        <li>Fail → you may retry</li>
+        <li>Goal: review and understand, not attendance only</li>
+      </ul>
+    </div>
+  </div>`;
 
 async function showQR(forStudents, clsId) {
   let target = '';
