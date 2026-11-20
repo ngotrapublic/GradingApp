@@ -2,15 +2,15 @@
 
 Staff (admin / lecturer / TA) sign in with username + password; students with student ID + password.
 Per class: the owner (lecturer) and the admin may do everything ('manage'); a TA may grade and open cards / submissions ('grade')."""
-import base64, http.server, io, json, os, re, secrets, socketserver, urllib.parse
+import base64, http.server, io, json, math, os, re, secrets, socketserver, time, urllib.parse
 
 from .config import LOCK, PORT, STATIC
 from .courses import COURSES, asset, keys, keys_live
 from .db import (ROLES, add_hit, allow, as_int, assign_random, check_pw, class_role, connect, count_hits, delete_class, hash_pw,
                  load, new_session, now, set_gradebook, set_sync, set_team_mark, upsert_student, user_from_token, visible_class_ids)
 from .network import lan_ips, qr_svg
-from .quiz import (build_paper, course_has_quizzes, grade_paper, is_phone_or_tablet_ua, list_banks, load_bank,
-                   should_unlock_hints)
+from .quiz import (build_paper, course_has_quizzes, grade_paper, is_left_submit, is_phone_or_tablet_ua, leave_cooldown_sec,
+                   list_banks, load_bank, should_unlock_hints)
 from .scoring import export_xlsx, score, variant, rule_of, qvalue
 
 PUBLIC_URL = os.environ.get('PUBLIC_URL', '').rstrip('/')
@@ -1009,7 +1009,7 @@ def staff_quiz_get(self, con, me, query):
                     ans = json.loads(answers) if isinstance(answers, str) else (answers or {})
                 except (TypeError, ValueError, json.JSONDecodeError):
                     ans = {}
-                status = 'left' if not ans else 'fail'
+                status = 'left' if (not ans or set(ans.keys()) <= {'__left'}) else 'fail'
             log.append({
                 'id': a['id'],
                 'sid': a['sid'],
@@ -1043,6 +1043,7 @@ def staff_quiz_post(self, con, me, body):
             return self.send_json(err('Missing student ID.', 'Thiếu MSSV.'), 400)
         con.execute('DELETE FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
         con.execute('DELETE FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
+        con.execute('DELETE FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
         con.execute('DELETE FROM quiz_sessions WHERE class_id=? AND sid=?', (cid, sid))
         return self.send_json({'ok': True, 'reset': True, 'sid': sid, 'slug': slug})
     bank = load_bank(row['course'], slug)
@@ -1097,6 +1098,12 @@ def public_quiz_me(self, con):
                           (row['id'], b['slug'], qu['sid'])).fetchone()
         passed = bool(best['passed'])
         attended = bool(rev and rev['seen'])
+        leave = con.execute(
+            'SELECT leaves, cooldown_until FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
+            (row['id'], b['slug'], qu['sid'])).fetchone()
+        leaves = int(leave['leaves']) if leave else 0
+        until = float(leave['cooldown_until']) if leave else 0.0
+        wait = max(0, int(math.ceil(until - time.time())))
         sets.append({
             **s,
             'best': best['score'],
@@ -1105,6 +1112,8 @@ def public_quiz_me(self, con):
             'solutions_seen': attended,
             'needs_explanations': passed and not attended,
             'attendance_done': attended,
+            'leave_count': leaves,
+            'cooldown_sec': wait if not attended else 0,
         })
     return self.send_json({
         'sid': qu['sid'],
@@ -1212,6 +1221,22 @@ def public_quiz_start(self, con, qu, body):
         (cid, slug, qu['sid'])).fetchone()
     if done:
         return self.send_json(err('Already passed — no more retries.', 'Đã đạt rồi — không được làm lại.'), 403)
+    leave = con.execute(
+        'SELECT leaves, cooldown_until FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, qu['sid'])).fetchone()
+    if leave and float(leave['cooldown_until'] or 0) > time.time():
+        wait = max(1, int(math.ceil(float(leave['cooldown_until']) - time.time())))
+        leaves = int(leave['leaves'] or 0)
+        mins = max(1, int(math.ceil(wait / 60)))
+        return self.send_json({
+            **err(
+                f'Wait {mins} min before retrying. Penalty for leaving the quiz app {leaves} times '
+                f'(from the 2nd leave: 1 min, then doubles each time).',
+                f'Chờ {mins} phút mới làm tiếp. Phạt vì thoát app quiz {leaves} lần '
+                f'(từ lần 2: 1 phút, lần sau nhân đôi).'),
+            'cooldown_sec': wait,
+            'leave_count': leaves,
+        }, 403)
     bank = load_bank(row['course'], slug)
     import random as _random
     rng = _random.Random(f"{qu['sid']}|{cid}|{slug}|{secrets.token_hex(8)}")
@@ -1268,10 +1293,13 @@ def public_quiz_submit(self, con, qu, body):
     row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
     paper = json.loads(att['paper'])
     answers = body.get('answers') or {}
-    score, total, review = grade_paper(paper, answers)
+    left = is_left_submit(answers, flag=bool(body.get('left_app')))
+    if left:
+        answers = {'__left': 1}
+    score, total, review = grade_paper(paper, {} if left else answers)
     s = _quiz_settings(con, cid, row['course'], att['slug']) if row else None
     pass_score = s['pass_score'] if s else 14
-    passed = 1 if score >= pass_score else 0
+    passed = 0 if left else (1 if score >= pass_score else 0)
     con.execute(
         'UPDATE quiz_attempts SET score=?, total=?, passed=?, answers=? WHERE id=?',
         (score, total, passed, json.dumps(answers), aid))
@@ -1283,6 +1311,32 @@ def public_quiz_submit(self, con, qu, body):
         'pass_score': pass_score,
         'passed': bool(passed),
     }
+    if left:
+        row_l = con.execute(
+            'SELECT leaves FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
+            (cid, att['slug'], qu['sid'])).fetchone()
+        leaves = int(row_l['leaves']) + 1 if row_l else 1
+        cool = leave_cooldown_sec(leaves)
+        until = time.time() + cool if cool else 0.0
+        con.execute(
+            'INSERT INTO quiz_leave (class_id, slug, sid, leaves, cooldown_until) VALUES (?,?,?,?,?) '
+            'ON CONFLICT(class_id, slug, sid) DO UPDATE SET leaves=excluded.leaves, cooldown_until=excluded.cooldown_until',
+            (cid, att['slug'], qu['sid'], leaves, until))
+        out['left_app'] = True
+        out['leave_count'] = leaves
+        out['cooldown_sec'] = cool
+        if leaves == 1:
+            out['penalty_note'] = 'First time leaving the app — no wait yet. Next leave adds a 1-minute wait before retry.'
+            out['penalty_note_vi'] = 'Lần thoát app đầu — chưa phạt chờ. Lần thoát tiếp theo phải chờ 1 phút mới làm lại.'
+        else:
+            mins = max(1, cool // 60)
+            out['penalty_note'] = (
+                f'You left the quiz app {leaves} times. Wait {mins} minute(s) before the next attempt '
+                f'(from the 2nd leave: 1 min, then doubles each time).')
+            out['penalty_note_vi'] = (
+                f'Bạn đã thoát app quiz {leaves} lần. Chờ {mins} phút mới làm tiếp '
+                f'(từ lần 2: 1 phút, các lần sau nhân đôi).')
+        return self.send_json(out)
     if not passed:
         return self.send_json(out)
     rev = con.execute(

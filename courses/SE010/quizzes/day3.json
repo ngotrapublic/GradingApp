@@ -1,67 +1,25 @@
 {
   "slug": "day3",
-  "title": "Day 3 – MOS, MOSFET, BJT, CMOS",
+  "title": "Day 3 – MOS, BJT & CMOS",
   "n_pick": 15,
   "pass_score": 11,
   "questions": [
     {
-      "id": "d3q01",
+      "id": "mcq081",
       "type": "mcq",
-      "stem": "For a p-type MOS capacitor, a negative gate voltage produces",
+      "stem": "The Early effect is caused by",
       "choices": [
-        "inversion",
-        "depletion",
-        "accumulation",
-        "avalanche"
+        "oxide inversion",
+        "photon absorption",
+        "avalanche only",
+        "base-width modulation"
       ],
-      "answer": 2,
-      "explain": "Negative VG pulls holes to the surface: accumulation.",
-      "hint": "Negative VG pulls holes to the surface: accumulation."
+      "answer": 3,
+      "explain": "Collector-base depletion encroaches into the base.",
+      "hint": "Collector-base depletion encroaches into the base."
     },
     {
-      "id": "d3q02",
-      "type": "mcq",
-      "stem": "An enhancement NMOS is normally",
-      "choices": [
-        "on at V_GS = 0",
-        "off at V_GS = 0",
-        "a two-terminal device",
-        "a pnp transistor"
-      ],
-      "answer": 1,
-      "explain": "Enhancement NMOS needs V_GS > V_T to turn on.",
-      "hint": "Enhancement NMOS needs V_GS > V_T to turn on."
-    },
-    {
-      "id": "d3q03",
-      "type": "mcq",
-      "stem": "MOSFET cutoff frequency increases when",
-      "choices": [
-        "g_m decreases",
-        "gate capacitance increases",
-        "g_m increases for fixed capacitance",
-        "channel length increases greatly"
-      ],
-      "answer": 2,
-      "explain": "f_T rises when g_m is larger or C is smaller.",
-      "hint": "f_T rises when g_m is larger or C is smaller."
-    },
-    {
-      "id": "d3q04",
-      "type": "mcq",
-      "stem": "A BJT in forward-active mode has",
-      "choices": [
-        "both junctions forward biased",
-        "EB forward and CB reverse biased",
-        "both junctions reverse biased",
-        "EB reverse and CB forward biased"
-      ],
-      "answer": 1,
-      "explain": "Forward-active: emitter-base forward, collector-base reverse.",
-      "hint": "Forward-active: emitter-base forward, collector-base reverse."
-    },
-    {
-      "id": "d3q05",
+      "id": "mcq082",
       "type": "mcq",
       "stem": "Base transit time approximately varies as",
       "choices": [
@@ -71,139 +29,25 @@
         "exp(WB)"
       ],
       "answer": 1,
-      "explain": "Transit time grows like the square of base width.",
-      "hint": "Transit time grows like the square of base width."
+      "explain": "Diffusive transit time is about WB²/(2D).",
+      "hint": "Diffusive transit time is about WB²/(2D)."
     },
     {
-      "id": "d3q06",
-      "type": "numeric",
-      "stem": "k = μ C_ox W/L = 1 mA/V^2 and V_OV = 2 V. Calculate I_D,sat = (k/2) * V_OV^2 in mA.",
-      "answer": 2,
-      "unit": "mA",
-      "tol_rel": 0.03,
-      "explain": "I_D,sat = 0.5 * 4 = 2 mA.",
-      "power10": 0,
-      "hint": "I_D,sat = (k/2) * V_OV^2 with k = 1 mA/V^2 and V_OV = 2 V. Compute V_OV^2, multiply by k/2. Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d3q07",
-      "type": "numeric",
-      "stem": "VA = 50 V and I_C = 2.5 mA. Calculate Early resistance r_o = VA/I_C in kΩ.",
-      "answer": 20,
-      "unit": "kOhm",
-      "tol_rel": 0.03,
-      "explain": "r_o = 50 / 0.0025 = 20000 Ω = 20 kΩ.",
-      "power10": 0,
-      "hint": "r_o = VA / I_C with VA = 50 V and I_C = 2.5 mA = 0.0025 A. Divide, then convert Ω → kΩ for the unit shown. Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d3q08",
+      "id": "mcq083",
       "type": "mcq",
-      "stem": "MOSFET pinch-off begins when",
+      "stem": "A wide-bandgap emitter in an HBT improves gain primarily by",
       "choices": [
-        "I_D = 0",
-        "V_DS = 0",
-        "V_DS = V_GS − V_T",
-        "V_GS = 0 always"
+        "eliminating the collector",
+        "increasing hole back-injection",
+        "suppressing minority back-injection",
+        "making the base insulating"
       ],
       "answer": 2,
-      "explain": "Saturation starts near V_DS = overdrive voltage.",
-      "hint": "Saturation starts near V_DS = overdrive voltage."
+      "explain": "The bandgap discontinuity improves emitter injection efficiency.",
+      "hint": "The bandgap discontinuity improves emitter injection efficiency."
     },
     {
-      "id": "d3q09",
-      "type": "mcq",
-      "stem": "In a CMOS inverter with low input,",
-      "choices": [
-        "output is ground",
-        "NMOS on, PMOS off",
-        "PMOS on, NMOS off",
-        "both permanently off"
-      ],
-      "answer": 2,
-      "explain": "Low input turns PMOS on and NMOS off, so output goes high.",
-      "hint": "Low input turns PMOS on and NMOS off, so output goes high."
-    },
-    {
-      "id": "d3q10",
-      "type": "numeric",
-      "stem": "A BJT has α = 0.99. Calculate β = α/(1−α).",
-      "answer": 99,
-      "unit": "",
-      "tol_rel": 0.03,
-      "explain": "β = 0.99/0.01 = 99.",
-      "power10": 0,
-      "hint": "β = α / (1 - α) with α = 0.99. Compute (1 - 0.99) first, then divide 0.99 by that result. Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d3q11",
-      "type": "mcq",
-      "stem": "Ideal CMOS static power is low because",
-      "choices": [
-        "capacitance is infinite",
-        "the output is always floating",
-        "both devices are on continuously",
-        "there is ideally no DC path from VDD to ground in steady states"
-      ],
-      "answer": 3,
-      "explain": "In each logic state, one FET is off, so almost no DC path.",
-      "hint": "In each logic state, one FET is off, so almost no DC path."
-    },
-    {
-      "id": "d3q12",
-      "type": "numeric",
-      "stem": "I_D = 2 mA and V_OV = 1 V in saturation. Calculate g_m = 2 I_D / V_OV in mS.",
-      "answer": 4,
-      "unit": "mS",
-      "tol_rel": 0.03,
-      "explain": "g_m = 2 * 2 / 1 = 4 mS.",
-      "power10": 0,
-      "hint": "g_m = 2 * I_D / V_OV with I_D = 2 mA and V_OV = 1 V. Compute 2 * 2 / 1 on the calculator (result in mS). Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d3q13",
-      "type": "mcq",
-      "stem": "Strong inversion in a p-type MOS capacitor is near",
-      "choices": [
-        "4φF",
-        "φF/2",
-        "φF",
-        "2φF"
-      ],
-      "answer": 3,
-      "explain": "A common rule of thumb is ψs ≈ 2φF for strong inversion.",
-      "hint": "A common rule of thumb is ψs ≈ 2φF for strong inversion."
-    },
-    {
-      "id": "d3q14",
-      "type": "mcq",
-      "stem": "Reducing oxide thickness causes C_ox to",
-      "choices": [
-        "become zero",
-        "be independent of εox",
-        "decrease",
-        "increase"
-      ],
-      "answer": 3,
-      "explain": "Thinner oxide means larger oxide capacitance per area.",
-      "hint": "Thinner oxide means larger oxide capacitance per area."
-    },
-    {
-      "id": "d3q15",
-      "type": "mcq",
-      "stem": "The relation between α and β is",
-      "choices": [
-        "β = 1/α",
-        "β = α²",
-        "β = 1 − α",
-        "β = α/(1 − α)"
-      ],
-      "answer": 3,
-      "explain": "Remember β = α / (1 − α).",
-      "hint": "Remember β = α / (1 − α)."
-    },
-    {
-      "id": "d3q16",
+      "id": "mcq084",
       "type": "mcq",
       "stem": "A depletion-mode MOSFET differs from enhancement mode because it",
       "choices": [
@@ -213,89 +57,512 @@
         "has no gate"
       ],
       "answer": 2,
-      "explain": "Depletion-mode devices already have a channel at V_GS = 0.",
-      "hint": "Depletion-mode devices already have a channel at V_GS = 0."
+      "explain": "The physical channel makes it normally on.",
+      "hint": "The physical channel makes it normally on."
     },
     {
-      "id": "d3q17",
+      "id": "mcq085",
       "type": "mcq",
-      "stem": "Saturation current in the long-channel square-law model varies with overdrive as",
+      "stem": "An NMOS pass transistor transfers most strongly",
       "choices": [
-        "1/V_OV",
-        "exp(−V_OV)",
-        "V_OV",
-        "V_OV²"
+        "logic 0",
+        "neither state",
+        "optical power",
+        "logic 1 only"
+      ],
+      "answer": 0,
+      "explain": "NMOS passes a strong 0 but a threshold-degraded 1.",
+      "hint": "NMOS passes a strong 0 but a threshold-degraded 1."
+    },
+    {
+      "id": "mcq086",
+      "type": "mcq",
+      "stem": "For tox=10 nm and εox=3.45×10^-13 F/cm, Cox/A is",
+      "choices": [
+        "3.45×10^-9",
+        "3.45×10^-8",
+        "3.45×10^-7",
+        "3.45×10^-6 F/cm²"
+      ],
+      "answer": 2,
+      "explain": "tox=10^-6 cm, so Cox=εox/tox=3.45×10^-7 F/cm².",
+      "hint": "tox=10^-6 cm, so Cox=εox/tox=3.45×10^-7 F/cm²."
+    },
+    {
+      "id": "mcq087",
+      "type": "mcq",
+      "stem": "If Cox doubles while all other long-channel parameters remain fixed, ID,sat",
+      "choices": [
+        "quadruples",
+        "halves",
+        "is unchanged",
+        "doubles"
       ],
       "answer": 3,
-      "explain": "I_D,sat is proportional to V_OV squared.",
-      "hint": "I_D,sat is proportional to V_OV squared."
+      "explain": "ID,sat is directly proportional to Cox.",
+      "hint": "ID,sat is directly proportional to Cox."
     },
     {
-      "id": "d3q18",
+      "id": "mcq088",
       "type": "mcq",
-      "stem": "Body effect usually makes threshold voltage",
+      "stem": "An NMOS has VGS=3 V and VT=1 V. VDS,sat is",
       "choices": [
-        "increase in magnitude with reverse body bias",
-        "always zero",
-        "independent of doping",
-        "equal to VDD"
+        "3",
+        "4 V",
+        "1",
+        "2 Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      ],
+      "answer": 3,
+      "explain": "VDS,sat=VGS-VT=2 V.",
+      "hint": "VDS,sat=VGS-VT=2 V."
+    },
+    {
+      "id": "mcq089",
+      "type": "mcq",
+      "stem": "For k=μCoxW/L=1 mA/V² and VOV=2 V, ID,sat is",
+      "choices": [
+        "2",
+        "4",
+        "8 mA",
+        "1"
       ],
       "answer": 0,
-      "explain": "Reverse body bias raises |V_T| (body effect).",
-      "hint": "Reverse body bias raises |V_T| (body effect)."
+      "explain": "ID,sat=0.5kVOV²=2 mA.",
+      "hint": "ID,sat=0.5kVOV²=2 mA."
     },
     {
-      "id": "d3q19",
+      "id": "mcq090",
       "type": "mcq",
-      "stem": "Early effect means BJT collector current rises with",
+      "stem": "For ID=2 mA and VOV=1 V, gm is",
       "choices": [
-        "V_CE because of base-width modulation",
-        "gate oxide only",
-        "photon energy",
-        "cleanroom class"
+        "1",
+        "2",
+        "4",
+        "8 mS"
+      ],
+      "answer": 2,
+      "explain": "gm=2ID/VOV=4 mS.",
+      "hint": "gm=2ID/VOV=4 mS."
+    },
+    {
+      "id": "mcq091",
+      "type": "mcq",
+      "stem": "If gm=5 mS and CG=0.5 pF, fT is closest to",
+      "choices": [
+        "159 GHz",
+        "0.16",
+        "1.59",
+        "15.9"
+      ],
+      "answer": 2,
+      "explain": "fT=0.005/(2π×0.5 pF)≈1.59 GHz.",
+      "hint": "fT=0.005/(2π×0.5 pF)≈1.59 GHz."
+    },
+    {
+      "id": "mcq092",
+      "type": "mcq",
+      "stem": "A BJT has α=0.99. β is",
+      "choices": [
+        "99",
+        "990",
+        "9.9",
+        "49.5"
       ],
       "answer": 0,
-      "explain": "Larger V_CE shrinks the neutral base a bit, so I_C rises.",
-      "hint": "Larger V_CE shrinks the neutral base a bit, so I_C rises."
+      "explain": "β=0.99/0.01=99.",
+      "hint": "β=0.99/0.01=99."
     },
     {
-      "id": "d3q20",
-      "type": "numeric",
-      "stem": "g_m = 8 mS and C = 0.4 pF. Estimate f_T = g_m/(2 * π * C) in GHz.",
-      "answer": 3.18,
-      "unit": "GHz",
-      "tol_rel": 0.08,
-      "explain": "f_T = 0.008 / (2 * π * 0.4e-12) ≈ 3.18e9 Hz ≈ 3.18 GHz.",
-      "power10": -2,
-      "hint": "f_T = g_m / (2 * π * C) with g_m = 8 mS = 0.008 S and C = 0.4 pF = 0.4e-12 F. Compute the denominator 2*π*C, then divide g_m by it, then convert Hz → GHz. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
-    },
-    {
-      "id": "d3q21",
+      "id": "mcq093",
       "type": "mcq",
-      "stem": "Complementary MOS means using",
+      "stem": "A BJT with β=100 and IB=20 μA has IC",
       "choices": [
-        "NMOS and PMOS together",
-        "only resistors",
-        "only BJTs",
-        "only diodes"
+        "2",
+        "20",
+        "200 mA",
+        "0.2"
       ],
       "answer": 0,
-      "explain": "CMOS pairs n-channel and p-channel MOSFETs.",
-      "hint": "CMOS pairs n-channel and p-channel MOSFETs."
+      "explain": "IC=βIB=2 mA.",
+      "hint": "IC=βIB=2 mA."
     },
     {
-      "id": "d3q22",
+      "id": "mcq094",
       "type": "mcq",
-      "stem": "Subthreshold conduction means",
+      "stem": "If VA=60 V and IC=3 mA, ro is",
       "choices": [
-        "a small current still flows for V_GS below V_T",
-        "I_D is exactly zero always",
-        "avalanche only",
-        "Hall effect only"
+        "2 kΩ",
+        "20 kΩ",
+        "60 kΩ",
+        "180 kΩ"
+      ],
+      "answer": 1,
+      "explain": "ro≈VA/IC=20 kΩ.",
+      "hint": "ro≈VA/IC=20 kΩ."
+    },
+    {
+      "id": "mcq095",
+      "type": "mcq",
+      "stem": "If BJT base width is halved, ideal base transit time becomes",
+      "choices": [
+        "four times",
+        "one quarter",
+        "one half",
+        "double"
+      ],
+      "answer": 1,
+      "explain": "τB∝WB².",
+      "hint": "τB∝WB²."
+    },
+    {
+      "id": "mcq096",
+      "type": "mcq",
+      "stem": "A Darlington pair has β1=10 and β2=20. Total β is",
+      "choices": [
+        "230",
+        "300",
+        "30",
+        "200"
       ],
       "answer": 0,
-      "explain": "Below V_T there is still a weak exponential current.",
-      "hint": "Below V_T there is still a weak exponential current."
+      "explain": "βT=β1β2+β1+β2=230.",
+      "hint": "βT=β1β2+β1+β2=230."
+    },
+    {
+      "id": "mcq097",
+      "type": "mcq",
+      "stem": "A CMOS load capacitance of 10 fF switches fully at 1 V and 100 MHz with activity 1. Dynamic power is",
+      "choices": [
+        "1 μW",
+        "10 μW",
+        "100 μW Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "0.1 μW"
+      ],
+      "answer": 0,
+      "explain": "P=CV²f=10^-14×10^8=10^-6 W.",
+      "hint": "P=CV²f=10^-14×10^8=10^-6 W."
+    },
+    {
+      "id": "mcq098",
+      "type": "mcq",
+      "stem": "A MOSFET with RDS(on)=0.1 Ω carries 5 A. Conduction loss is",
+      "choices": [
+        "0.5",
+        "1",
+        "2.5",
+        "5 W"
+      ],
+      "answer": 2,
+      "explain": "P=I²R=25×0.1=2.5 W.",
+      "hint": "P=I²R=25×0.1=2.5 W."
+    },
+    {
+      "id": "mcq099",
+      "type": "mcq",
+      "stem": "If reverse body bias raises VT by 0.2 V while VGS is fixed and original VOV=1 V, the new overdrive is",
+      "choices": [
+        "1.2 V",
+        "0.2",
+        "0.8",
+        "1.0"
+      ],
+      "answer": 2,
+      "explain": "VOV=VGS-VT decreases by 0.2 V.",
+      "hint": "VOV=VGS-VT decreases by 0.2 V."
+    },
+    {
+      "id": "mcq100",
+      "type": "mcq",
+      "stem": "If β rises from 50 to 100 at fixed collector current, required base current",
+      "choices": [
+        "is unchanged",
+        "quadruples",
+        "doubles",
+        "halves IV. Microwave, power and thyristor devices"
+      ],
+      "answer": 3,
+      "explain": "IB=IC/β.",
+      "hint": "IB=IC/β."
+    },
+    {
+      "id": "mcq101",
+      "type": "mcq",
+      "stem": "The Gunn effect is based on",
+      "choices": [
+        "intervalley transfer and negative differential mobility",
+        "MOS inversion",
+        "radiative recombination",
+        "pn-junction avalanche"
+      ],
+      "answer": 0,
+      "explain": "Electrons transfer to a lower-mobility satellite valley.",
+      "hint": "Electrons transfer to a lower-mobility satellite valley."
+    },
+    {
+      "id": "mcq102",
+      "type": "mcq",
+      "stem": "A Gunn device is typically",
+      "choices": [
+        "a pnpn structure",
+        "an n-type bulk device with ohmic contacts",
+        "a MOS capacitor",
+        "a solar cell only"
+      ],
+      "answer": 1,
+      "explain": "It is not a pn-junction diode.",
+      "hint": "It is not a pn-junction diode."
+    },
+    {
+      "id": "mcq103",
+      "type": "mcq",
+      "stem": "IMPATT negative resistance is produced by",
+      "choices": [
+        "Fresnel loss",
+        "tunnel-state alignment only",
+        "avalanche and transit-time phase delays",
+        "CMOS latch-up"
+      ],
+      "answer": 2,
+      "explain": "Two approximately π/2 delays produce about π total phase shift.",
+      "hint": "Two approximately π/2 delays produce about π total phase shift."
+    },
+    {
+      "id": "mcq104",
+      "type": "mcq",
+      "stem": "Compared with a Gunn device, an IMPATT typically has",
+      "choices": [
+        "no reverse bias",
+        "zero power output",
+        "lower noise due to no avalanche",
+        "higher avalanche noise"
+      ],
+      "answer": 3,
+      "explain": "Random avalanche multiplication raises noise.",
+      "hint": "Random avalanche multiplication raises noise."
+    },
+    {
+      "id": "mcq105",
+      "type": "mcq",
+      "stem": "A vertical power BJT uses a lightly doped collector drift region mainly to",
+      "choices": [
+        "support high blocking voltage",
+        "reduce all capacitance to zero",
+        "form a laser cavity",
+        "increase optical generation Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      ],
+      "answer": 0,
+      "explain": "A thick, lightly doped layer spreads the depletion region.",
+      "hint": "A thick, lightly doped layer spreads the depletion region."
+    },
+    {
+      "id": "mcq106",
+      "type": "mcq",
+      "stem": "Second breakdown in a power BJT involves",
+      "choices": [
+        "uniform cooling",
+        "localized electrothermal positive feedback",
+        "optical reflection",
+        "only oxide tunnelling"
+      ],
+      "answer": 1,
+      "explain": "Hot spots attract additional current and may melt the device.",
+      "hint": "Hot spots attract additional current and may melt the device."
+    },
+    {
+      "id": "mcq107",
+      "type": "mcq",
+      "stem": "The BJT safe operating area includes limits set by",
+      "choices": [
+        "oxide color",
+        "current, voltage, power and second breakdown",
+        "wavelength only",
+        "Hall coefficient only"
+      ],
+      "answer": 1,
+      "explain": "All four boundaries can be relevant.",
+      "hint": "All four boundaries can be relevant."
+    },
+    {
+      "id": "mcq108",
+      "type": "mcq",
+      "stem": "A positive temperature coefficient of MOSFET on-resistance helps parallel cells because it",
+      "choices": [
+        "eliminates resistance",
+        "triggers the parasitic BJT",
+        "causes hotter cells to take more current",
+        "promotes current sharing by reducing current in hotter cells"
+      ],
+      "answer": 3,
+      "explain": "Heating raises resistance and self-limits local current.",
+      "hint": "Heating raises resistance and self-limits local current."
+    },
+    {
+      "id": "mcq109",
+      "type": "mcq",
+      "stem": "The parasitic BJT in a vertical MOSFET can be triggered by",
+      "choices": [
+        "low optical intensity only",
+        "zero drain voltage",
+        "a wide laser cavity",
+        "body-resistance voltage during fast dV/dt"
+      ],
+      "answer": 3,
+      "explain": "Displacement current can forward-bias the body-source junction.",
+      "hint": "Displacement current can forward-bias the body-source junction."
+    },
+    {
+      "id": "mcq110",
+      "type": "mcq",
+      "stem": "An SCR remains on after gate current is removed if",
+      "choices": [
+        "anode current remains above holding current",
+        "the device is reverse blocking",
+        "anode current is zero",
+        "α1+α2 is always zero"
+      ],
+      "answer": 0,
+      "explain": "Regenerative conduction persists after latching.",
+      "hint": "Regenerative conduction persists after latching."
+    },
+    {
+      "id": "mcq111",
+      "type": "mcq",
+      "stem": "SCR turn-off normally requires",
+      "choices": [
+        "more avalanche",
+        "larger positive gate current",
+        "anode current below holding current",
+        "higher dV/dt"
+      ],
+      "answer": 2,
+      "explain": "The regenerative loop must be deprived of sustaining current.",
+      "hint": "The regenerative loop must be deprived of sustaining current."
+    },
+    {
+      "id": "mcq112",
+      "type": "mcq",
+      "stem": "A TRIAC is best described as",
+      "choices": [
+        "a photodiode",
+        "a Schottky barrier",
+        "unidirectional only",
+        "a bilateral gate-controlled thyristor"
+      ],
+      "answer": 3,
+      "explain": "TRIACs control both ac half cycles.",
+      "hint": "TRIACs control both ac half cycles."
+    },
+    {
+      "id": "mcq113",
+      "type": "mcq",
+      "stem": "An RTD obtains negative differential resistance when",
+      "choices": [
+        "all barriers vanish",
+        "holes accumulate in oxide",
+        "temperature is zero only",
+        "emitter states become misaligned from a discrete well level"
+      ],
+      "answer": 3,
+      "explain": "Current peaks at resonance and falls after misalignment.",
+      "hint": "Current peaks at resonance and falls after misalignment."
+    },
+    {
+      "id": "mcq114",
+      "type": "mcq",
+      "stem": "Hot electrons are carriers with",
+      "choices": [
+        "kinetic energy substantially above kT",
+        "zero kinetic energy",
+        "only valence-band energy",
+        "no scattering ever Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      ],
+      "answer": 0,
+      "explain": "High fields or ballistic injection create a nonequilibrium energy distribution.",
+      "hint": "High fields or ballistic injection create a nonequilibrium energy distribution."
+    },
+    {
+      "id": "mcq115",
+      "type": "mcq",
+      "stem": "Real-space transfer differs from Gunn momentum-space transfer because carriers move",
+      "choices": [
+        "into vacuum",
+        "between layers in real space",
+        "only between valleys in the same layer",
+        "only through a pn junction"
+      ],
+      "answer": 1,
+      "explain": "RSP transfer occurs from a high-mobility channel to another layer.",
+      "hint": "RSP transfer occurs from a high-mobility channel to another layer."
+    },
+    {
+      "id": "mcq116",
+      "type": "mcq",
+      "stem": "A Gunn device has L=10 μm and vd=1×10^7 cm/s. Its transit frequency is",
+      "choices": [
+        "100",
+        "1000 GHz",
+        "1",
+        "10"
+      ],
+      "answer": 3,
+      "explain": "L=10^-3 cm, so f=10^7/10^-3=10 GHz.",
+      "hint": "L=10^-3 cm, so f=10^7/10^-3=10 GHz."
+    },
+    {
+      "id": "mcq117",
+      "type": "mcq",
+      "stem": "For a 20 GHz Gunn oscillator with vd=1×10^7 cm/s, L is",
+      "choices": [
+        "5",
+        "50",
+        "500 μm",
+        "0.5"
+      ],
+      "answer": 0,
+      "explain": "L=vd/f=5×10^-4 cm=5 μm.",
+      "hint": "L=vd/f=5×10^-4 cm=5 μm."
+    },
+    {
+      "id": "mcq118",
+      "type": "mcq",
+      "stem": "An IMPATT has L=2 μm and vs=1×10^7 cm/s. Resonance frequency is",
+      "choices": [
+        "2.5",
+        "25",
+        "50",
+        "250 GHz"
+      ],
+      "answer": 1,
+      "explain": "f=vs/(2L)=10^7/(4×10^-4)=25 GHz. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+      "hint": "f=vs/(2L)=10^7/(4×10^-4)=25 GHz. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+    },
+    {
+      "id": "mcq119",
+      "type": "mcq",
+      "stem": "A BJT load has VCC=40 V and RL=10 Ω. Current-axis intercept is",
+      "choices": [
+        "40 A",
+        "2",
+        "4",
+        "10"
+      ],
+      "answer": 2,
+      "explain": "IC=VCC/RL=4 A.",
+      "hint": "IC=VCC/RL=4 A."
+    },
+    {
+      "id": "mcq120",
+      "type": "mcq",
+      "stem": "For VCC=40 V and RL=10 Ω, maximum transistor power on the load line is",
+      "choices": [
+        "80",
+        "160 W",
+        "20",
+        "40"
+      ],
+      "answer": 3,
+      "explain": "Pmax=VCC²/(4RL)=1600/40=40 W.",
+      "hint": "Pmax=VCC²/(4RL)=1600/40=40 W."
     }
   ]
 }

@@ -128,10 +128,16 @@ function onLeaveApp(ev) {
     fetch('/api/public/quiz/submit', {
       method: 'POST',
       headers: quizHeaders({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ attempt_id: P.attempt_id, answers: {} }),
+      body: JSON.stringify({ attempt_id: P.attempt_id, answers: {}, left_app: true }),
       keepalive: true,
       credentials: 'same-origin',
-    });
+    }).then(r => r.json().catch(() => ({}))).then(j => {
+      if (!j || !Q.result || !Q.result.left_app) return;
+      Q.result.leave_count = j.leave_count;
+      Q.result.cooldown_sec = j.cooldown_sec || 0;
+      Q.result.penalty_note = (LANG === 'vi' && j.penalty_note_vi) || j.penalty_note || '';
+      render();
+    }).catch(() => {});
   } catch (e) {}
   Q.paper = null;
   Q.result = {
@@ -141,6 +147,9 @@ function onLeaveApp(ev) {
     pass_score: P.pass_score,
     slug: P.slug,
     left_app: true,
+    leave_count: null,
+    cooldown_sec: 0,
+    penalty_note: T('Attempt ended because you left this app.', 'Bài bị hủy vì bạn đã thoát khỏi app.'),
   };
   render();
 }
@@ -197,10 +206,20 @@ function renderHome(app) {
       badge = s.tries
         ? `<span class="badge warn">${T('Best', 'Cao nhất')} ${s.best}/${s.n_pick}</span>`
         : `<span class="badge">${T('Not tried', 'Chưa làm')}</span>`;
-      btn = `<button class="big on" data-start="${esc(s.slug)}">${s.tries ? T('Retry', 'Làm lại') : T('Start', 'Bắt đầu')}</button>`;
+      const cool = Number(s.cooldown_sec) || 0;
+      if (cool > 0) {
+        const mins = Math.max(1, Math.ceil(cool / 60));
+        btn = `<p class="muted" data-cool="${esc(s.slug)}"><b>${T(
+          `Wait ${mins} min — penalty for leaving the quiz app ${s.leave_count || ''} time(s) (from 2nd leave: 1 min, then doubles).`,
+          `Chờ ${mins} phút — phạt thoát app ${s.leave_count || ''} lần (từ lần 2: 1 phút, sau đó nhân đôi).`
+        )}</b></p>
+        <button class="big" disabled>${T(`Wait ${mins} min`, `Chờ ${mins} phút`)}</button>`;
+      } else {
+        btn = `<button class="big on" data-start="${esc(s.slug)}">${s.tries ? T('Retry', 'Làm lại') : T('Start', 'Bắt đầu')}</button>`;
+      }
     }
     h += `<div class="card qcard"><div class="stem">${esc(s.title)}</div>
-      <div class="muted">${badge} · ${T('tries', 'lần')}: ${s.tries} · pass ${s.pass_score}/${s.n_pick}</div>
+      <div class="muted">${badge} · ${T('tries', 'lần')}: ${s.tries} · pass ${s.pass_score}/${s.n_pick} · ${T('bank', 'ngân hàng')} ${s.n}</div>
       ${btn}</div>`;
   });
   h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button></div></main>`;
@@ -210,6 +229,14 @@ function renderHome(app) {
   $('#ref').onclick = () => reload();
   app.querySelectorAll('[data-start]').forEach(b => b.onclick = () => startQuiz(b.dataset.start));
   app.querySelectorAll('[data-explain]').forEach(b => b.onclick = () => resumeExplain(b.dataset.explain));
+  const coolNeed = (I.sets || []).some(s => (Number(s.cooldown_sec) || 0) > 0);
+  if (Q._coolTimer) clearInterval(Q._coolTimer);
+  if (coolNeed) {
+    Q._coolTimer = setInterval(() => {
+      if (!Q.me) { clearInterval(Q._coolTimer); return; }
+      reload();
+    }, 15000);
+  }
 }
 
 async function startQuiz(slug) {
@@ -310,12 +337,12 @@ function renderPaper(app) {
     if ((q.type || 'mcq') === 'numeric') {
       h += `<label class="fl numans">${T('Your answer', 'Nhập đáp án')}
         <span class="numrow">
-          <input inputmode="numeric" autocomplete="off" name="qm_${esc(q.id)}" placeholder="${T('coeff.', 'hệ số')}">
+          <input inputmode="decimal" autocomplete="off" name="qm_${esc(q.id)}" placeholder="${T('coeff.', 'hệ số')}" >
           <span class="scale">* 10</span>
-          <input class="exp" inputmode="numeric" autocomplete="off" name="qe_${esc(q.id)}" placeholder="${T('power', 'mũ')}">
+          <input class="exp" inputmode="text" autocomplete="off" name="qe_${esc(q.id)}" placeholder="${T('power', 'mũ')}">
           ${q.unit ? `<span class="unit">${quizMath(q.unit)}</span>` : ''}
         </span></label>
-        <p class="muted">${T('Enter integer coefficient and power of 10 (example: 259 and −4 for 0.0259).', 'Nhập hệ số nguyên và mũ 10 (vd: 259 và −4 cho 0.0259).')}</p>`;
+        <p class="muted">${T('Enter coefficient (dot or comma OK) and power of 10. Example: 2.59 and −1, or 259 and −3.', 'Nhập hệ số (được dùng . hoặc ,) và mũ 10. Vd: 2.59 và −1, hoặc 259 và −3.')}</p>`;
     } else {
       (q.choices || []).forEach((c, ci) => {
         h += `<label><input type="radio" name="q_${esc(q.id)}" value="${ci}"> ${quizMath(c)}</label>`;
@@ -404,8 +431,14 @@ function renderResult(app) {
     <div class="score">${R.score} / ${R.total}</div>
     <div class="muted">${T('Pass mark', 'Mốc đạt')}: ${R.pass_score}/${R.total}</div>`;
   if (R.left_app) {
-    h += `<p class="muted"><b>${T('Attempt ended because you left this app.', 'Bài bị hủy vì bạn đã thoát khỏi app.')}</b>
-      ${T('You can retry.', 'Bạn có thể làm lại.')}</p>`;
+    const note = R.penalty_note || T('Attempt ended because you left this app.', 'Bài bị hủy vì bạn đã thoát khỏi app.');
+    const cool = Number(R.cooldown_sec) || 0;
+    h += `<p class="muted"><b>${esc(note)}</b></p>`;
+    if (cool > 0) {
+      h += `<p class="muted" id="coolLeft">${T(`Wait ${Math.ceil(cool / 60)} min before the next try.`, `Chờ ${Math.ceil(cool / 60)} phút mới làm lại.`)}</p>`;
+    } else {
+      h += `<p class="muted">${T('You can retry now (next leave will add a wait).', 'Bạn có thể làm lại ngay (lần thoát sau sẽ bị chờ).')}</p>`;
+    }
   } else if (!pass) {
     h += `<p class="muted"><b>${T('Attendance not recorded yet.', 'Chưa được điểm danh.')}</b>
       ${T('Please retry.', 'Hãy làm lại.')}</p>`;

@@ -81,6 +81,24 @@ def course_has_quizzes(course):
     return bool(list_banks(course))
 
 
+def leave_cooldown_sec(leaves):
+    """After 2nd leave: 1 min; each further leave doubles (2, 4, 8, …)."""
+    if leaves < 2:
+        return 0
+    return 60 * (2 ** (leaves - 2))
+
+
+def is_left_submit(answers, flag=False):
+    """Leave-app submit: explicit flag or empty / marker payload."""
+    if flag:
+        return True
+    if not answers:
+        return True
+    if isinstance(answers, dict) and set(answers.keys()) <= {'__left'}:
+        return True
+    return False
+
+
 def parse_number(raw):
     """Parse student numeric input; allow comma decimal and scientific notation."""
     if raw is None or raw == '':

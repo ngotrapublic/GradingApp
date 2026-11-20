@@ -68,7 +68,8 @@ async function loadQuizRoster(slug) {
     <p class="muted">${T('Tap Log on a student to see only that student’s attempts.', 'Bấm Log ở từng SV để xem các lần làm của bạn đó.')}</p>
     <table><thead><tr><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Best', 'Cao nhất')}</th><th>${T('Tries', 'Lần')}</th><th>${T('Pass', 'Đạt')}</th><th>${T('Solutions', 'Đáp án')}</th><th></th></tr></thead><tbody>`;
   j.roster.forEach(r => {
-    h += `<tr data-sid="${esc(r.sid)}"><td>${esc(r.name)}</td><td>${esc(r.sid)}</td><td>${r.best == null ? '–' : r.best}</td><td>${r.tries}</td>
+    const rowCls = r.solutions_seen ? 'quiz-att-done' : (r.passed ? 'quiz-passed' : '');
+    h += `<tr class="${rowCls}" data-sid="${esc(r.sid)}"><td>${esc(r.name)}</td><td>${esc(r.sid)}</td><td>${r.best == null ? '–' : r.best}</td><td>${r.tries}</td>
       <td>${r.passed ? '✓' : '–'}</td><td>${r.solutions_seen ? '✓' : '–'}</td>
       <td style="white-space:nowrap">
         <button class="btn" data-log="${esc(r.sid)}">${T('Log', 'Log')}</button>

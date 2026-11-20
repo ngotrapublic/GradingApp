@@ -1,220 +1,165 @@
 {
   "slug": "day4",
-  "title": "Day 4 – Power, optical, fabrication",
+  "title": "Day 4 – Power, optical & fabrication",
   "n_pick": 15,
   "pass_score": 11,
   "questions": [
     {
-      "id": "d4q01",
+      "id": "mcq121",
       "type": "mcq",
-      "stem": "The Gunn effect is based on",
+      "stem": "Two Darlington devices each have β=15. Total gain is",
       "choices": [
-        "intervalley transfer and negative differential mobility",
-        "MOS inversion",
-        "radiative recombination",
-        "pn-junction avalanche"
+        "225",
+        "255",
+        "450",
+        "30"
       ],
-      "answer": 0,
-      "explain": "Electrons jump to a slower valley and NDR appears.",
-      "hint": "Electrons jump to a slower valley and NDR appears."
+      "answer": 1,
+      "explain": "βT=225+15+15=255.",
+      "hint": "βT=225+15+15=255."
     },
     {
-      "id": "d4q02",
+      "id": "mcq122",
       "type": "mcq",
-      "stem": "Compared with a Gunn device, an IMPATT typically has",
+      "stem": "A power MOSFET has RS=20 mΩ, RCH=30 mΩ and RD=50 mΩ. Ron is",
       "choices": [
-        "no reverse bias",
-        "zero power output",
-        "lower noise due to no avalanche",
-        "higher avalanche noise"
+        "50",
+        "80",
+        "100",
+        "150 mΩ"
+      ],
+      "answer": 2,
+      "explain": "Ron is the sum, 100 mΩ.",
+      "hint": "Ron is the sum, 100 mΩ."
+    },
+    {
+      "id": "mcq123",
+      "type": "mcq",
+      "stem": "An SCR has α1+α2=0.9 and total leakage 0.1 mA. No gate current. IA is",
+      "choices": [
+        "10 mA",
+        "0.1",
+        "0.5",
+        "1 Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
       ],
       "answer": 3,
-      "explain": "IMPATT uses avalanche, so it is usually noisier.",
-      "hint": "IMPATT uses avalanche, so it is usually noisier."
+      "explain": "IA=0.1/(1-0.9)=1 mA.",
+      "hint": "IA=0.1/(1-0.9)=1 mA."
     },
     {
-      "id": "d4q03",
-      "type": "numeric",
-      "stem": "P=20 W, R_θJA=4 °C/W, T_A=25 °C. Calculate T_j = T_A + P * R_θ.",
-      "answer": 105,
-      "unit": "C",
-      "tol_rel": 0.03,
-      "explain": "T_j = 25 + 20 * 4 = 105 °C.",
-      "power10": 0,
-      "hint": "T_j = T_A + P * R_θJA with T_A = 25, P = 20, R_θJA = 4. Compute P * R_θJA, then add T_A. Enter an integer coefficient and power of 10 (usually 0 here)."
+      "id": "mcq124",
+      "type": "mcq",
+      "stem": "If α1+α2 changes from 0.9 to 0.99 with the same leakage, IA changes by a factor of",
+      "choices": [
+        "10",
+        "100",
+        "0.1",
+        "1"
+      ],
+      "answer": 0,
+      "explain": "Denominator falls from 0.1 to 0.01.",
+      "hint": "Denominator falls from 0.1 to 0.01."
     },
     {
-      "id": "d4q04",
+      "id": "mcq125",
+      "type": "mcq",
+      "stem": "A power device dissipates 30 W with RθJA=3 °C/W and TA=25 °C. Tj is",
+      "choices": [
+        "90",
+        "115",
+        "150 °C",
+        "55"
+      ],
+      "answer": 1,
+      "explain": "Tj=TA+PRθ=25+90=115 °C.",
+      "hint": "Tj=TA+PRθ=25+90=115 °C."
+    },
+    {
+      "id": "mcq126",
+      "type": "mcq",
+      "stem": "A tunnel diode has fr=20 GHz. Which oscillator frequency satisfies the simple cutoff criterion?",
+      "choices": [
+        "25 GHz",
+        "22 GHz",
+        "20 GHz exactly",
+        "15 GHz"
+      ],
+      "answer": 3,
+      "explain": "Oscillation requires fo<fr.",
+      "hint": "Oscillation requires fo<fr."
+    },
+    {
+      "id": "mcq127",
+      "type": "mcq",
+      "stem": "An RTD first level is E1=0.12 eV. The simple 2E1/q voltage estimate is",
+      "choices": [
+        "0.48 V",
+        "0.06",
+        "0.12",
+        "0.24"
+      ],
+      "answer": 3,
+      "explain": "Numerically, 2×0.12 eV/q corresponds to 0.24 V.",
+      "hint": "Numerically, 2×0.12 eV/q corresponds to 0.24 V."
+    },
+    {
+      "id": "mcq128",
+      "type": "mcq",
+      "stem": "A microwave device has 4 W rf output from 32 W dc input. Efficiency is",
+      "choices": [
+        "25%",
+        "80%",
+        "8%",
+        "12.5%"
+      ],
+      "answer": 3,
+      "explain": "η=4/32=12.5%.",
+      "hint": "η=4/32=12.5%."
+    },
+    {
+      "id": "mcq129",
+      "type": "mcq",
+      "stem": "For domain stability n0L=10^12 cm^-2 and L=10 μm, n0 is",
+      "choices": [
+        "10^14",
+        "10^15",
+        "10^18 cm^-3",
+        "10^12"
+      ],
+      "answer": 1,
+      "explain": "L=10^-3 cm, so n0=10^15 cm^-3.",
+      "hint": "L=10^-3 cm, so n0=10^15 cm^-3."
+    },
+    {
+      "id": "mcq130",
+      "type": "mcq",
+      "stem": "A 60 GHz signal lies in the",
+      "choices": [
+        "L band",
+        "X band",
+        "millimetre-wave range",
+        "submillimetre range V. Optoelectronic devices"
+      ],
+      "answer": 2,
+      "explain": "Millimetre wave spans roughly 30-300 GHz.",
+      "hint": "Millimetre wave spans roughly 30-300 GHz."
+    },
+    {
+      "id": "mcq131",
       "type": "mcq",
       "stem": "A photon can cause direct interband absorption when",
       "choices": [
         "mobility is zero",
-        "hν < E_g",
-        "hν ≥ E_g",
-        "hν = 0 only"
+        "hν<Eg",
+        "hν≥Eg",
+        "hν=0 only Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
       ],
       "answer": 2,
-      "explain": "The photon energy must be at least the bandgap.",
-      "hint": "The photon energy must be at least the bandgap."
+      "explain": "Photon energy must at least equal the bandgap.",
+      "hint": "Photon energy must at least equal the bandgap."
     },
     {
-      "id": "d4q05",
-      "type": "mcq",
-      "stem": "Solar-cell open-circuit voltage increases with illumination mainly",
-      "choices": [
-        "linearly",
-        "logarithmically",
-        "quadratically",
-        "not at all"
-      ],
-      "answer": 1,
-      "explain": "V_oc grows like the log of light-generated current.",
-      "hint": "V_oc grows like the log of light-generated current."
-    },
-    {
-      "id": "d4q06",
-      "type": "mcq",
-      "stem": "A PIN photodiode is fast because much of the light is collected in",
-      "choices": [
-        "a wide depleted intrinsic region",
-        "a neutral metal region",
-        "a forward-biased base",
-        "an oxide only"
-      ],
-      "answer": 0,
-      "explain": "Carriers drift quickly across the wide i-region.",
-      "hint": "Carriers drift quickly across the wide i-region."
-    },
-    {
-      "id": "d4q07",
-      "type": "mcq",
-      "stem": "Direct-bandgap materials are preferred for LEDs because",
-      "choices": [
-        "radiative transitions are efficient",
-        "they have no electrons",
-        "they eliminate all reflection",
-        "their bandgap is zero"
-      ],
-      "answer": 0,
-      "explain": "Direct gap makes light-emitting recombination efficient.",
-      "hint": "Direct gap makes light-emitting recombination efficient."
-    },
-    {
-      "id": "d4q08",
-      "type": "numeric",
-      "stem": "I_sc=40 mA, V_oc=0.50 V, P_max=14 mW. Calculate fill factor FF = P_max/(I_sc * V_oc).",
-      "answer": 0.7,
-      "unit": "",
-      "tol_rel": 0.03,
-      "explain": "FF = 14e-3 / (0.04 * 0.50) = 0.70.",
-      "power10": -1,
-      "hint": "FF = P_max / (I_sc * V_oc). Convert P_max = 14 mW → W and I_sc = 40 mA → A, then compute the denominator I_sc * V_oc and divide. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
-    },
-    {
-      "id": "d4q09",
-      "type": "numeric",
-      "stem": "Y_W=0.98, Y_D=0.85, Y_C=0.95. Calculate total yield Y = Y_W * Y_D * Y_C.",
-      "answer": 0.79135,
-      "unit": "",
-      "tol_rel": 0.03,
-      "explain": "0.98 * 0.85 * 0.95 ≈ 0.791.",
-      "power10": -3,
-      "hint": "Y = Y_W * Y_D * Y_C with 0.98, 0.85, 0.95. Multiply step by step on the calculator. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
-    },
-    {
-      "id": "d4q10",
-      "type": "numeric",
-      "stem": "R=50 ohm drives C=40 fF. Calculate RC time constant in ps.",
-      "answer": 2,
-      "unit": "ps",
-      "tol_rel": 0.03,
-      "explain": "τ = 50 * 40e-15 = 2e-12 s = 2 ps.",
-      "power10": 0,
-      "hint": "τ = R * C with R = 50 and C = 40 fF = 40e-15 F. Multiply, then convert seconds → ps. Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d4q11",
-      "type": "mcq",
-      "stem": "CMP combines",
-      "choices": [
-        "chemical reaction and mechanical abrasion",
-        "only optical absorption",
-        "only thermal diffusion",
-        "Hall measurement and packaging"
-      ],
-      "answer": 0,
-      "explain": "CMP is chemical-mechanical polishing.",
-      "hint": "CMP is chemical-mechanical polishing."
-    },
-    {
-      "id": "d4q12",
-      "type": "numeric",
-      "stem": "For 90% absorption and α=1000 cm^-1, calculate thickness d = -ln(0.1)/α in μm.",
-      "answer": 23.03,
-      "unit": "um",
-      "tol_rel": 0.05,
-      "explain": "d = 2.3026/1000 cm = 0.002303 cm = 23.03 μm.",
-      "power10": -1,
-      "hint": "For 90% absorption, remaining = 0.1 so d = -ln(0.1) / α with α = 1000 cm^-1. Compute -ln(0.1), divide by α (cm), then convert cm → μm. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
-    },
-    {
-      "id": "d4q13",
-      "type": "mcq",
-      "stem": "Laser threshold occurs when",
-      "choices": [
-        "round-trip gain equals total loss",
-        "current is zero",
-        "reflectivity is zero and gain negative",
-        "all photons are absorbed"
-      ],
-      "answer": 0,
-      "explain": "At threshold, gain per round trip balances the losses.",
-      "hint": "At threshold, gain per round trip balances the losses."
-    },
-    {
-      "id": "d4q14",
-      "type": "mcq",
-      "stem": "The main purpose of a cleanroom is to control",
-      "choices": [
-        "particles and contamination",
-        "only device voltage",
-        "laser wavelength",
-        "BJT gain only"
-      ],
-      "answer": 0,
-      "explain": "Cleanrooms keep particles and contamination low.",
-      "hint": "Cleanrooms keep particles and contamination low."
-    },
-    {
-      "id": "d4q15",
-      "type": "mcq",
-      "stem": "Photolithography primarily",
-      "choices": [
-        "creates laser population inversion",
-        "transfers a reticle pattern to photoresist",
-        "removes all metal mechanically",
-        "measures Hall voltage"
-      ],
-      "answer": 1,
-      "explain": "It copies the mask pattern into resist.",
-      "hint": "It copies the mask pattern into resist."
-    },
-    {
-      "id": "d4q16",
-      "type": "mcq",
-      "stem": "Low-k dielectric is used in interconnects to reduce",
-      "choices": [
-        "bandgap",
-        "capacitance",
-        "carrier lifetime",
-        "wafer diameter"
-      ],
-      "answer": 1,
-      "explain": "Lower k means lower wiring capacitance.",
-      "hint": "Lower k means lower wiring capacitance."
-    },
-    {
-      "id": "d4q17",
+      "id": "mcq132",
       "type": "mcq",
       "stem": "A larger absorption coefficient means",
       "choices": [
@@ -224,52 +169,167 @@
         "absorption closer to the surface"
       ],
       "answer": 3,
-      "explain": "Large α means light is absorbed near the surface.",
-      "hint": "Large α means light is absorbed near the surface."
+      "explain": "The penetration depth is approximately 1/α.",
+      "hint": "The penetration depth is approximately 1/α."
     },
     {
-      "id": "d4q18",
+      "id": "mcq133",
       "type": "mcq",
-      "stem": "Fill factor of a solar cell is",
+      "stem": "In a solar cell, short-circuit current is approximately",
       "choices": [
-        "P_max / (I_sc * V_oc)",
-        "I_sc / V_oc",
-        "only series resistance",
-        "always exactly 1"
+        "IL",
+        "zero",
+        "Voc/IS",
+        "IS"
       ],
       "answer": 0,
-      "explain": "FF compares real max power to the I_sc–V_oc rectangle.",
-      "hint": "FF compares real max power to the I_sc–V_oc rectangle."
+      "explain": "At V=0, the diode term vanishes and Isc≈IL.",
+      "hint": "At V=0, the diode term vanishes and Isc≈IL."
     },
     {
-      "id": "d4q19",
+      "id": "mcq134",
       "type": "mcq",
-      "stem": "Through-silicon vias support",
+      "stem": "Solar-cell open-circuit voltage increases with illumination mainly",
       "choices": [
-        "optical absorption only",
-        "Schottky barrier lowering",
-        "vertical 3D interconnection",
-        "only planar diffusion"
+        "linearly",
+        "logarithmically",
+        "quadratically",
+        "not at all"
+      ],
+      "answer": 1,
+      "explain": "Voc=VT ln(1+IL/IS).",
+      "hint": "Voc=VT ln(1+IL/IS)."
+    },
+    {
+      "id": "mcq135",
+      "type": "mcq",
+      "stem": "A wide-bandgap solar-cell window layer is used to",
+      "choices": [
+        "increase series resistance",
+        "absorb all photons before the junction",
+        "transmit useful photons and reduce surface loss",
+        "eliminate the depletion field"
       ],
       "answer": 2,
-      "explain": "TSVs connect chips/wafers in the vertical direction.",
-      "hint": "TSVs connect chips/wafers in the vertical direction."
+      "explain": "The window reduces parasitic absorption and surface recombination.",
+      "hint": "The window reduces parasitic absorption and surface recombination."
     },
     {
-      "id": "d4q20",
-      "type": "numeric",
-      "stem": "Package thermal resistance 20 °C/W, dissipates 2 W, ambient 30 °C. Calculate T_j.",
-      "answer": 70,
-      "unit": "C",
-      "tol_rel": 0.03,
-      "explain": "T_j = 30 + 2 * 20 = 70 °C.",
-      "power10": 0,
-      "hint": "T_j = T_A + P * R_θ with T_A = 30, P = 2 W, R_θ = 20 °C/W. Compute P * R_θ, then add T_A. Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d4q21",
+      "id": "mcq136",
       "type": "mcq",
-      "stem": "External LED efficiency is lower than internal efficiency mainly because of",
+      "stem": "Photoconductor gain can exceed unity because",
+      "choices": [
+        "there is avalanche in every photoconductor",
+        "the device has no bias",
+        "one photon creates infinite carriers",
+        "contact charge can circulate during carrier lifetime"
+      ],
+      "answer": 3,
+      "explain": "Long lifetime relative to transit time permits repeated charge flow.",
+      "hint": "Long lifetime relative to transit time permits repeated charge flow."
+    },
+    {
+      "id": "mcq137",
+      "type": "mcq",
+      "stem": "Increasing photoconductor lifetime generally",
+      "choices": [
+        "lowers gain and speeds response",
+        "changes neither",
+        "eliminates absorption",
+        "raises gain and slows response"
+      ],
+      "answer": 3,
+      "explain": "Gain is proportional to lifetime, while response time also increases.",
+      "hint": "Gain is proportional to lifetime, while response time also increases."
+    },
+    {
+      "id": "mcq138",
+      "type": "mcq",
+      "stem": "A PIN photodiode is fast because much of the light is collected in",
+      "choices": [
+        "a wide depleted intrinsic region",
+        "a neutral metal region",
+        "a forward-biased base",
+        "an oxide only"
+      ],
+      "answer": 0,
+      "explain": "Carriers generated in the depleted region are swept out promptly.",
+      "hint": "Carriers generated in the depleted region are swept out promptly."
+    },
+    {
+      "id": "mcq139",
+      "type": "mcq",
+      "stem": "An APD provides internal gain through",
+      "choices": [
+        "thermal equilibrium",
+        "impact ionization",
+        "Fresnel reflection",
+        "MOS accumulation"
+      ],
+      "answer": 1,
+      "explain": "Primary carriers create secondary carriers at high reverse field.",
+      "hint": "Primary carriers create secondary carriers at high reverse field."
+    },
+    {
+      "id": "mcq140",
+      "type": "mcq",
+      "stem": "Compared with a PIN diode, an APD generally has",
+      "choices": [
+        "no depletion region",
+        "only hole conduction",
+        "lower bias and no noise",
+        "higher gain, higher bias and more noise Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      ],
+      "answer": 3,
+      "explain": "Avalanche multiplication improves sensitivity but adds noise and bias requirements.",
+      "hint": "Avalanche multiplication improves sensitivity but adds noise and bias requirements."
+    },
+    {
+      "id": "mcq141",
+      "type": "mcq",
+      "stem": "Phototransistor gain is approximately",
+      "choices": [
+        "1+β",
+        "β-1 only",
+        "zero",
+        "1/β"
+      ],
+      "answer": 0,
+      "explain": "Primary photocurrent acts like base current.",
+      "hint": "Primary photocurrent acts like base current."
+    },
+    {
+      "id": "mcq142",
+      "type": "mcq",
+      "stem": "Direct-bandgap materials are preferred for LEDs because",
+      "choices": [
+        "radiative transitions are efficient",
+        "they have no electrons",
+        "they eliminate all reflection",
+        "their bandgap is zero"
+      ],
+      "answer": 0,
+      "explain": "Momentum-conserving radiative recombination is much more probable.",
+      "hint": "Momentum-conserving radiative recombination is much more probable."
+    },
+    {
+      "id": "mcq143",
+      "type": "mcq",
+      "stem": "Auger recombination becomes especially important at",
+      "choices": [
+        "flat-band voltage",
+        "high carrier concentration",
+        "zero carrier concentration",
+        "low optical index only"
+      ],
+      "answer": 1,
+      "explain": "It is a multi-carrier nonradiative mechanism.",
+      "hint": "It is a multi-carrier nonradiative mechanism."
+    },
+    {
+      "id": "mcq144",
+      "type": "mcq",
+      "stem": "LED external efficiency is lower than internal efficiency mainly because of",
       "choices": [
         "zero injection",
         "no bandgap",
@@ -277,22 +337,232 @@
         "lack of any recombination"
       ],
       "answer": 2,
-      "explain": "Much light is trapped or reflected inside and never leaves.",
-      "hint": "Much light is trapped or reflected inside and never leaves."
+      "explain": "Internal absorption, Fresnel reflection and total internal reflection trap light.",
+      "hint": "Internal absorption, Fresnel reflection and total internal reflection trap light."
     },
     {
-      "id": "d4q22",
+      "id": "mcq145",
       "type": "mcq",
-      "stem": "Junction temperature rises when",
+      "stem": "Laser emission differs from LED emission by being primarily",
       "choices": [
-        "power dissipation or thermal resistance rises",
-        "only when V_oc is measured",
-        "bandgap becomes infinite",
-        "cleanroom class improves"
+        "spontaneous and broad",
+        "nonradiative",
+        "caused by Hall effect",
+        "stimulated and coherent"
+      ],
+      "answer": 3,
+      "explain": "Stimulated emission gives phase-coherent amplification.",
+      "hint": "Stimulated emission gives phase-coherent amplification."
+    },
+    {
+      "id": "mcq146",
+      "type": "mcq",
+      "stem": "Laser threshold occurs when",
+      "choices": [
+        "round-trip gain equals total loss",
+        "all photons are absorbed",
+        "current is zero",
+        "reflectivity is zero and gain negative"
       ],
       "answer": 0,
-      "explain": "Higher P or higher Rθ both push T_j up.",
-      "hint": "Higher P or higher Rθ both push T_j up."
+      "explain": "Internal and mirror losses must be balanced by gain.",
+      "hint": "Internal and mirror losses must be balanced by gain."
+    },
+    {
+      "id": "mcq147",
+      "type": "mcq",
+      "stem": "A double heterojunction laser confines",
+      "choices": [
+        "only the substrate",
+        "only heat",
+        "both carriers and the optical mode",
+        "only metal atoms"
+      ],
+      "answer": 2,
+      "explain": "Band offsets confine carriers and refractive-index contrast confines light.",
+      "hint": "Band offsets confine carriers and refractive-index contrast confines light."
+    },
+    {
+      "id": "mcq148",
+      "type": "mcq",
+      "stem": "Population inversion in a semiconductor laser requires",
+      "choices": [
+        "zero carrier density",
+        "reverse recovery",
+        "strong injection and quasi-Fermi separation",
+        "thermal equilibrium only"
+      ],
+      "answer": 2,
+      "explain": "The upper-state occupation must exceed the lower-state occupation for relevant transitions.",
+      "hint": "The upper-state occupation must exceed the lower-state occupation for relevant transitions."
+    },
+    {
+      "id": "mcq149",
+      "type": "mcq",
+      "stem": "Total internal reflection becomes stronger when the semiconductor-air index contrast is",
+      "choices": [
+        "zero",
+        "negative only",
+        "unrelated to index",
+        "large Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      ],
+      "answer": 3,
+      "explain": "A high internal index produces a small escape cone.",
+      "hint": "A high internal index produces a small escape cone."
+    },
+    {
+      "id": "mcq150",
+      "type": "mcq",
+      "stem": "An LED spectrum is typically broader than a laser spectrum because LED emission is",
+      "choices": [
+        "spontaneous over an energy distribution",
+        "a single cavity mode only",
+        "always monochromatic",
+        "nonoptical"
+      ],
+      "answer": 0,
+      "explain": "Spontaneous recombination spans a range of energies.",
+      "hint": "Spontaneous recombination spans a range of energies."
+    },
+    {
+      "id": "mcq151",
+      "type": "mcq",
+      "stem": "Photon energy at λ=0.80 μm is closest to",
+      "choices": [
+        "2.48 eV",
+        "0.65",
+        "1.00",
+        "1.55"
+      ],
+      "answer": 3,
+      "explain": "E=1.24/0.80=1.55 eV.",
+      "hint": "E=1.24/0.80=1.55 eV."
+    },
+    {
+      "id": "mcq152",
+      "type": "mcq",
+      "stem": "An LED with Eg=2.0 eV emits near",
+      "choices": [
+        "870",
+        "1240 nm",
+        "400",
+        "620"
+      ],
+      "answer": 3,
+      "explain": "λ=1.24/2.0=0.620 μm.",
+      "hint": "λ=1.24/2.0=0.620 μm."
+    },
+    {
+      "id": "mcq153",
+      "type": "mcq",
+      "stem": "For α=1000 cm^-1 and d=10 μm, transmitted fraction is",
+      "choices": [
+        "0.368",
+        "0.632",
+        "0.900",
+        "0.135"
+      ],
+      "answer": 0,
+      "explain": "αd=1 and T=e^-1=0.368.",
+      "hint": "αd=1 and T=e^-1=0.368."
+    },
+    {
+      "id": "mcq154",
+      "type": "mcq",
+      "stem": "For 90% absorption and α=2000 cm^-1, thickness is closest to",
+      "choices": [
+        "1.15",
+        "11.5",
+        "115",
+        "1150 μm"
+      ],
+      "answer": 1,
+      "explain": "d=ln10/α=0.001151 cm=11.51 μm.",
+      "hint": "d=ln10/α=0.001151 cm=11.51 μm."
+    },
+    {
+      "id": "mcq155",
+      "type": "mcq",
+      "stem": "A solar cell has Im=30 mA and Vm=0.50 V. Maximum power is",
+      "choices": [
+        "150 mW",
+        "1.5",
+        "15",
+        "50"
+      ],
+      "answer": 2,
+      "explain": "P=IV=0.03×0.50=15 mW.",
+      "hint": "P=IV=0.03×0.50=15 mW."
+    },
+    {
+      "id": "mcq156",
+      "type": "mcq",
+      "stem": "If Isc=35 mA, Voc=0.60 V and Pmax=15 mW, fill factor is",
+      "choices": [
+        "0.714",
+        "1.40",
+        "0.357",
+        "0.500"
+      ],
+      "answer": 0,
+      "explain": "FF=15/(35×0.60)=0.714 using mW units.",
+      "hint": "FF=15/(35×0.60)=0.714 using mW units."
+    },
+    {
+      "id": "mcq157",
+      "type": "mcq",
+      "stem": "A PIN diode absorbs 80% of Φ0=10^17 photons cm^-2s^-1. JL is closest to",
+      "choices": [
+        "12.8",
+        "128",
+        "1280 mA/cm²",
+        "1.28"
+      ],
+      "answer": 0,
+      "explain": "JL=qΦ0×0.8=0.0128 A/cm²=12.8 mA/cm².",
+      "hint": "JL=qΦ0×0.8=0.0128 A/cm²=12.8 mA/cm²."
+    },
+    {
+      "id": "mcq158",
+      "type": "mcq",
+      "stem": "A 2 μm depletion region crossed at 10^7 cm/s has transit time",
+      "choices": [
+        "2 ps",
+        "20 ps",
+        "200 ps",
+        "2 ns Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      ],
+      "answer": 1,
+      "explain": "2×10^-4 cm /10^7 cm/s=2×10^-11 s.",
+      "hint": "2×10^-4 cm /10^7 cm/s=2×10^-11 s."
+    },
+    {
+      "id": "mcq159",
+      "type": "mcq",
+      "stem": "An APD with primary current 5 μA and gain 20 produces",
+      "choices": [
+        "100 μA",
+        "0.25",
+        "5",
+        "25"
+      ],
+      "answer": 0,
+      "explain": "Iout=MIprimary=100 μA. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+      "hint": "Iout=MIprimary=100 μA. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+    },
+    {
+      "id": "mcq160",
+      "type": "mcq",
+      "stem": "A phototransistor with β=49 and IL=1 μA gives IC",
+      "choices": [
+        "50",
+        "100 μA",
+        "1",
+        "49"
+      ],
+      "answer": 0,
+      "explain": "IC=(1+β)IL=50 μA.",
+      "hint": "IC=(1+β)IL=50 μA."
     }
   ]
 }

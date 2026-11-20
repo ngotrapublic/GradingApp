@@ -5,9 +5,9 @@
   "pass_score": 11,
   "questions": [
     {
-      "id": "d1q01",
+      "id": "mcq001",
       "type": "mcq",
-      "stem": "In thermal equilibrium, which quantity must be spatially constant throughout a connected semiconductor?",
+      "stem": "In thermal equilibrium, which quantity must be spatially constant throughout a connected semiconductor system?",
       "choices": [
         "Hole concentration",
         "Fermi level",
@@ -15,116 +15,27 @@
         "Electron concentration"
       ],
       "answer": 1,
-      "explain": "The Fermi level is flat in equilibrium. Carrier numbers can still change with doping.",
-      "hint": "The Fermi level is flat in equilibrium. Carrier numbers can still change with doping."
+      "explain": "A spatial Fermi-level gradient would produce current, contradicting equilibrium.",
+      "hint": "A spatial Fermi-level gradient would produce current, contradicting equilibrium."
     },
     {
-      "id": "d1q02",
+      "id": "mcq002",
       "type": "mcq",
-      "stem": "For an intrinsic semiconductor at equilibrium, which relation holds?",
+      "stem": "The Maxwell-Boltzmann approximation is most appropriate when the Fermi level is",
       "choices": [
-        "n_0 = p_0 = n_i",
-        "n_0 p_0 = 0",
-        "n_0 > p_0 always",
-        "n_0 < p_0 always"
+        "inside a permitted band",
+        "several kT away from the relevant band edge",
+        "exactly at the conduction-band edge",
+        "equal to the vacuum level"
       ],
-      "answer": 0,
-      "explain": "Intrinsic means electrons and holes are equal, both equal to n_i.",
-      "hint": "Intrinsic means electrons and holes are equal, both equal to n_i."
+      "answer": 1,
+      "explain": "Nondegenerate statistics require the relevant energies to be several kT from EF.",
+      "hint": "Nondegenerate statistics require the relevant energies to be several kT from EF."
     },
     {
-      "id": "d1q03",
+      "id": "mcq003",
       "type": "mcq",
-      "stem": "Acceptor-doped silicon (complete ionization, N_A >> n_i) is normally",
-      "choices": [
-        "degenerate n-type",
-        "n-type with holes as minority carriers",
-        "p-type with holes as majority carriers",
-        "intrinsic"
-      ],
-      "answer": 2,
-      "explain": "Acceptors make holes the majority carriers, so the sample is p-type.",
-      "hint": "Acceptors make holes the majority carriers, so the sample is p-type."
-    },
-    {
-      "id": "d1q04",
-      "type": "mcq",
-      "stem": "Electron drift velocity is directed",
-      "choices": [
-        "perpendicular to the field",
-        "independent of the field",
-        "along the electric field",
-        "opposite the electric field"
-      ],
-      "answer": 3,
-      "explain": "Electrons are negative, so they drift opposite the electric field E.",
-      "hint": "Electrons are negative, so they drift opposite the electric field E."
-    },
-    {
-      "id": "d1q05",
-      "type": "mcq",
-      "stem": "The Einstein relation connects",
-      "choices": [
-        "bandgap and lifetime",
-        "capacitance and resistance",
-        "gain and cutoff frequency",
-        "mobility and diffusion coefficient"
-      ],
-      "answer": 3,
-      "explain": "Einstein link: D = μ * V_T. Mobility and diffusivity stay tied together.",
-      "hint": "Einstein link: D = μ * V_T. Mobility and diffusivity stay tied together."
-    },
-    {
-      "id": "d1q06",
-      "type": "numeric",
-      "stem": "At 300 K, n-type Si has n = 2e16 cm^-3 and μ_n = 1000 cm^2/Vs. Calculate conductivity σ = q * n * μ (q=1.6e-19 C).",
-      "answer": 3.2,
-      "unit": "S/cm",
-      "tol_rel": 0.03,
-      "explain": "σ = q * n * μ = 1.6e-19 * 2e16 * 1000 = 3.2 S/cm.",
-      "power10": -1,
-      "hint": "Use σ = q * n * μ with q = 1.6e-19, n = 2e16, μ = 1000. Compute 1.6e-19 * 2e16 first, then multiply by 1000. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
-    },
-    {
-      "id": "d1q07",
-      "type": "numeric",
-      "stem": "Two mobility limits are 800 and 400 cm^2/Vs. Using Matthiessen (1/μ = 1/μ_1 + 1/μ_2), calculate μ.",
-      "answer": 266.67,
-      "unit": "cm^2/Vs",
-      "tol_rel": 0.05,
-      "explain": "1/μ = 1/800 + 1/400 = 0.00375, so μ ≈ 267 cm^2/Vs.",
-      "power10": 0,
-      "hint": "Matthiessen: 1/μ = 1/800 + 1/400. Add those two terms on the calculator, then take the reciprocal 1/(...). Enter an integer coefficient and power of 10 (usually 0 here)."
-    },
-    {
-      "id": "d1q08",
-      "type": "mcq",
-      "stem": "The mass-action law in a nondegenerate semiconductor at equilibrium is",
-      "choices": [
-        "n_0 p_0 = n_i²",
-        "n_0 / p_0 = n_i²",
-        "n_0 + p_0 = n_i",
-        "n_0 − p_0 = n_i"
-      ],
-      "answer": 0,
-      "explain": "In equilibrium, the product n p equals n_i squared.",
-      "hint": "In equilibrium, the product n p equals n_i squared."
-    },
-    {
-      "id": "d1q09",
-      "type": "numeric",
-      "stem": "For μ_n = 1000 cm^2/Vs at 300 K, calculate D_n = μ_n * V_T with V_T=0.0259 V.",
-      "answer": 25.9,
-      "unit": "cm^2/s",
-      "tol_rel": 0.03,
-      "explain": "D_n = 1000 * 0.0259 = 25.9 cm^2/s.",
-      "power10": -1,
-      "hint": "Use D_n = μ_n * V_T with μ_n = 1000 and V_T = 0.0259. Multiply those two numbers. Enter an integer coefficient and the power of 10 (for example 259 and -4 for 0.0259)."
-    },
-    {
-      "id": "d1q10",
-      "type": "mcq",
-      "stem": "N_c (effective density of states) varies approximately as",
+      "stem": "The effective density of states Nc varies approximately as",
       "choices": [
         "exp(T)",
         "T",
@@ -132,64 +43,25 @@
         "T^(3/2)"
       ],
       "answer": 3,
-      "explain": "N_c grows like T to the power 3/2.",
-      "hint": "N_c grows like T to the power 3/2."
+      "explain": "For a parabolic band, Nc is proportional to effective mass^(3/2) and T^(3/2).",
+      "hint": "For a parabolic band, Nc is proportional to effective mass^(3/2) and T^(3/2)."
     },
     {
-      "id": "d1q11",
-      "type": "numeric",
-      "stem": "N_D = 6e15 cm^-3, N_A = 1e15 cm^-3, n_i negligible. Calculate majority electron concentration n_0 ≈ N_D − N_A.",
-      "answer": 5000000000000000.0,
-      "unit": "cm^-3",
-      "tol_rel": 0.02,
-      "explain": "n_0 ≈ N_D − N_A = 5e15 cm^-3.",
-      "power10": 15,
-      "hint": "Majority electrons: n_0 ≈ N_D - N_A with N_D = 6e15 and N_A = 1e15. Subtract, then enter coefficient and power of 10."
-    },
-    {
-      "id": "d1q12",
+      "id": "mcq004",
       "type": "mcq",
-      "stem": "The Hall voltage sign is mainly useful for identifying",
+      "stem": "For an intrinsic semiconductor, the equilibrium concentrations satisfy",
       "choices": [
-        "junction area",
-        "bandgap only",
-        "carrier type",
-        "oxide thickness"
+        "n0=p0=ni",
+        "n0p0=0",
+        "n0>p0",
+        "n0<p0"
       ],
-      "answer": 2,
-      "explain": "Hall polarity tells you if majority carriers are electrons or holes.",
-      "hint": "Hall polarity tells you if majority carriers are electrons or holes."
+      "answer": 0,
+      "explain": "Thermal generation creates electrons and holes in equal numbers.",
+      "hint": "Thermal generation creates electrons and holes in equal numbers."
     },
     {
-      "id": "d1q13",
-      "type": "mcq",
-      "stem": "A donor atom in silicon becomes, after ionization,",
-      "choices": [
-        "a mobile positive ion",
-        "a fixed positive ion plus a mobile electron",
-        "a fixed negative ion plus a hole",
-        "electrically neutral with a mobile hole"
-      ],
-      "answer": 1,
-      "explain": "The donor ion stays fixed; one electron is free to move.",
-      "hint": "The donor ion stays fixed; one electron is free to move."
-    },
-    {
-      "id": "d1q14",
-      "type": "mcq",
-      "stem": "Matthiessen’s rule combines scattering mechanisms by adding",
-      "choices": [
-        "mobilities",
-        "conductivities",
-        "reciprocal mobilities",
-        "carrier concentrations"
-      ],
-      "answer": 2,
-      "explain": "You add 1/μ terms, not the mobilities themselves.",
-      "hint": "You add 1/μ terms, not the mobilities themselves."
-    },
-    {
-      "id": "d1q15",
+      "id": "mcq005",
       "type": "mcq",
       "stem": "The intrinsic carrier concentration decreases most strongly when",
       "choices": [
@@ -199,100 +71,498 @@
         "mobility increases"
       ],
       "answer": 0,
-      "explain": "Larger E_g makes n_i drop very fast through the exp(−E_g/2kT) factor.",
-      "hint": "Larger E_g makes n_i drop very fast through the exp(−E_g/2kT) factor."
+      "explain": "ni contains the factor exp[-Eg/(2kT)].",
+      "hint": "ni contains the factor exp[-Eg/(2kT)]."
     },
     {
-      "id": "d1q16",
-      "type": "numeric",
-      "stem": "E = 100 V/cm and μ_n = 800 cm^2/Vs. Calculate electron drift speed magnitude v = μ * E.",
-      "answer": 80000.0,
-      "unit": "cm/s",
-      "tol_rel": 0.03,
-      "explain": "v = μ * E = 800 * 100 = 8e4 cm/s.",
-      "power10": 4,
-      "hint": "Use v = μ * E with μ = 800 and E = 100. Multiply, then enter an integer coefficient and the power of 10."
+      "id": "mcq006",
+      "type": "mcq",
+      "stem": "A donor atom in silicon becomes, after ionization,",
+      "choices": [
+        "a mobile positive ion",
+        "a fixed positive ion plus a mobile electron",
+        "a fixed negative ion plus a hole",
+        "electrically neutral with a mobile hole"
+      ],
+      "answer": 1,
+      "explain": "A group-V donor releases its weakly bound fifth electron.",
+      "hint": "A group-V donor releases its weakly bound fifth electron."
     },
     {
-      "id": "d1q17",
+      "id": "mcq007",
+      "type": "mcq",
+      "stem": "An acceptor-doped silicon sample is normally",
+      "choices": [
+        "degenerate n type",
+        "n type with holes as minority carriers",
+        "p type with holes as majority carriers",
+        "intrinsic"
+      ],
+      "answer": 2,
+      "explain": "Ionized acceptors create mobile holes and fixed negative ions.",
+      "hint": "Ionized acceptors create mobile holes and fixed negative ions."
+    },
+    {
+      "id": "mcq008",
+      "type": "mcq",
+      "stem": "The mass-action law in a nondegenerate semiconductor at equilibrium is",
+      "choices": [
+        "n0p0=ni²",
+        "n0/p0=ni²",
+        "n0+p0=ni",
+        "n0-p0=ni"
+      ],
+      "answer": 0,
+      "explain": "The product is fixed by material and temperature.",
+      "hint": "The product is fixed by material and temperature."
+    },
+    {
+      "id": "mcq009",
+      "type": "mcq",
+      "stem": "In compensated material with ND>NA and |ND-NA|>>ni, the majority concentration is approximately",
+      "choices": [
+        "ND-NA Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "ni",
+        "NDNA",
+        "ND+NA"
+      ],
+      "answer": 0,
+      "explain": "Opposite dopants compensate, leaving the net donor concentration.",
+      "hint": "Opposite dopants compensate, leaving the net donor concentration."
+    },
+    {
+      "id": "mcq010",
+      "type": "mcq",
+      "stem": "At very high n-type doping, degeneracy occurs when EF",
+      "choices": [
+        "moves toward midgap",
+        "enters the conduction band",
+        "enters the valence band",
+        "becomes zero"
+      ],
+      "answer": 1,
+      "explain": "Fermi-Dirac statistics are required when EF enters a band.",
+      "hint": "Fermi-Dirac statistics are required when EF enters a band."
+    },
+    {
+      "id": "mcq011",
+      "type": "mcq",
+      "stem": "During freeze-out, the main reason for low carrier concentration is",
+      "choices": [
+        "oxide charging",
+        "carrier velocity saturation",
+        "incomplete dopant ionization",
+        "avalanche multiplication"
+      ],
+      "answer": 2,
+      "explain": "At low temperature, carriers remain bound to dopants.",
+      "hint": "At low temperature, carriers remain bound to dopants."
+    },
+    {
+      "id": "mcq012",
+      "type": "mcq",
+      "stem": "Electron drift velocity is directed",
+      "choices": [
+        "perpendicular to the field",
+        "independent of the field",
+        "along the electric field",
+        "opposite the electric field"
+      ],
+      "answer": 3,
+      "explain": "Electrons have negative charge, so particle motion is opposite E.",
+      "hint": "Electrons have negative charge, so particle motion is opposite E."
+    },
+    {
+      "id": "mcq013",
+      "type": "mcq",
+      "stem": "Conventional electron drift current points",
+      "choices": [
+        "along E",
+        "perpendicular to E",
+        "toward lower electron concentration only",
+        "opposite E"
+      ],
+      "answer": 0,
+      "explain": "Negative charge moving opposite E produces conventional current along E.",
+      "hint": "Negative charge moving opposite E produces conventional current along E."
+    },
+    {
+      "id": "mcq014",
+      "type": "mcq",
+      "stem": "Matthiessen’s rule combines scattering mechanisms by adding",
+      "choices": [
+        "mobilities",
+        "conductivities",
+        "reciprocal mobilities",
+        "carrier concentrations"
+      ],
+      "answer": 2,
+      "explain": "Independent scattering rates add, so 1/μ=Σ1/μi.",
+      "hint": "Independent scattering rates add, so 1/μ=Σ1/μi."
+    },
+    {
+      "id": "mcq015",
+      "type": "mcq",
+      "stem": "Ionized-impurity scattering generally becomes stronger when",
+      "choices": [
+        "bandgap decreases",
+        "dopant concentration increases",
+        "temperature becomes extremely high only",
+        "sample thickness increases"
+      ],
+      "answer": 1,
+      "explain": "More charged impurities produce more Coulomb scattering.",
+      "hint": "More charged impurities produce more Coulomb scattering."
+    },
+    {
+      "id": "mcq016",
+      "type": "mcq",
+      "stem": "The electron diffusion current density is proportional to",
+      "choices": [
+        "nE only",
+        "pE only",
+        "-dn/dx",
+        "+dn/dx"
+      ],
+      "answer": 3,
+      "explain": "Jn,diff=qDn(dn/dx) under the stated conventional-current sign convention.",
+      "hint": "Jn,diff=qDn(dn/dx) under the stated conventional-current sign convention."
+    },
+    {
+      "id": "mcq017",
+      "type": "mcq",
+      "stem": "The Einstein relation connects",
+      "choices": [
+        "bandgap and lifetime",
+        "capacitance and resistance",
+        "gain and cutoff frequency",
+        "mobility and diffusion coefficient"
+      ],
+      "answer": 3,
+      "explain": "D/μ=kT/q links random diffusion and field-driven transport.",
+      "hint": "D/μ=kT/q links random diffusion and field-driven transport."
+    },
+    {
+      "id": "mcq018",
       "type": "mcq",
       "stem": "In a graded n-type semiconductor at equilibrium, the built-in field primarily balances",
       "choices": [
-        "avalanche current",
+        "avalanche current Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
         "electron diffusion",
         "hole recombination",
         "optical generation"
       ],
       "answer": 1,
-      "explain": "Diffusion and drift currents cancel in equilibrium.",
-      "hint": "Diffusion and drift currents cancel in equilibrium."
+      "explain": "The field-induced drift current cancels diffusion current.",
+      "hint": "The field-induced drift current cancels diffusion current."
     },
     {
-      "id": "d1q18",
+      "id": "mcq019",
       "type": "mcq",
-      "stem": "Resistivity ρ relates to conductivity σ by",
+      "stem": "The sign of the Hall voltage is useful for identifying",
       "choices": [
-        "ρ = σ",
-        "ρ = 1/σ",
-        "ρ = σ²",
-        "ρ = q/σ"
+        "junction area",
+        "bandgap only",
+        "carrier type",
+        "oxide thickness"
       ],
-      "answer": 1,
-      "explain": "Resistivity is simply the inverse of conductivity.",
-      "hint": "Resistivity is simply the inverse of conductivity."
+      "answer": 2,
+      "explain": "Hall polarity distinguishes electrons from holes.",
+      "hint": "Hall polarity distinguishes electrons from holes."
     },
     {
-      "id": "d1q19",
-      "type": "numeric",
-      "stem": "At 300 K, calculate V_T = k * T / q (standard room-temperature value ≈ 0.0259 V).",
-      "answer": 0.0259,
-      "unit": "V",
-      "tol_rel": 0.05,
-      "explain": "At room temperature, V_T is about 0.0259 V.",
-      "power10": -4,
-      "hint": "V_T = k * T / q at 300 K. Use ≈ 0.0259 V: enter coefficient and power of 10 (for example 259 and -4)."
-    },
-    {
-      "id": "d1q20",
+      "id": "mcq020",
       "type": "mcq",
-      "stem": "Majority carriers in strongly n-type material are",
+      "stem": "For a strongly n-type sample, conductivity is usually dominated by",
       "choices": [
-        "holes",
-        "electrons",
-        "ions only",
-        "photons"
+        "ni only",
+        "depletion charge",
+        "q p μp",
+        "q n μn"
       ],
-      "answer": 1,
-      "explain": "n-type means electrons are the majority carriers.",
-      "hint": "n-type means electrons are the majority carriers."
+      "answer": 3,
+      "explain": "The majority electron term is much larger than the hole term.",
+      "hint": "The majority electron term is much larger than the hole term."
     },
     {
-      "id": "d1q21",
+      "id": "mcq021",
       "type": "mcq",
-      "stem": "Complete ionization means dopant atoms have",
+      "stem": "At 300 K, n-type silicon has n=1×10^16 cm^-3 and μn=1000 cm²/Vs. Its conductivity is closest to",
       "choices": [
-        "all released their free carriers",
-        "zero charge",
-        "no effect on Fermi level",
-        "become intrinsic"
+        "1.60 S/cm",
+        "16.0 S/cm",
+        "160 S/cm",
+        "0.16 S/cm"
       ],
       "answer": 0,
-      "explain": "Each dopant has given (or taken) its carrier, so N_D^+ ≈ N_D.",
-      "hint": "Each dopant has given (or taken) its carrier, so N_D^+ ≈ N_D."
+      "explain": "σ=qnμn≈1.602 S/cm.",
+      "hint": "σ=qnμn≈1.602 S/cm."
     },
     {
-      "id": "d1q22",
+      "id": "mcq022",
       "type": "mcq",
-      "stem": "Hole drift current points",
+      "stem": "If σ=2 S/cm, the resistivity is",
       "choices": [
-        "opposite hole velocity",
-        "along the hole velocity / along E",
-        "only in metals",
-        "always to ground"
+        "0.02 Ω·cm",
+        "0.2 Ω·cm",
+        "0.5 Ω·cm",
+        "2 Ω·cm"
+      ],
+      "answer": 2,
+      "explain": "ρ=1/σ=0.5 Ω·cm.",
+      "hint": "ρ=1/σ=0.5 Ω·cm."
+    },
+    {
+      "id": "mcq023",
+      "type": "mcq",
+      "stem": "For μn=1200 cm²/Vs at 300 K, Dn is closest to",
+      "choices": [
+        "120 cm²/s",
+        "3.1 cm²/s",
+        "12 cm²/s",
+        "31 cm²/s"
+      ],
+      "answer": 3,
+      "explain": "Dn=μnVT=1200×0.0259≈31.1 cm²/s.",
+      "hint": "Dn=μnVT=1200×0.0259≈31.1 cm²/s."
+    },
+    {
+      "id": "mcq024",
+      "type": "mcq",
+      "stem": "If ND=7×10^15 cm^-3, NA=2×10^15 cm^-3 and ni is negligible, n0 is approximately",
+      "choices": [
+        "7×10^15",
+        "9×10^15 cm^-3",
+        "2×10^15",
+        "5×10^15"
+      ],
+      "answer": 3,
+      "explain": "n0≈ND-NA=5×10^15 cm^-3.",
+      "hint": "n0≈ND-NA=5×10^15 cm^-3."
+    },
+    {
+      "id": "mcq025",
+      "type": "mcq",
+      "stem": "For n0=1×10^15 cm^-3 and ni=1×10^10 cm^-3, p0 equals",
+      "choices": [
+        "10^5",
+        "10^10",
+        "10^15 cm^-3",
+        "10^2"
+      ],
+      "answer": 0,
+      "explain": "p0=ni²/n0=10^20/10^15=10^5 cm^-3.",
+      "hint": "p0=ni²/n0=10^20/10^15=10^5 cm^-3."
+    },
+    {
+      "id": "mcq026",
+      "type": "mcq",
+      "stem": "If EF-EFi increases by kT, electron concentration changes by a factor of",
+      "choices": [
+        "1/2",
+        "1",
+        "e",
+        "e²"
+      ],
+      "answer": 2,
+      "explain": "n0=ni exp[(EF-EFi)/kT].",
+      "hint": "n0=ni exp[(EF-EFi)/kT]."
+    },
+    {
+      "id": "mcq027",
+      "type": "mcq",
+      "stem": "A bar has ρ=1 Ω·cm, L=0.1 cm and A=10^-4 cm². Its resistance is",
+      "choices": [
+        "10 kΩ Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "10 Ω",
+        "100 Ω",
+        "1 kΩ"
+      ],
+      "answer": 3,
+      "explain": "R=ρL/A=0.1/10^-4=1000 Ω.",
+      "hint": "R=ρL/A=0.1/10^-4=1000 Ω."
+    },
+    {
+      "id": "mcq028",
+      "type": "mcq",
+      "stem": "Two mobility limits are 1000 and 500 cm²/Vs. Combined mobility is closest to",
+      "choices": [
+        "750",
+        "1500 cm²/Vs",
+        "250",
+        "333"
+      ],
+      "answer": 3,
+      "explain": "1/μ=1/1000+1/500, so μ≈333 cm²/Vs.",
+      "hint": "1/μ=1/1000+1/500, so μ≈333 cm²/Vs."
+    },
+    {
+      "id": "mcq029",
+      "type": "mcq",
+      "stem": "For E=100 V/cm and μn=800 cm²/Vs, electron drift-speed magnitude is",
+      "choices": [
+        "8×10^3",
+        "8×10^4",
+        "8×10^5 cm/s",
+        "8×10^2"
       ],
       "answer": 1,
-      "explain": "Holes are positive, so their drift current follows E.",
-      "hint": "Holes are positive, so their drift current follows E."
+      "explain": "|vn|=μnE=8×10^4 cm/s.",
+      "hint": "|vn|=μnE=8×10^4 cm/s."
+    },
+    {
+      "id": "mcq030",
+      "type": "mcq",
+      "stem": "At 300 K, a doping gradient has d(ln ND)/dx=200 cm^-1. The equilibrium field is closest to",
+      "choices": [
+        "-0.052",
+        "-0.52",
+        "-5.18",
+        "-51.8 V/cm II. pn junctions, diodes, heterojunctions and contacts"
+      ],
+      "answer": 2,
+      "explain": "E=-VT d lnND/dx=-0.0259×200=-5.18 V/cm.",
+      "hint": "E=-VT d lnND/dx=-0.0259×200=-5.18 V/cm."
+    },
+    {
+      "id": "mcq031",
+      "type": "mcq",
+      "stem": "The depletion region extends farther into the side that is",
+      "choices": [
+        "made of metal",
+        "more heavily doped",
+        "more lightly doped",
+        "forward biased only"
+      ],
+      "answer": 2,
+      "explain": "Equal uncovered charge requires greater width in the lighter-doped side.",
+      "hint": "Equal uncovered charge requires greater width in the lighter-doped side."
+    },
+    {
+      "id": "mcq032",
+      "type": "mcq",
+      "stem": "In an abrupt junction, charge neutrality requires",
+      "choices": [
+        "NA/xp=ND/xn",
+        "xp=xn always",
+        "NA+xp=ND+xn",
+        "NAxp=NDxn"
+      ],
+      "answer": 3,
+      "explain": "The magnitudes of uncovered acceptor and donor charge must match.",
+      "hint": "The magnitudes of uncovered acceptor and donor charge must match."
+    },
+    {
+      "id": "mcq033",
+      "type": "mcq",
+      "stem": "Forward bias on a pn junction generally",
+      "choices": [
+        "lowers the barrier and narrows depletion",
+        "widens depletion",
+        "eliminates minority injection",
+        "raises the barrier"
+      ],
+      "answer": 0,
+      "explain": "Forward bias opposes the built-in potential.",
+      "hint": "Forward bias opposes the built-in potential."
+    },
+    {
+      "id": "mcq034",
+      "type": "mcq",
+      "stem": "Reverse bias generally causes the depletion width to",
+      "choices": [
+        "decrease",
+        "remain fixed",
+        "increase",
+        "become zero"
+      ],
+      "answer": 2,
+      "explain": "The total junction potential increases under reverse bias.",
+      "hint": "The total junction potential increases under reverse bias."
+    },
+    {
+      "id": "mcq035",
+      "type": "mcq",
+      "stem": "For an abrupt junction, a plot of 1/Cj² versus reverse voltage is ideally",
+      "choices": [
+        "constant",
+        "linear",
+        "exponential Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "sinusoidal"
+      ],
+      "answer": 1,
+      "explain": "Cj varies as (Vbi+VR)^-1/2.",
+      "hint": "Cj varies as (Vbi+VR)^-1/2."
+    },
+    {
+      "id": "mcq036",
+      "type": "mcq",
+      "stem": "A varactor is normally operated under",
+      "choices": [
+        "zero field only",
+        "avalanche at all times",
+        "strong forward bias",
+        "reverse bias"
+      ],
+      "answer": 3,
+      "explain": "Reverse bias provides voltage-controlled depletion capacitance. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+      "hint": "Reverse bias provides voltage-controlled depletion capacitance. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+    },
+    {
+      "id": "mcq037",
+      "type": "mcq",
+      "stem": "In a long diode, injected minority carriers decay over the",
+      "choices": [
+        "diffusion length",
+        "Debye wavelength only",
+        "metal work function",
+        "oxide thickness"
+      ],
+      "answer": 0,
+      "explain": "The characteristic length is L=sqrt(Dτ).",
+      "hint": "The characteristic length is L=sqrt(Dτ)."
+    },
+    {
+      "id": "mcq038",
+      "type": "mcq",
+      "stem": "The ideal diode saturation current is strongly temperature dependent mainly because of",
+      "choices": [
+        "junction area only",
+        "ni²",
+        "series resistance only",
+        "contact color"
+      ],
+      "answer": 1,
+      "explain": "IS includes minority concentrations proportional to ni².",
+      "hint": "IS includes minority concentrations proportional to ni²."
+    },
+    {
+      "id": "mcq039",
+      "type": "mcq",
+      "stem": "An ideality factor near 2 usually indicates dominance of",
+      "choices": [
+        "optical reflection",
+        "neutral-region diffusion",
+        "depletion-region recombination",
+        "metal conduction"
+      ],
+      "answer": 2,
+      "explain": "SRH recombination in depletion gives exp(qV/2kT).",
+      "hint": "SRH recombination in depletion gives exp(qV/2kT)."
+    },
+    {
+      "id": "mcq040",
+      "type": "mcq",
+      "stem": "At high-level injection, injected carrier density becomes",
+      "choices": [
+        "exactly zero",
+        "independent of voltage",
+        "negligible relative to doping",
+        "comparable to or larger than doping"
+      ],
+      "answer": 3,
+      "explain": "Low-level approximations then fail and conductivity modulation occurs.",
+      "hint": "Low-level approximations then fail and conductivity modulation occurs."
     }
   ]
 }
