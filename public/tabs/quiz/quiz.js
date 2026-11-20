@@ -12,7 +12,8 @@ async function renderQuiz(root) {
   }
   let h = `<div class="card" style="padding:12px">
     <p>${T('Student page', 'Trang SV')}: <code>${esc(j.quiz_url || '/quiz/')}</code>
-      <button class="btn" id="qqr">${T('QR for students', 'QR cho SV')}</button></p>
+      <button class="btn" id="qqr">${T('QR + student notice', 'QR + thông báo SV')}</button></p>
+    <p class="muted">${T('Open QR to show the link and the English student notice (copyable) side by side.', 'Bấm QR để hiện link và thông báo tiếng Anh cho SV (copy được) cạnh nhau.')}</p>
     <p class="muted">${T('Free name+ID. Each student gets a unique shuffle. Pass then forced English explanations (silent 10s/item) before attendance. Reset clears a student.', 'Họ tên+MSSV tự do. Mỗi SV một đề xáo riêng. Đạt rồi phải đọc giải thích tiếng Anh (im lặng ≥10s/câu) mới điểm danh. Reset để cho làm lại.')}</p>
   </div>`;
   j.sets.forEach(s => {

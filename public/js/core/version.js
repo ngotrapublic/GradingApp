@@ -1,4 +1,4 @@
-const APP_VERSION = '0.0.33';
+const APP_VERSION = '0.0.34';
 
 function showAppVersion() {
   const el = document.getElementById('app-ver');
