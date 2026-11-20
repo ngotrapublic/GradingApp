@@ -222,6 +222,7 @@ def load(con, user, ids=None):
     if ids is None:
         ids = visible_class_ids(con, user)
     d = {'me': user, 'courses': [{'code': c['code'], 'name': c['name'], 'sets': c.get('sets', 1),
+                                  'kind': c.get('kind') or 'lab',
                                   'has_quizzes': bool(c.get('has_quizzes'))} for c in COURSES.values()], 'classes': {}}
     if not ids:
         return d
