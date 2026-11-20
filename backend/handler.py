@@ -980,6 +980,15 @@ def staff_quiz_get(self, con, me, query):
             n = con.execute('SELECT name FROM students WHERE sid=?', (sid,)).fetchone()
             return n['name'] if n and n['name'] else sid
 
+        def _vn_ts(s):
+            if not s:
+                return 0.0
+            try:
+                import datetime as _dt
+                return _dt.datetime.strptime(str(s), '%d/%m/%Y %H:%M').timestamp()
+            except ValueError:
+                return 0.0
+
         rows = con.execute(
             'SELECT DISTINCT sid FROM quiz_attempts WHERE class_id=? AND slug=?', (cid, slug)).fetchall()
         for r0 in rows:
@@ -987,15 +996,24 @@ def staff_quiz_get(self, con, me, query):
             best = con.execute(
                 'SELECT MAX(score) AS score, MAX(passed) AS passed, COUNT(*) AS tries FROM quiz_attempts '
                 'WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid)).fetchone()
-            rev = con.execute('SELECT seen, first_pass FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
-                              (cid, slug, sid)).fetchone()
+            rev = con.execute(
+                'SELECT seen, first_pass, staff_ok, staff_ok_at FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+                (cid, slug, sid)).fetchone()
+            pass_row = con.execute(
+                'SELECT created FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND passed=1 '
+                'AND answers IS NOT NULL ORDER BY id ASC LIMIT 1', (cid, slug, sid)).fetchone()
+            pass_at = (rev['first_pass'] if rev and rev['seen'] and rev['first_pass'] else None) or (
+                pass_row['created'] if pass_row else None)
             roster.append({
                 'sid': sid, 'name': _quiz_name(sid),
                 'best': best['score'], 'tries': best['tries'] or 0,
                 'passed': bool(best['passed']), 'solutions_seen': bool(rev and rev['seen']),
                 'first_pass': rev['first_pass'] if rev else None,
+                'pass_at': pass_at,
+                'staff_checked': bool(rev and rev['staff_ok']),
+                'staff_ok_at': rev['staff_ok_at'] if rev else None,
             })
-        roster.sort(key=lambda r: (not r['passed'], (r['name'] or '').lower()))
+        roster.sort(key=lambda r: (-_vn_ts(r.get('pass_at')), (r['name'] or '').lower()))
         for a in con.execute(
                 'SELECT id, sid, score, total, passed, answers, created FROM quiz_attempts '
                 'WHERE class_id=? AND slug=? ORDER BY id DESC', (cid, slug)).fetchall():
@@ -1046,6 +1064,20 @@ def staff_quiz_post(self, con, me, body):
         con.execute('DELETE FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
         con.execute('DELETE FROM quiz_sessions WHERE class_id=? AND sid=?', (cid, sid))
         return self.send_json({'ok': True, 'reset': True, 'sid': sid, 'slug': slug})
+    if body.get('action') == 'check':
+        sid = str(body.get('sid') or '').strip().upper()
+        if not sid:
+            return self.send_json(err('Missing student ID.', 'Thiếu MSSV.'), 400)
+        rev = con.execute(
+            'SELECT seen, staff_ok FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+            (cid, slug, sid)).fetchone()
+        if not rev or not rev['seen']:
+            return self.send_json(err('Student has not finished explanations yet.', 'SV chưa đọc xong giải thích.'), 400)
+        on = 0 if rev['staff_ok'] else 1
+        con.execute(
+            'UPDATE quiz_reveal SET staff_ok=?, staff_ok_at=? WHERE class_id=? AND slug=? AND sid=?',
+            (on, now() if on else None, cid, slug, sid))
+        return self.send_json({'ok': True, 'staff_checked': bool(on), 'sid': sid, 'slug': slug})
     bank = load_bank(row['course'], slug)
     n_pick = as_int(body.get('n_pick'))
     if n_pick is None:

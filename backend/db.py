@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS quiz_publish (class_id INTEGER, slug TEXT, open INTEG
 CREATE TABLE IF NOT EXISTS quiz_attempts (id {ID}, class_id INTEGER, slug TEXT, sid TEXT, score INTEGER, total INTEGER,
                                           passed INTEGER, paper TEXT, answers TEXT, created TEXT);
 CREATE TABLE IF NOT EXISTS quiz_reveal (class_id INTEGER, slug TEXT, sid TEXT, seen INTEGER DEFAULT 0, first_pass TEXT,
+                                        staff_ok INTEGER DEFAULT 0, staff_ok_at TEXT,
                                         PRIMARY KEY (class_id, slug, sid));
 CREATE TABLE IF NOT EXISTS quiz_sessions (token TEXT PRIMARY KEY, sid TEXT, name TEXT, class_id INTEGER, created TEXT);
 CREATE TABLE IF NOT EXISTS quiz_leave (class_id INTEGER, slug TEXT, sid TEXT, leaves INTEGER DEFAULT 0,
@@ -86,13 +87,20 @@ def init_db():
         if PG:
             con.execute('ALTER TABLE users ADD COLUMN IF NOT EXISTS must_change INTEGER DEFAULT 0')
             con.execute('ALTER TABLE records ADD COLUMN IF NOT EXISTS show_marks INTEGER DEFAULT 0')
+            con.execute('ALTER TABLE quiz_reveal ADD COLUMN IF NOT EXISTS staff_ok INTEGER DEFAULT 0')
+            con.execute('ALTER TABLE quiz_reveal ADD COLUMN IF NOT EXISTS staff_ok_at TEXT')
         else:
             cols_u = [r[1] for r in con.execute('PRAGMA table_info(users)').fetchall()]
             cols_r = [r[1] for r in con.execute('PRAGMA table_info(records)').fetchall()]
+            cols_q = [r[1] for r in con.execute('PRAGMA table_info(quiz_reveal)').fetchall()] if 'quiz_reveal' in tables(con) else []
             if 'must_change' not in cols_u:
                 con.execute('ALTER TABLE users ADD COLUMN must_change INTEGER DEFAULT 0')
             if 'show_marks' not in cols_r:
                 con.execute('ALTER TABLE records ADD COLUMN show_marks INTEGER DEFAULT 0')
+            if 'staff_ok' not in cols_q:
+                con.execute('ALTER TABLE quiz_reveal ADD COLUMN staff_ok INTEGER DEFAULT 0')
+            if 'staff_ok_at' not in cols_q:
+                con.execute('ALTER TABLE quiz_reveal ADD COLUMN staff_ok_at TEXT')
         if os.environ.get('ADMIN_PASSWORD'):           # optional: the admin password as a server setting (Vercel)
             u = con.execute("SELECT id FROM users WHERE username='admin'").fetchone()
             if u:

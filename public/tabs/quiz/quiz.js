@@ -65,17 +65,21 @@ async function loadQuizRoster(slug) {
     (logBySid[a.sid] || (logBySid[a.sid] = [])).push(a);
   });
   let h = `<div class="card" style="padding:12px"><h2>${esc(slug)} – ${T('Roster', 'Danh sách')}</h2>
-    <p class="muted">${T('Tap Log on a student to see only that student’s attempts.', 'Bấm Log ở từng SV để xem các lần làm của bạn đó.')}</p>
-    <table><thead><tr><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Best', 'Cao nhất')}</th><th>${T('Tries', 'Lần')}</th><th>${T('Pass', 'Đạt')}</th><th>${T('Solutions', 'Đáp án')}</th><th></th></tr></thead><tbody>`;
+    <p class="muted">${T('Sorted by pass/attendance time (newest first). Green = ready; blue = you already checked. Tap Log for one student.', 'Sắp theo giờ đạt/điểm danh (mới nhất trước). Xanh = sẵn sàng; xanh dương = bạn đã check. Bấm Log từng SV.')}</p>
+    <table><thead><tr><th>${T('Time', 'Giờ')}</th><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Best', 'Cao nhất')}</th><th>${T('Tries', 'Lần')}</th><th>${T('Pass', 'Đạt')}</th><th>${T('Solutions', 'Đáp án')}</th><th></th></tr></thead><tbody>`;
   j.roster.forEach(r => {
-    const rowCls = r.solutions_seen ? 'quiz-att-done' : (r.passed ? 'quiz-passed' : '');
-    h += `<tr class="${rowCls}" data-sid="${esc(r.sid)}"><td>${esc(r.name)}</td><td>${esc(r.sid)}</td><td>${r.best == null ? '–' : r.best}</td><td>${r.tries}</td>
+    const rowCls = r.staff_checked ? 'quiz-staff-ok' : (r.solutions_seen ? 'quiz-att-done' : (r.passed ? 'quiz-passed' : ''));
+    const checkBtn = r.solutions_seen
+      ? `<button class="btn ${r.staff_checked ? 'pri' : ''}" data-check="${esc(r.sid)}" data-slug="${esc(slug)}">${r.staff_checked ? T('Uncheck', 'Bỏ check') : T('Checked', 'Đã check')}</button>`
+      : '';
+    h += `<tr class="${rowCls}" data-sid="${esc(r.sid)}"><td>${esc(r.pass_at || '–')}</td><td>${esc(r.name)}</td><td>${esc(r.sid)}</td><td>${r.best == null ? '–' : r.best}</td><td>${r.tries}</td>
       <td>${r.passed ? '✓' : '–'}</td><td>${r.solutions_seen ? '✓' : '–'}</td>
       <td style="white-space:nowrap">
+        ${checkBtn}
         <button class="btn" data-log="${esc(r.sid)}">${T('Log', 'Log')}</button>
         <button class="btn warn" data-reset="${esc(r.sid)}" data-slug="${esc(slug)}">${T('Reset', 'Reset')}</button>
       </td></tr>
-      <tr class="quiz-log-row" data-logfor="${esc(r.sid)}" hidden><td colspan="7" id="qlog-${esc(r.sid)}"></td></tr>`;
+      <tr class="quiz-log-row" data-logfor="${esc(r.sid)}" hidden><td colspan="8" id="qlog-${esc(r.sid)}"></td></tr>`;
   });
   h += `</tbody></table></div>`;
   box.innerHTML = h;
@@ -104,6 +108,16 @@ async function loadQuizRoster(slug) {
     if (!row.hidden) { row.hidden = true; return; }
     box.querySelectorAll('.quiz-log-row').forEach(r => { r.hidden = true; });
     renderOneLog(sid);
+  });
+  box.querySelectorAll('[data-check]').forEach(b => b.onclick = async () => {
+    b.disabled = true;
+    try {
+      const r = await api('/api/quiz', { cls: +S.cls, slug: b.dataset.slug, action: 'check', sid: b.dataset.check });
+      toast(r.staff_checked ? T('Marked checked', 'Đã check') : T('Unchecked', 'Đã bỏ check'));
+      loadQuizRoster(b.dataset.slug);
+    } catch (e) {
+      b.disabled = false;
+    }
   });
   box.querySelectorAll('[data-reset]').forEach(b => b.onclick = async () => {
     const sid = b.dataset.reset;

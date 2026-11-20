@@ -20,6 +20,7 @@ th,td{padding:6px 5px;border-bottom:1px solid var(--line);text-align:left;vertic
 th{color:var(--mut);font-weight:600;font-size:12px}
 tr.quiz-passed td{background:#e8f5e9}
 tr.quiz-att-done td{background:#c8e6c9;font-weight:600}
+tr.quiz-staff-ok td{background:#bbdefb;font-weight:600}
 td.num{font-variant-numeric:tabular-nums}
 .btns{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0}
 .btns button,.btn{border:1px solid var(--g);background:#fff;color:var(--g2);border-radius:9px;padding:7px 12px;font-weight:600}
