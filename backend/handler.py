@@ -968,29 +968,62 @@ def staff_quiz_get(self, con, me, query):
             (cid, b['slug'])).fetchone()['n']
         sets.append({**s, 'passed': passed, 'attempted': attempts})
     roster = []
+    log = []
     slug = (query.get('slug') or [None])[0]
     if slug:
+        def _quiz_name(sid):
+            n = con.execute(
+                'SELECT name FROM quiz_sessions WHERE class_id=? AND sid=? ORDER BY created DESC LIMIT 1',
+                (cid, sid)).fetchone()
+            if n and n['name']:
+                return n['name']
+            n = con.execute('SELECT name FROM students WHERE sid=?', (sid,)).fetchone()
+            return n['name'] if n and n['name'] else sid
+
         rows = con.execute(
             'SELECT DISTINCT sid FROM quiz_attempts WHERE class_id=? AND slug=?', (cid, slug)).fetchall()
         for r0 in rows:
             sid = r0['sid']
-            name_row = con.execute('SELECT name FROM students WHERE sid=?', (sid,)).fetchone()
             best = con.execute(
                 'SELECT MAX(score) AS score, MAX(passed) AS passed, COUNT(*) AS tries FROM quiz_attempts '
                 'WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid)).fetchone()
             rev = con.execute('SELECT seen, first_pass FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
                               (cid, slug, sid)).fetchone()
             roster.append({
-                'sid': sid, 'name': name_row['name'] if name_row else sid,
+                'sid': sid, 'name': _quiz_name(sid),
                 'best': best['score'], 'tries': best['tries'] or 0,
                 'passed': bool(best['passed']), 'solutions_seen': bool(rev and rev['seen']),
                 'first_pass': rev['first_pass'] if rev else None,
             })
         roster.sort(key=lambda r: (not r['passed'], (r['name'] or '').lower()))
+        for a in con.execute(
+                'SELECT id, sid, score, total, passed, answers, created FROM quiz_attempts '
+                'WHERE class_id=? AND slug=? ORDER BY id DESC', (cid, slug)).fetchall():
+            answers = a['answers']
+            if answers is None:
+                status = 'open'
+            elif a['passed']:
+                status = 'pass'
+            else:
+                try:
+                    ans = json.loads(answers) if isinstance(answers, str) else (answers or {})
+                except (TypeError, ValueError, json.JSONDecodeError):
+                    ans = {}
+                status = 'left' if not ans else 'fail'
+            log.append({
+                'id': a['id'],
+                'sid': a['sid'],
+                'name': _quiz_name(a['sid']),
+                'score': a['score'],
+                'total': a['total'],
+                'passed': bool(a['passed']),
+                'status': status,
+                'created': a['created'] or '',
+            })
     return self.send_json({
         'class_id': cid, 'course': row['course'], 'className': row['name'],
         'has_quizzes': course_has_quizzes(row['course']),
-        'sets': sets, 'roster': roster, 'slug': slug,
+        'sets': sets, 'roster': roster, 'log': log, 'slug': slug,
         'quiz_url': f'/quiz/?cls={cid}',
     })
 

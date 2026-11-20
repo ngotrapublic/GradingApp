@@ -54,6 +54,12 @@ async function loadQuizRoster(slug) {
     box.innerHTML = '';
     return;
   }
+  const stLabel = {
+    pass: T('Pass', 'Đạt'),
+    fail: T('Fail', 'Trượt'),
+    left: T('Left app / empty', 'Thoát app / trống'),
+    open: T('Started (no submit)', 'Mở đề (chưa nộp)'),
+  };
   let h = `<div class="card" style="padding:12px"><h2>${esc(slug)} – ${T('Roster', 'Danh sách')}</h2>
     <table><thead><tr><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Best', 'Cao nhất')}</th><th>${T('Tries', 'Lần')}</th><th>${T('Pass', 'Đạt')}</th><th>${T('Solutions', 'Đáp án')}</th><th></th></tr></thead><tbody>`;
   j.roster.forEach(r => {
@@ -61,6 +67,16 @@ async function loadQuizRoster(slug) {
       <td>${r.passed ? '✓' : '–'}</td><td>${r.solutions_seen ? '✓' : '–'}</td>
       <td><button class="btn warn" data-reset="${esc(r.sid)}" data-slug="${esc(slug)}">${T('Reset', 'Reset')}</button></td></tr>`;
   });
+  h += `</tbody></table>
+    <h2 style="margin-top:16px">${T('Attempt log', 'Log các lần làm')}</h2>
+    <p class="muted">${T('Every start/submit for this quiz set (newest first).', 'Mọi lần mở đề / nộp của bộ quiz này (mới nhất trước).')}</p>
+    <table><thead><tr><th>${T('Time', 'Thời gian')}</th><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Score', 'Điểm')}</th><th>${T('Result', 'Kết quả')}</th></tr></thead><tbody>`;
+  (j.log || []).forEach(a => {
+    const sc = a.score == null ? '–' : `${a.score}/${a.total == null ? '–' : a.total}`;
+    h += `<tr><td>${esc(a.created || '–')}</td><td>${esc(a.name)}</td><td>${esc(a.sid)}</td><td>${sc}</td>
+      <td>${esc(stLabel[a.status] || a.status)}</td></tr>`;
+  });
+  if (!(j.log || []).length) h += `<tr><td colspan="5" class="muted">${T('No attempts yet.', 'Chưa có lần làm nào.')}</td></tr>`;
   h += `</tbody></table></div>`;
   box.innerHTML = h;
   box.querySelectorAll('[data-reset]').forEach(b => b.onclick = async () => {
