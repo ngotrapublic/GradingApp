@@ -942,8 +942,8 @@ def _quiz_settings(con, class_id, course, slug):
         'slug': meta['slug'],
         'title': meta['title'],
         'n': meta['n'],
-        'n_pick': int(row['n_pick']) if row else int(meta['n_pick']),
-        'pass_score': int(row['pass_score']) if row else int(meta['pass_score']),
+        'n_pick': int(meta['n_pick']),
+        'pass_score': int(meta['pass_score']),
         'open': bool(row and row['open']),
     }
 
