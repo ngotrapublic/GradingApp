@@ -3,6 +3,7 @@ const QUIZ_STUDENT_NOTICE_EN = `Weekly review quiz (not the final exam)
 Before you start
 • Phone or tablet only — computers cannot open the quiz
 • Scan the QR, then enter your full name and student ID
+• Read the timed theory pages first, then the quiz unlocks
 • Laptop is OK for Canvas review PDFs; keep the quiz open on your phone
 • Bring a calculator for number questions
 
@@ -10,7 +11,7 @@ During the quiz
 • 20 shuffled questions · pass mark 14/20
 • Number answers: any integers for coeff and power of 10 (we check the product; e.g. 259 and −2 for 2.59)
 • Stay in this quiz app — switching apps / locking the phone may end your attempt
-• Leaving again adds a wait before retry (1 min, then 2, 4, …)
+• Leaving or reloading the quiz adds a wait before retry (1 min, then 2, 4, …)
 • If disconnected: reopen the link and enter name or student ID to continue
 • If you get stuck, a hint bulb may unlock later (not the final answer)
 
@@ -28,6 +29,7 @@ const QUIZ_STUDENT_NOTICE_HTML = `
       <ul>
         <li>Phone or tablet only — computers cannot open the quiz</li>
         <li>Scan the QR, then enter your full name and student ID</li>
+        <li>Read the timed theory pages first, then the quiz unlocks</li>
         <li>Laptop is OK for Canvas review PDFs; keep the quiz open on your phone</li>
         <li>Bring a calculator for number questions</li>
       </ul>
@@ -38,7 +40,7 @@ const QUIZ_STUDENT_NOTICE_HTML = `
         <li>20 shuffled questions · pass mark <b>14/20</b></li>
         <li>Number answers: any integers for coeff and power of 10 (we check the product; e.g. 259 and −2 for 2.59)</li>
         <li>Stay in this quiz app — switching apps / locking the phone may end your attempt</li>
-        <li>Leaving again adds a wait before retry (1 min, then 2, 4, …)</li>
+        <li>Leaving or reloading the quiz adds a wait before retry (1 min, then 2, 4, …)</li>
         <li>If disconnected: reopen the link and enter name or student ID to continue</li>
         <li>If you get stuck, a hint bulb may unlock later (not the final answer)</li>
       </ul>

@@ -564,5 +564,77 @@
       "explain": "IC=(1+β)IL=50 μA.",
       "hint": "IC=(1+β)IL=50 μA."
     }
-  ]
+  ],
+  "pre_read": {
+    "sec_per_page": 15,
+    "pages": [
+      {
+        "title": "Power and thermal",
+        "body": [
+          "Junction temperature: T_j ≈ T_A + P · R_θJA",
+          "Excess heat limits safe power",
+          "Package / heat sink lower R_θ"
+        ],
+        "image": "/quiz/theory/day4/01.png"
+      },
+      {
+        "title": "Power devices snapshot",
+        "body": [
+          "Power BJT / MOSFET / thyristors handle high V and I",
+          "High-field microwave devices (GaAs, GaN) trade voltage for speed"
+        ],
+        "image": "/quiz/theory/day4/02.png"
+      },
+      {
+        "title": "Optical absorption",
+        "body": [
+          "Photons with E ≥ E_g can generate e–h pairs",
+          "Absorption depth ~ 1/α",
+          "High absorption → thinner layers or direct-gap materials"
+        ],
+        "image": "/quiz/theory/day4/03.png"
+      },
+      {
+        "title": "Solar cell metrics",
+        "body": [
+          "Key metrics: I_sc, V_oc, fill factor FF = P_max/(I_sc V_oc), efficiency",
+          "Series resistance and recombination hurt FF and V_oc"
+        ],
+        "image": "/quiz/theory/day4/04.png"
+      },
+      {
+        "title": "Photodetectors / LED / laser",
+        "body": [
+          "Photodetectors convert light → current",
+          "LEDs spontaneously emit",
+          "Lasers need population inversion and optical feedback"
+        ],
+        "image": "/quiz/theory/day4/05.png"
+      },
+      {
+        "title": "CMOS in systems",
+        "body": [
+          "Logic uses complementary MOS for density and low static power",
+          "Interconnect RC delay often limits speed at advanced nodes"
+        ],
+        "image": "/quiz/theory/day4/06.jpg"
+      },
+      {
+        "title": "Fabrication yield",
+        "body": [
+          "Overall yield multiplies step yields (e.g. Y = Y_W·Y_D·Y_C)",
+          "Defects and process variation set die cost"
+        ],
+        "image": "/quiz/theory/day4/07.png"
+      },
+      {
+        "title": "Test and packaging",
+        "body": [
+          "After fab: wafer test → dicing → package → final test",
+          "Package sets R_θ and parasitics"
+        ],
+        "image": "/quiz/theory/day4/08.png"
+      }
+    ]
+  }
 }

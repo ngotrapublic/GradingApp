@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS quiz_reveal (class_id INTEGER, slug TEXT, sid TEXT, s
 CREATE TABLE IF NOT EXISTS quiz_sessions (token TEXT PRIMARY KEY, sid TEXT, name TEXT, class_id INTEGER, created TEXT);
 CREATE TABLE IF NOT EXISTS quiz_leave (class_id INTEGER, slug TEXT, sid TEXT, leaves INTEGER DEFAULT 0,
                                        cooldown_until REAL DEFAULT 0, PRIMARY KEY (class_id, slug, sid));
+CREATE TABLE IF NOT EXISTS quiz_preread (class_id INTEGER, slug TEXT, sid TEXT, started REAL, done INTEGER DEFAULT 0,
+                                         PRIMARY KEY (class_id, slug, sid));
 CREATE INDEX IF NOT EXISTS quiz_attempts_lookup ON quiz_attempts (class_id, slug, sid);
 """
 SCHEMA = TABLES.format(ID='SERIAL PRIMARY KEY', BLOB='BYTEA') if PG else TABLES.format(ID='INTEGER PRIMARY KEY AUTOINCREMENT', BLOB='BLOB')

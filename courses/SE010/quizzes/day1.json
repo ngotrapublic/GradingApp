@@ -564,5 +564,85 @@
       "explain": "Low-level approximations then fail and conductivity modulation occurs.",
       "hint": "Low-level approximations then fail and conductivity modulation occurs."
     }
-  ]
+  ],
+  "pre_read": {
+    "sec_per_page": 15,
+    "pages": [
+      {
+        "title": "Thermal equilibrium",
+        "body": [
+          "No external voltage, field, temperature gradient, or light",
+          "Macroscopic properties are time-independent",
+          "Carriers from density of states × Fermi–Dirac occupation",
+          "One common Fermi level E_F for electrons and holes"
+        ],
+        "image": "/quiz/theory/day1/01.png"
+      },
+      {
+        "title": "Fermi–Dirac and Boltzmann",
+        "body": [
+          "Occupation probability uses f_F(E)",
+          "Nondegenerate (energies several kT from E_F): f_F ≈ exp[−(E−E_F)/kT]",
+          "At 300 K: kT ≈ V_T ≈ 0.0259 eV (V)"
+        ],
+        "image": "/quiz/theory/day1/02.png"
+      },
+      {
+        "title": "Intrinsic carrier concentration",
+        "body": [
+          "n_i grows strongly with temperature T",
+          "n_i falls when bandgap E_g rises (factor exp[−E_g/(2kT)])",
+          "Intrinsic material: n_0 = p_0 = n_i"
+        ],
+        "image": "/quiz/theory/day1/03.png"
+      },
+      {
+        "title": "Mass action and doping",
+        "body": [
+          "At equilibrium: n_0 p_0 = n_i^2",
+          "Donors → mobile electrons + fixed positive ions",
+          "Acceptors → mobile holes + fixed negative ions",
+          "Net doping after compensation sets majority type"
+        ],
+        "image": "/quiz/theory/day1/04.png"
+      },
+      {
+        "title": "Drift current",
+        "body": [
+          "Field drives carriers (drift)",
+          "J_n,drift = q n μ_n E (electrons move opposite E; conventional current along E)",
+          "J_p,drift = q p μ_p E"
+        ],
+        "image": "/quiz/theory/day1/05.png"
+      },
+      {
+        "title": "Mobility limits",
+        "body": [
+          "Matthiessen: 1/μ = Σ 1/μ_i",
+          "More ionized impurities → more Coulomb scattering → lower μ",
+          "High field: velocity saturates in Si"
+        ],
+        "image": "/quiz/theory/day1/06.png"
+      },
+      {
+        "title": "Diffusion and Einstein",
+        "body": [
+          "J_n,diff = q D_n dn/dx",
+          "J_p,diff = −q D_p dp/dx",
+          "Einstein: D_n/μ_n = D_p/μ_p = V_T = kT/q",
+          "Total current = drift + diffusion"
+        ],
+        "image": "/quiz/theory/day1/07.png"
+      },
+      {
+        "title": "Conductivity and Hall",
+        "body": [
+          "σ ≈ q(nμ_n + pμ_p); ρ = 1/σ",
+          "Hall voltage sign identifies carrier type",
+          "With σ → concentration and mobility"
+        ],
+        "image": "/quiz/theory/day1/08.jpg"
+      }
+    ]
+  }
 }

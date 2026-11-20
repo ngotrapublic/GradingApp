@@ -564,5 +564,81 @@
       "explain": "Pmax=VCC²/(4RL)=1600/40=40 W.",
       "hint": "Pmax=VCC²/(4RL)=1600/40=40 W."
     }
-  ]
+  ],
+  "pre_read": {
+    "sec_per_page": 15,
+    "pages": [
+      {
+        "title": "MOS capacitor states",
+        "body": [
+          "p-substrate: negative V_G → accumulation",
+          "Moderate positive V_G → depletion",
+          "Large positive V_G → inversion (n-channel at the surface)"
+        ],
+        "image": "/quiz/theory/day3/01.jpg"
+      },
+      {
+        "title": "Threshold and strong inversion",
+        "body": [
+          "Strong inversion near ψ_s ≈ 2φ_F",
+          "φ_F = V_T ln(N_A/n_i)",
+          "Threshold V_T depends on oxide, doping, and body effect"
+        ],
+        "image": "/quiz/theory/day3/02.jpg"
+      },
+      {
+        "title": "MOSFET saturation current",
+        "body": [
+          "k = μ C_ox W/L",
+          "I_D,sat ≈ (k/2) V_OV^2 with V_OV = V_GS − V_T",
+          "In saturation the channel is pinched off at the drain end"
+        ],
+        "image": "/quiz/theory/day3/03.jpg"
+      },
+      {
+        "title": "Transconductance",
+        "body": [
+          "g_m = ∂I_D/∂V_GS",
+          "In saturation often g_m ≈ 2 I_D / V_OV (or √(2k I_D))",
+          "Larger g_m → stronger gate control of current"
+        ],
+        "image": "/quiz/theory/day3/04.jpg"
+      },
+      {
+        "title": "BJT basics",
+        "body": [
+          "α = I_C/I_E; β = I_C/I_B = α/(1−α)",
+          "Forward-active: emitter injects, collector collects",
+          "Base current is small but essential"
+        ],
+        "image": "/quiz/theory/day3/05.jpg"
+      },
+      {
+        "title": "Early effect",
+        "body": [
+          "Finite Early voltage V_A",
+          "Output resistance r_o ≈ V_A/I_C",
+          "Larger V_A → flatter I_C vs V_CE curves"
+        ],
+        "image": "/quiz/theory/day3/06.jpg"
+      },
+      {
+        "title": "CMOS inverter idea",
+        "body": [
+          "Complementary NMOS/PMOS",
+          "Low static power; rail-to-rail swing",
+          "Noise margins and delay set by sizing and load"
+        ],
+        "image": "/quiz/theory/day3/07.jpg"
+      },
+      {
+        "title": "Scaling intuition",
+        "body": [
+          "Thinner oxide and shorter L raise current and g_m",
+          "Also increase leakage, short-channel effects, and variability"
+        ],
+        "image": "/quiz/theory/day3/08.jpg"
+      }
+    ]
+  }
 }

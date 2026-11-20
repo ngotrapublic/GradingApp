@@ -1,13 +1,14 @@
-const Q = { cls: '', classInfo: null, me: null, paper: null, result: null, explain: null };
+const Q = { cls: '', classInfo: null, me: null, paper: null, result: null, explain: null, preread: null };
 
 function quizMath(s) {
   let t = String(s ?? '');
   t = t.replace(/(^|[^A-Za-z0-9.])(\d+(?:\.\d+)?)[eE]([+-]?\d+)(?![A-Za-z0-9])/g, (_, p, a, b) => `${p}${a} * 10^${b}`);
   t = esc(t);
-  t = t.replace(/(^|[^A-Za-z0-9_])([A-Za-zμσαβθφψΩ]{1,4})_([A-Za-z0-9,θφψα-ω]+)(?![A-Za-z0-9_])/g,
+  t = t.replace(/(^|[^A-Za-z0-9_])([A-Za-zμσαβθφψΩ∂]{1,6})_([A-Za-z0-9,θφψα-ω+−\-]+)(?![A-Za-z0-9_])/g,
     (_, p, base, sub) => `${p}${base}<sub>${sub}</sub>`);
   t = t.replace(/\^\{([^}]+)\}/g, '<sup>$1</sup>');
   t = t.replace(/\^(-?\d+)/g, '<sup>$1</sup>');
+  t = t.replace(/[²]/g, '<sup>2</sup>').replace(/[³]/g, '<sup>3</sup>');
   return t;
 }
 
@@ -59,10 +60,22 @@ async function get(path) {
   return j;
 }
 
+function formatExplainBody(body) {
+  const items = Array.isArray(body)
+    ? body.map(x => String(x || '').trim()).filter(Boolean)
+    : String(body || '').split(/\n+/).map(x => x.replace(/^[-•*]\s*/, '').trim()).filter(Boolean);
+  if (!items.length) return '';
+  if (items.length === 1 && !Array.isArray(body) && !/\n/.test(String(body || ''))) {
+    return `<div class="explain">${quizMath(items[0])}</div>`;
+  }
+  return `<ul class="explain-bullets">${items.map(t => `<li>${quizMath(t)}</li>`).join('')}</ul>`;
+}
+
 async function reload() {
   Q.paper = null;
   Q.result = null;
   Q.explain = null;
+  Q.preread = null;
   Q.cls = qsCls() || Q.cls;
   Q.classInfo = Q.cls ? await get('/api/public/quiz/class?cls=' + encodeURIComponent(Q.cls)) : null;
   Q.me = await get('/api/public/quiz/me');
@@ -70,13 +83,23 @@ async function reload() {
     await post('/api/public/quiz/logout', {});
     Q.me = null;
   }
+  if (Q.me) {
+    const left = await flushAbandonedAttempt();
+    if (left) {
+      Q.result = left;
+      render();
+      return;
+    }
+  } else {
+    clearActiveAttempt();
+  }
   render();
 }
 
 async function signOut() {
   disarmLeaveGuard();
   await post('/api/public/quiz/logout', {});
-  Q.me = null; Q.paper = null; Q.result = null; Q.explain = null;
+  Q.me = null; Q.paper = null; Q.result = null; Q.explain = null; Q.preread = null;
   render();
 }
 
@@ -101,11 +124,75 @@ function blockCopy(root) {
 
 let leaveArmed = false;
 let leaveDone = false;
+const ACTIVE_ATTEMPT_KEY = 'quiz_active_attempt';
+
+function saveActiveAttempt(P) {
+  if (!P || !P.attempt_id) return;
+  try {
+    sessionStorage.setItem(ACTIVE_ATTEMPT_KEY, JSON.stringify({
+      attempt_id: P.attempt_id,
+      slug: P.slug,
+      total: P.total,
+      pass_score: P.pass_score,
+    }));
+  } catch (e) {}
+}
+
+function clearActiveAttempt() {
+  try { sessionStorage.removeItem(ACTIVE_ATTEMPT_KEY); } catch (e) {}
+}
+
+function readActiveAttempt() {
+  try {
+    const raw = sessionStorage.getItem(ACTIVE_ATTEMPT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+
+function postLeaveAttempt(attemptId) {
+  const body = JSON.stringify({ attempt_id: attemptId, answers: {}, left_app: true });
+  const headers = quizHeaders({ 'Content-Type': 'application/json' });
+  try {
+    if (navigator.sendBeacon) {
+      const ok = navigator.sendBeacon(
+        '/api/public/quiz/submit',
+        new Blob([body], { type: 'application/json' })
+      );
+      if (ok) return Promise.resolve({ ok: true, beacon: true });
+    }
+  } catch (e) {}
+  return fetch('/api/public/quiz/submit', {
+    method: 'POST',
+    headers,
+    body,
+    keepalive: true,
+    credentials: 'same-origin',
+  }).then(r => r.json().catch(() => ({}))).catch(() => null);
+}
+
+async function flushAbandonedAttempt() {
+  const saved = readActiveAttempt();
+  if (!saved || !saved.attempt_id) return null;
+  clearActiveAttempt();
+  try {
+    const r = await fetch('/api/public/quiz/submit', {
+      method: 'POST',
+      headers: quizHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ attempt_id: saved.attempt_id, answers: {}, left_app: true }),
+      credentials: 'same-origin',
+    });
+    const j = await r.json().catch(() => ({}));
+    return j && j.left_app ? j : null;
+  } catch (e) {
+    return null;
+  }
+}
 
 function disarmLeaveGuard() {
   leaveArmed = false;
   document.removeEventListener('visibilitychange', onLeaveApp);
   window.removeEventListener('pagehide', onLeaveApp);
+  window.removeEventListener('beforeunload', onLeaveApp);
 }
 
 function armLeaveGuard() {
@@ -114,6 +201,7 @@ function armLeaveGuard() {
   leaveArmed = true;
   document.addEventListener('visibilitychange', onLeaveApp);
   window.addEventListener('pagehide', onLeaveApp);
+  window.addEventListener('beforeunload', onLeaveApp);
 }
 
 function onLeaveApp(ev) {
@@ -124,21 +212,14 @@ function onLeaveApp(ev) {
   if (P && P._hintTimer) clearInterval(P._hintTimer);
   closeHintPopup();
   disarmLeaveGuard();
-  try {
-    fetch('/api/public/quiz/submit', {
-      method: 'POST',
-      headers: quizHeaders({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ attempt_id: P.attempt_id, answers: {}, left_app: true }),
-      keepalive: true,
-      credentials: 'same-origin',
-    }).then(r => r.json().catch(() => ({}))).then(j => {
-      if (!j || !Q.result || !Q.result.left_app) return;
-      Q.result.leave_count = j.leave_count;
-      Q.result.cooldown_sec = j.cooldown_sec || 0;
-      Q.result.penalty_note = (LANG === 'vi' && j.penalty_note_vi) || j.penalty_note || '';
-      render();
-    }).catch(() => {});
-  } catch (e) {}
+  postLeaveAttempt(P.attempt_id).then(j => {
+    clearActiveAttempt();
+    if (!j || j.beacon || !Q.result || !Q.result.left_app) return;
+    Q.result.leave_count = j.leave_count;
+    Q.result.cooldown_sec = j.cooldown_sec || 0;
+    Q.result.penalty_note = (LANG === 'vi' && j.penalty_note_vi) || j.penalty_note || '';
+    render();
+  });
   Q.paper = null;
   Q.result = {
     passed: false,
@@ -149,9 +230,9 @@ function onLeaveApp(ev) {
     left_app: true,
     leave_count: null,
     cooldown_sec: 0,
-    penalty_note: T('Attempt ended because you left this app.', 'Bài bị hủy vì bạn đã thoát khỏi app.'),
+    penalty_note: T('Attempt ended because you left / reloaded this page.', 'Bài bị hủy vì bạn thoát app hoặc reload trang.'),
   };
-  render();
+  if (ev && ev.type !== 'beforeunload' && ev.type !== 'pagehide') render();
 }
 
 function renderIdentify(app) {
@@ -189,7 +270,7 @@ function renderHome(app) {
   const I = Q.me;
   let h = headBar() + `<main><div class="card who"><div class="nm">${esc(I.name)}</div>
     <div class="sub">${esc(I.sid)} · ${esc(I.className)}</div></div>
-    <p class="muted">${T('Each student gets a different shuffled paper. Pass the quiz, then read every English explanation. Attendance is given only after that.', 'Mỗi bạn một đề xáo khác nhau. Đạt quiz rồi phải đọc hết giải thích tiếng Anh. Điểm danh chỉ sau bước đó.')}</p>`;
+    <p class="muted">${T('Read the short theory pages first (timed). Then take the quiz, then review every English explanation. Attendance is only after that.', 'Đọc lý thuyết ngắn trước (có đếm giờ). Rồi làm quiz, rồi xem hết giải thích tiếng Anh. Điểm danh chỉ sau bước đó.')}</p>`;
   if (!I.sets.length) h += `<p class="muted">${T('No open quiz right now.', 'Hiện chưa có quiz nào mở.')}</p>`;
   I.sets.forEach(s => {
     let badge, btn;
@@ -211,12 +292,12 @@ function renderHome(app) {
       if (cool > 0) {
         const mins = Math.max(1, Math.ceil(cool / 60));
         btn = `<p class="muted" data-cool="${esc(s.slug)}"><b>${T(
-          `Wait ${mins} min — penalty for leaving the quiz app ${s.leave_count || ''} time(s) (from 2nd leave: 1 min, then doubles).`,
-          `Chờ ${mins} phút — phạt thoát app ${s.leave_count || ''} lần (từ lần 2: 1 phút, sau đó nhân đôi).`
+          `Wait ${mins} min — leave penalty (${s.leave_count || ''}×; 1st = 1 min, then ×2).`,
+          `Chờ ${mins} phút — phạt thoát app (${s.leave_count || ''} lần; lần 1 = 1 phút, sau ×2).`
         )}</b></p>
         <button class="big" disabled>${T(`Wait ${mins} min`, `Chờ ${mins} phút`)}</button>`;
       } else {
-        btn = `<button class="big on" data-start="${esc(s.slug)}">${s.tries ? T('Retry', 'Làm lại') : T('Start', 'Bắt đầu')}</button>`;
+        btn = `<button class="big on" data-read="${esc(s.slug)}">${s.tries ? T('Retry — read theory first', 'Làm lại — đọc lý thuyết trước') : T('Read theory, then quiz', 'Đọc lý thuyết rồi làm quiz')}</button>`;
       }
     }
     h += `<div class="card qcard"><div class="stem">${esc(s.title)}</div>
@@ -228,7 +309,7 @@ function renderHome(app) {
   bindLangToggle(app);
   const out = $('#out'); if (out) out.onclick = signOut;
   $('#ref').onclick = () => reload();
-  app.querySelectorAll('[data-start]').forEach(b => b.onclick = () => startQuiz(b.dataset.start));
+  app.querySelectorAll('[data-read]').forEach(b => b.onclick = () => beginPreRead(b.dataset.read));
   app.querySelectorAll('[data-explain]').forEach(b => b.onclick = () => resumeExplain(b.dataset.explain));
   const coolNeed = (I.sets || []).some(s => (Number(s.cooldown_sec) || 0) > 0);
   if (Q._coolTimer) clearInterval(Q._coolTimer);
@@ -240,16 +321,105 @@ function renderHome(app) {
   }
 }
 
+async function beginPreRead(slug) {
+  const j = await post('/api/public/quiz/read_start', { slug });
+  if (!j) return;
+  if (j.skip || !(j.pages || []).length) {
+    return startQuiz(slug);
+  }
+  Q.preread = {
+    slug: j.slug,
+    title: j.title,
+    pages: j.pages,
+    sec: Number(j.sec_per_page) || 15,
+    i: 0,
+    unlockAt: Date.now() + (Number(j.sec_per_page) || 15) * 1000,
+  };
+  Q.paper = null;
+  Q.result = null;
+  Q.explain = null;
+  render();
+}
+
 async function startQuiz(slug) {
   const j = await post('/api/public/quiz/start', { slug });
   if (!j) return;
   j.startedAt = Date.now();
   j.hints_unlocked = !!j.hints_ready;
   j.hint_after_sec = Number(j.hint_after_sec) || 20 * 60;
+  Q.preread = null;
   Q.paper = j;
   Q.result = null;
   Q.explain = null;
+  saveActiveAttempt(j);
   render();
+}
+
+function renderPreRead(app) {
+  const R = Q.preread;
+  if (!R) return renderHome(app);
+  const n = R.pages.length;
+  const page = R.pages[R.i];
+  const last = R.i + 1 >= n;
+  const img = page.image
+    ? `<img class="theory-img" src="${esc(page.image)}" alt="${esc(page.title || 'theory')}" loading="eager">`
+    : '';
+  let h = headBar() + `<main class="no-copy">
+    <p class="muted"><b>${T('Theory first', 'Đọc lý thuyết trước')}</b> — ${esc(R.title)}</p>
+    <p class="muted">${T('Page', 'Trang')} ${R.i + 1} / ${n}. ${T('Read carefully (English). Next unlocks after the timer.', 'Đọc kỹ (tiếng Anh). Hết giờ mới bấm Tiếp.')}</p>
+    <div class="card qcard">
+      <div class="stem">${quizMath(page.title || '')}</div>
+      ${img}
+      <div style="margin-top:10px">${formatExplainBody(page.body)}</div>
+    </div>
+    <p class="muted" id="readWait"></p>
+    <button class="big on" id="readNext">${last ? T('Finish reading — start quiz', 'Xong đọc — bắt đầu quiz') : T('Next', 'Tiếp')}</button>
+  </main>`;
+  app.innerHTML = h;
+  bindLangToggle(app);
+  blockCopy(app.querySelector('main.no-copy') || app);
+  const out = $('#out'); if (out) out.onclick = signOut;
+  const next = $('#readNext');
+  const waitEl = $('#readWait');
+  const label = last ? T('Finish reading — start quiz', 'Xong đọc — bắt đầu quiz') : T('Next', 'Tiếp');
+  if (R._timer) clearInterval(R._timer);
+  const tick = () => {
+    if (!Q.preread || Q.preread !== R) { clearInterval(R._timer); return; }
+    const left = Math.max(0, R.unlockAt - Date.now());
+    const sec = Math.ceil(left / 1000);
+    if (left <= 0) {
+      clearInterval(R._timer);
+      R._timer = null;
+      waitEl.textContent = '';
+      next.classList.remove('wait');
+      next.textContent = label;
+      return;
+    }
+    next.classList.add('wait');
+    waitEl.textContent = T(`Next unlocks in ${sec}s — keep reading. Early tap adds +10s.`, `Còn ${sec}s mới bấm tiếp — hãy đọc. Bấm sớm +10s.`);
+    next.textContent = T(`Wait ${sec}s`, `Chờ ${sec}s`);
+  };
+  R._timer = setInterval(tick, 200);
+  tick();
+  next.onclick = async () => {
+    if (Date.now() < R.unlockAt) {
+      R.unlockAt += 10000;
+      if (!R._timer) R._timer = setInterval(tick, 200);
+      tick();
+      return;
+    }
+    if (R._timer) clearInterval(R._timer);
+    if (!last) {
+      R.i += 1;
+      R.unlockAt = Date.now() + R.sec * 1000;
+      render();
+      return;
+    }
+    next.disabled = true;
+    const ok = await post('/api/public/quiz/read_done', { slug: R.slug });
+    if (!ok) { next.disabled = false; return; }
+    await startQuiz(R.slug);
+  };
 }
 
 function paperHintsOn() {
@@ -388,7 +558,16 @@ function renderPaper(app) {
     }, 5000);
   }
   armLeaveGuard();
-  $('#cancel').onclick = () => { if (P._hintTimer) clearInterval(P._hintTimer); closeHintPopup(); disarmLeaveGuard(); Q.paper = null; render(); };
+  saveActiveAttempt(P);
+  $('#cancel').onclick = () => {
+    if (P._hintTimer) clearInterval(P._hintTimer);
+    closeHintPopup();
+    disarmLeaveGuard();
+    leaveDone = true;
+    clearActiveAttempt();
+    Q.paper = null;
+    render();
+  };
   $('#submit').onclick = async () => {
     const answers = {};
     let missing = 0;
@@ -419,6 +598,7 @@ function renderPaper(app) {
       return;
     }
     closeHintPopup();
+    clearActiveAttempt();
     Q.paper = null;
     if (j.needs_explanations && j.review) beginExplain(j);
     else { Q.result = j; render(); }
@@ -439,7 +619,7 @@ function renderResult(app) {
     if (cool > 0) {
       h += `<p class="muted" id="coolLeft">${T(`Wait ${Math.ceil(cool / 60)} min before the next try.`, `Chờ ${Math.ceil(cool / 60)} phút mới làm lại.`)}</p>`;
     } else {
-      h += `<p class="muted">${T('You can retry now (next leave will add a wait).', 'Bạn có thể làm lại ngay (lần thoát sau sẽ bị chờ).')}</p>`;
+      h += `<p class="muted">${T('Wait ends before you can retry (1st leave = 1 min, then doubles).', 'Hết chờ mới làm lại được (lần 1 = 1 phút, sau nhân đôi).')}</p>`;
     }
   } else if (!pass) {
     h += `<p class="muted"><b>${T('Attendance not recorded yet.', 'Chưa được điểm danh.')}</b>
@@ -592,6 +772,7 @@ function render() {
   document.title = T('Review Quiz', 'Quiz ôn tập');
   const app = $('#app');
   if (!isPhoneOrTablet()) return renderDeviceBlock(app);
+  if (Q.preread) return renderPreRead(app);
   if (Q.explain) return renderExplain(app);
   if (Q.paper) return renderPaper(app);
   if (Q.result) return renderResult(app);

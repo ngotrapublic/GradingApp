@@ -541,7 +541,8 @@ class H(http.server.SimpleHTTPRequestHandler):
             if tok:
                 con.execute('DELETE FROM quiz_sessions WHERE token=?', (tok,))
             return self.send_json({'ok': True}, cookie=self.set_cookie('qtok', '', 0, 'Lax'))
-        if path in ('/api/public/quiz/start', '/api/public/quiz/submit', '/api/public/quiz/review', '/api/public/quiz/finish_explain'):
+        if path in ('/api/public/quiz/start', '/api/public/quiz/submit', '/api/public/quiz/review',
+                    '/api/public/quiz/finish_explain', '/api/public/quiz/read_start', '/api/public/quiz/read_done'):
             if not is_phone_or_tablet_ua(self.headers.get('User-Agent'), self.headers.get('X-Quiz-Client')):
                 return self.send_json(QUIZ_DEVICE, 403)
             qu = self.quiz_user(con)
@@ -549,6 +550,10 @@ class H(http.server.SimpleHTTPRequestHandler):
                 return self.send_json(err('Please enter your name and student ID again.', 'Nhập lại họ tên và MSSV.'), 401)
             if not allow(con, 'quiz:' + qu['sid'], 60):
                 return self.send_json(TOO_MANY, 429)
+            if path == '/api/public/quiz/read_start':
+                return self.public_quiz_read_start(con, qu, body)
+            if path == '/api/public/quiz/read_done':
+                return self.public_quiz_read_done(con, qu, body)
             if path == '/api/public/quiz/start':
                 return self.public_quiz_start(con, qu, body)
             if path == '/api/public/quiz/submit':
@@ -1066,6 +1071,7 @@ def staff_quiz_post(self, con, me, body):
         con.execute('DELETE FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
         con.execute('DELETE FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
         con.execute('DELETE FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
+        con.execute('DELETE FROM quiz_preread WHERE class_id=? AND slug=? AND sid=?', (cid, slug, sid))
         con.execute('DELETE FROM quiz_sessions WHERE class_id=? AND sid=?', (cid, sid))
         return self.send_json({'ok': True, 'reset': True, 'sid': sid, 'slug': slug})
     if body.get('action') == 'check':
@@ -1242,6 +1248,82 @@ def public_quiz_identify(self, con, body):
     }, cookie=self.set_cookie('qtok', tok, 86400, 'Lax'))
 
 
+def public_quiz_read_start(self, con, qu, body):
+    """Begin mandatory theory pages before a quiz attempt."""
+    cid = qu['class_id']
+    row = con.execute('SELECT id, course FROM classes WHERE id=?', (cid,)).fetchone()
+    if not row:
+        return self.send_json(err('Class missing.', 'Lớp không còn.'), 404)
+    slug = str(body.get('slug') or '').strip()
+    s = _quiz_settings(con, cid, row['course'], slug) if slug else None
+    if not s or not s['open']:
+        return self.send_json(err('This quiz is closed.', 'Quiz này đang đóng.'), 403)
+    done = con.execute(
+        'SELECT 1 FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND passed=1 LIMIT 1',
+        (cid, slug, qu['sid'])).fetchone()
+    if done:
+        return self.send_json(err('Already passed — no more retries.', 'Đã đạt rồi — không được làm lại.'), 403)
+    leave = con.execute(
+        'SELECT leaves, cooldown_until FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, qu['sid'])).fetchone()
+    if leave and float(leave['cooldown_until'] or 0) > time.time():
+        wait = max(1, int(math.ceil(float(leave['cooldown_until']) - time.time())))
+        mins = max(1, int(math.ceil(wait / 60)))
+        return self.send_json(err(
+            f'Wait {mins} min before retrying (leave-app penalty).',
+            f'Chờ {mins} phút mới làm tiếp (phạt thoát app).'), 403)
+    bank = load_bank(row['course'], slug) or {}
+    pre = bank.get('pre_read') or {}
+    pages = pre.get('pages') or []
+    if not pages:
+        con.execute(
+            'INSERT INTO quiz_preread (class_id, slug, sid, started, done) VALUES (?,?,?,?,1) '
+            'ON CONFLICT(class_id, slug, sid) DO UPDATE SET started=excluded.started, done=1',
+            (cid, slug, qu['sid'], time.time()))
+        return self.send_json({'slug': slug, 'title': s['title'], 'sec_per_page': 0, 'pages': [], 'skip': True})
+    sec = int(pre.get('sec_per_page') or 15)
+    con.execute(
+        'INSERT INTO quiz_preread (class_id, slug, sid, started, done) VALUES (?,?,?,?,0) '
+        'ON CONFLICT(class_id, slug, sid) DO UPDATE SET started=excluded.started, done=0',
+        (cid, slug, qu['sid'], time.time()))
+    return self.send_json({
+        'slug': slug,
+        'title': s['title'],
+        'sec_per_page': sec,
+        'pages': pages,
+        'min_sec': sec * len(pages),
+    })
+
+
+def public_quiz_read_done(self, con, qu, body):
+    """Mark theory reading complete after the required wait."""
+    cid = qu['class_id']
+    slug = str(body.get('slug') or '').strip()
+    row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
+    if not row or not slug:
+        return self.send_json(err('Quiz not found.', 'Không tìm thấy quiz.'), 404)
+    bank = load_bank(row['course'], slug) or {}
+    pre = bank.get('pre_read') or {}
+    pages = pre.get('pages') or []
+    sec = int(pre.get('sec_per_page') or 15)
+    need = max(0, int(sec * len(pages) * 0.9))
+    pr = con.execute(
+        'SELECT started, done FROM quiz_preread WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, qu['sid'])).fetchone()
+    if not pr or not pr['started']:
+        return self.send_json(err('Start the reading first.', 'Hãy bắt đầu phần đọc trước.'), 400)
+    elapsed = time.time() - float(pr['started'])
+    if elapsed < need:
+        left = max(1, int(math.ceil(need - elapsed)))
+        return self.send_json(err(
+            f'Read longer — about {left}s left before the quiz unlocks.',
+            f'Đọc thêm khoảng {left}s nữa mới mở quiz.'), 400)
+    con.execute(
+        'UPDATE quiz_preread SET done=1 WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, qu['sid']))
+    return self.send_json({'ok': True, 'slug': slug, 'read_done': True})
+
+
 def public_quiz_start(self, con, qu, body):
     """Student: start a shuffled attempt of an open quiz."""
     cid = qu['class_id']
@@ -1266,14 +1348,21 @@ def public_quiz_start(self, con, qu, body):
         mins = max(1, int(math.ceil(wait / 60)))
         return self.send_json({
             **err(
-                f'Wait {mins} min before retrying. Penalty for leaving the quiz app {leaves} times '
-                f'(from the 2nd leave: 1 min, then doubles each time).',
-                f'Chờ {mins} phút mới làm tiếp. Phạt vì thoát app quiz {leaves} lần '
-                f'(từ lần 2: 1 phút, lần sau nhân đôi).'),
+                f'Wait {mins} min before retrying. Leave penalty ({leaves}×; 1st = 1 min, then doubles).',
+                f'Chờ {mins} phút mới làm tiếp. Phạt thoát app ({leaves} lần; lần 1 = 1 phút, sau nhân đôi).'),
             'cooldown_sec': wait,
             'leave_count': leaves,
         }, 403)
     bank = load_bank(row['course'], slug)
+    pre_pages = ((bank or {}).get('pre_read') or {}).get('pages') or []
+    if pre_pages:
+        pr = con.execute(
+            'SELECT done FROM quiz_preread WHERE class_id=? AND slug=? AND sid=?',
+            (cid, slug, qu['sid'])).fetchone()
+        if not pr or not pr['done']:
+            return self.send_json(err(
+                'Read the theory pages first, then start the quiz.',
+                'Hãy đọc lý thuyết trước, rồi mới bắt đầu quiz.'), 403)
     import random as _random
     rng = _random.Random(f"{qu['sid']}|{cid}|{slug}|{secrets.token_hex(8)}")
     paper, client = build_paper(bank, n_pick=s['n_pick'], rng=rng)
@@ -1289,6 +1378,9 @@ def public_quiz_start(self, con, qu, body):
         'INSERT INTO quiz_attempts (class_id, slug, sid, score, total, passed, paper, answers, created) '
         'VALUES (?,?,?,?,?,?,?,?,?) RETURNING id',
         (cid, slug, qu['sid'], None, len(paper), 0, json.dumps(paper), None, now())).fetchone()
+    con.execute(
+        'UPDATE quiz_preread SET done=0 WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, qu['sid']))
     return self.send_json({
         'attempt_id': att['id'],
         'slug': slug,
@@ -1324,12 +1416,42 @@ def public_quiz_submit(self, con, qu, body):
         (aid, cid, qu['sid'])).fetchone()
     if not att:
         return self.send_json(err('Attempt not found.', 'Không tìm thấy lần làm.'), 404)
-    if att['answers'] is not None:
-        return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
     row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
     paper = json.loads(att['paper'])
     answers = body.get('answers') or {}
     left = is_left_submit(answers, flag=bool(body.get('left_app')))
+    if att['answers'] is not None:
+        prev = {}
+        try:
+            prev = json.loads(att['answers'] or '{}')
+        except (TypeError, json.JSONDecodeError):
+            prev = {}
+        if left and prev.get('__left'):
+            leave = con.execute(
+                'SELECT leaves, cooldown_until FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
+                (cid, att['slug'], qu['sid'])).fetchone()
+            leaves = int(leave['leaves']) if leave else 0
+            until = float(leave['cooldown_until']) if leave else 0.0
+            wait = max(0, int(math.ceil(until - time.time()))) if until else 0
+            mins = max(1, wait // 60) if wait else 1
+            return self.send_json({
+                'attempt_id': aid,
+                'slug': att['slug'],
+                'score': att['score'] or 0,
+                'total': att['total'] or 0,
+                'pass_score': (_quiz_settings(con, cid, row['course'], att['slug']) or {}).get('pass_score', 14) if row else 14,
+                'passed': False,
+                'left_app': True,
+                'leave_count': leaves,
+                'cooldown_sec': wait,
+                'penalty_note': (
+                    f'You left the quiz app {leaves} time(s). Wait {mins} minute(s) before retry '
+                    f'(1st leave = 1 min, then doubles: 2, 4, 8, …).'),
+                'penalty_note_vi': (
+                    f'Bạn đã thoát app quiz {leaves} lần. Chờ {mins} phút mới làm lại '
+                    f'(lần 1 = 1 phút, sau đó nhân đôi: 2, 4, 8, …).'),
+            })
+        return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
     if left:
         answers = {'__left': 1}
     score, total, review = grade_paper(paper, {} if left else answers)
@@ -1361,17 +1483,13 @@ def public_quiz_submit(self, con, qu, body):
         out['left_app'] = True
         out['leave_count'] = leaves
         out['cooldown_sec'] = cool
-        if leaves == 1:
-            out['penalty_note'] = 'First time leaving the app — no wait yet. Next leave adds a 1-minute wait before retry.'
-            out['penalty_note_vi'] = 'Lần thoát app đầu — chưa phạt chờ. Lần thoát tiếp theo phải chờ 1 phút mới làm lại.'
-        else:
-            mins = max(1, cool // 60)
-            out['penalty_note'] = (
-                f'You left the quiz app {leaves} times. Wait {mins} minute(s) before the next attempt '
-                f'(from the 2nd leave: 1 min, then doubles each time).')
-            out['penalty_note_vi'] = (
-                f'Bạn đã thoát app quiz {leaves} lần. Chờ {mins} phút mới làm tiếp '
-                f'(từ lần 2: 1 phút, các lần sau nhân đôi).')
+        mins = max(1, cool // 60) if cool else 1
+        out['penalty_note'] = (
+            f'You left the quiz app {leaves} time(s). Wait {mins} minute(s) before retry '
+            f'(1st leave = 1 min, then doubles: 2, 4, 8, …).')
+        out['penalty_note_vi'] = (
+            f'Bạn đã thoát app quiz {leaves} lần. Chờ {mins} phút mới làm lại '
+            f'(lần 1 = 1 phút, sau đó nhân đôi: 2, 4, 8, …).')
         return self.send_json(out)
     if not passed:
         return self.send_json(out)
@@ -1451,6 +1569,8 @@ H.staff_quiz_post = staff_quiz_post
 H.public_quiz_class_info = public_quiz_class_info
 H.public_quiz_me = public_quiz_me
 H.public_quiz_identify = public_quiz_identify
+H.public_quiz_read_start = public_quiz_read_start
+H.public_quiz_read_done = public_quiz_read_done
 H.public_quiz_start = public_quiz_start
 H.public_quiz_submit = public_quiz_submit
 H.public_quiz_review = public_quiz_review

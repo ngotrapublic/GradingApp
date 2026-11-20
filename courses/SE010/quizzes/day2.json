@@ -564,5 +564,78 @@
       "explain": "It follows from IE=IC+IB.",
       "hint": "It follows from IE=IC+IB."
     }
-  ]
+  ],
+  "pre_read": {
+    "sec_per_page": 15,
+    "pages": [
+      {
+        "title": "pn junction built-in potential",
+        "body": [
+          "Diffusion of majority carriers leaves uncovered space charge",
+          "Built-in voltage V_bi ≈ V_T ln(N_A N_D / n_i^2)",
+          "At equilibrium: drift balances diffusion"
+        ],
+        "image": "/quiz/theory/day2/01.png"
+      },
+      {
+        "title": "Depletion width and charge",
+        "body": [
+          "Most depletion lies on the lighter-doped side",
+          "Uncovered acceptor and donor charge form a dipole",
+          "Reverse bias widens the depletion region"
+        ],
+        "image": "/quiz/theory/day2/02.png"
+      },
+      {
+        "title": "Junction capacitance",
+        "body": [
+          "Depletion capacitance falls as (V_bi+V_R)^{−1/2} (abrupt junction)",
+          "Higher reverse bias → thicker depletion → smaller C_j"
+        ],
+        "image": "/quiz/theory/day2/03.png"
+      },
+      {
+        "title": "Diode law",
+        "body": [
+          "Ideal diode: I = I_S (exp(qV/nkT) − 1)",
+          "Small-signal resistance r_d ≈ n V_T / I_D",
+          "~60 mV/decade at room T means n ≈ 1"
+        ],
+        "image": "/quiz/theory/day2/04.png"
+      },
+      {
+        "title": "Breakdown and storage",
+        "body": [
+          "Avalanche / Zener set reverse limits",
+          "Forward → reverse needs time to remove stored minority charge (recovery)"
+        ],
+        "image": "/quiz/theory/day2/05.png"
+      },
+      {
+        "title": "Schottky vs pn",
+        "body": [
+          "Schottky barrier Φ_Bn = Φ_m − χ (ideal)",
+          "Lower V_F than a typical Si pn diode",
+          "Higher leakage; little minority storage"
+        ],
+        "image": "/quiz/theory/day2/06.jpg"
+      },
+      {
+        "title": "Ohmic contacts",
+        "body": [
+          "Want low, non-rectifying contact resistance",
+          "Often heavy surface doping so tunneling dominates through a thin barrier"
+        ],
+        "image": "/quiz/theory/day2/07.jpg"
+      },
+      {
+        "title": "Heterojunctions / 2DEG",
+        "body": [
+          "Band offsets can form a 2D electron gas (e.g. AlGaAs/GaAs)",
+          "High mobility when ionized donors sit away from the channel"
+        ],
+        "image": "/quiz/theory/day2/08.jpg"
+      }
+    ]
+  }
 }

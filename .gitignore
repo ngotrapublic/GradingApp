@@ -12,3 +12,4 @@ __pycache__/
 
 # content scripts: temporary build folder
 tools/content/_build/
+public/quiz/theory/_extract/

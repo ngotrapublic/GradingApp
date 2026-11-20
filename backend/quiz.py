@@ -82,10 +82,10 @@ def course_has_quizzes(course):
 
 
 def leave_cooldown_sec(leaves):
-    """After 2nd leave: 1 min; each further leave doubles (2, 4, 8, …)."""
-    if leaves < 2:
+    """1st leave: 1 min; each further leave doubles (2, 4, 8, …)."""
+    if leaves < 1:
         return 0
-    return 60 * (2 ** (leaves - 2))
+    return 60 * (2 ** (leaves - 1))
 
 
 def is_left_submit(answers, flag=False):
