@@ -65,7 +65,7 @@ async function loadQuizRoster(slug) {
     (logBySid[a.sid] || (logBySid[a.sid] = [])).push(a);
   });
   let h = `<div class="card" style="padding:12px"><h2>${esc(slug)} – ${T('Roster', 'Danh sách')}</h2>
-    <p class="muted">${T('Sorted by pass/attendance time (newest first). Green = ready; blue = you already checked. Tap Log for one student.', 'Sắp theo giờ đạt/điểm danh (mới nhất trước). Xanh = sẵn sàng; xanh dương = bạn đã check. Bấm Log từng SV.')}</p>
+    <p class="muted">${T('Unchecked first (by pass time). Checked move to the bottom (blue). Tap Log for one student.', 'Chưa check ở trên (theo giờ đạt). Đã check xuống dưới (xanh dương). Bấm Log từng SV.')}</p>
     <table><thead><tr><th>${T('Time', 'Giờ')}</th><th>${T('Name', 'Tên')}</th><th>MSSV</th><th>${T('Best', 'Cao nhất')}</th><th>${T('Tries', 'Lần')}</th><th>${T('Pass', 'Đạt')}</th><th>${T('Solutions', 'Đáp án')}</th><th></th></tr></thead><tbody>`;
   j.roster.forEach(r => {
     const rowCls = r.staff_checked ? 'quiz-staff-ok' : (r.solutions_seen ? 'quiz-att-done' : (r.passed ? 'quiz-passed' : ''));

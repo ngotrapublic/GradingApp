@@ -1013,7 +1013,11 @@ def staff_quiz_get(self, con, me, query):
                 'staff_checked': bool(rev and rev['staff_ok']),
                 'staff_ok_at': rev['staff_ok_at'] if rev else None,
             })
-        roster.sort(key=lambda r: (-_vn_ts(r.get('pass_at')), (r['name'] or '').lower()))
+        roster.sort(key=lambda r: (
+            1 if r.get('staff_checked') else 0,
+            -_vn_ts(r.get('pass_at')),
+            (r['name'] or '').lower(),
+        ))
         for a in con.execute(
                 'SELECT id, sid, score, total, passed, answers, created FROM quiz_attempts '
                 'WHERE class_id=? AND slug=? ORDER BY id DESC', (cid, slug)).fetchall():
