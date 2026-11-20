@@ -8,7 +8,7 @@ Before you start
 
 During the quiz
 • 15 shuffled questions · pass mark 11/15
-• Number answers: type coefficient + power of 10 (dot/comma OK; e.g. 2.59 and −1)
+• Number answers: any integers for coeff and power of 10 (we check the product; e.g. 259 and −2 for 2.59)
 • Stay in this quiz app — switching apps / locking the phone may end your attempt
 • Leaving again adds a wait before retry (1 min, then 2, 4, …)
 • If disconnected: reopen the link and enter name or student ID to continue
@@ -35,7 +35,7 @@ const QUIZ_STUDENT_NOTICE_HTML = `
       <div class="quiz-notice-h">During the quiz</div>
       <ul>
         <li>15 shuffled questions · pass mark <b>11/15</b></li>
-        <li>Number answers: type coefficient + power of 10 (dot/comma OK; e.g. 2.59 and −1)</li>
+        <li>Number answers: any integers for coeff and power of 10 (we check the product; e.g. 259 and −2 for 2.59)</li>
         <li>Stay in this quiz app — switching apps / locking the phone may end your attempt</li>
         <li>Leaving again adds a wait before retry (1 min, then 2, 4, …)</li>
         <li>If disconnected: reopen the link and enter name or student ID to continue</li>

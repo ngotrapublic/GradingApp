@@ -337,12 +337,12 @@ function renderPaper(app) {
     if ((q.type || 'mcq') === 'numeric') {
       h += `<label class="fl numans">${T('Your answer', 'Nhập đáp án')}
         <span class="numrow">
-          <input inputmode="decimal" autocomplete="off" name="qm_${esc(q.id)}" placeholder="${T('coeff.', 'hệ số')}" >
+          <input inputmode="numeric" autocomplete="off" name="qm_${esc(q.id)}" placeholder="${T('integer', 'số nguyên')}">
           <span class="scale">* 10</span>
           <input class="exp" inputmode="text" autocomplete="off" name="qe_${esc(q.id)}" placeholder="${T('power', 'mũ')}">
           ${q.unit ? `<span class="unit">${quizMath(q.unit)}</span>` : ''}
         </span></label>
-        <p class="muted">${T('Enter coefficient (dot or comma OK) and power of 10. Example: 2.59 and −1, or 259 and −3.', 'Nhập hệ số (được dùng . hoặc ,) và mũ 10. Vd: 2.59 và −1, hoặc 259 và −3.')}</p>`;
+        <p class="muted">${T('Any integers OK — we check coeff × 10^power. Example for 2.59: 259 and −2 (or 2590 and −3).', 'Nhập số nguyên tự do — chấm theo hệ số × 10^mũ. Vd 2.59: 259 và −2 (hoặc 2590 và −3).')}</p>`;
     } else {
       (q.choices || []).forEach((c, ci) => {
         h += `<label><input type="radio" name="q_${esc(q.id)}" value="${ci}"> ${quizMath(c)}</label>`;
