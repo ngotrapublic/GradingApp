@@ -211,7 +211,7 @@
       "tol_rel": 0.03,
       "explain": "v = μ * E = 800 * 100 = 8e4 cm/s.",
       "power10": 4,
-      "hint": "Use v = μ * E with μ = 800 and E = 100. Multiply, then write the result in the given * 10^p form and enter only the integer coefficient."
+      "hint": "Use v = μ * E with μ = 800 and E = 100. Multiply, then enter an integer coefficient and the power of 10."
     },
     {
       "id": "d1q17",
@@ -250,7 +250,7 @@
       "tol_rel": 0.05,
       "explain": "At room temperature, V_T is about 0.0259 V.",
       "power10": -4,
-      "hint": "V_T = k * T / q at 300 K. Use the standard room-temperature value from the lecture (enter it with the given * 10 power)."
+      "hint": "V_T = k * T / q at 300 K. Use ≈ 0.0259 V: enter coefficient and power of 10 (for example 259 and -4)."
     },
     {
       "id": "d1q20",
