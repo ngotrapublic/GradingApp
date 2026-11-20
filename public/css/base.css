@@ -31,11 +31,12 @@ input[type=text],input[type=search]{padding:8px;border:1px solid var(--line);bor
 .qrbtn{background:#fff;color:var(--g2);border:0;border-radius:8px;padding:6px 10px;font-weight:700}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
 .modal .box{background:#fff;border-radius:14px;padding:18px;max-width:360px;width:100%;text-align:center}
-.modal .box.quiz-qr-box{max-width:min(980px,96vw);text-align:left}
-.quiz-qr-grid{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center;margin:8px 0}
+.modal .box.quiz-qr-box{max-width:min(1120px,96vw);text-align:left}
+.quiz-qr-grid{display:grid;grid-template-columns:400px 1fr;gap:18px;align-items:center;margin:8px 0}
 @media (max-width:700px){.quiz-qr-grid{grid-template-columns:1fr}}
 .quiz-qr-left{text-align:center}
-.quiz-qr-left img{max-width:180px;width:100%;height:auto}
+.quiz-qr-left img{max-width:360px;width:100%;height:auto}
+.modal .quiz-qr-left img{max-width:360px}
 .quiz-qr-left .muted{font-size:13px;margin:0 0 8px}
 .quiz-qr-notice h3{margin:0 0 8px;font-size:14px}
 .quiz-notice-body{
