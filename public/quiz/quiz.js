@@ -450,18 +450,38 @@ function renderExplain(app) {
   }
   h += `<div class="explain">${quizMath(q.explain || 'This is the correct idea for this item.')}</div>
     </div>
-    <button class="big on" id="next">${E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp')}</button>
+    <p class="muted" id="explainWait"></p>
+    <button class="big on" id="next" disabled>${E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp')}</button>
     </main>`;
   app.innerHTML = h;
   bindLangToggle(app);
   blockCopy(app.querySelector('main.no-copy') || app);
   const out = $('#out'); if (out) out.onclick = signOut;
-  $('#next').onclick = () => {
-    const now = Date.now();
-    if (now < E.unlockAt) {
-      E.unlockAt = now + 10000;
+  const next = $('#next');
+  const waitEl = $('#explainWait');
+  const doneLabel = E.i + 1 >= n ? T('Finish', 'Hoàn thành') : T('Next', 'Tiếp');
+  if (E._timer) clearInterval(E._timer);
+  const tick = () => {
+    if (!Q.explain || Q.explain !== E) { clearInterval(E._timer); return; }
+    const left = Math.max(0, E.unlockAt - Date.now());
+    const sec = Math.ceil(left / 1000);
+    if (left <= 0) {
+      clearInterval(E._timer);
+      E._timer = null;
+      waitEl.textContent = '';
+      next.disabled = false;
+      next.textContent = doneLabel;
       return;
     }
+    next.disabled = true;
+    waitEl.textContent = T(`Next unlocks in ${sec}s — keep reading.`, `Còn ${sec}s mới bấm tiếp — hãy đọc tiếp.`);
+    next.textContent = T(`Wait ${sec}s`, `Chờ ${sec}s`);
+  };
+  E._timer = setInterval(tick, 200);
+  tick();
+  next.onclick = () => {
+    if (Date.now() < E.unlockAt || next.disabled) return;
+    if (E._timer) clearInterval(E._timer);
     if (E.i + 1 >= n) return finishExplain();
     E.i += 1;
     E.unlockAt = Date.now() + 10000;
