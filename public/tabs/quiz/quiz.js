@@ -91,10 +91,13 @@ async function loadQuizRoster(slug) {
     if (!rows.length) {
       cell.innerHTML = `<p class="muted" style="margin:6px 0">${T('No attempts yet.', 'Chưa có lần làm nào.')}</p>`;
     } else {
-      let t = `<table style="margin:6px 0"><thead><tr><th>${T('Time', 'Thời gian')}</th><th>${T('Score', 'Điểm')}</th><th>${T('Result', 'Kết quả')}</th></tr></thead><tbody>`;
+      let t = `<table style="margin:6px 0"><thead><tr><th>${T('Opened', 'Mở đề')}</th><th>${T('Submitted or ended', 'Nộp hoặc kết thúc')}</th><th>${T('Duration', 'Thời lượng')}</th><th>${T('Score', 'Điểm')}</th><th>${T('Result', 'Kết quả')}</th></tr></thead><tbody>`;
       rows.forEach(a => {
         const sc = a.score == null ? '–' : `${a.score}/${a.total == null ? '–' : a.total}`;
-        t += `<tr><td>${esc(a.created || '–')}</td><td>${sc}</td><td>${esc(stLabel[a.status] || a.status)}</td></tr>`;
+        const submitted = a.submitted_at == null ? '–' : new Date(a.submitted_at * 1000)
+          .toLocaleString('en-GB', { timeZone: 'Asia/Ho_Chi_Minh' });
+        const duration = a.duration_sec == null ? '–' : `${Math.floor(a.duration_sec / 60)}m ${a.duration_sec % 60}s`;
+        t += `<tr><td>${esc(a.created || '–')}</td><td>${esc(submitted)}</td><td>${duration}</td><td>${sc}</td><td>${esc(stLabel[a.status] || a.status)}</td></tr>`;
       });
       t += `</tbody></table>`;
       cell.innerHTML = t;

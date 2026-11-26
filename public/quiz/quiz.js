@@ -277,6 +277,9 @@ function renderHome(app) {
     if (s.attendance_done) {
       badge = `<span class="badge ok">${T('Attendance done', 'Đã điểm danh')} ${s.best}/${s.n_pick}</span>`;
       btn = `<p class="muted">${T('You may leave.', 'Bạn có thể ra về.')}</p>`;
+    } else if (s.expired) {
+      badge = `<span class="badge warn">${T('Session ended', 'Phiên đã kết thúc')}</span>`;
+      btn = '';
     } else if (s.needs_explanations) {
       badge = `<span class="badge warn">${T('Finish answer review', 'Cần xem lại đáp án')}</span>`;
       btn = `<p class="muted">${T('Read every question’s answer before attendance is recorded. Result is shown only at the end.', 'Phải xem hết đáp án từng câu mới điểm danh. Kết quả chỉ hiện ở cuối.')}</p>
@@ -302,6 +305,9 @@ function renderHome(app) {
     }
     h += `<div class="card qcard"><div class="stem">${esc(s.title)}</div>
       <div class="muted">${badge} · ${T('tries', 'lần')}: ${s.tries} · pass ${s.pass_score}/${s.n_pick} · ${T('bank', 'ngân hàng')} ${s.n}</div>
+      ${s.session_minutes ? `<p class="muted">${T(
+        `Submit the quiz when ready. Finish from minute ${s.session_minutes.min}. The session closes at minute ${s.session_minutes.max}.`,
+        `Nộp quiz khi làm xong. Hoàn tất từ phút ${s.session_minutes.min}. Phiên đóng ở phút ${s.session_minutes.max}.`)}</p>` : ''}
       ${btn}</div>`;
   });
   h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button></div></main>`;
@@ -345,6 +351,7 @@ async function startQuiz(slug) {
   const j = await post('/api/public/quiz/start', { slug });
   if (!j) return;
   j.startedAt = Date.now();
+  j.deadline = j.seconds_remaining == null ? null : j.startedAt + j.seconds_remaining * 1000;
   j.hints_unlocked = !!j.hints_ready;
   j.hint_after_sec = Number(j.hint_after_sec) || 20 * 60;
   Q.preread = null;
@@ -482,6 +489,10 @@ function beginExplain(payload) {
     total: payload.total,
     pass_score: payload.pass_score,
     review: payload.review || [],
+    followUp: payload.follow_up || [],
+    followAnswers: {},
+    finishAt: Date.now() + (payload.finish_wait_sec || 0) * 1000,
+    deadline: payload.seconds_remaining == null ? null : Date.now() + payload.seconds_remaining * 1000,
     i: 0,
     unlockAt: Date.now() + 10000,
   };
@@ -496,9 +507,10 @@ function renderPaper(app) {
   let h = headBar() + `<main class="no-copy"><h2>${esc(P.title)}</h2>
     <p class="muted">${T('Pass from', 'Đạt từ')} ${P.pass_score}/${P.total}. ${T('Your question order and choices are unique. Copying is disabled.', 'Thứ tự câu và đáp án của bạn là riêng. Không cho copy.')}</p>
     <p class="muted"><b>${T('Stay in this app. Switching away ends your attempt immediately.', 'Ở lại trong app này. Đổi sang app khác là hủy bài ngay.')}</b></p>
-    <p class="muted" id="hintBanner">${hintsOn
+    ${P.deadline ? '<p class="muted" id="sessionClock"></p>' : ''}
+    ${P.deadline ? '' : `<p class="muted" id="hintBanner">${hintsOn
       ? `<b>${T('Hints unlocked — tap the lightbulb on each question.', 'Đã mở gợi ý — bấm bóng đèn ở từng câu.')}</b>`
-      : T(`Lightbulb unlocks after ${mins} min, after 5+ tries, or from attempt 4 if scores stay between 10 and 14.`, `Bóng đèn mở sau ${mins} phút, sau trên 5 lần thử, hoặc từ lần 4 nếu điểm cứ trong khoảng 10–14.`)}</p>`;
+      : T(`Lightbulb unlocks after ${mins} min, after 5+ tries, or from attempt 4 if scores stay between 10 and 14.`, `Bóng đèn mở sau ${mins} phút, sau trên 5 lần thử, hoặc từ lần 4 nếu điểm cứ trong khoảng 10–14.`)}</p>`}`;
   P.questions.forEach((q, qi) => {
     const bulb = q.hint
       ? `<button type="button" class="hintbulb ${hintsOn ? 'on' : ''}" data-qid="${esc(q.id)}" data-qn="${qi + 1}"
@@ -548,7 +560,7 @@ function renderPaper(app) {
     };
   });
   if (P._hintTimer) clearInterval(P._hintTimer);
-  if (!hintsOn) {
+  if (!P.deadline && !hintsOn) {
     P._hintTimer = setInterval(() => {
       if (!Q.paper || Q.paper.attempt_id !== P.attempt_id) { clearInterval(P._hintTimer); return; }
       if (paperHintsOn()) {
@@ -568,6 +580,19 @@ function renderPaper(app) {
     Q.paper = null;
     render();
   };
+  if (P.deadline) {
+    watchReviewClock(P.deadline, (seconds) => {
+      const clock = $('#sessionClock');
+      if (!clock || Q.paper !== P) return false;
+      clock.textContent = reviewTimeLabel(seconds);
+      if (!seconds) {
+        $('#submit').disabled = true;
+        disarmLeaveGuard();
+        clearActiveAttempt();
+      }
+      return true;
+    });
+  }
   $('#submit').onclick = async () => {
     const answers = {};
     let missing = 0;
@@ -600,6 +625,10 @@ function renderPaper(app) {
     closeHintPopup();
     clearActiveAttempt();
     Q.paper = null;
+    if (j.expired) {
+      toast(T('The 60-minute review session has ended.', 'Phiên ôn tập 60 phút đã kết thúc.'));
+      return reload();
+    }
     if (j.needs_explanations && j.review) beginExplain(j);
     else { Q.result = j; render(); }
   };
@@ -636,7 +665,7 @@ function renderResult(app) {
   const out = $('#out'); if (out) out.onclick = signOut;
   $('#done').onclick = () => { Q.result = null; reload(); };
   const retry = $('#retry');
-  if (retry) retry.onclick = () => { const slug = R.slug; Q.result = null; startQuiz(slug); };
+  if (retry) retry.onclick = () => { const slug = R.slug; Q.result = null; beginPreRead(slug); };
 }
 
 function renderExplain(app) {
@@ -711,11 +740,28 @@ function renderExplain(app) {
       return;
     }
     if (E._timer) clearInterval(E._timer);
-    if (last) return showAttendanceAsk();
+    if (last) { E.i = n; return showAttendanceAsk(); }
     E.i += 1;
     E.unlockAt = Date.now() + 10000;
     render();
   };
+}
+
+function reviewTimeLabel(seconds) {
+  if (!seconds) return T('Session ended.', 'Phiên ôn tập đã kết thúc.');
+  const time = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+  return T(`Session time left: ${time}`, `Thời gian còn lại: ${time}`);
+}
+
+let reviewClock;
+function watchReviewClock(deadline, paint) {
+  clearInterval(reviewClock);
+  const tick = () => {
+    const seconds = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+    if (!paint(seconds) || !seconds) clearInterval(reviewClock);
+  };
+  reviewClock = setInterval(tick, 1000);
+  tick();
 }
 
 function showAttendanceAsk() {
@@ -724,31 +770,53 @@ function showAttendanceAsk() {
   if (E._timer) clearInterval(E._timer);
   const app = $('#app');
   const askLabel = T("I'm done — please mark my attendance", 'Em xong rồi — thầy điểm danh giúp em');
+  const application = E.followUp.map(q => `<fieldset class="card qcard">
+    <legend>${quizMath(q.stem)}</legend>
+    ${q.choices.map((choice, index) => `<label><input type="radio" name="${esc(q.id)}"
+      value="${index}" ${E.followAnswers[q.id] === index ? 'checked' : ''}> ${quizMath(choice)}</label>`).join('')}
+    </fieldset>`).join('');
   app.innerHTML = headBar() + `<main>
-    <div class="card" style="padding:16px">
-      <h2 style="margin-top:0">${T('Ready for attendance', 'Sẵn sàng điểm danh')}</h2>
-      <p class="muted">${T('You finished every explanation. Tap the button below to join the attendance list. Then wait for the lecturer to check you (or you may leave if told to).', 'Bạn đã xem hết giải thích. Bấm nút bên dưới để vào danh sách điểm danh. Sau đó chờ thầy check (hoặc ra về nếu thầy cho phép).')}</p>
-    </div>
+    <h2>${E.followUp.length ? T('Apply what you reviewed', 'Áp dụng kiến thức vừa ôn') : T('Ready for attendance', 'Sẵn sàng điểm danh')}</h2>
+    ${application}
+    <p class="muted" id="finishStatus"></p>
     <button class="big on" id="askAtt">${askLabel}</button>
-  </main>`;
+    </main>`;
   bindLangToggle(app);
   const out = $('#out'); if (out) out.onclick = signOut;
-  $('#askAtt').onclick = async () => {
-    const btn = $('#askAtt');
-    btn.disabled = true;
-    await finishExplain();
+  const btn = $('#askAtt');
+  let pending = false;
+  const update = (seconds) => {
+    if (Q.explain !== E || $('#askAtt') !== btn) return false;
+    const wait = Math.max(0, Math.ceil((E.finishAt - Date.now()) / 1000));
+    btn.disabled = pending || (E.deadline != null && !seconds) || wait > 0
+      || E.followUp.some(q => E.followAnswers[q.id] == null);
+    const unlock = wait ? T(`Finish opens in ${Math.ceil(wait / 60)} min.`, `Còn ${Math.ceil(wait / 60)} phút mới hoàn tất được.`) : '';
+    $('#finishStatus').textContent = E.deadline ? [reviewTimeLabel(seconds), unlock].filter(Boolean).join(' ') : '';
+    return true;
   };
+  const refresh = () => update(E.deadline ? Math.max(0, Math.ceil((E.deadline - Date.now()) / 1000)) : 1);
+  app.querySelectorAll('fieldset input[type="radio"]').forEach(input => {
+    input.onchange = () => {
+      E.followAnswers[input.name] = Number(input.value);
+      refresh();
+    };
+  });
+  btn.onclick = async () => {
+    pending = true;
+    refresh();
+    try { await finishExplain(); }
+    finally { pending = false; refresh(); }
+  };
+  if (E.deadline) watchReviewClock(E.deadline, update);
+  else refresh();
 }
 
 async function finishExplain() {
   const E = Q.explain;
   if (!E) return;
   const slug = E.slug;
-  const j = await post('/api/public/quiz/finish_explain', { slug });
-  if (!j) {
-    render();
-    return;
-  }
+  const j = await post('/api/public/quiz/finish_explain', { slug, follow_up: E.followAnswers });
+  if (!j) return;
   const score = j.score != null ? j.score : E.score;
   const total = j.total != null ? j.total : E.total;
   const passScore = j.pass_score != null ? j.pass_score : E.pass_score;
@@ -761,6 +829,11 @@ async function finishExplain() {
     <div class="muted">${T('Pass mark', 'Mốc đạt')}: ${esc(String(passScore))}/${esc(String(total))}</div>
     <p class="muted"><b>${T('You are on the attendance list. The lecturer can mark you now — you may leave.', 'Bạn đã có trong danh sách điểm danh. Thầy có thể điểm danh — bạn có thể ra về.')}</b></p>
   </div>
+  ${(j.follow_up_review || []).map(q => `<div class="card qcard">
+    <div>${quizMath(q.stem)}</div>
+    <p>${T('Correct answer', 'Đáp án đúng')}: ${quizMath(q.choices[q.correct])}</p>
+    ${formatExplainBody(q.explain)}
+    </div>`).join('')}
   <button class="big on" id="done">${T('OK — I understand', 'OK — Em hiểu rồi')}</button></main>`;
   bindLangToggle(app);
   const out = $('#out'); if (out) out.onclick = signOut;
@@ -773,7 +846,7 @@ function render() {
   const app = $('#app');
   if (!isPhoneOrTablet()) return renderDeviceBlock(app);
   if (Q.preread) return renderPreRead(app);
-  if (Q.explain) return renderExplain(app);
+  if (Q.explain) return Q.explain.i >= Q.explain.review.length ? showAttendanceAsk() : renderExplain(app);
   if (Q.paper) return renderPaper(app);
   if (Q.result) return renderResult(app);
   if (Q.me) return renderHome(app);

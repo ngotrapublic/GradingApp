@@ -52,7 +52,7 @@ def list_banks(course):
         out.append({
             'slug': slug,
             'title': bank.get('title') or slug,
-            'n': len(bank.get('questions') or []),
+            'n': len(bank.get('questions') or []) + sum(map(len, bank.get('required_questions') or [])),
             'n_pick': int(bank.get('n_pick') or 20),
             'pass_score': int(bank.get('pass_score') or 14),
         })
@@ -190,10 +190,12 @@ def build_paper(bank, n_pick=None, rng=None):
     """Pick questions, shuffle MCQ choices. Numeric items keep a typed answer key."""
     rng = rng or random.Random(secrets.token_hex(8))
     qs = list(bank.get('questions') or [])
-    n = min(int(n_pick or bank.get('n_pick') or 20), len(qs))
+    required = [rng.choice(forms) for forms in (bank.get('required_questions') or [])]
+    n = min(int(n_pick or bank.get('n_pick') or 20), len(qs) + len(required))
     if n <= 0:
         return None, []
-    picked = rng.sample(qs, n)
+    picked = required[:n] + rng.sample(qs, max(0, n - len(required)))
+    rng.shuffle(picked)
     paper = []
     client = []
     for q in picked:

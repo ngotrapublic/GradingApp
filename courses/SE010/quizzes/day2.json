@@ -637,5 +637,137 @@
         "image": "/quiz/theory/day2/08.jpg"
       }
     ]
+  },
+  "required_questions": [
+    [
+      {
+        "id": "d2-vbi",
+        "type": "numeric",
+        "stem": "At 300 K, an abrupt Si junction has NA = 4 × 10^16 cm⁻³, ND = 2 × 10^15 cm⁻³, and ni = 1 × 10^10 cm⁻³. Use VT = 0.0259 V. Find the equilibrium built-in voltage in volts.",
+        "unit": "V",
+        "answer": 0.7098640289235113,
+        "tol_rel": 0.03,
+        "explain": "Use Vbi = VT ln(NA ND / ni²). With these dopings, Vbi ≈ 0.710 V. Reverse bias changes the voltage across the depletion region, not this equilibrium built-in voltage."
+      },
+      {
+        "id": "d2-vbi-b",
+        "type": "numeric",
+        "stem": "At 300 K, an abrupt Si junction has NA = 3 × 10^16 cm⁻³, ND = 5 × 10^17 cm⁻³, and ni = 1 × 10^10 cm⁻³. Use VT = 0.0259 V. Find the equilibrium built-in voltage in volts.",
+        "unit": "V",
+        "answer": 0.8454189010196423,
+        "tol_rel": 0.03,
+        "explain": "Use Vbi = VT ln(NA ND / ni²). Substitution gives about 0.845 V."
+      }
+    ],
+    [
+      {
+        "id": "d2-width",
+        "type": "numeric",
+        "stem": "An abrupt junction has W = 0.40 μm at zero bias and Vbi = 0.80 V. Its depletion width is proportional to the square root of the voltage across the depletion region. Find W at 2.40 V reverse bias.",
+        "unit": "μm",
+        "answer": 0.8,
+        "tol_rel": 0.03,
+        "explain": "The voltage across the depletion region grows from 0.80 V to 3.20 V. The width increases by √4 = 2, to 0.80 μm."
+      },
+      {
+        "id": "d2-width-b",
+        "type": "numeric",
+        "stem": "An abrupt junction has W = 0.30 μm at zero bias and Vbi = 0.70 V. Its depletion width is proportional to the square root of the voltage across the depletion region. Find W at 5.60 V reverse bias.",
+        "unit": "μm",
+        "answer": 0.9,
+        "tol_rel": 0.03,
+        "explain": "The depletion voltage rises from 0.70 V to 6.30 V. The width increases by √9 = 3, giving 0.90 μm."
+      }
+    ],
+    [
+      {
+        "id": "d2-current",
+        "type": "numeric",
+        "stem": "A diode carries 0.20 mA in forward bias. Its forward voltage increases by 0.10 V at the same temperature. Use n = 2, VT = 0.025 V, and the exponential approximation to find the new current in mA.",
+        "unit": "mA",
+        "answer": 1.4778112197861302,
+        "tol_rel": 0.03,
+        "explain": "The forward current is multiplied by exp(0.10 / (2 × 0.025)) = exp(2), giving 1.48 mA."
+      },
+      {
+        "id": "d2-current-b",
+        "type": "numeric",
+        "stem": "A diode carries 0.80 mA in forward bias. Its forward voltage increases by 0.075 V at the same temperature. Use n = 2, VT = 0.025 V, and the exponential approximation to find the new current in mA.",
+        "unit": "mA",
+        "answer": 3.5853512562704517,
+        "tol_rel": 0.03,
+        "explain": "The current is multiplied by exp(0.075 / (2 × 0.025)) = exp(1.5), giving 3.59 mA."
+      }
+    ],
+    [
+      {
+        "id": "d2-capacitance",
+        "type": "numeric",
+        "stem": "An abrupt varactor has Cj = 15 pF at zero bias and Vbi = 0.75 V. Find Cj at 2.25 V reverse bias. Assume fixed area and uniform doping on each side.",
+        "unit": "pF",
+        "answer": 7.5,
+        "tol_rel": 0.03,
+        "explain": "The depletion voltage increases from 0.75 V to 3.00 V. The depletion width doubles, so its capacitance halves to 7.50 pF."
+      },
+      {
+        "id": "d2-capacitance-b",
+        "type": "numeric",
+        "stem": "An abrupt varactor has Cj = 18 pF at zero bias and Vbi = 0.60 V. Find Cj at 4.80 V reverse bias. Assume fixed area and uniform doping on each side.",
+        "unit": "pF",
+        "answer": 6,
+        "tol_rel": 0.03,
+        "explain": "The depletion voltage grows from 0.60 V to 5.40 V. The depletion width triples, so Cj falls to 6.0 pF."
+      }
+    ],
+    [
+      {
+        "id": "d2-recovery",
+        "type": "numeric",
+        "stem": "A diode carries 0.60 A just before switching. The driver removes stored charge with a constant 1.20 A reverse current. For lifetime 2.0 μs, use ts = τ ln(1 + IF / IR) to find the storage time in μs.",
+        "unit": "μs",
+        "answer": 0.8109302162163288,
+        "tol_rel": 0.03,
+        "explain": "The ratio IF / IR is 0.5, so ts = 2.0 μs × ln(1.5) ≈ 0.811 μs. A larger reverse removal current shortens the storage time."
+      },
+      {
+        "id": "d2-recovery-b",
+        "type": "numeric",
+        "stem": "A diode carries 0.80 A just before switching. The driver removes stored charge with a constant 0.40 A reverse current. For lifetime 3.0 μs, use ts = τ ln(1 + IF / IR) to find the storage time in μs.",
+        "unit": "μs",
+        "answer": 3.295836866004329,
+        "tol_rel": 0.03,
+        "explain": "The ratio IF / IR is 2, so ts = 3.0 μs × ln(3) ≈ 3.30 μs."
+      }
+    ]
+  ],
+  "follow_up": [
+    {
+      "id": "d2-transfer-bias",
+      "stem": "A reverse-biased varactor is in an LC resonator. The reverse voltage increases and L stays fixed. What happens to resonance frequency, and why?",
+      "choices": [
+        "It rises because the depletion layer widens and the capacitance falls.",
+        "It falls because the depletion layer widens and the capacitance falls.",
+        "It rises because the depletion layer narrows and the capacitance rises.",
+        "It stays the same because the reverse DC current is small."
+      ],
+      "answer": 0,
+      "explain": "Wider depletion means smaller junction capacitance. The resonant frequency varies as 1/√(LC), so it rises."
+    },
+    {
+      "id": "d2-transfer-recovery",
+      "stem": "The same PN diode switches from the same forward current in two tests. Driver B removes stored charge with twice the reverse current of driver A. Which test shows a shorter storage interval, and why?",
+      "choices": [
+        "Driver A, because a smaller reverse current removes charge faster.",
+        "Driver B, because its stronger reverse current removes the stored carriers faster.",
+        "Both are equal because the initial forward current is the same.",
+        "Driver B takes longer because more reverse current creates more forward-stored charge."
+      ],
+      "answer": 1,
+      "explain": "At the same initial forward current, the stronger reverse removal current clears the stored minority carriers sooner."
+    }
+  ],
+  "session_minutes": {
+    "min": 30,
+    "max": 60
   }
 }

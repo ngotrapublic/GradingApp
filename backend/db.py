@@ -34,14 +34,14 @@ CREATE INDEX IF NOT EXISTS hits_k ON hits (k, t);
 CREATE TABLE IF NOT EXISTS quiz_publish (class_id INTEGER, slug TEXT, open INTEGER DEFAULT 0, n_pick INTEGER DEFAULT 10,
                                          pass_score INTEGER DEFAULT 7, PRIMARY KEY (class_id, slug));
 CREATE TABLE IF NOT EXISTS quiz_attempts (id {ID}, class_id INTEGER, slug TEXT, sid TEXT, score INTEGER, total INTEGER,
-                                          passed INTEGER, paper TEXT, answers TEXT, created TEXT);
+                                          passed INTEGER, paper TEXT, answers TEXT, created TEXT, opened_at DOUBLE PRECISION, submitted_at DOUBLE PRECISION, follow_up TEXT);
 CREATE TABLE IF NOT EXISTS quiz_reveal (class_id INTEGER, slug TEXT, sid TEXT, seen INTEGER DEFAULT 0, first_pass TEXT,
                                         staff_ok INTEGER DEFAULT 0, staff_ok_at TEXT,
                                         PRIMARY KEY (class_id, slug, sid));
 CREATE TABLE IF NOT EXISTS quiz_sessions (token TEXT PRIMARY KEY, sid TEXT, name TEXT, class_id INTEGER, created TEXT);
 CREATE TABLE IF NOT EXISTS quiz_leave (class_id INTEGER, slug TEXT, sid TEXT, leaves INTEGER DEFAULT 0,
                                        cooldown_until REAL DEFAULT 0, PRIMARY KEY (class_id, slug, sid));
-CREATE TABLE IF NOT EXISTS quiz_preread (class_id INTEGER, slug TEXT, sid TEXT, started REAL, done INTEGER DEFAULT 0,
+CREATE TABLE IF NOT EXISTS quiz_preread (class_id INTEGER, slug TEXT, sid TEXT, started REAL, done INTEGER DEFAULT 0, session_started DOUBLE PRECISION,
                                          PRIMARY KEY (class_id, slug, sid));
 CREATE INDEX IF NOT EXISTS quiz_attempts_lookup ON quiz_attempts (class_id, slug, sid);
 """
@@ -103,6 +103,15 @@ def init_db():
                 con.execute('ALTER TABLE quiz_reveal ADD COLUMN staff_ok INTEGER DEFAULT 0')
             if 'staff_ok_at' not in cols_q:
                 con.execute('ALTER TABLE quiz_reveal ADD COLUMN staff_ok_at TEXT')
+        for table, definitions in (
+            ('quiz_attempts', {'opened_at': 'DOUBLE PRECISION', 'submitted_at': 'DOUBLE PRECISION', 'follow_up': 'TEXT'}),
+            ('quiz_preread', {'session_started': 'DOUBLE PRECISION'}),
+        ):
+            columns = set() if PG else {r[1] for r in con.execute(f'PRAGMA table_info({table})').fetchall()}
+            for column, datatype in definitions.items():
+                if PG or column not in columns:
+                    clause = 'IF NOT EXISTS ' if PG else ''
+                    con.execute(f'ALTER TABLE {table} ADD COLUMN {clause}{column} {datatype}')
         if os.environ.get('ADMIN_PASSWORD'):           # optional: the admin password as a server setting (Vercel)
             u = con.execute("SELECT id FROM users WHERE username='admin'").fetchone()
             if u:

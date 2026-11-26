@@ -1024,7 +1024,7 @@ def staff_quiz_get(self, con, me, query):
             (r['name'] or '').lower(),
         ))
         for a in con.execute(
-                'SELECT id, sid, score, total, passed, answers, created FROM quiz_attempts '
+                'SELECT id, sid, score, total, passed, answers, created, opened_at, submitted_at FROM quiz_attempts '
                 'WHERE class_id=? AND slug=? ORDER BY id DESC', (cid, slug)).fetchall():
             answers = a['answers']
             if answers is None:
@@ -1046,6 +1046,9 @@ def staff_quiz_get(self, con, me, query):
                 'passed': bool(a['passed']),
                 'status': status,
                 'created': a['created'] or '',
+                'submitted_at': a['submitted_at'],
+                'duration_sec': round(a['submitted_at'] - a['opened_at'])
+                if a['submitted_at'] is not None and a['opened_at'] is not None else None,
             })
     return self.send_json({
         'class_id': cid, 'course': row['course'], 'className': row['name'],
@@ -1146,8 +1149,12 @@ def public_quiz_me(self, con):
         leaves = int(leave['leaves']) if leave else 0
         until = float(leave['cooldown_until']) if leave else 0.0
         wait = max(0, int(math.ceil(until - time.time())))
+        bank = load_bank(row['course'], s['slug'])
+        window = _quiz_window(con, row['id'], s['slug'], qu['sid'], bank)
         sets.append({
             **s,
+            'session_minutes': (bank or {}).get('session_minutes'),
+            'expired': bool(window and time.time() >= window[1]),
             'best': best['score'],
             'tries': best['tries'] or 0,
             'passed': passed,
@@ -1248,6 +1255,26 @@ def public_quiz_identify(self, con, body):
     }, cookie=self.set_cookie('qtok', tok, 86400, 'Lax'))
 
 
+def _quiz_window(con, cid, slug, sid, bank):
+    limits = (bank or {}).get('session_minutes')
+    if not limits:
+        return None
+    row = con.execute(
+        'SELECT session_started FROM quiz_preread WHERE class_id=? AND slug=? AND sid=?',
+        (cid, slug, sid)).fetchone()
+    if not row or row['session_started'] is None:
+        return None
+    started = float(row['session_started'])
+    return started + 60 * limits['min'], started + 60 * limits['max']
+
+
+QUIZ_EXPIRED = err('The 60-minute review session has ended.', 'Phiên ôn tập 60 phút đã kết thúc.')
+
+
+def _quiz_follow_up(bank):
+    return [{key: item[key] for key in ('id', 'stem', 'choices')} for item in (bank or {}).get('follow_up', [])]
+
+
 def public_quiz_read_start(self, con, qu, body):
     """Begin mandatory theory pages before a quiz attempt."""
     cid = qu['class_id']
@@ -1273,25 +1300,25 @@ def public_quiz_read_start(self, con, qu, body):
             f'Wait {mins} min before retrying (leave-app penalty).',
             f'Chờ {mins} phút mới làm tiếp (phạt thoát app).'), 403)
     bank = load_bank(row['course'], slug) or {}
+    window = _quiz_window(con, cid, slug, qu['sid'], bank)
+    if window and time.time() >= window[1]:
+        return self.send_json(QUIZ_EXPIRED, 403)
     pre = bank.get('pre_read') or {}
     pages = pre.get('pages') or []
-    if not pages:
-        con.execute(
-            'INSERT INTO quiz_preread (class_id, slug, sid, started, done) VALUES (?,?,?,?,1) '
-            'ON CONFLICT(class_id, slug, sid) DO UPDATE SET started=excluded.started, done=1',
-            (cid, slug, qu['sid'], time.time()))
-        return self.send_json({'slug': slug, 'title': s['title'], 'sec_per_page': 0, 'pages': [], 'skip': True})
-    sec = int(pre.get('sec_per_page') or 15)
+    sec = int(pre.get('sec_per_page') or 15) if pages else 0
+    started = time.time()
     con.execute(
-        'INSERT INTO quiz_preread (class_id, slug, sid, started, done) VALUES (?,?,?,?,0) '
-        'ON CONFLICT(class_id, slug, sid) DO UPDATE SET started=excluded.started, done=0',
-        (cid, slug, qu['sid'], time.time()))
+        'INSERT INTO quiz_preread (class_id, slug, sid, started, done, session_started) VALUES (?,?,?,?,?,?) '
+        'ON CONFLICT(class_id, slug, sid) DO UPDATE SET started=excluded.started, done=excluded.done, '
+        'session_started=COALESCE(quiz_preread.session_started, excluded.session_started)',
+        (cid, slug, qu['sid'], started, int(not pages), started if bank.get('session_minutes') else None))
     return self.send_json({
         'slug': slug,
         'title': s['title'],
         'sec_per_page': sec,
         'pages': pages,
         'min_sec': sec * len(pages),
+        'skip': not pages,
     })
 
 
@@ -1303,6 +1330,9 @@ def public_quiz_read_done(self, con, qu, body):
     if not row or not slug:
         return self.send_json(err('Quiz not found.', 'Không tìm thấy quiz.'), 404)
     bank = load_bank(row['course'], slug) or {}
+    window = _quiz_window(con, cid, slug, qu['sid'], bank)
+    if window and time.time() >= window[1]:
+        return self.send_json(QUIZ_EXPIRED, 403)
     pre = bank.get('pre_read') or {}
     pages = pre.get('pages') or []
     sec = int(pre.get('sec_per_page') or 15)
@@ -1354,6 +1384,9 @@ def public_quiz_start(self, con, qu, body):
             'leave_count': leaves,
         }, 403)
     bank = load_bank(row['course'], slug)
+    window = _quiz_window(con, cid, slug, qu['sid'], bank)
+    if window and time.time() >= window[1]:
+        return self.send_json(QUIZ_EXPIRED, 403)
     pre_pages = ((bank or {}).get('pre_read') or {}).get('pages') or []
     if pre_pages:
         pr = con.execute(
@@ -1368,6 +1401,9 @@ def public_quiz_start(self, con, qu, body):
     paper, client = build_paper(bank, n_pick=s['n_pick'], rng=rng)
     if not paper:
         return self.send_json(err('Empty quiz bank.', 'Ngân hàng câu hỏi trống.'), 400)
+    if (bank or {}).get('session_minutes'):
+        for question in client:
+            question.pop('hint', None)
     prior = con.execute(
         'SELECT score, total FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND answers IS NOT NULL '
         'ORDER BY id', (cid, slug, qu['sid'])).fetchall()
@@ -1375,9 +1411,9 @@ def public_quiz_start(self, con, qu, body):
     total_ref = int(s['n_pick'] or len(client) or 20)
     hints_ready = should_unlock_hints(prior_scores, total=total_ref)
     att = con.execute(
-        'INSERT INTO quiz_attempts (class_id, slug, sid, score, total, passed, paper, answers, created) '
-        'VALUES (?,?,?,?,?,?,?,?,?) RETURNING id',
-        (cid, slug, qu['sid'], None, len(paper), 0, json.dumps(paper), None, now())).fetchone()
+        'INSERT INTO quiz_attempts (class_id, slug, sid, score, total, passed, paper, answers, created, opened_at) '
+        'VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING id',
+        (cid, slug, qu['sid'], None, len(paper), 0, json.dumps(paper), None, now(), time.time())).fetchone()
     con.execute(
         'UPDATE quiz_preread SET done=0 WHERE class_id=? AND slug=? AND sid=?',
         (cid, slug, qu['sid']))
@@ -1391,6 +1427,7 @@ def public_quiz_start(self, con, qu, body):
         'hints_ready': hints_ready,
         'hint_after_sec': 20 * 60,
         'prior_tries': len(prior),
+        'seconds_remaining': max(0, math.ceil(window[1] - time.time())) if window else None,
     })
 
 
@@ -1452,15 +1489,22 @@ def public_quiz_submit(self, con, qu, body):
                     f'(lần 1 = 1 phút, sau đó nhân đôi: 2, 4, 8, …).'),
             })
         return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
+    bank = load_bank(row['course'], att['slug']) if row else None
+    window = _quiz_window(con, cid, att['slug'], qu['sid'], bank)
+    if window and time.time() >= window[1]:
+        return self.send_json({**QUIZ_EXPIRED, 'expired': True})
     if left:
         answers = {'__left': 1}
     score, total, review = grade_paper(paper, {} if left else answers)
     s = _quiz_settings(con, cid, row['course'], att['slug']) if row else None
     pass_score = s['pass_score'] if s else 14
     passed = 0 if left else (1 if score >= pass_score else 0)
-    con.execute(
-        'UPDATE quiz_attempts SET score=?, total=?, passed=?, answers=? WHERE id=?',
-        (score, total, passed, json.dumps(answers), aid))
+    updated = con.execute(
+        'UPDATE quiz_attempts SET score=?, total=?, passed=?, answers=?, submitted_at=? '
+        'WHERE id=? AND answers IS NULL RETURNING id',
+        (score, total, passed, json.dumps(answers), time.time(), aid)).fetchone()
+    if not updated:
+        return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
     out = {
         'attempt_id': aid,
         'slug': att['slug'],
@@ -1505,6 +1549,9 @@ def public_quiz_submit(self, con, qu, body):
         'slug': att['slug'],
         'needs_explanations': True,
         'review': review,
+        'follow_up': _quiz_follow_up(bank),
+        'finish_wait_sec': max(0, math.ceil(window[0] - time.time())) if window else 0,
+        'seconds_remaining': max(0, math.ceil(window[1] - time.time())) if window else None,
         'total': total,
         'score': score,
         'pass_score': pass_score,
@@ -1526,7 +1573,14 @@ def public_quiz_review(self, con, qu, body):
         return self.send_json(err('No passing attempt to review.', 'Chưa có bài đạt để xem giải thích.'), 404)
     row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
     s = _quiz_settings(con, cid, row['course'], slug) if row else None
+    bank = load_bank(row['course'], slug) if row else None
+    window = _quiz_window(con, cid, slug, qu['sid'], bank)
+    if window and time.time() >= window[1]:
+        return self.send_json(QUIZ_EXPIRED, 403)
     return self.send_json({
+        'follow_up': _quiz_follow_up(bank),
+        'finish_wait_sec': max(0, math.ceil(window[0] - time.time())) if window else 0,
+        'seconds_remaining': max(0, math.ceil(window[1] - time.time())) if window else None,
         'needs_explanations': True,
         'hide_outcome': True,
         'slug': slug,
@@ -1547,6 +1601,31 @@ def public_quiz_finish_explain(self, con, qu, body):
         return self.send_json(err('No passing attempt.', 'Chưa có bài đạt.'), 404)
     row = con.execute('SELECT course FROM classes WHERE id=?', (cid,)).fetchone()
     s = _quiz_settings(con, cid, row['course'], slug) if row else None
+    bank = load_bank(row['course'], slug) if row else None
+    window = _quiz_window(con, cid, slug, qu['sid'], bank)
+    seen = con.execute('SELECT seen FROM quiz_reveal WHERE class_id=? AND slug=? AND sid=?',
+                       (cid, slug, qu['sid'])).fetchone()
+    follow_up_review = []
+    if not (seen and seen['seen']):
+        if window and time.time() >= window[1]:
+            return self.send_json(QUIZ_EXPIRED, 403)
+        if window and time.time() < window[0]:
+            return self.send_json(err('You can finish from minute 30.', 'Bạn có thể hoàn tất từ phút 30.'), 403)
+        follow_up = (bank or {}).get('follow_up', [])
+        if follow_up:
+            answers = body.get('follow_up')
+            if not isinstance(answers, dict) or any(
+                type(answers.get(q['id'])) is not int or not 0 <= answers[q['id']] < len(q['choices'])
+                for q in follow_up
+            ):
+                return self.send_json(err('Answer both application questions.', 'Hãy trả lời cả hai câu áp dụng.'), 400)
+            _, _, follow_up_review = grade_paper(follow_up, answers)
+            saved = con.execute(
+                'UPDATE quiz_attempts SET follow_up=? WHERE id=? AND follow_up IS NULL RETURNING id',
+                (json.dumps(follow_up_review), att['id'])).fetchone()
+            if not saved:
+                existing = con.execute('SELECT follow_up FROM quiz_attempts WHERE id=?', (att['id'],)).fetchone()
+                follow_up_review = json.loads(existing['follow_up'])
     con.execute(
         'INSERT INTO quiz_reveal (class_id, slug, sid, seen, first_pass) VALUES (?,?,?,1,?) '
         'ON CONFLICT(class_id, slug, sid) DO UPDATE SET seen=1, first_pass=COALESCE(quiz_reveal.first_pass, excluded.first_pass)',
@@ -1554,6 +1633,7 @@ def public_quiz_finish_explain(self, con, qu, body):
     return self.send_json({
         'ok': True,
         'attendance_done': True,
+        'follow_up_review': follow_up_review,
         'passed': True,
         'slug': slug,
         'score': payload['score'],
