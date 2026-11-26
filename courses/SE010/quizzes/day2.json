@@ -696,6 +696,66 @@
         "tol_rel": 0.03,
         "explain": "The ratio IF / IR is 2, so ts = 3.0 μs × ln(3) ≈ 3.30 μs."
       }
+    ],
+    [
+      {
+        "id": "d2-partition",
+        "type": "numeric",
+        "stem": "An abrupt PN junction has N_A = 6 × 10^16 cm^-3, N_D = 2 × 10^16 cm^-3, and V_bi = 0.75 V. Its total depletion width at zero bias is 0.36 μm. At a reverse bias of 2.25 V, how far does depletion extend into the n side? Report the distance in μm.",
+        "unit": "μm",
+        "answer": 0.54,
+        "tol_rel": 0.03,
+        "explain": "The total junction voltage rises from 0.75 V to 3.00 V, so W doubles to 0.72 μm. From N_A x_p = N_D x_n and W = x_p + x_n, the n side takes 3/4 of W, giving 0.54 μm."
+      },
+      {
+        "id": "d2-partition-b",
+        "type": "numeric",
+        "stem": "An abrupt PN junction has N_A = 2 × 10^16 cm^-3, N_D = 8 × 10^16 cm^-3, and V_bi = 0.65 V. Its total depletion width at zero bias is 0.40 μm. At a reverse bias of 1.95 V, how far does depletion extend into the p side? Report the distance in μm.",
+        "unit": "μm",
+        "answer": 0.64,
+        "tol_rel": 0.03,
+        "explain": "The junction voltage quadruples, so W doubles to 0.80 μm. The p side takes N_D/(N_A + N_D) = 4/5 of that width, giving 0.64 μm."
+      }
+    ],
+    [
+      {
+        "id": "d2-bias-cap",
+        "type": "numeric",
+        "stem": "At 300 K, an abrupt silicon varactor has N_A = 5 × 10^16 cm^-3, N_D = 2 × 10^15 cm^-3, n_i = 1 × 10^10 cm^-3, and zero-bias capacitance 18 pF. Use V_T = 0.0259 V. Find the reverse bias needed to reduce the capacitance to 6 pF.",
+        "unit": "V",
+        "answer": 5.725147575220395,
+        "tol_rel": 0.03,
+        "explain": "The doping values give V_bi ≈ 0.716 V. Reducing capacitance by a factor of 3 triples W and requires 9 times the total depletion voltage. Thus V_R = 8 V_bi ≈ 5.73 V."
+      },
+      {
+        "id": "d2-bias-cap-b",
+        "type": "numeric",
+        "stem": "At 300 K, an abrupt silicon varactor has N_A = 8 × 10^16 cm^-3, N_D = 5 × 10^15 cm^-3, n_i = 1 × 10^10 cm^-3, and zero-bias capacitance 20 pF. Use V_T = 0.0259 V. Find the reverse bias needed to reduce the capacitance to 10 pF.",
+        "unit": "V",
+        "answer": 2.2546454125666635,
+        "tol_rel": 0.03,
+        "explain": "The doping values give V_bi ≈ 0.752 V. Halving capacitance doubles W and requires 4 times the total depletion voltage. Thus V_R = 3 V_bi ≈ 2.25 V."
+      }
+    ],
+    [
+      {
+        "id": "d2-bias-resistance",
+        "type": "numeric",
+        "stem": "A forward-biased diode carries 0.50 mA. Its voltage increases by 0.052 V at constant temperature. Assume n = 2, V_T = 0.026 V, and the exponential approximation. Find the small-signal resistance at the new operating point.",
+        "unit": "Ω",
+        "answer": 38.25946188183,
+        "tol_rel": 0.03,
+        "explain": "The increase is n V_T, so current becomes 0.50 mA × exp(1) ≈ 1.36 mA. Use r_d = n V_T/I_D with current in amperes to get about 38.3 Ω."
+      },
+      {
+        "id": "d2-bias-resistance-b",
+        "type": "numeric",
+        "stem": "A forward-biased diode carries 2.0 mA. Its voltage decreases by 0.026 V at constant temperature while it remains strongly forward biased. Assume n = 1, V_T = 0.026 V, and the exponential approximation. Find the small-signal resistance at the new operating point.",
+        "unit": "Ω",
+        "answer": 35.337663769967584,
+        "tol_rel": 0.03,
+        "explain": "The voltage falls by n V_T, so current becomes 2.0 mA × exp(−1) ≈ 0.736 mA. The incremental resistance n V_T/I_D is about 35.3 Ω."
+      }
     ]
   ],
   "follow_up": [
@@ -725,7 +785,7 @@
     }
   ],
   "session_minutes": {
-    "min": 30,
+    "min": 0,
     "max": 60
   }
 }

@@ -312,8 +312,8 @@ function renderHome(app) {
     h += `<div class="card qcard"><div class="stem">${esc(s.title)}</div>
       <div class="muted">${badge} · ${T('tries', 'lần')}: ${s.tries} · pass ${s.pass_score}/${s.n_pick} · ${T('bank', 'ngân hàng')} ${s.n}</div>
       ${s.session_minutes ? `<p class="muted">${T(
-        `Submit the quiz when ready. Finish from minute ${s.session_minutes.min}. The session closes at minute ${s.session_minutes.max}.`,
-        `Nộp quiz khi làm xong. Hoàn tất từ phút ${s.session_minutes.min}. Phiên đóng ở phút ${s.session_minutes.max}.`)}</p>` : ''}
+        `Submit when ready. The session closes at minute ${s.session_minutes.max}.`,
+        `Nộp quiz khi làm xong. Phiên đóng ở phút ${s.session_minutes.max}.`)}</p>` : ''}
       ${btn}</div>`;
   });
   h += `<div class="btns"><button class="on" id="ref">${T('Refresh', 'Tải lại')}</button></div></main>`;
@@ -884,6 +884,7 @@ async function finishExplain() {
 }
 
 function render() {
+  $('#app-ver').disabled = !Q.preread?.localTheoryTest;
   document.documentElement.lang = LANG;
   document.title = T('Review Quiz', 'Quiz ôn tập');
   const app = $('#app');

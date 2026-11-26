@@ -67,3 +67,7 @@
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:#e3e9de;color:var(--g2)}
 .badge.ok{background:#e8f5e9;color:var(--ok)}
 .badge.warn{background:#fff3e0;color:var(--half)}
+
+.quiz-version{appearance:none;background:transparent;border:0;box-shadow:none;color:inherit;font:inherit;letter-spacing:inherit;min-height:44px;min-width:44px;padding:0 8px;touch-action:manipulation}
+.quiz-version:enabled{cursor:pointer}
+.quiz-version:disabled{opacity:1}
