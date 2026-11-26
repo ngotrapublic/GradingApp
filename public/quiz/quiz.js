@@ -276,7 +276,7 @@ function renderHome(app) {
   const I = Q.me;
   let h = headBar() + `<main><div class="card who"><div class="nm">${esc(I.name)}</div>
     <div class="sub">${esc(I.sid)} · ${esc(I.className)}</div></div>
-    <p class="muted">${T('Read the short theory pages first (timed). Then take the quiz, then review every English explanation. Attendance is only after that.', 'Đọc lý thuyết ngắn trước (có đếm giờ). Rồi làm quiz, rồi xem hết giải thích tiếng Anh. Điểm danh chỉ sau bước đó.')}</p>`;
+    <p class="muted">${T('Read all theory pages once for each day. Then take the quiz and review the explanations before attendance.', 'Đọc hết lý thuyết một lần cho mỗi ngày. Sau đó làm quiz và xem giải thích trước khi điểm danh.')}</p>`;
   if (!I.sets.length) h += `<p class="muted">${T('No open quiz right now.', 'Hiện chưa có quiz nào mở.')}</p>`;
   I.sets.forEach(s => {
     let badge, btn;
@@ -306,7 +306,7 @@ function renderHome(app) {
         )}</b></p>
         <button class="big" disabled>${T(`Wait ${mins} min`, `Chờ ${mins} phút`)}</button>`;
       } else {
-        btn = `<button class="big on" data-read="${esc(s.slug)}">${s.tries ? T('Retry — read theory first', 'Làm lại — đọc lý thuyết trước') : T('Read theory, then quiz', 'Đọc lý thuyết rồi làm quiz')}</button>`;
+        btn = `<button class="big on" data-read="${esc(s.slug)}">${s.theory_done ? T('Start quiz', 'Vào quiz') : T('Read theory, then quiz', 'Đọc lý thuyết rồi làm quiz')}</button>`;
       }
     }
     h += `<div class="card qcard"><div class="stem">${esc(s.title)}</div>
@@ -343,6 +343,7 @@ async function beginPreRead(slug) {
     slug: j.slug,
     title: j.title,
     pages: j.pages,
+    localTheoryTest: j.local_theory_test === true,
     sec: Number(j.sec_per_page) || 15,
     i: 0,
     unlockAt: Date.now() + (Number(j.sec_per_page) || 15) * 1000,
@@ -355,7 +356,7 @@ async function beginPreRead(slug) {
 
 async function startQuiz(slug) {
   const j = await post('/api/public/quiz/start', { slug });
-  if (!j) return;
+  if (!j) return false;
   j.startedAt = Date.now();
   j.deadline = j.seconds_remaining == null ? null : j.startedAt + j.seconds_remaining * 1000;
   j.hints_unlocked = !!j.hints_ready;
@@ -366,6 +367,7 @@ async function startQuiz(slug) {
   Q.explain = null;
   saveActiveAttempt(j);
   render();
+  return true;
 }
 
 function renderPreRead(app) {
@@ -436,12 +438,39 @@ function renderPreRead(app) {
       render();
       return;
     }
-    next.disabled = true;
-    const ok = await post('/api/public/quiz/read_done', { slug: R.slug });
-    if (!ok) { next.disabled = false; return; }
-    await startQuiz(R.slug);
+    await finishPreRead(R);
   };
 }
+
+async function finishPreRead(R, skipForTest = false) {
+  if (Q.preread !== R || R.finishing) return;
+  R.finishing = true;
+  const next = $('#readNext');
+  if (next) next.disabled = true;
+  try {
+    const ok = await post('/api/public/quiz/read_done', {
+      slug: R.slug, local_skip_theory: skipForTest,
+    });
+    if (!ok) return;
+    if (R._timer) clearInterval(R._timer);
+    if (!(await startQuiz(R.slug))) {
+      Q.preread = null;
+      await reload();
+    }
+  } finally {
+    R.finishing = false;
+    if (next) next.disabled = false;
+  }
+}
+
+$('#app-ver').addEventListener('click', () => {
+  const reading = Q.preread;
+  if (!reading?.localTheoryTest || reading.finishing) return;
+  reading.versionTaps = (reading.versionTaps || 0) + 1;
+  if (reading.versionTaps !== 5) return;
+  reading.versionTaps = 0;
+  finishPreRead(reading, true);
+});
 
 function paperHintsOn() {
   const P = Q.paper;

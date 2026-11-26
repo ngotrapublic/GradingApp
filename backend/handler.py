@@ -1151,8 +1151,11 @@ def public_quiz_me(self, con):
         wait = max(0, int(math.ceil(until - time.time())))
         bank = load_bank(row['course'], s['slug'])
         window = _quiz_window(con, row['id'], s['slug'], qu['sid'], bank)
+        preread = con.execute('SELECT done FROM quiz_preread WHERE class_id=? AND slug=? AND sid=?',
+                              (row['id'], s['slug'], qu['sid'])).fetchone()
         sets.append({
             **s,
+            'theory_done': bool(preread and preread['done']),
             'session_minutes': (bank or {}).get('session_minutes'),
             'expired': bool(window and time.time() >= window[1]),
             'best': best['score'],
@@ -1275,6 +1278,14 @@ def _quiz_follow_up(bank):
     return [{key: item[key] for key in ('id', 'stem', 'choices')} for item in (bank or {}).get('follow_up', [])]
 
 
+def _local_theory_test(request):
+    return (
+        not ON_VERCEL
+        and request.client_address[0] in ('127.0.0.1', '::1')
+        and request.headers.get('Host', '').split(':', 1)[0] in ('localhost', '127.0.0.1')
+    )
+
+
 def public_quiz_read_start(self, con, qu, body):
     """Begin mandatory theory pages before a quiz attempt."""
     cid = qu['class_id']
@@ -1303,6 +1314,12 @@ def public_quiz_read_start(self, con, qu, body):
     window = _quiz_window(con, cid, slug, qu['sid'], bank)
     if window and time.time() >= window[1]:
         return self.send_json(QUIZ_EXPIRED, 403)
+    # Earlier releases consumed the read marker when opening a paper.
+    # A timestamped attempt backed by a preread row proves that gate was passed.
+    con.execute(
+        'UPDATE quiz_preread SET done=1 WHERE class_id=? AND slug=? AND sid=? AND done=0 '
+        'AND EXISTS (SELECT 1 FROM quiz_attempts WHERE class_id=? AND slug=? AND sid=? AND opened_at IS NOT NULL)',
+        (cid, slug, qu['sid'], cid, slug, qu['sid']))
     pre = bank.get('pre_read') or {}
     pages = pre.get('pages') or []
     sec = int(pre.get('sec_per_page') or 15) if pages else 0
@@ -1310,15 +1327,21 @@ def public_quiz_read_start(self, con, qu, body):
     con.execute(
         'INSERT INTO quiz_preread (class_id, slug, sid, started, done, session_started) VALUES (?,?,?,?,?,?) '
         'ON CONFLICT(class_id, slug, sid) DO UPDATE SET started=excluded.started, done=excluded.done, '
-        'session_started=COALESCE(quiz_preread.session_started, excluded.session_started)',
+        'session_started=COALESCE(quiz_preread.session_started, excluded.session_started) '
+        'WHERE COALESCE(quiz_preread.done, 0)=0',
         (cid, slug, qu['sid'], started, int(not pages), started if bank.get('session_minutes') else None))
+    read = con.execute('SELECT done FROM quiz_preread WHERE class_id=? AND slug=? AND sid=?',
+                       (cid, slug, qu['sid'])).fetchone()
+    if read['done']:
+        return self.send_json({'slug': slug, 'title': s['title'], 'skip': True, 'pages': []})
     return self.send_json({
         'slug': slug,
         'title': s['title'],
         'sec_per_page': sec,
         'pages': pages,
         'min_sec': sec * len(pages),
-        'skip': not pages,
+        'local_theory_test': _local_theory_test(self),
+        'skip': False,
     })
 
 
@@ -1342,8 +1365,11 @@ def public_quiz_read_done(self, con, qu, body):
         (cid, slug, qu['sid'])).fetchone()
     if not pr or not pr['started']:
         return self.send_json(err('Start the reading first.', 'Hãy bắt đầu phần đọc trước.'), 400)
+    if pr['done']:
+        return self.send_json({'ok': True, 'slug': slug, 'read_done': True})
+    local_skip = body.get('local_skip_theory') is True and _local_theory_test(self)
     elapsed = time.time() - float(pr['started'])
-    if elapsed < need:
+    if elapsed < need and not local_skip:
         left = max(1, int(math.ceil(need - elapsed)))
         return self.send_json(err(
             f'Read longer — about {left}s left before the quiz unlocks.',
@@ -1414,9 +1440,6 @@ def public_quiz_start(self, con, qu, body):
         'INSERT INTO quiz_attempts (class_id, slug, sid, score, total, passed, paper, answers, created, opened_at) '
         'VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING id',
         (cid, slug, qu['sid'], None, len(paper), 0, json.dumps(paper), None, now(), time.time())).fetchone()
-    con.execute(
-        'UPDATE quiz_preread SET done=0 WHERE class_id=? AND slug=? AND sid=?',
-        (cid, slug, qu['sid']))
     return self.send_json({
         'attempt_id': att['id'],
         'slug': slug,

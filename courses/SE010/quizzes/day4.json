@@ -5,51 +5,37 @@
   "pass_score": 14,
   "questions": [
     {
-      "id": "mcq121",
-      "type": "mcq",
-      "stem": "Two Darlington devices each have β=15. Total gain is",
-      "choices": [
-        "225",
-        "255",
-        "450",
-        "30"
-      ],
-      "answer": 1,
-      "explain": "βT=225+15+15=255.",
-      "hint": "βT=225+15+15=255."
-    },
-    {
       "id": "mcq122",
       "type": "mcq",
-      "stem": "A power MOSFET has RS=20 mΩ, RCH=30 mΩ and RD=50 mΩ. Ron is",
+      "stem": "A power MOSFET has R_S=20 mΩ, R_CH=30 mΩ and R_D=50 mΩ. R_on is",
       "choices": [
-        "50",
-        "80",
-        "100",
+        "50 mΩ",
+        "80 mΩ",
+        "100 mΩ",
         "150 mΩ"
       ],
       "answer": 2,
-      "explain": "Ron is the sum, 100 mΩ.",
-      "hint": "Ron is the sum, 100 mΩ."
+      "explain": "R_on is the sum, 100 mΩ.",
+      "hint": "R_on is the sum, 100 mΩ."
     },
     {
       "id": "mcq123",
       "type": "mcq",
-      "stem": "An SCR has α1+α2=0.9 and total leakage 0.1 mA. No gate current. IA is",
+      "stem": "An SCR has α_1+α_2=0.9 and total leakage 0.1 mA. No gate current. I_A is",
       "choices": [
         "10 mA",
-        "0.1",
-        "0.5",
-        "1 Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+        "0.1 mA",
+        "0.5 mA",
+        "1 mA"
       ],
       "answer": 3,
-      "explain": "IA=0.1/(1-0.9)=1 mA.",
-      "hint": "IA=0.1/(1-0.9)=1 mA."
+      "explain": "I_A=0.1/(1-0.9)=1 mA.",
+      "hint": "I_A=0.1/(1-0.9)=1 mA."
     },
     {
       "id": "mcq124",
       "type": "mcq",
-      "stem": "If α1+α2 changes from 0.9 to 0.99 with the same leakage, IA changes by a factor of",
+      "stem": "If α_1+α_2 changes from 0.9 to 0.99 with the same leakage, I_A changes by a factor of",
       "choices": [
         "10",
         "100",
@@ -63,21 +49,21 @@
     {
       "id": "mcq125",
       "type": "mcq",
-      "stem": "A power device dissipates 30 W with RθJA=3 °C/W and TA=25 °C. Tj is",
+      "stem": "A power device dissipates 30 W with R_θJA=3 °C/W and T_A=25 °C. T_j is",
       "choices": [
-        "90",
-        "115",
+        "90 °C",
+        "115 °C",
         "150 °C",
-        "55"
+        "55 °C"
       ],
       "answer": 1,
-      "explain": "Tj=TA+PRθ=25+90=115 °C.",
-      "hint": "Tj=TA+PRθ=25+90=115 °C."
+      "explain": "T_j=T_A+P R_θJA=25+90=115 °C.",
+      "hint": "T_j=T_A+P R_θJA=25+90=115 °C."
     },
     {
       "id": "mcq126",
       "type": "mcq",
-      "stem": "A tunnel diode has fr=20 GHz. Which oscillator frequency satisfies the simple cutoff criterion?",
+      "stem": "A tunnel diode has f_r=20 GHz. Which oscillator frequency satisfies the simple cutoff criterion?",
       "choices": [
         "25 GHz",
         "22 GHz",
@@ -85,18 +71,18 @@
         "15 GHz"
       ],
       "answer": 3,
-      "explain": "Oscillation requires fo<fr.",
-      "hint": "Oscillation requires fo<fr."
+      "explain": "Oscillation requires f_o<f_r.",
+      "hint": "Oscillation requires f_o<f_r."
     },
     {
       "id": "mcq127",
       "type": "mcq",
-      "stem": "An RTD first level is E1=0.12 eV. The simple 2E1/q voltage estimate is",
+      "stem": "An RTD first level is E_1=0.12 eV. The simple 2 E_1/q voltage estimate is",
       "choices": [
         "0.48 V",
-        "0.06",
-        "0.12",
-        "0.24"
+        "0.06 V",
+        "0.12 V",
+        "0.24 V"
       ],
       "answer": 3,
       "explain": "Numerically, 2×0.12 eV/q corresponds to 0.24 V.",
@@ -119,16 +105,16 @@
     {
       "id": "mcq129",
       "type": "mcq",
-      "stem": "For domain stability n0L=10^12 cm^-2 and L=10 μm, n0 is",
+      "stem": "For domain stability n_0 L=10^12 cm^-2 and L=10 μm, n_0 is",
       "choices": [
-        "10^14",
-        "10^15",
+        "10^14 cm^-3",
+        "10^15 cm^-3",
         "10^18 cm^-3",
-        "10^12"
+        "10^12 cm^-3"
       ],
       "answer": 1,
-      "explain": "L=10^-3 cm, so n0=10^15 cm^-3.",
-      "hint": "L=10^-3 cm, so n0=10^15 cm^-3."
+      "explain": "L=10^-3 cm, so n_0=10^15 cm^-3.",
+      "hint": "L=10^-3 cm, so n_0=10^15 cm^-3."
     },
     {
       "id": "mcq130",
@@ -138,7 +124,7 @@
         "L band",
         "X band",
         "millimetre-wave range",
-        "submillimetre range V. Optoelectronic devices"
+        "submillimetre range"
       ],
       "answer": 2,
       "explain": "Millimetre wave spans roughly 30-300 GHz.",
@@ -150,9 +136,9 @@
       "stem": "A photon can cause direct interband absorption when",
       "choices": [
         "mobility is zero",
-        "hν<Eg",
-        "hν≥Eg",
-        "hν=0 only Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+        "hν<E_g",
+        "hν≥E_g",
+        "hν=0 only"
       ],
       "answer": 2,
       "explain": "Photon energy must at least equal the bandgap.",
@@ -177,14 +163,14 @@
       "type": "mcq",
       "stem": "In a solar cell, short-circuit current is approximately",
       "choices": [
-        "IL",
+        "I_L",
         "zero",
-        "Voc/IS",
-        "IS"
+        "V_oc/I_S",
+        "I_S"
       ],
       "answer": 0,
-      "explain": "At V=0, the diode term vanishes and Isc≈IL.",
-      "hint": "At V=0, the diode term vanishes and Isc≈IL."
+      "explain": "At V=0, the diode term vanishes and I_sc≈I_L.",
+      "hint": "At V=0, the diode term vanishes and I_sc≈I_L."
     },
     {
       "id": "mcq134",
@@ -197,50 +183,8 @@
         "not at all"
       ],
       "answer": 1,
-      "explain": "Voc=VT ln(1+IL/IS).",
-      "hint": "Voc=VT ln(1+IL/IS)."
-    },
-    {
-      "id": "mcq135",
-      "type": "mcq",
-      "stem": "A wide-bandgap solar-cell window layer is used to",
-      "choices": [
-        "increase series resistance",
-        "absorb all photons before the junction",
-        "transmit useful photons and reduce surface loss",
-        "eliminate the depletion field"
-      ],
-      "answer": 2,
-      "explain": "The window reduces parasitic absorption and surface recombination.",
-      "hint": "The window reduces parasitic absorption and surface recombination."
-    },
-    {
-      "id": "mcq136",
-      "type": "mcq",
-      "stem": "Photoconductor gain can exceed unity because",
-      "choices": [
-        "there is avalanche in every photoconductor",
-        "the device has no bias",
-        "one photon creates infinite carriers",
-        "contact charge can circulate during carrier lifetime"
-      ],
-      "answer": 3,
-      "explain": "Long lifetime relative to transit time permits repeated charge flow.",
-      "hint": "Long lifetime relative to transit time permits repeated charge flow."
-    },
-    {
-      "id": "mcq137",
-      "type": "mcq",
-      "stem": "Increasing photoconductor lifetime generally",
-      "choices": [
-        "lowers gain and speeds response",
-        "changes neither",
-        "eliminates absorption",
-        "raises gain and slows response"
-      ],
-      "answer": 3,
-      "explain": "Gain is proportional to lifetime, while response time also increases.",
-      "hint": "Gain is proportional to lifetime, while response time also increases."
+      "explain": "V_oc=V_T ln(1+I_L/I_S).",
+      "hint": "V_oc=V_T ln(1+I_L/I_S)."
     },
     {
       "id": "mcq138",
@@ -278,25 +222,11 @@
         "no depletion region",
         "only hole conduction",
         "lower bias and no noise",
-        "higher gain, higher bias and more noise Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+        "higher gain, higher bias and more noise"
       ],
       "answer": 3,
       "explain": "Avalanche multiplication improves sensitivity but adds noise and bias requirements.",
       "hint": "Avalanche multiplication improves sensitivity but adds noise and bias requirements."
-    },
-    {
-      "id": "mcq141",
-      "type": "mcq",
-      "stem": "Phototransistor gain is approximately",
-      "choices": [
-        "1+β",
-        "β-1 only",
-        "zero",
-        "1/β"
-      ],
-      "answer": 0,
-      "explain": "Primary photocurrent acts like base current.",
-      "hint": "Primary photocurrent acts like base current."
     },
     {
       "id": "mcq142",
@@ -311,20 +241,6 @@
       "answer": 0,
       "explain": "Momentum-conserving radiative recombination is much more probable.",
       "hint": "Momentum-conserving radiative recombination is much more probable."
-    },
-    {
-      "id": "mcq143",
-      "type": "mcq",
-      "stem": "Auger recombination becomes especially important at",
-      "choices": [
-        "flat-band voltage",
-        "high carrier concentration",
-        "zero carrier concentration",
-        "low optical index only"
-      ],
-      "answer": 1,
-      "explain": "It is a multi-carrier nonradiative mechanism.",
-      "hint": "It is a multi-carrier nonradiative mechanism."
     },
     {
       "id": "mcq144",
@@ -369,20 +285,6 @@
       "hint": "Internal and mirror losses must be balanced by gain."
     },
     {
-      "id": "mcq147",
-      "type": "mcq",
-      "stem": "A double heterojunction laser confines",
-      "choices": [
-        "only the substrate",
-        "only heat",
-        "both carriers and the optical mode",
-        "only metal atoms"
-      ],
-      "answer": 2,
-      "explain": "Band offsets confine carriers and refractive-index contrast confines light.",
-      "hint": "Band offsets confine carriers and refractive-index contrast confines light."
-    },
-    {
       "id": "mcq148",
       "type": "mcq",
       "stem": "Population inversion in a semiconductor laser requires",
@@ -404,7 +306,7 @@
         "zero",
         "negative only",
         "unrelated to index",
-        "large Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+        "large"
       ],
       "answer": 3,
       "explain": "A high internal index produces a small escape cone.",
@@ -430,9 +332,9 @@
       "stem": "Photon energy at λ=0.80 μm is closest to",
       "choices": [
         "2.48 eV",
-        "0.65",
-        "1.00",
-        "1.55"
+        "0.65 eV",
+        "1.00 eV",
+        "1.55 eV"
       ],
       "answer": 3,
       "explain": "E=1.24/0.80=1.55 eV.",
@@ -441,12 +343,12 @@
     {
       "id": "mcq152",
       "type": "mcq",
-      "stem": "An LED with Eg=2.0 eV emits near",
+      "stem": "An LED with E_g=2.0 eV emits near",
       "choices": [
-        "870",
+        "870 nm",
         "1240 nm",
-        "400",
-        "620"
+        "400 nm",
+        "620 nm"
       ],
       "answer": 3,
       "explain": "λ=1.24/2.0=0.620 μm.",
@@ -471,9 +373,9 @@
       "type": "mcq",
       "stem": "For 90% absorption and α=2000 cm^-1, thickness is closest to",
       "choices": [
-        "1.15",
-        "11.5",
-        "115",
+        "1.15 μm",
+        "11.5 μm",
+        "115 μm",
         "1150 μm"
       ],
       "answer": 1,
@@ -483,12 +385,12 @@
     {
       "id": "mcq155",
       "type": "mcq",
-      "stem": "A solar cell has Im=30 mA and Vm=0.50 V. Maximum power is",
+      "stem": "A solar cell has I_m=30 mA and V_m=0.50 V. Maximum power is",
       "choices": [
         "150 mW",
-        "1.5",
-        "15",
-        "50"
+        "1.5 mW",
+        "15 mW",
+        "50 mW"
       ],
       "answer": 2,
       "explain": "P=IV=0.03×0.50=15 mW.",
@@ -497,7 +399,7 @@
     {
       "id": "mcq156",
       "type": "mcq",
-      "stem": "If Isc=35 mA, Voc=0.60 V and Pmax=15 mW, fill factor is",
+      "stem": "If I_sc=35 mA, V_oc=0.60 V and P_max=15 mW, fill factor is",
       "choices": [
         "0.714",
         "1.40",
@@ -511,16 +413,16 @@
     {
       "id": "mcq157",
       "type": "mcq",
-      "stem": "A PIN diode absorbs 80% of Φ0=10^17 photons cm^-2s^-1. JL is closest to",
+      "stem": "A PIN diode absorbs 80% of Φ_0=10^17 photons cm^-2s^-1. J_L is closest to",
       "choices": [
-        "12.8",
-        "128",
+        "12.8 mA/cm²",
+        "128 mA/cm²",
         "1280 mA/cm²",
-        "1.28"
+        "1.28 mA/cm²"
       ],
       "answer": 0,
-      "explain": "JL=qΦ0×0.8=0.0128 A/cm²=12.8 mA/cm².",
-      "hint": "JL=qΦ0×0.8=0.0128 A/cm²=12.8 mA/cm²."
+      "explain": "J_L=qΦ_0×0.8=0.0128 A/cm²=12.8 mA/cm².",
+      "hint": "J_L=qΦ_0×0.8=0.0128 A/cm²=12.8 mA/cm²."
     },
     {
       "id": "mcq158",
@@ -530,7 +432,7 @@
         "2 ps",
         "20 ps",
         "200 ps",
-        "2 ns Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+        "2 ns"
       ],
       "answer": 1,
       "explain": "2×10^-4 cm /10^7 cm/s=2×10^-11 s.",
@@ -542,96 +444,190 @@
       "stem": "An APD with primary current 5 μA and gain 20 produces",
       "choices": [
         "100 μA",
-        "0.25",
-        "5",
-        "25"
+        "0.25 μA",
+        "5 μA",
+        "25 μA"
       ],
       "answer": 0,
-      "explain": "Iout=MIprimary=100 μA. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
-      "hint": "Iout=MIprimary=100 μA. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      "explain": "I_out=M I_primary=100 μA.",
+      "hint": "I_out=M I_primary=100 μA."
     },
     {
-      "id": "mcq160",
+      "id": "day4-core-01",
       "type": "mcq",
-      "stem": "A phototransistor with β=49 and IL=1 μA gives IC",
+      "stem": "A hotter power device dissipates the same power as before. What change would lower junction temperature at the same ambient temperature?",
       "choices": [
-        "50",
-        "100 μA",
-        "1",
-        "49"
+        "Lower thermal resistance to ambient",
+        "Higher thermal resistance to ambient",
+        "Greater electrical power loss",
+        "Higher ambient temperature"
       ],
       "answer": 0,
-      "explain": "IC=(1+β)IL=50 μA.",
-      "hint": "IC=(1+β)IL=50 μA."
+      "explain": "With fixed power and ambient temperature, reducing R_θJA reduces the temperature rise."
+    },
+    {
+      "id": "day4-core-02",
+      "type": "mcq",
+      "stem": "What does photolithography define on a wafer?",
+      "choices": [
+        "The pattern of areas to process",
+        "The final package pin count",
+        "The final test voltage",
+        "The wafer diameter"
+      ],
+      "answer": 0,
+      "explain": "A mask transfers a pattern to photoresist so selected regions can be processed."
+    },
+    {
+      "id": "day4-core-03",
+      "type": "mcq",
+      "stem": "Which fabrication step selectively removes material after patterning?",
+      "choices": [
+        "Etching",
+        "Final electrical test",
+        "Wire bonding",
+        "Encapsulation"
+      ],
+      "answer": 0,
+      "explain": "Etching removes exposed or selected material to transfer the pattern."
+    },
+    {
+      "id": "day4-core-04",
+      "type": "mcq",
+      "stem": "Why is airborne dust controlled in an I_C cleanroom?",
+      "choices": [
+        "A particle can break or bridge small patterned features",
+        "It changes the ideal diode equation",
+        "It doubles the wafer area",
+        "It raises photon energy"
+      ],
+      "answer": 0,
+      "explain": "Particles can cause missing or bridged features and lower yield."
+    },
+    {
+      "id": "day4-core-05",
+      "type": "mcq",
+      "stem": "Out of 200 dies tested on a wafer, 170 pass. What is the die yield?",
+      "choices": [
+        "85%",
+        "70%",
+        "17%",
+        "115%"
+      ],
+      "answer": 0,
+      "explain": "Divide good dies by total tested dies: 170/200 = 85%."
+    },
+    {
+      "id": "day4-core-06",
+      "type": "mcq",
+      "stem": "Two consecutive process stages each retain 90% of incoming good dies. What share of the starting dies survives both?",
+      "choices": [
+        "81%",
+        "90%",
+        "80%",
+        "99%"
+      ],
+      "answer": 0,
+      "explain": "Multiply the two stage yields: 0.90 × 0.90 = 0.81."
+    },
+    {
+      "id": "day4-core-07",
+      "type": "mcq",
+      "stem": "Why can smaller dies give higher yield per die at the same random defect density?",
+      "choices": [
+        "Each smaller die covers less area where a killer defect can land",
+        "Smaller dies always use fewer process steps",
+        "Smaller dies eliminate defects from the wafer",
+        "The total wafer area grows"
+      ],
+      "answer": 0,
+      "explain": "With other conditions equal, a smaller die is less likely to contain a random killer defect."
+    },
+    {
+      "id": "day4-core-08",
+      "type": "mcq",
+      "stem": "What is an advantage of probing dies electrically before dicing and packaging?",
+      "choices": [
+        "Known bad dies can be screened before paying to package them",
+        "Probing increases chip thickness",
+        "Probing replaces all final package tests",
+        "Probing grows the oxide layer"
+      ],
+      "answer": 0,
+      "explain": "Wafer probing detects bad dies early. Final test can check the packaged device."
     }
   ],
   "pre_read": {
     "sec_per_page": 15,
     "pages": [
       {
-        "title": "Power and thermal",
+        "title": "Power losses and junction temperature",
         "body": [
-          "Junction temperature: T_j ≈ T_A + P · R_θJA",
-          "Excess heat limits safe power",
-          "Package / heat sink lower R_θ"
+          "T_j ≈ T_A + P R_θJA. Lowering thermal resistance lowers the temperature rise at the same power.",
+          "MOSFET on-resistance includes source, channel and drain contributions: R_on ≈ R_S + R_CH + R_D. A high voltage and current combination can exceed a device’s safe operating area."
         ],
         "image": "/quiz/theory/day4/01.png"
       },
       {
-        "title": "Power devices snapshot",
+        "title": "Thyristors and power structures",
         "body": [
-          "Power BJT / MOSFET / thyristors handle high V and I",
-          "High-field microwave devices (GaAs, GaN) trade voltage for speed"
+          "In the simplified SCR model with no gate current, I_A ≈ I_leak/(1 − α_1 − α_2). Regeneration rises as the gain sum approaches 1.",
+          "A latched SCR stays on until its current falls below the holding current. A power MOSFET uses a vertical drift region to support off-state voltage."
         ],
         "image": "/quiz/theory/day4/02.png"
       },
       {
+        "title": "Microwave and quantum devices",
+        "body": [
+          "60 GHz is in the 30–300 GHz millimetre-wave band. A tunnel-diode oscillator needs operation below its resistive cutoff in the simple model.",
+          "Gunn domain stability uses the product n_0 L. An RTD can show negative differential resistance as bias shifts alignment with a resonant level. If the model specifies 2E_1/q, 0.10 eV gives 0.20 V.",
+          "RF conversion efficiency is RF output power divided by DC input power."
+        ]
+      },
+      {
         "title": "Optical absorption",
         "body": [
-          "Photons with E ≥ E_g can generate e–h pairs",
-          "Absorption depth ~ 1/α",
-          "High absorption → thinner layers or direct-gap materials"
+          "Absorption needs photons with energy at least E_g in the direct-transition model. E (eV) ≈ 1.24/λ (μm).",
+          "Transmission through thickness d is exp(−αd), ignoring reflection. A larger α means absorption closer to the surface."
         ],
         "image": "/quiz/theory/day4/03.png"
       },
       {
-        "title": "Solar cell metrics",
+        "title": "Solar cells",
         "body": [
-          "Key metrics: I_sc, V_oc, fill factor FF = P_max/(I_sc V_oc), efficiency",
-          "Series resistance and recombination hurt FF and V_oc"
+          "At short circuit I_sc ≈ I_L. In the ideal model, V_oc increases logarithmically with illumination.",
+          "At the maximum-power point, P_max = I_m V_m. Fill factor is P_max/(I_sc V_oc)."
         ],
         "image": "/quiz/theory/day4/04.png"
       },
       {
-        "title": "Photodetectors / LED / laser",
+        "title": "Photodetectors",
         "body": [
-          "Photodetectors convert light → current",
-          "LEDs spontaneously emit",
-          "Lasers need population inversion and optical feedback"
+          "A PIN photodiode collects carriers by drift across a depleted region, with transit time roughly distance divided by drift speed.",
+          "Unit carrier collection gives J_L = qηΦ_0 for photon flux Φ_0 and collected fraction η. An APD multiplies primary current by impact ionization, at the cost of higher bias and noise."
+        ]
+      },
+      {
+        "title": "LEDs and semiconductor lasers",
+        "body": [
+          "Direct-gap materials favor radiative recombination. A photon’s wavelength is set approximately by the transition energy.",
+          "An LED emits spontaneously, with a broader spectrum. Extraction losses reduce external efficiency. A laser needs population inversion and round-trip gain that balances loss."
         ],
         "image": "/quiz/theory/day4/05.png"
       },
       {
-        "title": "CMOS in systems",
+        "title": "Fabrication steps and yield",
         "body": [
-          "Logic uses complementary MOS for density and low static power",
-          "Interconnect RC delay often limits speed at advanced nodes"
-        ],
-        "image": "/quiz/theory/day4/06.jpg"
-      },
-      {
-        "title": "Fabrication yield",
-        "body": [
-          "Overall yield multiplies step yields (e.g. Y = Y_W·Y_D·Y_C)",
-          "Defects and process variation set die cost"
+          "Pattern the resist by lithography, then use selective etching or another process to transfer the pattern. Cleanrooms help prevent particles from disrupting small features.",
+          "Yield is the fraction of dies that pass. Stage yields multiply. With the same defect density, smaller dies are less likely to contain a killer defect."
         ],
         "image": "/quiz/theory/day4/07.png"
       },
       {
-        "title": "Test and packaging",
+        "title": "Wafer test and packaging",
         "body": [
-          "After fab: wafer test → dicing → package → final test",
-          "Package sets R_θ and parasitics"
+          "Wafer probing screens dies before dicing and packaging. Final test verifies the packaged device.",
+          "The package provides electrical connections and a heat path. The die-attach layer in the figure links the chip to its substrate."
         ],
         "image": "/quiz/theory/day4/08.png"
       }
