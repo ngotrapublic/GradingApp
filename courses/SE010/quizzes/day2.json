@@ -11,7 +11,7 @@
       "choices": [
         "deep reverse bias only",
         "zero temperature",
-        "flat-band MOS conditions",
+        "zero applied bias only",
         "substantial forward bias"
       ],
       "answer": 3,
@@ -51,9 +51,9 @@
       "type": "mcq",
       "stem": "Avalanche breakdown is caused by",
       "choices": [
-        "MOS inversion",
+        "diffusion across the neutral region",
         "radiative recombination",
-        "impact ionization Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "impact ionization",
         "Fresnel reflection"
       ],
       "answer": 2,
@@ -73,76 +73,6 @@
       "answer": 3,
       "explain": "Depletion extension removes the neutral blocking region.",
       "hint": "Depletion extension removes the neutral blocking region."
-    },
-    {
-      "id": "mcq046",
-      "type": "mcq",
-      "stem": "A tunnel diode shows negative differential resistance because",
-      "choices": [
-        "current rises while voltage falls absolutely",
-        "tunnelling-state alignment decreases as voltage rises",
-        "minority storage increases",
-        "the device is reverse biased only"
-      ],
-      "answer": 1,
-      "explain": "Between peak and valley, available aligned states decrease.",
-      "hint": "Between peak and valley, available aligned states decrease."
-    },
-    {
-      "id": "mcq047",
-      "type": "mcq",
-      "stem": "A type-I heterojunction has",
-      "choices": [
-        "a metal contact",
-        "straddling band alignment",
-        "broken-gap alignment only",
-        "no band offsets"
-      ],
-      "answer": 1,
-      "explain": "Both band edges of one material lie inside those of the other.",
-      "hint": "Both band edges of one material lie inside those of the other."
-    },
-    {
-      "id": "mcq048",
-      "type": "mcq",
-      "stem": "A two-dimensional electron gas at AlGaAs/GaAs has high mobility mainly because electrons are",
-      "choices": [
-        "holes",
-        "at zero temperature only",
-        "spatially separated from ionized donors",
-        "inside a metal"
-      ],
-      "answer": 2,
-      "explain": "Modulation doping reduces ionized-impurity scattering.",
-      "hint": "Modulation doping reduces ionized-impurity scattering."
-    },
-    {
-      "id": "mcq049",
-      "type": "mcq",
-      "stem": "For an ideal n-type Schottky contact, barrier height is",
-      "choices": [
-        "Φm-χ",
-        "χ-Φm always positive",
-        "Eg/2 only",
-        "Φm+χ"
-      ],
-      "answer": 0,
-      "explain": "The ideal electron barrier is metal work function minus electron affinity.",
-      "hint": "The ideal electron barrier is metal work function minus electron affinity."
-    },
-    {
-      "id": "mcq050",
-      "type": "mcq",
-      "stem": "Compared with a pn diode, a Schottky diode typically has",
-      "choices": [
-        "more minority storage",
-        "slower switching",
-        "lower forward drop and faster switching",
-        "lower reverse leakage in all cases"
-      ],
-      "answer": 2,
-      "explain": "Schottky conduction is majority-carrier thermionic emission.",
-      "hint": "Schottky conduction is majority-carrier thermionic emission."
     },
     {
       "id": "mcq051",
@@ -179,7 +109,7 @@
       "choices": [
         "1",
         "2",
-        "4 Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "4",
         "1/2"
       ],
       "answer": 1,
@@ -271,20 +201,6 @@
       "hint": "C∝V^-1/2, so C=10/2=5 pF."
     },
     {
-      "id": "mcq060",
-      "type": "mcq",
-      "stem": "A metal work function is 4.7 eV and semiconductor affinity is 4.0 eV. Ideal ΦBn is",
-      "choices": [
-        "4.0",
-        "8.7 eV",
-        "0.3",
-        "0.7"
-      ],
-      "answer": 3,
-      "explain": "ΦBn=4.7-4.0=0.7 eV.",
-      "hint": "ΦBn=4.7-4.0=0.7 eV."
-    },
-    {
       "id": "mcq061",
       "type": "mcq",
       "stem": "For a diode with IS=1 nA and V=0 under the ideal equation, current is",
@@ -305,7 +221,7 @@
       "choices": [
         "1/4",
         "1/2",
-        "2 Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
+        "2",
         "4"
       ],
       "answer": 2,
@@ -341,228 +257,290 @@
       "hint": "20×10^-9×5×10^-4=10^-11 F=10 pF."
     },
     {
-      "id": "mcq065",
+      "id": "d2-pn-01",
       "type": "mcq",
-      "stem": "A Schottky barrier is lowered by 0.05 eV at 300 K. The thermionic saturation current changes by about",
+      "stem": "The n side of an abrupt junction is ten times more lightly doped than the p side. Where does the depletion region extend farther?",
       "choices": [
-        "1.05×",
-        "6.9×",
-        "50×",
-        "0.15× III. MOS capacitors, MOSFETs, CMOS, BJTs and HBTs"
-      ],
-      "answer": 1,
-      "explain": "Current ratio=exp(0.05/0.0259)≈6.9.",
-      "hint": "Current ratio=exp(0.05/0.0259)≈6.9."
-    },
-    {
-      "id": "mcq066",
-      "type": "mcq",
-      "stem": "For a p-type MOS capacitor, a negative gate voltage produces",
-      "choices": [
-        "inversion",
-        "depletion",
-        "accumulation",
-        "avalanche"
-      ],
-      "answer": 2,
-      "explain": "Negative gate charge attracts holes to the interface.",
-      "hint": "Negative gate charge attracts holes to the interface."
-    },
-    {
-      "id": "mcq067",
-      "type": "mcq",
-      "stem": "Strong inversion in a p-type MOS capacitor is conventionally defined near ψs=",
-      "choices": [
-        "4φF",
-        "φF/2",
-        "φF",
-        "2φF"
-      ],
-      "answer": 3,
-      "explain": "At ψs=2φF, surface electron concentration reaches the bulk hole concentration.",
-      "hint": "At ψs=2φF, surface electron concentration reaches the bulk hole concentration."
-    },
-    {
-      "id": "mcq068",
-      "type": "mcq",
-      "stem": "Reducing oxide thickness causes Cox to",
-      "choices": [
-        "become zero",
-        "be independent of εox",
-        "decrease",
-        "increase"
-      ],
-      "answer": 3,
-      "explain": "Cox=εox/tox.",
-      "hint": "Cox=εox/tox."
-    },
-    {
-      "id": "mcq069",
-      "type": "mcq",
-      "stem": "Positive fixed oxide charge primarily causes a MOS C-V curve to",
-      "choices": [
-        "become a laser",
-        "lose all capacitance",
-        "reverse carrier charge",
-        "shift along the voltage axis"
-      ],
-      "answer": 3,
-      "explain": "Fixed charge changes flat-band and threshold voltage.",
-      "hint": "Fixed charge changes flat-band and threshold voltage."
-    },
-    {
-      "id": "mcq070",
-      "type": "mcq",
-      "stem": "An enhancement NMOS is normally",
-      "choices": [
-        "on at VGS=0",
-        "off at VGS=0",
-        "a two-terminal device",
-        "a pnp transistor Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
-      ],
-      "answer": 1,
-      "explain": "A positive gate bias is required to create inversion.",
-      "hint": "A positive gate bias is required to create inversion."
-    },
-    {
-      "id": "mcq071",
-      "type": "mcq",
-      "stem": "MOSFET pinch-off begins when",
-      "choices": [
-        "ID=0",
-        "VDS=0",
-        "VDS=VGS-VT",
-        "VGS=0 always"
-      ],
-      "answer": 2,
-      "explain": "Drain-end inversion charge reaches zero at VDS,sat=VOV.",
-      "hint": "Drain-end inversion charge reaches zero at VDS,sat=VOV."
-    },
-    {
-      "id": "mcq072",
-      "type": "mcq",
-      "stem": "In the long-channel square-law model, saturation current varies with overdrive as",
-      "choices": [
-        "1/VOV",
-        "exp(-VOV)",
-        "VOV",
-        "VOV²"
-      ],
-      "answer": 3,
-      "explain": "ID,sat=(1/2)μCox(W/L)VOV².",
-      "hint": "ID,sat=(1/2)μCox(W/L)VOV²."
-    },
-    {
-      "id": "mcq073",
-      "type": "mcq",
-      "stem": "Reverse source-body bias in an NMOS generally",
-      "choices": [
-        "increases VT",
-        "makes VT zero",
-        "has no effect",
-        "reduces VT"
+        "Into the n side, about ten times farther",
+        "Into the p side, about ten times farther",
+        "Equally into both sides",
+        "Only into the p side"
       ],
       "answer": 0,
-      "explain": "The body effect increases depletion charge and threshold.",
-      "hint": "The body effect increases depletion charge and threshold."
+      "explain": "Charge balance requires N_A x_p = N_D x_n, so the less doped n side takes more width."
     },
     {
-      "id": "mcq074",
+      "id": "d2-pn-02",
       "type": "mcq",
-      "stem": "MOSFET cutoff frequency increases when",
+      "stem": "What happens to the junction barrier and depletion width when a PN diode is forward biased?",
       "choices": [
-        "gm decreases",
-        "gate capacitance increases",
-        "gm increases for fixed capacitance",
-        "channel length increases greatly"
+        "Both decrease",
+        "Both increase",
+        "Barrier decreases and width increases",
+        "Neither changes"
       ],
-      "answer": 2,
-      "explain": "fT≈gm/(2πCG).",
-      "hint": "fT≈gm/(2πCG)."
+      "answer": 0,
+      "explain": "The applied forward voltage opposes the built-in barrier and narrows depletion."
     },
     {
-      "id": "mcq075",
+      "id": "d2-pn-03",
       "type": "mcq",
-      "stem": "In a CMOS inverter with low input,",
+      "stem": "What does increasing the reverse bias of an abrupt PN junction do before breakdown?",
       "choices": [
-        "output is ground",
-        "NMOS on, PMOS off",
-        "PMOS on, NMOS off",
-        "both permanently off"
+        "It widens depletion and raises the peak electric field",
+        "It narrows depletion and raises the peak field",
+        "It widens depletion and lowers the peak field",
+        "It eliminates the built-in field"
       ],
-      "answer": 2,
-      "explain": "The PMOS pulls the output toward VDD.",
-      "hint": "The PMOS pulls the output toward VDD."
+      "answer": 0,
+      "explain": "Higher reverse voltage increases both depletion width and peak field for fixed doping."
     },
     {
-      "id": "mcq076",
+      "id": "d2-pn-04",
       "type": "mcq",
-      "stem": "The ideal CMOS inverter has low static power because",
+      "stem": "An unbiased PN junction has a nonzero built-in electric field. Why is its net current zero?",
       "choices": [
-        "capacitance is infinite",
-        "the output is always floating",
-        "both devices are on continuously",
-        "there is ideally no dc path from VDD to ground in steady states"
+        "Drift and diffusion currents balance",
+        "No carriers can move across the junction",
+        "Electrons and holes have identical mobility",
+        "The electric field is canceled everywhere"
       ],
-      "answer": 3,
-      "explain": "One complementary device is ideally off in each logic state.",
-      "hint": "One complementary device is ideally off in each logic state."
+      "answer": 0,
+      "explain": "The opposing drift and diffusion currents cancel at equilibrium."
     },
     {
-      "id": "mcq077",
+      "id": "d2-pn-05",
       "type": "mcq",
-      "stem": "CMOS latch-up is associated with",
+      "stem": "At fixed temperature, N_A is multiplied by 10 while N_D is unchanged. How does V_bi change?",
       "choices": [
-        "a single resistor only",
-        "laser threshold",
-        "Hall voltage",
-        "a parasitic pnpn path"
+        "It increases by V_T ln(10)",
+        "It increases by exactly 10 V",
+        "It decreases by V_T ln(10)",
+        "It is unchanged"
       ],
-      "answer": 3,
-      "explain": "Parasitic bipolar devices can regenerate like an SCR. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs",
-      "hint": "Parasitic bipolar devices can regenerate like an SCR. Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+      "answer": 0,
+      "explain": "The dopant product inside the logarithm increases by a factor of ten."
     },
     {
-      "id": "mcq078",
+      "id": "d2-pn-06",
       "type": "mcq",
-      "stem": "A BJT in forward-active mode has",
+      "stem": "An abrupt junction has V_bi = 0.7 V and a reverse bias of 2.3 V. What voltage magnitude appears across the depletion region?",
       "choices": [
-        "both junctions forward biased",
-        "emitter-base forward and collector-base reverse biased",
-        "both junctions reverse biased",
-        "emitter-base reverse and collector-base forward biased"
+        "3.0 V",
+        "2.3 V",
+        "1.6 V",
+        "0.7 V"
       ],
-      "answer": 1,
-      "explain": "This bias enables injection and collector sweep-out.",
-      "hint": "This bias enables injection and collector sweep-out."
+      "answer": 0,
+      "explain": "In reverse bias the depletion region supports V_bi + V_R."
     },
     {
-      "id": "mcq079",
+      "id": "d2-pn-07",
       "type": "mcq",
-      "stem": "A thin BJT base improves current gain mainly because it",
+      "stem": "Two varactors have the same doping and reverse bias. One has twice the junction area. How do their capacitances compare?",
       "choices": [
-        "forces saturation",
-        "increases base recombination",
-        "reduces the fraction recombining in the base",
-        "eliminates emitter injection Lecturer question bank | Based on Review_detail.pdf Semiconductor Physics and Devices | 200 Moderate-Level MCQs"
+        "The larger one has twice the capacitance",
+        "They have equal capacitance",
+        "The larger one has half the capacitance",
+        "The larger one has four times the capacitance"
       ],
-      "answer": 2,
-      "explain": "More injected carriers reach the collector.",
-      "hint": "More injected carriers reach the collector."
+      "answer": 0,
+      "explain": "With the same depletion width, C_j = ε_s A / W scales with area."
     },
     {
-      "id": "mcq080",
+      "id": "d2-pn-08",
       "type": "mcq",
-      "stem": "The relation between α and β is",
+      "stem": "A measured capacitance drops from 12 pF to 6 pF as reverse bias increases. What happened to depletion width at fixed area?",
       "choices": [
-        "β=1/α",
-        "β=α²",
-        "β=1-α",
-        "β=α/(1-α)"
+        "It doubled",
+        "It halved",
+        "It increased by a factor of four",
+        "It stayed constant"
       ],
-      "answer": 3,
-      "explain": "It follows from IE=IC+IB.",
-      "hint": "It follows from IE=IC+IB."
+      "answer": 0,
+      "explain": "Junction capacitance is inversely proportional to depletion width."
+    },
+    {
+      "id": "d2-pn-09",
+      "type": "mcq",
+      "stem": "Which plot is expected to be approximately linear for an abrupt PN junction before breakdown?",
+      "choices": [
+        "1/C_j^2 versus V_R",
+        "C_j^2 versus V_R",
+        "C_j versus exp(V_R)",
+        "W versus V_R"
+      ],
+      "answer": 0,
+      "explain": "C_j is proportional to (V_bi + V_R) raised to −1/2 for an abrupt junction."
+    },
+    {
+      "id": "d2-pn-10",
+      "type": "mcq",
+      "stem": "An abrupt junction has W = 0.50 μm. Total depletion voltage increases by a factor of nine. What is the new W?",
+      "choices": [
+        "1.50 μm",
+        "4.50 μm",
+        "0.167 μm",
+        "0.50 μm"
+      ],
+      "answer": 0,
+      "explain": "The width grows by the square root of nine."
+    },
+    {
+      "id": "d2-pn-11",
+      "type": "mcq",
+      "stem": "A forward-biased diode current doubles at fixed temperature and ideality factor. What happens to its small-signal resistance?",
+      "choices": [
+        "It halves",
+        "It doubles",
+        "It quadruples",
+        "It stays fixed"
+      ],
+      "answer": 0,
+      "explain": "The incremental resistance is approximately n V_T / I_D."
+    },
+    {
+      "id": "d2-pn-12",
+      "type": "mcq",
+      "stem": "Two diodes follow the exponential approximation at the same temperature. For the same voltage increase, which has the larger current multiplication factor?",
+      "choices": [
+        "The diode with n = 1",
+        "The diode with n = 2",
+        "Both have the same multiplier",
+        "The answer depends only on area"
+      ],
+      "answer": 0,
+      "explain": "The exponent increment is ΔV/(n V_T), which is larger for n = 1."
+    },
+    {
+      "id": "d2-pn-13",
+      "type": "mcq",
+      "stem": "At 300 K, a diode with n = 1 carries 2 mA. Using V_T = 26 mV, what is its small-signal resistance?",
+      "choices": [
+        "13 Ω",
+        "26 Ω",
+        "52 Ω",
+        "0.013 Ω"
+      ],
+      "answer": 0,
+      "explain": "Divide 26 mV by 2 mA to get 13 Ω."
+    },
+    {
+      "id": "d2-pn-14",
+      "type": "mcq",
+      "stem": "In the ideal diode law, I_S = 3 nA. What current is expected well into reverse bias, before breakdown?",
+      "choices": [
+        "Approximately −3 nA",
+        "Approximately +3 nA",
+        "Exactly 0 A",
+        "A large negative current that grows exponentially with reverse bias"
+      ],
+      "answer": 0,
+      "explain": "In reverse bias, the exponential term tends to zero, leaving −I_S."
+    },
+    {
+      "id": "d2-pn-15",
+      "type": "mcq",
+      "stem": "In the charge-control model, a forward-biased diode has Q = 30 nC at I_D = 10 mA. What is the carrier lifetime estimate?",
+      "choices": [
+        "3 μs",
+        "0.3 μs",
+        "30 μs",
+        "300 μs"
+      ],
+      "answer": 0,
+      "explain": "Use τ ≈ Q/I_D = 30 nC / 10 mA."
+    },
+    {
+      "id": "d2-pn-16",
+      "type": "mcq",
+      "stem": "A silicon PN diode switches from a larger forward current, with lifetime and reverse removal current unchanged. How does the storage interval change?",
+      "choices": [
+        "It becomes longer",
+        "It becomes shorter",
+        "It stays constant",
+        "It vanishes before reversal"
+      ],
+      "answer": 0,
+      "explain": "Larger forward current stores more minority charge, which takes longer to remove."
+    },
+    {
+      "id": "d2-pn-17",
+      "type": "mcq",
+      "stem": "Two identical PN diodes start with the same forward current. The second driver provides more reverse removal current. Which diode stops conducting reverse recovery current sooner?",
+      "choices": [
+        "The second diode",
+        "The first diode",
+        "Both at the same time",
+        "Neither can recover"
+      ],
+      "answer": 0,
+      "explain": "Greater reverse removal current clears the same initial stored charge faster."
+    },
+    {
+      "id": "d2-pn-18",
+      "type": "mcq",
+      "stem": "Which mechanism dominates the reverse breakdown of a heavily doped junction with a very thin depletion region?",
+      "choices": [
+        "Band-to-band tunneling",
+        "Impact ionization only",
+        "Forward diffusion",
+        "Thermal motion with no electric field"
+      ],
+      "answer": 0,
+      "explain": "A narrow, high-field depletion layer allows Zener tunneling."
+    },
+    {
+      "id": "d2-pn-19",
+      "type": "mcq",
+      "stem": "In avalanche breakdown, why can reverse current rise sharply?",
+      "choices": [
+        "Accelerated carriers generate new electron–hole pairs by collisions",
+        "The applied voltage removes all ionized dopants",
+        "The depletion layer instantly disappears",
+        "Minority carriers stop moving"
+      ],
+      "answer": 0,
+      "explain": "Impact ionization generates mobile carriers that can create further pairs."
+    },
+    {
+      "id": "d2-pn-20",
+      "type": "mcq",
+      "stem": "An idealized triangular field profile has the same peak field but twice the depletion width. What happens to the voltage represented by its area?",
+      "choices": [
+        "It doubles",
+        "It halves",
+        "It quadruples",
+        "It is unchanged"
+      ],
+      "answer": 0,
+      "explain": "The field integral is E_max W / 2 for a triangular profile."
+    },
+    {
+      "id": "d2-pn-21",
+      "type": "mcq",
+      "stem": "A long diode has the same minority-carrier diffusion coefficient but one quarter of the lifetime. How does diffusion length change?",
+      "choices": [
+        "It halves",
+        "It becomes one quarter",
+        "It doubles",
+        "It stays fixed"
+      ],
+      "answer": 0,
+      "explain": "The diffusion length is √(Dτ)."
+    },
+    {
+      "id": "d2-pn-22",
+      "type": "mcq",
+      "stem": "Under strong forward bias at fixed temperature, why does diffusion capacitance rise as the diode current rises?",
+      "choices": [
+        "More minority charge is stored and changes more strongly with voltage",
+        "The depletion region widens far into both neutral regions",
+        "The ionized dopants vanish",
+        "The diode enters reverse breakdown"
+      ],
+      "answer": 0,
+      "explain": "Forward injection stores minority carriers, and diffusion capacitance measures the change in stored charge with voltage."
     }
   ],
   "pre_read": {
@@ -571,70 +549,50 @@
       {
         "title": "pn junction built-in potential",
         "body": [
-          "Diffusion of majority carriers leaves uncovered space charge",
-          "Built-in voltage V_bi ≈ V_T ln(N_A N_D / n_i^2)",
-          "At equilibrium: drift balances diffusion"
+          "At equilibrium, electrons and holes diffuse across the junction until drift balances diffusion.",
+          "V_bi = V_T ln(N_A N_D / n_i^2), where V_T ≈ 0.026 V at 300 K."
         ],
-        "image": "/quiz/theory/day2/01.png"
+        "image": "/quiz/theory/day2/junction-equilibrium.png"
       },
       {
         "title": "Depletion width and charge",
         "body": [
-          "Most depletion lies on the lighter-doped side",
-          "Uncovered acceptor and donor charge form a dipole",
-          "Reverse bias widens the depletion region"
+          "Forward bias narrows depletion. Reverse bias widens it and raises the peak field.",
+          "Depletion extends farther into the lightly doped side: N_A x_p = N_D x_n."
         ],
         "image": "/quiz/theory/day2/02.png"
       },
       {
         "title": "Junction capacitance",
         "body": [
-          "Depletion capacitance falls as (V_bi+V_R)^{−1/2} (abrupt junction)",
-          "Higher reverse bias → thicker depletion → smaller C_j"
+          "For an abrupt junction, W ∝ √(V_bi + V_R) and C_j = ε_s A/W.",
+          "For example, quadrupling the total depletion voltage doubles W and halves C_j."
         ],
         "image": "/quiz/theory/day2/03.png"
       },
       {
         "title": "Diode law",
         "body": [
-          "Ideal diode: I = I_S (exp(qV/nkT) − 1)",
-          "Small-signal resistance r_d ≈ n V_T / I_D",
-          "~60 mV/decade at room T means n ≈ 1"
-        ],
-        "image": "/quiz/theory/day2/04.png"
+          "I_D = I_S [exp(V/(n V_T)) − 1]. In strong forward bias, increasing V by about 60 mV gives 10× the current at room temperature if n = 1.",
+          "Small-signal resistance is r_d ≈ n V_T/I_D. At n = 1 and I_D = 10 mA, it is about 2.6 Ω."
+        ]
       },
       {
-        "title": "Breakdown and storage",
+        "title": "Reverse breakdown",
         "body": [
-          "Avalanche / Zener set reverse limits",
-          "Forward → reverse needs time to remove stored minority charge (recovery)"
+          "Zener breakdown comes from tunneling through a narrow depletion layer. Avalanche comes from impact ionization.",
+          "Voltage is the area under the field profile. For a triangular profile, V ≈ E_max W/2.",
+          "Punch-through occurs when depletion spans a thin lightly doped region and reaches its far boundary."
         ],
         "image": "/quiz/theory/day2/05.png"
       },
       {
-        "title": "Schottky vs pn",
+        "title": "Stored charge and reverse recovery",
+        "image": "/quiz/theory/day2/04.png",
         "body": [
-          "Schottky barrier Φ_Bn = Φ_m − χ (ideal)",
-          "Lower V_F than a typical Si pn diode",
-          "Higher leakage; little minority storage"
-        ],
-        "image": "/quiz/theory/day2/06.jpg"
-      },
-      {
-        "title": "Ohmic contacts",
-        "body": [
-          "Want low, non-rectifying contact resistance",
-          "Often heavy surface doping so tunneling dominates through a thin barrier"
-        ],
-        "image": "/quiz/theory/day2/07.jpg"
-      },
-      {
-        "title": "Heterojunctions / 2DEG",
-        "body": [
-          "Band offsets can form a 2D electron gas (e.g. AlGaAs/GaAs)",
-          "High mobility when ionized donors sit away from the channel"
-        ],
-        "image": "/quiz/theory/day2/08.jpg"
+          "Forward bias injects minority carriers. Q ≈ τ I_D, and the diffusion length is √(Dτ). This stored charge gives rise to diffusion capacitance.",
+          "When the diode switches to reverse bias, the reverse current clears stored charge. A larger removal current shortens storage time: t_s ≈ τ ln(1 + I_F/I_R)."
+        ]
       }
     ]
   },

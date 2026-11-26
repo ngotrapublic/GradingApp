@@ -3,8 +3,14 @@ const Q = { cls: '', classInfo: null, me: null, paper: null, result: null, expla
 function quizMath(s) {
   let t = String(s ?? '');
   t = t.replace(/(^|[^A-Za-z0-9.])(\d+(?:\.\d+)?)[eE]([+-]?\d+)(?![A-Za-z0-9])/g, (_, p, a, b) => `${p}${a} * 10^${b}`);
+  // Older banks use compact symbols, while newer entries can use explicit underscores.
+  t = t.replace(/\bn(?=VT\b)/g, 'n ')
+    .replace(/\b(VDS|ID),(sat)\b/g, (_, base, qualifier) => `${base[0]}_${base.slice(1)},${qualifier}`)
+    .replace(/\b(ID|IS|IF|IR|IB|IC|IE|NA|ND|VGS|VDS|VBS|VSB|VBE|VCE|VCB|VCC|VDD|VT|VA|VR|VF|VOV|Vbi|ni|Cj|Cox|CG|rd|ro|gm|tox|fT|Emax|RL|RDS)\b/g,
+      (_, symbol) => `${symbol[0]}_${symbol.slice(1)}`)
+    .replace(/ΦBn\b/g, 'Φ_Bn');
   t = esc(t);
-  t = t.replace(/(^|[^A-Za-z0-9_])([A-Za-zμσαβθφψΩ∂]{1,6})_([A-Za-z0-9,θφψα-ω+−\-]+)(?![A-Za-z0-9_])/g,
+  t = t.replace(/(^|[^A-Za-z0-9_])([A-Za-zμσαβθφψΦεΩ∂]{1,6})_([A-Za-z0-9α-ω]+(?:,[A-Za-z0-9α-ω]+)*)(?![A-Za-z0-9_])/g,
     (_, p, base, sub) => `${p}${base}<sub>${sub}</sub>`);
   t = t.replace(/\^\{([^}]+)\}/g, '<sup>$1</sup>');
   t = t.replace(/\^(-?\d+)/g, '<sup>$1</sup>');
@@ -369,15 +375,21 @@ function renderPreRead(app) {
   const page = R.pages[R.i];
   const last = R.i + 1 >= n;
   const img = page.image
-    ? `<img class="theory-img" src="${esc(page.image)}" alt="${esc(page.title || 'theory')}" loading="eager">`
+    ? `<button type="button" class="theory-figure" id="openTheoryFigure" aria-label="${T('Enlarge figure', 'Phóng to hình')}">
+        <img class="theory-img" src="${esc(page.image)}" alt="${esc(page.title || 'Theory figure')}">
+      </button>
+      <dialog class="theory-dialog" aria-label="${T('Theory figure', 'Hình lý thuyết')}">
+        <form method="dialog"><button type="submit" class="big">${T('Close figure', 'Đóng hình')}</button></form>
+        <img src="${esc(page.image)}" alt="${esc(page.title || 'Theory figure')}">
+      </dialog>`
     : '';
   let h = headBar() + `<main class="no-copy">
     <p class="muted"><b>${T('Theory first', 'Đọc lý thuyết trước')}</b> — ${esc(R.title)}</p>
     <p class="muted">${T('Page', 'Trang')} ${R.i + 1} / ${n}. ${T('Read carefully (English). Next unlocks after the timer.', 'Đọc kỹ (tiếng Anh). Hết giờ mới bấm Tiếp.')}</p>
     <div class="card qcard">
       <div class="stem">${quizMath(page.title || '')}</div>
+      <div class="theory-body">${formatExplainBody(page.body)}</div>
       ${img}
-      <div style="margin-top:10px">${formatExplainBody(page.body)}</div>
     </div>
     <p class="muted" id="readWait"></p>
     <button class="big on" id="readNext">${last ? T('Finish reading — start quiz', 'Xong đọc — bắt đầu quiz') : T('Next', 'Tiếp')}</button>
@@ -386,6 +398,8 @@ function renderPreRead(app) {
   bindLangToggle(app);
   blockCopy(app.querySelector('main.no-copy') || app);
   const out = $('#out'); if (out) out.onclick = signOut;
+  const figure = $('#openTheoryFigure');
+  if (figure) figure.onclick = () => app.querySelector('.theory-dialog').showModal();
   const next = $('#readNext');
   const waitEl = $('#readWait');
   const label = last ? T('Finish reading — start quiz', 'Xong đọc — bắt đầu quiz') : T('Next', 'Tiếp');
