@@ -45,14 +45,24 @@ function quizHeaders(extra) {
 }
 
 async function post(path, body) {
-  const r = await fetch(path, {
-    method: 'POST',
-    headers: quizHeaders({ 'Content-Type': 'application/json' }),
-    body: JSON.stringify(body),
-  });
-  const j = await r.json().catch(() => ({}));
+  const fallback = path === '/api/public/quiz/submit'
+    ? T('Submission could not be confirmed. Stay on this page and tap Submit again.',
+        'Chưa xác nhận được bài đã nộp. Hãy giữ nguyên trang và bấm Nộp bài lại.')
+    : T('Could not connect. Please try again.', 'Không kết nối được. Vui lòng thử lại.');
+  let r, j;
+  try {
+    r = await fetch(path, {
+      method: 'POST',
+      headers: quizHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(body),
+    });
+    j = await r.json();
+  } catch {
+    toast(fallback);
+    return null;
+  }
   if (!r.ok) {
-    toast((LANG === 'vi' && j.error_vi) || j.error || T('Error', 'Lỗi'));
+    toast((LANG === 'vi' && j.error_vi) || j.error || fallback);
     if (r.status === 401) { Q.me = null; render(); }
     return null;
   }

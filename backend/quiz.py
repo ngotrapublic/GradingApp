@@ -100,52 +100,34 @@ def is_left_submit(answers, flag=False):
 
 
 def parse_number(raw):
-    """Parse student numeric input; allow comma decimal and scientific notation."""
-    if raw is None or raw == '':
-        return None
-    s = str(raw).strip().replace(',', '.').replace(' ', '')
-    if not s:
+    if raw is None:
         return None
     try:
-        return float(s)
-    except ValueError:
+        value = float(str(raw).strip().replace(',', '.').replace('−', '-').replace(' ', ''))
+    except (ValueError, OverflowError):
         return None
+    return value if math.isfinite(value) else None
 
 
 def parse_mantissa_exp(raw, legacy_power10=0):
-    """Student enters coefficient + power of 10. Returns (value, mantissa, exp) or (None, None, None).
-
-    New answers: {'m': '259', 'e': '-4'} or '259e-4'.
-    Legacy: plain coefficient with fixed bank power10.
-    """
+    """Parse the two-field answer, scientific notation, or a legacy coefficient."""
+    invalid = (None, None, None)
     if raw is None or raw == '':
-        return None, None, None
+        return invalid
     if isinstance(raw, dict):
-        m = parse_number(raw.get('m', raw.get('mantissa')))
-        e_raw = raw.get('e', raw.get('exp', raw.get('power10')))
-        e = parse_number(e_raw)
-        if m is None:
-            return None, None, None
-        e = 0 if e is None else int(e)
-        return m * (10 ** e), m, e
-    s = str(raw).strip().replace(',', '.').replace(' ', '')
-    if not s:
-        return None, None, None
-    if re.search(r'[eE]', s):
-        v = parse_number(s)
-        if v is None:
-            return None, None, None
-        parts = re.split(r'[eE]', s, maxsplit=1)
-        m = parse_number(parts[0])
-        e = int(parse_number(parts[1]) or 0) if len(parts) > 1 else 0
-        if m is None:
-            m, e = v, 0
-        return v, m, e
-    m = parse_number(s)
-    if m is None:
-        return None, None, None
-    e = int(legacy_power10 or 0)
-    return m * (10 ** e), m, e
+        mantissa = raw.get('m', raw.get('mantissa'))
+        exponent = raw.get('e', raw.get('exp', raw.get('power10')))
+    else:
+        parts = re.split(r'[eE]', str(raw).strip(), maxsplit=1)
+        mantissa = parts[0]
+        exponent = parts[1] if len(parts) == 2 else legacy_power10
+    m = parse_number(mantissa)
+    e = 0.0 if exponent is None or exponent == '' else parse_number(exponent)
+    if m is None or e is None or not e.is_integer() or abs(e) > 308:
+        return invalid
+    e = int(e)
+    value = m * (10.0 ** e)
+    return (value, m, e) if math.isfinite(value) else invalid
 
 
 def numeric_ok(chosen, correct, tol_rel=0.03, tol_abs=None):
@@ -278,7 +260,7 @@ def grade_paper(paper, answers):
             continue
         try:
             chosen = int(raw) if raw is not None and raw != '' else None
-        except (TypeError, ValueError):
+        except (TypeError, ValueError, OverflowError):
             chosen = None
         ok = chosen is not None and chosen == int(q['answer'])
         if ok:

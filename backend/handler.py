@@ -1467,6 +1467,23 @@ def _review_from_pass(con, cid, sid, slug):
     return att, {'score': score, 'total': total, 'review': review, 'attempt_id': att['id'], 'slug': slug}
 
 
+def _quiz_leave_result(con, att, pass_score):
+    leave = con.execute(
+        'SELECT leaves, cooldown_until FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
+        (att['class_id'], att['slug'], att['sid'])).fetchone()
+    leaves = int(leave['leaves']) if leave else 0
+    until = float(leave['cooldown_until'] or 0) if leave else 0
+    wait = max(0, math.ceil(until - time.time()))
+    mins = math.ceil(wait / 60)
+    return {
+        'attempt_id': att['id'], 'slug': att['slug'], 'score': 0,
+        'total': att['total'], 'pass_score': pass_score, 'passed': False,
+        'left_app': True, 'leave_count': leaves, 'cooldown_sec': wait,
+        'penalty_note': f'This attempt ended when you left the quiz ({leaves}×). Retry wait: {mins} min.',
+        'penalty_note_vi': f'Lượt làm đã kết thúc khi bạn rời quiz ({leaves} lần). Chờ {mins} phút để thử lại.',
+    }
+
+
 def public_quiz_submit(self, con, qu, body):
     """Fail → score only. Pass → return review for forced English explanations (attendance later)."""
     cid = qu['class_id']
@@ -1480,54 +1497,33 @@ def public_quiz_submit(self, con, qu, body):
     paper = json.loads(att['paper'])
     answers = body.get('answers') or {}
     left = is_left_submit(answers, flag=bool(body.get('left_app')))
-    if att['answers'] is not None:
-        prev = {}
-        try:
-            prev = json.loads(att['answers'] or '{}')
-        except (TypeError, json.JSONDecodeError):
-            prev = {}
-        if left and prev.get('__left'):
-            leave = con.execute(
-                'SELECT leaves, cooldown_until FROM quiz_leave WHERE class_id=? AND slug=? AND sid=?',
-                (cid, att['slug'], qu['sid'])).fetchone()
-            leaves = int(leave['leaves']) if leave else 0
-            until = float(leave['cooldown_until']) if leave else 0.0
-            wait = max(0, int(math.ceil(until - time.time()))) if until else 0
-            mins = max(1, wait // 60) if wait else 1
-            return self.send_json({
-                'attempt_id': aid,
-                'slug': att['slug'],
-                'score': att['score'] or 0,
-                'total': att['total'] or 0,
-                'pass_score': (_quiz_settings(con, cid, row['course'], att['slug']) or {}).get('pass_score', 14) if row else 14,
-                'passed': False,
-                'left_app': True,
-                'leave_count': leaves,
-                'cooldown_sec': wait,
-                'penalty_note': (
-                    f'You left the quiz app {leaves} time(s). Wait {mins} minute(s) before retry '
-                    f'(1st leave = 1 min, then doubles: 2, 4, 8, …).'),
-                'penalty_note_vi': (
-                    f'Bạn đã thoát app quiz {leaves} lần. Chờ {mins} phút mới làm lại '
-                    f'(lần 1 = 1 phút, sau đó nhân đôi: 2, 4, 8, …).'),
-            })
-        return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
-    bank = load_bank(row['course'], att['slug']) if row else None
-    window = _quiz_window(con, cid, att['slug'], qu['sid'], bank)
-    if window and time.time() >= window[1]:
-        return self.send_json({**QUIZ_EXPIRED, 'expired': True})
-    if left:
-        answers = {'__left': 1}
-    score, total, review = grade_paper(paper, {} if left else answers)
     s = _quiz_settings(con, cid, row['course'], att['slug']) if row else None
     pass_score = s['pass_score'] if s else 14
-    passed = 0 if left else (1 if score >= pass_score else 0)
-    updated = con.execute(
-        'UPDATE quiz_attempts SET score=?, total=?, passed=?, answers=?, submitted_at=? '
-        'WHERE id=? AND answers IS NULL RETURNING id',
-        (score, total, passed, json.dumps(answers), time.time(), aid)).fetchone()
-    if not updated:
-        return self.send_json(err('Already submitted.', 'Đã nộp rồi.'), 400)
+    bank = load_bank(row['course'], att['slug']) if row else None
+    window = _quiz_window(con, cid, att['slug'], qu['sid'], bank)
+    if att['answers'] is not None:
+        saved_answers = json.loads(att['answers'] or '{}')
+        if saved_answers.get('__left'):
+            return self.send_json(_quiz_leave_result(con, att, pass_score))
+        _, _, review = grade_paper(paper, saved_answers)
+        score, total, passed = att['score'], att['total'], att['passed']
+        left = False
+    else:
+        if window and time.time() >= window[1]:
+            return self.send_json({**QUIZ_EXPIRED, 'expired': True})
+        if not isinstance(answers, dict):
+            return self.send_json(err('Invalid answer format.', 'Định dạng câu trả lời không hợp lệ.'), 400)
+        if left:
+            answers = {'__left': 1}
+        score, total, review = grade_paper(paper, {} if left else answers)
+        passed = int(not left and score >= pass_score)
+        updated = con.execute(
+            'UPDATE quiz_attempts SET score=?, total=?, passed=?, answers=?, submitted_at=? '
+            'WHERE id=? AND answers IS NULL RETURNING id',
+            (score, total, passed, json.dumps(answers), time.time(), aid)).fetchone()
+        if not updated:
+            # A concurrent request already saved the attempt. Return that result.
+            return self.public_quiz_submit(con, qu, body)
     out = {
         'attempt_id': aid,
         'slug': att['slug'],
@@ -1547,17 +1543,9 @@ def public_quiz_submit(self, con, qu, body):
             'INSERT INTO quiz_leave (class_id, slug, sid, leaves, cooldown_until) VALUES (?,?,?,?,?) '
             'ON CONFLICT(class_id, slug, sid) DO UPDATE SET leaves=excluded.leaves, cooldown_until=excluded.cooldown_until',
             (cid, att['slug'], qu['sid'], leaves, until))
-        out['left_app'] = True
-        out['leave_count'] = leaves
-        out['cooldown_sec'] = cool
-        mins = max(1, cool // 60) if cool else 1
-        out['penalty_note'] = (
-            f'You left the quiz app {leaves} time(s). Wait {mins} minute(s) before retry '
-            f'(1st leave = 1 min, then doubles: 2, 4, 8, …).')
-        out['penalty_note_vi'] = (
-            f'Bạn đã thoát app quiz {leaves} lần. Chờ {mins} phút mới làm lại '
-            f'(lần 1 = 1 phút, sau đó nhân đôi: 2, 4, 8, …).')
-        return self.send_json(out)
+        con.commit()
+        return self.send_json(_quiz_leave_result(con, att, pass_score))
+    con.commit()
     if not passed:
         return self.send_json(out)
     rev = con.execute(
